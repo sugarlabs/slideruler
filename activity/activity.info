@@ -1,0 +1,8 @@
+[Activity]
+name = Sliderule
+activity_version = 1
+license = GPLv3
+bundle_id = org.sugarlabs.SlideruleActivity
+exec = sugar-activity SlideruleActivity.SlideruleActivity
+icon = activity-sliderule
+show_launcher = yes
