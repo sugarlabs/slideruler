@@ -34,13 +34,13 @@ except:
 from rule import *
 from mark import *
 
-class taWindow: pass
+class srWindow: pass
 
 #
 # handle launch from both within and without of Sugar environment 
 #
 def new_window(canvas, path, parent=None):
-    tw = taWindow()
+    tw = srWindow()
     tw.path = path
     tw.activity = parent
 
@@ -74,18 +74,18 @@ def new_window(canvas, path, parent=None):
     tw.scale = 1
 
     # Open the sliders
-    tw.sliders = [Mark(tw,"reticule",0,90), \
-                  Rule(tw,"C",0,100), \
-                  Rule(tw,"D",0,160)]
-    tw.sliders[1].draw_ruler()
-    tw.sliders[2].draw_ruler()
+    tw.reticule = Mark(tw,"reticule",0,90)
+    tw.C = Rule(tw,"C",0,100)
+    tw.D = Rule(tw,"D",0,160)
+    tw.C.draw_ruler()
+    tw.D.draw_ruler()
 
     # and the reticule
-    tw.sliders[0].draw_mark()
+    tw.reticule.draw_mark()
 
     # Start calculating
     tw.press = None
-    tw.start_drag = [0,0]
+    tw.dragpos = 0
 
     return tw
 
@@ -95,7 +95,7 @@ def new_window(canvas, path, parent=None):
 def _button_press_cb(win, event, tw):
     win.grab_focus()
     x, y = map(int, event.get_coords())
-    tw.start_drag = [x,y]
+    tw.dragpos = x
     spr = findsprite(tw,(x,y))
     tw.press = spr
     return True
@@ -105,20 +105,49 @@ def _button_press_cb(win, event, tw):
 #
 def _mouse_move_cb(win, event, tw):
     if tw.press is None:
+        tw.dragpos = 0
         return True
     win.grab_focus()
     x, y = map(int, event.get_coords())
     # redicule doesn't use offset
-    if tw.press == tw.sliders[0].spr:
-        dx = x-tw.press.x
-    else:
-        dx = x-tw.press.x-tw.start_drag[0]
-    if tw.press.label == "D":
+    dx = x-tw.dragpos
+    if tw.press == tw.D.spr:
         # everything moves
-        for r in tw.sliders:
-            move(r.spr,(r.spr.x+dx,r.spr.y))
+        move(tw.reticule.spr,(tw.reticule.spr.x+dx,tw.reticule.spr.y))
+        move(tw.C.spr,(tw.C.spr.x+dx,tw.C.spr.y))
+        move(tw.D.spr,(tw.D.spr.x+dx,tw.D.spr.y))
     else:
         move(tw.press,(tw.press.x+dx,tw.press.y))
+    # reset drag position
+    tw.dragpos = x
+
+    if tw.press == tw.C.spr:
+        # set the C label to the D value while it is moving
+        dx = tw.C.spr.x - tw.D.spr.x    
+        if dx < 0:
+            D = " "
+        else:
+            D = math.exp(dx/1000.)
+            D = float(int(D*100)/100.)
+        setlabel(tw.C.spr,str(D))
+    elif tw.press == tw.reticule.spr:
+        # set the C label to the C value while it is moving
+        dx = tw.reticule.spr.x - tw.C.spr.x    
+        if dx < 0:
+            C = " "
+        else:
+            C = math.exp(dx/1000.)
+            C = float(int(C*100)/100.)
+        setlabel(tw.C.spr,str(C))
+        # set the D label to the D value while it is moving
+        dx = tw.reticule.spr.x - tw.D.spr.x    
+        if dx < 0:
+            D = " "
+        else:
+            D = math.exp(dx/1000.)
+            D = float(int(D*100)/100.)
+        setlabel(tw.D.spr,str(D))
+
     return True
 
 
@@ -130,22 +159,26 @@ def _button_release_cb(win, event, tw):
         return True
     tw.press = None
 
+    # reset slider labels
+    setlabel(tw.C.spr,"C")
+    setlabel(tw.D.spr,"D")
+
     # calculate the values for D, C, and D*C (under the redicule)
-    dx = tw.sliders[1].spr.x - tw.sliders[2].spr.x    
+    dx = tw.C.spr.x - tw.D.spr.x    
     if dx < 0:
         D = " "
     else:
         D = math.exp(dx/1000.)
         D = float(int(D*100)/100.)
     
-    dx = tw.sliders[0].spr.x - tw.sliders[1].spr.x    
+    dx = tw.reticule.spr.x - tw.C.spr.x    
     if dx < 0:
         C = " "
     else:
         C = math.exp(dx/1000.)
         C = float(int(C*100)/100.)
 
-    dx = tw.sliders[0].spr.x - tw.sliders[2].spr.x    
+    dx = tw.reticule.spr.x - tw.D.spr.x    
     if dx < 0:
         DC = " "
     else:
