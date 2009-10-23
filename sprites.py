@@ -126,16 +126,13 @@ def hit(spr,pos):
             + str(dy) + " " + str(spr.width) + " " + str(spr.height)
         return True
 
-def draw_label(spr, label, myscale, center_flag, truncate_flag):
+def draw_label(spr, label, myscale, center_flag="False", vert_pos="middle"):
     fd = pango.FontDescription('Sans')
     fd.set_size(int(myscale*spr.tw.scale*pango.SCALE))
     if type(label) == str or type(label) == unicode:
         mylabel = label.replace("\0"," ")
         l = len(mylabel)
-        if truncate_flag and l > 8:
-            pl = spr.tw.canvas.create_pango_layout("..."+mylabel[l-8:])
-        else:
-            pl = spr.tw.canvas.create_pango_layout(mylabel)
+        pl = spr.tw.canvas.create_pango_layout(mylabel)
         pl.set_font_description(fd)
         if center_flag:
             swidth = pl.get_size()[0]/pango.SCALE
@@ -145,17 +142,24 @@ def draw_label(spr, label, myscale, center_flag, truncate_flag):
             x = spr.x+4 # small offset from left edge
         sheight = pl.get_size()[1]/pango.SCALE
         centery = spr.y+spr.height/2
-        y = int(centery-sheight/2)
+        if vert_pos == "middle":
+            y = int(centery-sheight/2)
+        elif vert_pos == "top":
+            y = int(sheight/2)
+        elif vert_pos == "bottom":
+            y = int(spr.height-sheight)
         spr.tw.gc.set_foreground(spr.tw.msgcolor)
         spr.tw.area.draw_layout(spr.tw.gc, x, y, pl)
     else:
         print type(label)
 
-# used for most things
+# used for sliders
 def draw_label1(spr, label):
-    draw_label(spr, label, 12, False, True)
+    draw_label(spr, label, 12, True, "middle")
 
-# used for status blocks
 def draw_label2(spr, label):
-    draw_label(spr, str(label), 14, False, False)
+    draw_label(spr, str(label), 14, True, "top")
+
+def draw_label3(spr, label):
+    draw_label(spr, str(label), 14, True, "bottom")
 

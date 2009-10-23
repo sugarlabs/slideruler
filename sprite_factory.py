@@ -29,20 +29,23 @@ from sprites import *
 #
 # class for defining individual cards
 #
-class Mark:
-    def __init__(self,tw,i,x,y):
+class Sprite:
+    def __init__(self, tw, name, x, y, w, h, name_label=True):
         # create sprite from svg file
-        self.spr = sprNew(tw, x, y,\
-                          self.load_image(tw.path,i))
-        self.spr.label = ""
+        self.spr = sprNew(tw, x, y,
+                          self.load_image(tw.path,name,w,h))
+        if name_label is True:
+            self.spr.label = name
+        else:
+            self.spr.label = "1.0"
 
-    def draw_mark(self):
+    def draw_slider(self):
         setlayer(self.spr,1000)
         draw(self.spr)
 
-    def load_image(self, file, i):
-        return gtk.gdk.pixbuf_new_from_file_at_size(os.path.join(file + \
-                                                                 str(i) + \
-                                                                 '.svg'), \
-                                                    100,140)
+    def load_image(self, file, name, w, h):
+        return gtk.gdk.pixbuf_new_from_file_at_size(os.path.join(file + 
+                                                                 name + 
+                                                                 '.svg'),
+                                                    w, h)
 

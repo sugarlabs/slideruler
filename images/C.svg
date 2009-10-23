@@ -12,6 +12,11 @@
        style="fill:none;stroke:#ffffff;stroke-width:60px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
   <text style="font-size:12px;fill:#000000;">
       <tspan
+       x="5"
+       y="32"
+       style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">C</tspan></text>
+  <text style="font-size:12px;fill:#000000;">
+      <tspan
        x="50.0"
        y="35"
        style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">1.0</tspan></text>
@@ -19,1144 +24,1144 @@
        d="M 50.0,38 L 50.0,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 59.9503308532,42 L 59.9503308532,59"
+       d="M 59.9,42 L 59.9,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 69.8026272962,42 L 69.8026272962,59"
+       d="M 69.8,42 L 69.8,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 79.5588022415,42 L 79.5588022415,59"
+       d="M 79.5,42 L 79.5,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 89.2207131533,42 L 89.2207131533,59"
+       d="M 89.2,42 L 89.2,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 98.7901641694,40 L 98.7901641694,59"
+       d="M 98.7,40 L 98.7,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 108.268908124,42 L 108.268908124,59"
+       d="M 108.2,42 L 108.2,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 117.658648474,42 L 117.658648474,59"
+       d="M 117.6,42 L 117.6,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 126.961041136,42 L 126.961041136,59"
+       d="M 126.9,42 L 126.9,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 136.177696241,42 L 136.177696241,59"
+       d="M 136.1,42 L 136.1,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
   <text style="font-size:12px;fill:#000000;">
       <tspan
-       x="145.310179804"
+       x="145.3"
        y="35"
        style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">1.1</tspan></text>
    <path
-       d="M 145.310179804,38 L 145.310179804,59"
+       d="M 145.3,38 L 145.3,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 154.360015324,42 L 154.360015324,59"
+       d="M 154.3,42 L 154.3,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 163.328685307,42 L 163.328685307,59"
+       d="M 163.3,42 L 163.3,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 172.217632724,42 L 172.217632724,59"
+       d="M 172.2,42 L 172.2,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 181.028262406,42 L 181.028262406,59"
+       d="M 181.0,42 L 181.0,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 189.761942375,40 L 189.761942375,59"
+       d="M 189.7,40 L 189.7,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 198.420005118,42 L 198.420005118,59"
+       d="M 198.4,42 L 198.4,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 207.00374881,42 L 207.00374881,59"
+       d="M 207.0,42 L 207.0,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 215.514438478,42 L 215.514438478,59"
+       d="M 215.5,42 L 215.5,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 223.953307123,42 L 223.953307123,59"
+       d="M 223.9,42 L 223.9,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
   <text style="font-size:12px;fill:#000000;">
       <tspan
-       x="232.321556794"
+       x="232.3"
        y="35"
        style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">1.2</tspan></text>
    <path
-       d="M 232.321556794,38 L 232.321556794,59"
+       d="M 232.3,38 L 232.3,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 240.620359609,42 L 240.620359609,59"
+       d="M 240.6,42 L 240.6,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 248.850858745,42 L 248.850858745,59"
+       d="M 248.8,42 L 248.8,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 257.014169384,42 L 257.014169384,59"
+       d="M 257.0,42 L 257.0,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 265.111379617,42 L 265.111379617,59"
+       d="M 265.1,42 L 265.1,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 273.143551314,40 L 273.143551314,59"
+       d="M 273.1,40 L 273.1,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 281.111720963,42 L 281.111720963,59"
+       d="M 281.1,42 L 281.1,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 289.01690047,42 L 289.01690047,59"
+       d="M 289.0,42 L 289.0,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 296.860077932,42 L 296.860077932,59"
+       d="M 296.8,42 L 296.8,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 304.642218374,42 L 304.642218374,59"
+       d="M 304.6,42 L 304.6,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
   <text style="font-size:12px;fill:#000000;">
       <tspan
-       x="312.364264467"
+       x="312.3"
        y="35"
        style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">1.3</tspan></text>
    <path
-       d="M 312.364264467,38 L 312.364264467,59"
+       d="M 312.3,38 L 312.3,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 320.027137213,42 L 320.027137213,59"
+       d="M 320.0,42 L 320.0,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 327.631736598,42 L 327.631736598,59"
+       d="M 327.6,42 L 327.6,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 335.178942234,42 L 335.178942234,59"
+       d="M 335.1,42 L 335.1,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 342.669613963,42 L 342.669613963,59"
+       d="M 342.6,42 L 342.6,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 350.10459245,40 L 350.10459245,59"
+       d="M 350.1,40 L 350.1,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 357.484699748,42 L 357.484699748,59"
+       d="M 357.4,42 L 357.4,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 364.81073984,42 L 364.81073984,59"
+       d="M 364.8,42 L 364.8,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 372.083499169,42 L 372.083499169,59"
+       d="M 372.0,42 L 372.0,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 379.303747143,42 L 379.303747143,59"
+       d="M 379.3,42 L 379.3,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
   <text style="font-size:12px;fill:#000000;">
       <tspan
-       x="386.472236621"
+       x="386.4"
        y="35"
        style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">1.4</tspan></text>
    <path
-       d="M 386.472236621,38 L 386.472236621,59"
+       d="M 386.4,38 L 386.4,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 393.58970439,42 L 393.58970439,59"
+       d="M 393.5,42 L 393.5,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 400.656871613,42 L 400.656871613,59"
+       d="M 400.6,42 L 400.6,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 407.674444272,42 L 407.674444272,59"
+       d="M 407.6,42 L 407.6,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 414.643113588,42 L 414.643113588,59"
+       d="M 414.6,42 L 414.6,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 421.563556432,40 L 421.563556432,59"
+       d="M 421.5,40 L 421.5,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 428.43643572,42 L 428.43643572,59"
+       d="M 428.4,42 L 428.4,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 435.262400791,42 L 435.262400791,59"
+       d="M 435.2,42 L 435.2,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 442.042087776,42 L 442.042087776,59"
+       d="M 442.0,42 L 442.0,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 448.776119957,42 L 448.776119957,59"
+       d="M 448.7,42 L 448.7,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
   <text style="font-size:12px;fill:#000000;">
       <tspan
-       x="455.465108108"
+       x="455.4"
        y="35"
        style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">1.5</tspan></text>
    <path
-       d="M 455.465108108,38 L 455.465108108,59"
+       d="M 455.4,38 L 455.4,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 462.109650827,42 L 462.109650827,59"
+       d="M 462.1,42 L 462.1,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 468.710334858,42 L 468.710334858,59"
+       d="M 468.7,42 L 468.7,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 475.267735404,42 L 475.267735404,59"
+       d="M 475.2,42 L 475.2,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 481.782416426,42 L 481.782416426,59"
+       d="M 481.7,42 L 481.7,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 488.254930931,40 L 488.254930931,59"
+       d="M 488.2,40 L 488.2,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 494.685821261,42 L 494.685821261,59"
+       d="M 494.6,42 L 494.6,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 501.07561936,42 L 501.07561936,59"
+       d="M 501.0,42 L 501.0,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 507.424847039,42 L 507.424847039,59"
+       d="M 507.4,42 L 507.4,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 513.734016232,42 L 513.734016232,59"
+       d="M 513.7,42 L 513.7,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
   <text style="font-size:12px;fill:#000000;">
       <tspan
-       x="520.003629246"
+       x="520.0"
        y="35"
        style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">1.6</tspan></text>
    <path
-       d="M 520.003629246,38 L 520.003629246,59"
+       d="M 520.0,38 L 520.0,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 526.234178996,42 L 526.234178996,59"
+       d="M 526.2,42 L 526.2,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 532.426149244,42 L 532.426149244,59"
+       d="M 532.4,42 L 532.4,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 538.580014819,42 L 538.580014819,59"
+       d="M 538.5,42 L 538.5,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 544.696241836,42 L 544.696241836,59"
+       d="M 544.6,42 L 544.6,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 550.775287912,40 L 550.775287912,59"
+       d="M 550.7,40 L 550.7,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 556.817602368,42 L 556.817602368,59"
+       d="M 556.8,42 L 556.8,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 562.823626429,42 L 562.823626429,59"
+       d="M 562.8,42 L 562.8,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 568.793793415,42 L 568.793793415,59"
+       d="M 568.7,42 L 568.7,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 574.728528935,42 L 574.728528935,59"
+       d="M 574.7,42 L 574.7,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
   <text style="font-size:12px;fill:#000000;">
       <tspan
-       x="580.628251062"
+       x="580.6"
        y="35"
        style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">1.7</tspan></text>
    <path
-       d="M 580.628251062,38 L 580.628251062,59"
+       d="M 580.6,38 L 580.6,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 586.493370515,42 L 586.493370515,59"
+       d="M 586.4,42 L 586.4,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 592.324290825,42 L 592.324290825,59"
+       d="M 592.3,42 L 592.3,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 598.12140851,42 L 598.12140851,59"
+       d="M 598.1,42 L 598.1,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 603.885113226,42 L 603.885113226,59"
+       d="M 603.8,42 L 603.8,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 609.615787935,40 L 609.615787935,59"
+       d="M 609.6,40 L 609.6,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 615.31380905,42 L 615.31380905,59"
+       d="M 615.3,42 L 615.3,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 620.979546586,42 L 620.979546586,59"
+       d="M 620.9,42 L 620.9,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 626.613364304,42 L 626.613364304,59"
+       d="M 626.6,42 L 626.6,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 632.215619853,42 L 632.215619853,59"
+       d="M 632.2,42 L 632.2,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
   <text style="font-size:12px;fill:#000000;">
       <tspan
-       x="637.786664902"
+       x="637.7"
        y="35"
        style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">1.8</tspan></text>
    <path
-       d="M 637.786664902,38 L 637.786664902,59"
+       d="M 637.7,38 L 637.7,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 643.326845278,42 L 643.326845278,59"
+       d="M 643.3,42 L 643.3,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 648.836501089,42 L 648.836501089,59"
+       d="M 648.8,42 L 648.8,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 654.315966853,42 L 654.315966853,59"
+       d="M 654.3,42 L 654.3,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 659.765571621,42 L 659.765571621,59"
+       d="M 659.7,42 L 659.7,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 665.18563909,40 L 665.18563909,59"
+       d="M 665.1,40 L 665.1,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 670.576487725,42 L 670.576487725,59"
+       d="M 670.5,42 L 670.5,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 675.938430866,42 L 675.938430866,59"
+       d="M 675.9,42 L 675.9,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 681.271776842,42 L 681.271776842,59"
+       d="M 681.2,42 L 681.2,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 686.576829072,42 L 686.576829072,59"
+       d="M 686.5,42 L 686.5,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
   <text style="font-size:12px;fill:#000000;">
       <tspan
-       x="691.853886172"
+       x="691.8"
        y="35"
        style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">1.9</tspan></text>
    <path
-       d="M 691.853886172,38 L 691.853886172,59"
+       d="M 691.8,38 L 691.8,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 697.103242059,42 L 697.103242059,59"
+       d="M 697.1,42 L 697.1,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 702.32518604,42 L 702.32518604,59"
+       d="M 702.3,42 L 702.3,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 707.520002917,42 L 707.520002917,59"
+       d="M 707.5,42 L 707.5,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 712.687973075,42 L 712.687973075,59"
+       d="M 712.6,42 L 712.6,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 717.829372576,40 L 717.829372576,59"
+       d="M 717.8,40 L 717.8,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 722.944473242,42 L 722.944473242,59"
+       d="M 722.9,42 L 722.9,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 728.03354275,42 L 728.03354275,59"
+       d="M 728.0,42 L 728.0,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 733.096844706,42 L 733.096844706,59"
+       d="M 733.0,42 L 733.0,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 738.134638736,42 L 738.134638736,59"
+       d="M 738.1,42 L 738.1,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
   <text style="font-size:12px;fill:#000000;">
       <tspan
-       x="743.14718056"
+       x="743.1"
        y="35"
        style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">2.0</tspan></text>
    <path
-       d="M 743.14718056,38 L 743.14718056,59"
+       d="M 743.1,38 L 743.1,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 753.097511413,40 L 753.097511413,59"
+       d="M 753.0,40 L 753.0,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 762.949807856,40 L 762.949807856,59"
+       d="M 762.9,40 L 762.9,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 772.705982801,40 L 772.705982801,59"
+       d="M 772.7,40 L 772.7,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 782.367893713,40 L 782.367893713,59"
+       d="M 782.3,40 L 782.3,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 791.937344729,38 L 791.937344729,59"
+       d="M 791.9,38 L 791.9,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 801.416088684,40 L 801.416088684,59"
+       d="M 801.4,40 L 801.4,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 810.805829034,40 L 810.805829034,59"
+       d="M 810.8,40 L 810.8,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 820.108221696,40 L 820.108221696,59"
+       d="M 820.1,40 L 820.1,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 829.324876801,40 L 829.324876801,59"
+       d="M 829.3,40 L 829.3,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 838.457360364,38 L 838.457360364,59"
+       d="M 838.4,38 L 838.4,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 847.507195884,40 L 847.507195884,59"
+       d="M 847.5,40 L 847.5,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 856.475865867,40 L 856.475865867,59"
+       d="M 856.4,40 L 856.4,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 865.364813284,40 L 865.364813284,59"
+       d="M 865.3,40 L 865.3,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 874.175442966,40 L 874.175442966,59"
+       d="M 874.1,40 L 874.1,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 882.909122935,38 L 882.909122935,59"
+       d="M 882.9,38 L 882.9,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 891.567185678,40 L 891.567185678,59"
+       d="M 891.5,40 L 891.5,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 900.15092937,40 L 900.15092937,59"
+       d="M 900.1,40 L 900.1,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 908.661619038,40 L 908.661619038,59"
+       d="M 908.6,40 L 908.6,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 917.100487683,40 L 917.100487683,59"
+       d="M 917.1,40 L 917.1,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 925.468737354,38 L 925.468737354,59"
+       d="M 925.4,38 L 925.4,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 933.767540169,40 L 933.767540169,59"
+       d="M 933.7,40 L 933.7,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 941.998039305,40 L 941.998039305,59"
+       d="M 941.9,40 L 941.9,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 950.161349944,40 L 950.161349944,59"
+       d="M 950.1,40 L 950.1,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 958.258560177,40 L 958.258560177,59"
+       d="M 958.2,40 L 958.2,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 966.290731874,38 L 966.290731874,59"
+       d="M 966.2,38 L 966.2,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 974.258901523,40 L 974.258901523,59"
+       d="M 974.2,40 L 974.2,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 982.16408103,40 L 982.16408103,59"
+       d="M 982.1,40 L 982.1,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 990.007258491,40 L 990.007258491,59"
+       d="M 990.0,40 L 990.0,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 997.789398934,40 L 997.789398934,59"
+       d="M 997.7,40 L 997.7,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 1005.51144503,38 L 1005.51144503,59"
+       d="M 1005.5,38 L 1005.5,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 1013.17431777,40 L 1013.17431777,59"
+       d="M 1013.1,40 L 1013.1,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 1020.77891716,40 L 1020.77891716,59"
+       d="M 1020.7,40 L 1020.7,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 1028.32612279,40 L 1028.32612279,59"
+       d="M 1028.3,40 L 1028.3,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 1035.81679452,40 L 1035.81679452,59"
+       d="M 1035.8,40 L 1035.8,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 1043.25177301,38 L 1043.25177301,59"
+       d="M 1043.2,38 L 1043.2,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 1050.63188031,40 L 1050.63188031,59"
+       d="M 1050.6,40 L 1050.6,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 1057.9579204,40 L 1057.9579204,59"
+       d="M 1057.9,40 L 1057.9,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 1065.23067973,40 L 1065.23067973,59"
+       d="M 1065.2,40 L 1065.2,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 1072.4509277,40 L 1072.4509277,59"
+       d="M 1072.4,40 L 1072.4,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 1079.61941718,38 L 1079.61941718,59"
+       d="M 1079.6,38 L 1079.6,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 1086.73688495,40 L 1086.73688495,59"
+       d="M 1086.7,40 L 1086.7,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 1093.80405217,40 L 1093.80405217,59"
+       d="M 1093.8,40 L 1093.8,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 1100.82162483,40 L 1100.82162483,59"
+       d="M 1100.8,40 L 1100.8,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 1107.79029415,40 L 1107.79029415,59"
+       d="M 1107.7,40 L 1107.7,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 1114.71073699,38 L 1114.71073699,59"
+       d="M 1114.7,38 L 1114.7,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 1121.58361628,40 L 1121.58361628,59"
+       d="M 1121.5,40 L 1121.5,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 1128.40958135,40 L 1128.40958135,59"
+       d="M 1128.4,40 L 1128.4,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 1135.18926834,40 L 1135.18926834,59"
+       d="M 1135.1,40 L 1135.1,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 1141.92330052,40 L 1141.92330052,59"
+       d="M 1141.9,40 L 1141.9,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
   <text style="font-size:12px;fill:#000000;">
       <tspan
-       x="1148.61228867"
+       x="1148.6"
        y="35"
        style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">3.0</tspan></text>
    <path
-       d="M 1148.61228867,38 L 1148.61228867,59"
+       d="M 1148.6,38 L 1148.6,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 1155.25683139,40 L 1155.25683139,59"
+       d="M 1155.2,40 L 1155.2,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 1161.85751542,40 L 1161.85751542,59"
+       d="M 1161.8,40 L 1161.8,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 1168.41491596,40 L 1168.41491596,59"
+       d="M 1168.4,40 L 1168.4,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 1174.92959699,40 L 1174.92959699,59"
+       d="M 1174.9,40 L 1174.9,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 1181.40211149,38 L 1181.40211149,59"
+       d="M 1181.4,38 L 1181.4,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 1187.83300182,40 L 1187.83300182,59"
+       d="M 1187.8,40 L 1187.8,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 1194.22279992,40 L 1194.22279992,59"
+       d="M 1194.2,40 L 1194.2,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 1200.5720276,40 L 1200.5720276,59"
+       d="M 1200.5,40 L 1200.5,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 1206.88119679,40 L 1206.88119679,59"
+       d="M 1206.8,40 L 1206.8,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 1213.15080981,38 L 1213.15080981,59"
+       d="M 1213.1,38 L 1213.1,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 1219.38135956,40 L 1219.38135956,59"
+       d="M 1219.3,40 L 1219.3,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 1225.5733298,40 L 1225.5733298,59"
+       d="M 1225.5,40 L 1225.5,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 1231.72719538,40 L 1231.72719538,59"
+       d="M 1231.7,40 L 1231.7,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 1237.8434224,40 L 1237.8434224,59"
+       d="M 1237.8,40 L 1237.8,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 1243.92246847,38 L 1243.92246847,59"
+       d="M 1243.9,38 L 1243.9,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 1249.96478293,40 L 1249.96478293,59"
+       d="M 1249.9,40 L 1249.9,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 1255.97080699,40 L 1255.97080699,59"
+       d="M 1255.9,40 L 1255.9,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 1261.94097398,40 L 1261.94097398,59"
+       d="M 1261.9,40 L 1261.9,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 1267.87570949,40 L 1267.87570949,59"
+       d="M 1267.8,40 L 1267.8,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 1273.77543162,38 L 1273.77543162,59"
+       d="M 1273.7,38 L 1273.7,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 1279.64055107,40 L 1279.64055107,59"
+       d="M 1279.6,40 L 1279.6,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 1285.47147139,40 L 1285.47147139,59"
+       d="M 1285.4,40 L 1285.4,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 1291.26858907,40 L 1291.26858907,59"
+       d="M 1291.2,40 L 1291.2,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 1297.03229379,40 L 1297.03229379,59"
+       d="M 1297.0,40 L 1297.0,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 1302.7629685,38 L 1302.7629685,59"
+       d="M 1302.7,38 L 1302.7,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 1308.46098961,40 L 1308.46098961,59"
+       d="M 1308.4,40 L 1308.4,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 1314.12672715,40 L 1314.12672715,59"
+       d="M 1314.1,40 L 1314.1,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 1319.76054486,40 L 1319.76054486,59"
+       d="M 1319.7,40 L 1319.7,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 1325.36280041,40 L 1325.36280041,59"
+       d="M 1325.3,40 L 1325.3,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 1330.93384546,38 L 1330.93384546,59"
+       d="M 1330.9,38 L 1330.9,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 1336.47402584,40 L 1336.47402584,59"
+       d="M 1336.4,40 L 1336.4,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 1341.98368165,40 L 1341.98368165,59"
+       d="M 1341.9,40 L 1341.9,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 1347.46314741,40 L 1347.46314741,59"
+       d="M 1347.4,40 L 1347.4,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 1352.91275218,40 L 1352.91275218,59"
+       d="M 1352.9,40 L 1352.9,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 1358.33281965,38 L 1358.33281965,59"
+       d="M 1358.3,38 L 1358.3,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 1363.72366829,40 L 1363.72366829,59"
+       d="M 1363.7,40 L 1363.7,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 1369.08561143,40 L 1369.08561143,59"
+       d="M 1369.0,40 L 1369.0,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 1374.4189574,40 L 1374.4189574,59"
+       d="M 1374.4,40 L 1374.4,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 1379.72400963,40 L 1379.72400963,59"
+       d="M 1379.7,40 L 1379.7,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 1385.00106673,38 L 1385.00106673,59"
+       d="M 1385.0,38 L 1385.0,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 1390.25042262,40 L 1390.25042262,59"
+       d="M 1390.2,40 L 1390.2,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 1395.4723666,40 L 1395.4723666,59"
+       d="M 1395.4,40 L 1395.4,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 1400.66718348,40 L 1400.66718348,59"
+       d="M 1400.6,40 L 1400.6,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 1405.83515364,40 L 1405.83515364,59"
+       d="M 1405.8,40 L 1405.8,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 1410.97655314,38 L 1410.97655314,59"
+       d="M 1410.9,38 L 1410.9,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 1416.0916538,40 L 1416.0916538,59"
+       d="M 1416.0,40 L 1416.0,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 1421.18072331,40 L 1421.18072331,59"
+       d="M 1421.1,40 L 1421.1,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 1426.24402527,40 L 1426.24402527,59"
+       d="M 1426.2,40 L 1426.2,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 1431.2818193,40 L 1431.2818193,59"
+       d="M 1431.2,40 L 1431.2,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
   <text style="font-size:12px;fill:#000000;">
       <tspan
-       x="1436.29436112"
+       x="1436.2"
        y="35"
        style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">4.0</tspan></text>
    <path
-       d="M 1436.29436112,38 L 1436.29436112,59"
+       d="M 1436.2,38 L 1436.2,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 1441.28190263,40 L 1441.28190263,59"
+       d="M 1441.2,40 L 1441.2,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 1446.24469197,40 L 1446.24469197,59"
+       d="M 1446.2,40 L 1446.2,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 1451.18297361,40 L 1451.18297361,59"
+       d="M 1451.1,40 L 1451.1,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 1456.09698842,40 L 1456.09698842,59"
+       d="M 1456.0,40 L 1456.0,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 1460.98697371,38 L 1460.98697371,59"
+       d="M 1460.9,38 L 1460.9,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 1465.85316336,40 L 1465.85316336,59"
+       d="M 1465.8,40 L 1465.8,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 1470.69578784,40 L 1470.69578784,59"
+       d="M 1470.6,40 L 1470.6,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 1475.51507427,40 L 1475.51507427,59"
+       d="M 1475.5,40 L 1475.5,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 1480.31124654,40 L 1480.31124654,59"
+       d="M 1480.3,40 L 1480.3,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 1485.08452529,38 L 1485.08452529,59"
+       d="M 1485.0,38 L 1485.0,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 1489.83512805,40 L 1489.83512805,59"
+       d="M 1489.8,40 L 1489.8,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 1494.56326924,40 L 1494.56326924,59"
+       d="M 1494.5,40 L 1494.5,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 1499.26916028,40 L 1499.26916028,59"
+       d="M 1499.2,40 L 1499.2,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 1503.95300959,40 L 1503.95300959,59"
+       d="M 1503.9,40 L 1503.9,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 1508.6150227,38 L 1508.6150227,59"
+       d="M 1508.6,38 L 1508.6,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 1513.25540226,40 L 1513.25540226,59"
+       d="M 1513.2,40 L 1513.2,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 1517.87434811,40 L 1517.87434811,59"
+       d="M 1517.8,40 L 1517.8,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 1522.47205736,40 L 1522.47205736,59"
+       d="M 1522.4,40 L 1522.4,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 1527.04872439,40 L 1527.04872439,59"
+       d="M 1527.0,40 L 1527.0,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 1531.60454092,38 L 1531.60454092,59"
+       d="M 1531.6,38 L 1531.6,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 1536.13969609,40 L 1536.13969609,59"
+       d="M 1536.1,40 L 1536.1,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 1540.65437644,40 L 1540.65437644,59"
+       d="M 1540.6,40 L 1540.6,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 1545.14876603,40 L 1545.14876603,59"
+       d="M 1545.1,40 L 1545.1,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 1549.62304643,40 L 1549.62304643,59"
+       d="M 1549.6,40 L 1549.6,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 1554.07739678,38 L 1554.07739678,59"
+       d="M 1554.0,38 L 1554.0,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 1558.51199384,40 L 1558.51199384,59"
+       d="M 1558.5,40 L 1558.5,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 1562.92701205,40 L 1562.92701205,59"
+       d="M 1562.9,40 L 1562.9,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 1567.32262353,40 L 1567.32262353,59"
+       d="M 1567.3,40 L 1567.3,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 1571.69899813,40 L 1571.69899813,59"
+       d="M 1571.6,40 L 1571.6,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 1576.0563035,38 L 1576.0563035,59"
+       d="M 1576.0,38 L 1576.0,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 1580.39470509,40 L 1580.39470509,59"
+       d="M 1580.3,40 L 1580.3,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 1584.71436624,40 L 1584.71436624,59"
+       d="M 1584.7,40 L 1584.7,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 1589.01544814,40 L 1589.01544814,59"
+       d="M 1589.0,40 L 1589.0,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 1593.29810993,40 L 1593.29810993,59"
+       d="M 1593.2,40 L 1593.2,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 1597.56250872,38 L 1597.56250872,59"
+       d="M 1597.5,38 L 1597.5,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 1601.8087996,40 L 1601.8087996,59"
+       d="M 1601.8,40 L 1601.8,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 1606.03713571,40 L 1606.03713571,59"
+       d="M 1606.0,40 L 1606.0,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 1610.24766824,40 L 1610.24766824,59"
+       d="M 1610.2,40 L 1610.2,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 1614.4405465,40 L 1614.4405465,59"
+       d="M 1614.4,40 L 1614.4,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 1618.61591791,38 L 1618.61591791,59"
+       d="M 1618.6,38 L 1618.6,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 1622.77392806,40 L 1622.77392806,59"
+       d="M 1622.7,40 L 1622.7,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 1626.91472073,40 L 1626.91472073,59"
+       d="M 1626.9,40 L 1626.9,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 1631.03843791,40 L 1631.03843791,59"
+       d="M 1631.0,40 L 1631.0,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 1635.14521987,40 L 1635.14521987,59"
+       d="M 1635.1,40 L 1635.1,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 1639.23520512,38 L 1639.23520512,59"
+       d="M 1639.2,38 L 1639.2,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 1643.3085305,40 L 1643.3085305,59"
+       d="M 1643.3,40 L 1643.3,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 1647.3653312,40 L 1647.3653312,59"
+       d="M 1647.3,40 L 1647.3,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 1651.40574074,40 L 1651.40574074,59"
+       d="M 1651.4,40 L 1651.4,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 1655.42989104,40 L 1655.42989104,59"
+       d="M 1655.4,40 L 1655.4,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
   <text style="font-size:12px;fill:#000000;">
       <tspan
-       x="1659.43791243"
+       x="1659.4"
        y="35"
        style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">5.0</tspan></text>
    <path
-       d="M 1659.43791243,38 L 1659.43791243,59"
+       d="M 1659.4,38 L 1659.4,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 1669.38824329,40 L 1669.38824329,59"
+       d="M 1669.3,40 L 1669.3,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 1679.24053973,38 L 1679.24053973,59"
+       d="M 1679.2,38 L 1679.2,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 1688.99671468,40 L 1688.99671468,59"
+       d="M 1688.9,40 L 1688.9,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 1698.65862559,38 L 1698.65862559,59"
+       d="M 1698.6,38 L 1698.6,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 1708.2280766,40 L 1708.2280766,59"
+       d="M 1708.2,40 L 1708.2,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 1717.70682056,38 L 1717.70682056,59"
+       d="M 1717.7,38 L 1717.7,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 1727.09656091,40 L 1727.09656091,59"
+       d="M 1727.0,40 L 1727.0,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 1736.39895357,38 L 1736.39895357,59"
+       d="M 1736.3,38 L 1736.3,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 1745.61560868,40 L 1745.61560868,59"
+       d="M 1745.6,40 L 1745.6,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 1754.74809224,38 L 1754.74809224,59"
+       d="M 1754.7,38 L 1754.7,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 1763.79792776,40 L 1763.79792776,59"
+       d="M 1763.7,40 L 1763.7,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 1772.76659774,38 L 1772.76659774,59"
+       d="M 1772.7,38 L 1772.7,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 1781.65554516,40 L 1781.65554516,59"
+       d="M 1781.6,40 L 1781.6,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 1790.46617484,38 L 1790.46617484,59"
+       d="M 1790.4,38 L 1790.4,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 1799.19985481,40 L 1799.19985481,59"
+       d="M 1799.1,40 L 1799.1,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 1807.85791755,38 L 1807.85791755,59"
+       d="M 1807.8,38 L 1807.8,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 1816.44166124,40 L 1816.44166124,59"
+       d="M 1816.4,40 L 1816.4,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 1824.95235091,38 L 1824.95235091,59"
+       d="M 1824.9,38 L 1824.9,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 1833.39121956,40 L 1833.39121956,59"
+       d="M 1833.3,40 L 1833.3,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
   <text style="font-size:12px;fill:#000000;">
       <tspan
-       x="1841.75946923"
+       x="1841.7"
        y="35"
        style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">6.0</tspan></text>
    <path
-       d="M 1841.75946923,38 L 1841.75946923,59"
+       d="M 1841.7,38 L 1841.7,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 1850.05827204,40 L 1850.05827204,59"
+       d="M 1850.0,40 L 1850.0,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 1858.28877118,38 L 1858.28877118,59"
+       d="M 1858.2,38 L 1858.2,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 1866.45208182,40 L 1866.45208182,59"
+       d="M 1866.4,40 L 1866.4,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 1874.54929205,38 L 1874.54929205,59"
+       d="M 1874.5,38 L 1874.5,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 1882.58146375,40 L 1882.58146375,59"
+       d="M 1882.5,40 L 1882.5,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 1890.5496334,38 L 1890.5496334,59"
+       d="M 1890.5,38 L 1890.5,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 1898.4548129,40 L 1898.4548129,59"
+       d="M 1898.4,40 L 1898.4,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 1906.29799037,38 L 1906.29799037,59"
+       d="M 1906.2,38 L 1906.2,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 1914.08013081,40 L 1914.08013081,59"
+       d="M 1914.0,40 L 1914.0,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 1921.8021769,38 L 1921.8021769,59"
+       d="M 1921.8,38 L 1921.8,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 1929.46504965,40 L 1929.46504965,59"
+       d="M 1929.4,40 L 1929.4,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 1937.06964903,38 L 1937.06964903,59"
+       d="M 1937.0,38 L 1937.0,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 1944.61685467,40 L 1944.61685467,59"
+       d="M 1944.6,40 L 1944.6,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 1952.1075264,38 L 1952.1075264,59"
+       d="M 1952.1,38 L 1952.1,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 1959.54250488,40 L 1959.54250488,59"
+       d="M 1959.5,40 L 1959.5,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 1966.92261218,38 L 1966.92261218,59"
+       d="M 1966.9,38 L 1966.9,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 1974.24865227,40 L 1974.24865227,59"
+       d="M 1974.2,40 L 1974.2,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 1981.5214116,38 L 1981.5214116,59"
+       d="M 1981.5,38 L 1981.5,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 1988.74165958,40 L 1988.74165958,59"
+       d="M 1988.7,40 L 1988.7,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
   <text style="font-size:12px;fill:#000000;">
       <tspan
-       x="1995.91014906"
+       x="1995.9"
        y="35"
        style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">7.0</tspan></text>
    <path
-       d="M 1995.91014906,38 L 1995.91014906,59"
+       d="M 1995.9,38 L 1995.9,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 2003.02761682,40 L 2003.02761682,59"
+       d="M 2003.0,40 L 2003.0,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 2010.09478405,38 L 2010.09478405,59"
+       d="M 2010.0,38 L 2010.0,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 2017.11235671,40 L 2017.11235671,59"
+       d="M 2017.1,40 L 2017.1,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 2024.08102602,38 L 2024.08102602,59"
+       d="M 2024.0,38 L 2024.0,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 2031.00146887,40 L 2031.00146887,59"
+       d="M 2031.0,40 L 2031.0,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 2037.87434815,38 L 2037.87434815,59"
+       d="M 2037.8,38 L 2037.8,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 2044.70031322,40 L 2044.70031322,59"
+       d="M 2044.7,40 L 2044.7,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 2051.48000021,38 L 2051.48000021,59"
+       d="M 2051.4,38 L 2051.4,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 2058.21403239,40 L 2058.21403239,59"
+       d="M 2058.2,40 L 2058.2,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 2064.90302054,38 L 2064.90302054,59"
+       d="M 2064.9,38 L 2064.9,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 2071.54756326,40 L 2071.54756326,59"
+       d="M 2071.5,40 L 2071.5,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 2078.14824729,38 L 2078.14824729,59"
+       d="M 2078.1,38 L 2078.1,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 2084.70564784,40 L 2084.70564784,59"
+       d="M 2084.7,40 L 2084.7,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 2091.22032886,38 L 2091.22032886,59"
+       d="M 2091.2,38 L 2091.2,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 2097.69284337,40 L 2097.69284337,59"
+       d="M 2097.6,40 L 2097.6,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 2104.1237337,38 L 2104.1237337,59"
+       d="M 2104.1,38 L 2104.1,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 2110.51353179,40 L 2110.51353179,59"
+       d="M 2110.5,40 L 2110.5,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 2116.86275947,38 L 2116.86275947,59"
+       d="M 2116.8,38 L 2116.8,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 2123.17192867,40 L 2123.17192867,59"
+       d="M 2123.1,40 L 2123.1,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
   <text style="font-size:12px;fill:#000000;">
       <tspan
-       x="2129.44154168"
+       x="2129.4"
        y="35"
        style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">8.0</tspan></text>
    <path
-       d="M 2129.44154168,38 L 2129.44154168,59"
+       d="M 2129.4,38 L 2129.4,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 2135.67209143,40 L 2135.67209143,59"
+       d="M 2135.6,40 L 2135.6,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 2141.86406168,38 L 2141.86406168,59"
+       d="M 2141.8,38 L 2141.8,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 2148.01792725,40 L 2148.01792725,59"
+       d="M 2148.0,40 L 2148.0,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 2154.13415427,38 L 2154.13415427,59"
+       d="M 2154.1,38 L 2154.1,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 2160.21320035,40 L 2160.21320035,59"
+       d="M 2160.2,40 L 2160.2,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 2166.2555148,38 L 2166.2555148,59"
+       d="M 2166.2,38 L 2166.2,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 2172.26153886,40 L 2172.26153886,59"
+       d="M 2172.2,40 L 2172.2,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 2178.23170585,38 L 2178.23170585,59"
+       d="M 2178.2,38 L 2178.2,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 2184.16644137,40 L 2184.16644137,59"
+       d="M 2184.1,40 L 2184.1,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 2190.0661635,38 L 2190.0661635,59"
+       d="M 2190.0,38 L 2190.0,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 2195.93128295,40 L 2195.93128295,59"
+       d="M 2195.9,40 L 2195.9,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 2201.76220326,38 L 2201.76220326,59"
+       d="M 2201.7,38 L 2201.7,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 2207.55932094,40 L 2207.55932094,59"
+       d="M 2207.5,40 L 2207.5,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 2213.32302566,38 L 2213.32302566,59"
+       d="M 2213.3,38 L 2213.3,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 2219.05370037,40 L 2219.05370037,59"
+       d="M 2219.0,40 L 2219.0,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 2224.75172148,38 L 2224.75172148,59"
+       d="M 2224.7,38 L 2224.7,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 2230.41745902,40 L 2230.41745902,59"
+       d="M 2230.4,40 L 2230.4,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 2236.05127674,38 L 2236.05127674,59"
+       d="M 2236.0,38 L 2236.0,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 2241.65353229,40 L 2241.65353229,59"
+       d="M 2241.6,40 L 2241.6,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
   <text style="font-size:12px;fill:#000000;">
       <tspan
-       x="2247.22457734"
+       x="2247.2"
        y="35"
        style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">9.0</tspan></text>
    <path
-       d="M 2247.22457734,38 L 2247.22457734,59"
+       d="M 2247.2,38 L 2247.2,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 2252.76475771,40 L 2252.76475771,59"
+       d="M 2252.7,40 L 2252.7,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 2258.27441352,38 L 2258.27441352,59"
+       d="M 2258.2,38 L 2258.2,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 2263.75387929,40 L 2263.75387929,59"
+       d="M 2263.7,40 L 2263.7,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 2269.20348405,38 L 2269.20348405,59"
+       d="M 2269.2,38 L 2269.2,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 2274.62355152,40 L 2274.62355152,59"
+       d="M 2274.6,40 L 2274.6,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 2280.01440016,38 L 2280.01440016,59"
+       d="M 2280.0,38 L 2280.0,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 2285.3763433,40 L 2285.3763433,59"
+       d="M 2285.3,40 L 2285.3,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 2290.70968928,38 L 2290.70968928,59"
+       d="M 2290.7,38 L 2290.7,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 2296.01474151,40 L 2296.01474151,59"
+       d="M 2296.0,40 L 2296.0,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 2301.29179861,38 L 2301.29179861,59"
+       d="M 2301.2,38 L 2301.2,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 2306.54115449,40 L 2306.54115449,59"
+       d="M 2306.5,40 L 2306.5,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 2311.76309847,38 L 2311.76309847,59"
+       d="M 2311.7,38 L 2311.7,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 2316.95791535,40 L 2316.95791535,59"
+       d="M 2316.9,40 L 2316.9,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 2322.12588551,38 L 2322.12588551,59"
+       d="M 2322.1,38 L 2322.1,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 2327.26728501,40 L 2327.26728501,59"
+       d="M 2327.2,40 L 2327.2,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 2332.38238568,38 L 2332.38238568,59"
+       d="M 2332.3,38 L 2332.3,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 2337.47145518,40 L 2337.47145518,59"
+       d="M 2337.4,40 L 2337.4,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 2342.53475714,38 L 2342.53475714,59"
+       d="M 2342.5,38 L 2342.5,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
    <path
-       d="M 2347.57255117,40 L 2347.57255117,59"
+       d="M 2347.5,40 L 2347.5,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
   <text style="font-size:12px;fill:#000000;">
       <tspan
-       x="2352.58509299"
+       x="2352.5"
        y="35"
        style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">10.0</tspan></text>
    <path
-       d="M 2352.58509299,38 L 2352.58509299,59"
+       d="M 2352.5,38 L 2352.5,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
   </g>
 </svg>

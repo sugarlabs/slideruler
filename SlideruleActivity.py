@@ -43,6 +43,9 @@ from gettext import gettext as _
 import locale
 import os.path
 
+import logging
+_logger = logging.getLogger("sliderule-activity")
+
 from sprites import *
 import window
 
@@ -64,7 +67,7 @@ class SlideruleActivity(activity.Activity):
             activity_button.show()
 
             # Label for showing status
-            self.results_label = gtk.Label(" D = 1.00 C = 1.00 D×C = 1.00 ")
+            self.results_label = gtk.Label("1.0 × 1.0 = 1.0")
             self.results_label.show()
             results_toolitem = gtk.ToolItem()
             results_toolitem.add(self.results_label)
@@ -109,6 +112,29 @@ class SlideruleActivity(activity.Activity):
                                                  'images/'), \
                                     self)
 
+        # Read the dpi from the Journal
+        try:
+            self.tw.C.spr.x = int(self.metadata['C'])
+            self.tw.C_tab.spr.x = int(self.metadata['C'])
+            self.tw.D.spr.x = int(self.metadata['D'])
+            self.tw.R.spr.x = int(self.metadata['R'])
+            self.tw.R_tab_top.spr.x = int(self.metadata['R'])
+            self.tw.R_tab_bot.spr.x = int(self.metadata['R'])
+            window.update_label(self.tw)
+        except:
+            pass
+
+
+    """
+    Write the slider positions to the Journal
+    """
+    def write_file(self, file_path):
+        _logger.debug("Write C offset: " + str(self.tw.C.spr.x))
+        self.metadata['C'] = str(self.tw.C.spr.x)
+        _logger.debug("Write D offset: " + str(self.tw.D.spr.x))
+        self.metadata['D'] = str(self.tw.D.spr.x)
+        _logger.debug("Write r offset: " + str(self.tw.R.spr.x))
+        self.metadata['R'] = str(self.tw.R.spr.x)
 
 
 #

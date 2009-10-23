@@ -19,6 +19,8 @@
 #OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 #THE SOFTWARE.
 
+from constants import *
+
 import pygtk
 pygtk.require('2.0')
 import gtk
@@ -31,8 +33,7 @@ try:
 except:
     GRID_CELL_SIZE = 0
 
-from rule import *
-from mark import *
+from sprite_factory import *
 
 class srWindow: pass
 
@@ -74,14 +75,25 @@ def new_window(canvas, path, parent=None):
     tw.scale = 1
 
     # Open the sliders
-    tw.reticule = Mark(tw,"reticule",0,90)
-    tw.C = Rule(tw,"C",0,100)
-    tw.D = Rule(tw,"D",0,160)
-    tw.C.draw_ruler()
-    tw.D.draw_ruler()
+    y = 50
+    tw.R = Sprite(tw,"reticule",0,y+SHEIGHT,100,2*SHEIGHT,False)
+    tw.R_tab_top = Sprite(tw,"tab",0,y,100,60,False)
+    tw.R_tab_bot = Sprite(tw,"tab",0,y+3*SHEIGHT,100,SHEIGHT,False)
+    tw.C = Sprite(tw,"C",0,y+60,SWIDTH,SHEIGHT)
+    tw.C_tab = Sprite(tw,"tab",0,y+3*SHEIGHT,100,SHEIGHT,False)
+    tw.D = Sprite(tw,"D",0,y+2*SHEIGHT,SWIDTH,SHEIGHT)
 
-    # and the reticule
-    tw.reticule.draw_mark()
+    setlabel(tw.R.spr,"")
+    setlabel(tw.C.spr,"")
+    setlabel(tw.D.spr,"")
+    _update_labels(tw)
+
+    tw.C.draw_slider()
+    tw.C_tab.draw_slider()
+    tw.D.draw_slider()
+    tw.R.draw_slider()
+    tw.R_tab_top.draw_slider()
+    tw.R_tab_bot.draw_slider()
 
     # Start calculating
     tw.press = None
@@ -107,47 +119,38 @@ def _mouse_move_cb(win, event, tw):
     if tw.press is None:
         tw.dragpos = 0
         return True
+
     win.grab_focus()
     x, y = map(int, event.get_coords())
     # redicule doesn't use offset
     dx = x-tw.dragpos
     if tw.press == tw.D.spr:
         # everything moves
-        move(tw.reticule.spr,(tw.reticule.spr.x+dx,tw.reticule.spr.y))
+        move(tw.R.spr,(tw.R.spr.x+dx,tw.R.spr.y))
+        move(tw.R_tab_top.spr,(tw.R_tab_top.spr.x+dx,tw.R_tab_top.spr.y))
+        move(tw.R_tab_bot.spr,(tw.R_tab_bot.spr.x+dx,tw.R_tab_bot.spr.y))
         move(tw.C.spr,(tw.C.spr.x+dx,tw.C.spr.y))
+        move(tw.C_tab.spr,(tw.C_tab.spr.x+dx,tw.C_tab.spr.y))
         move(tw.D.spr,(tw.D.spr.x+dx,tw.D.spr.y))
-    else:
+    elif tw.press == tw.R_tab_top.spr or \
+         tw.press == tw.R_tab_bot.spr or \
+         tw.press == tw.R.spr:
+        move(tw.R.spr,(tw.R.spr.x+dx,tw.R.spr.y))
+        move(tw.R_tab_top.spr,(tw.R_tab_top.spr.x+dx,tw.R_tab_top.spr.y))
+        move(tw.R_tab_bot.spr,(tw.R_tab_bot.spr.x+dx,tw.R_tab_bot.spr.y))
+    elif tw.press == tw.C.spr or tw.press == tw.C_tab.spr:
+        move(tw.C.spr,(tw.C.spr.x+dx,tw.C.spr.y))
+        move(tw.C_tab.spr,(tw.C_tab.spr.x+dx,tw.C_tab.spr.y))
+    else: # what else?
         move(tw.press,(tw.press.x+dx,tw.press.y))
     # reset drag position
     tw.dragpos = x
+    _update_labels(tw)
 
-    if tw.press == tw.C.spr:
-        # set the C label to the D value while it is moving
-        dx = tw.C.spr.x - tw.D.spr.x    
-        if dx < 0:
-            D = " "
-        else:
-            D = math.exp(dx/1000.)
-            D = float(int(D*100)/100.)
-        setlabel(tw.C.spr,str(D))
-    elif tw.press == tw.reticule.spr:
-        # set the C label to the C value while it is moving
-        dx = tw.reticule.spr.x - tw.C.spr.x    
-        if dx < 0:
-            C = " "
-        else:
-            C = math.exp(dx/1000.)
-            C = float(int(C*100)/100.)
-        setlabel(tw.C.spr,str(C))
-        # set the D label to the D value while it is moving
-        dx = tw.reticule.spr.x - tw.D.spr.x    
-        if dx < 0:
-            D = " "
-        else:
-            D = math.exp(dx/1000.)
-            D = float(int(D*100)/100.)
-        setlabel(tw.D.spr,str(D))
-
+def _update_labels(tw):
+    setlabel(tw.C_tab.spr,_calc_D(tw))
+    setlabel(tw.R_tab_top.spr,_calc_C(tw))
+    setlabel(tw.R_tab_bot.spr,_calc_DC(tw))
     return True
 
 
@@ -158,37 +161,39 @@ def _button_release_cb(win, event, tw):
     if tw.press == None:
         return True
     tw.press = None
+    update_label(tw)
 
-    # reset slider labels
-    setlabel(tw.C.spr,"C")
-    setlabel(tw.D.spr,"D")
-
+def update_label(tw):
     # calculate the values for D, C, and D*C (under the redicule)
-    dx = tw.C.spr.x - tw.D.spr.x    
-    if dx < 0:
-        D = " "
-    else:
-        D = math.exp(dx/1000.)
-        D = float(int(D*100)/100.)
-    
-    dx = tw.reticule.spr.x - tw.C.spr.x    
-    if dx < 0:
-        C = " "
-    else:
-        C = math.exp(dx/1000.)
-        C = float(int(C*100)/100.)
-
-    dx = tw.reticule.spr.x - tw.D.spr.x    
-    if dx < 0:
-        DC = " "
-    else:
-        DC = math.exp(dx/1000.)
-        DC = float(int(DC*100)/100.)
-    tw.activity.results_label.set_text(" D = " + str(D) + 
-                                       " C = " + str(C) + 
-                                       " D×C = " + str(DC))
+    tw.activity.results_label.set_text(_calc_D(tw) + " × " + 
+                                       _calc_C(tw) + " = " +
+                                       _calc_DC(tw))
     tw.activity.results_label.show()
     return True
+
+def _calc_C(tw):
+    dx = tw.R.spr.x - tw.C.spr.x    
+    if dx < 0:
+        return " "
+    else:
+        C = math.exp(dx/SCALE)
+        return str(float(int(C*100)/100.))
+
+def _calc_D(tw):
+    dx = tw.C.spr.x - tw.D.spr.x
+    if dx < 0:
+        return " "
+    else:
+        D = math.exp(dx/SCALE)
+        return str(float(int(D*100)/100.))
+
+def _calc_DC(tw):
+    dx = tw.R.spr.x - tw.D.spr.x    
+    if dx < 0:
+        return " "
+    else:
+        DC = math.exp(dx/SCALE)
+        return str(float(int(DC*100)/100.))
 
 def _expose_cb(win, event, tw):
     redrawsprites(tw)
