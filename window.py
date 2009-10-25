@@ -86,7 +86,8 @@ def new_window(canvas, path, parent=None):
     setlabel(tw.R.spr,"")
     setlabel(tw.C.spr,"")
     setlabel(tw.D.spr,"")
-    _update_labels(tw)
+    _update_slider_labels(tw)
+    _update_results_label(tw)
 
     tw.C.draw_slider()
     tw.C_tab.draw_slider()
@@ -96,6 +97,7 @@ def new_window(canvas, path, parent=None):
     tw.R_tab_bot.draw_slider()
 
     # Start calculating
+    tw.factor = 1
     tw.press = None
     tw.dragpos = 0
 
@@ -145,12 +147,13 @@ def _mouse_move_cb(win, event, tw):
         move(tw.press,(tw.press.x+dx,tw.press.y))
     # reset drag position
     tw.dragpos = x
-    _update_labels(tw)
+    _update_slider_labels(tw)
+    _update_results_label(tw)
 
-def _update_labels(tw):
-    setlabel(tw.C_tab.spr,_calc_D(tw))
-    setlabel(tw.R_tab_top.spr,_calc_C(tw))
-    setlabel(tw.R_tab_bot.spr,_calc_DC(tw))
+def _update_slider_labels(tw):
+    setlabel(tw.C_tab.spr,str(_calc_D(tw)))
+    setlabel(tw.R_tab_top.spr,str(_calc_C(tw)))
+    setlabel(tw.R_tab_bot.spr,str(_calc_DC(tw)))
     return True
 
 
@@ -161,39 +164,39 @@ def _button_release_cb(win, event, tw):
     if tw.press == None:
         return True
     tw.press = None
-    update_label(tw)
+    _update_results_label(tw)
 
-def update_label(tw):
+def _update_results_label(tw):
     # calculate the values for D, C, and D*C (under the redicule)
-    tw.activity.results_label.set_text(_calc_D(tw) + " × " + 
-                                       _calc_C(tw) + " = " +
-                                       _calc_DC(tw))
+    tw.activity.results_label.set_text(str(_calc_D(tw)) + " × " + 
+                                       str(_calc_C(tw)) + " = " +
+                                       str(_calc_DC(tw)*tw.factor))
     tw.activity.results_label.show()
     return True
 
 def _calc_C(tw):
     dx = tw.R.spr.x - tw.C.spr.x    
     if dx < 0:
-        return " "
-    else:
-        C = math.exp(dx/SCALE)
-        return str(float(int(C*100)/100.))
+        dx = math.log(10.)*SCALE + dx
+    C = math.exp(dx/SCALE)
+    return float(int(C*100)/100.)
 
 def _calc_D(tw):
     dx = tw.C.spr.x - tw.D.spr.x
     if dx < 0:
-        return " "
+        dx = math.log(10.)*SCALE + dx
+        tw.factor = 10
     else:
-        D = math.exp(dx/SCALE)
-        return str(float(int(D*100)/100.))
+        tw.factor = 1
+    D = math.exp(dx/SCALE)
+    return float(int(D*100)/100.)
 
 def _calc_DC(tw):
     dx = tw.R.spr.x - tw.D.spr.x    
     if dx < 0:
-        return " "
-    else:
-        DC = math.exp(dx/SCALE)
-        return str(float(int(DC*100)/100.))
+        dx = math.log(10.)*SCALE + dx
+    DC = math.exp(dx/SCALE)
+    return float(int(DC*100)/100.)
 
 def _expose_cb(win, event, tw):
     redrawsprites(tw)

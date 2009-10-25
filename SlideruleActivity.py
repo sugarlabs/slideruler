@@ -120,7 +120,8 @@ class SlideruleActivity(activity.Activity):
             self.tw.R.spr.x = int(self.metadata['R'])
             self.tw.R_tab_top.spr.x = int(self.metadata['R'])
             self.tw.R_tab_bot.spr.x = int(self.metadata['R'])
-            window.update_label(self.tw)
+            window._update_results_label(self.tw)
+            window._update_slider_labels(self.tw)
         except:
             pass
 
@@ -147,7 +148,7 @@ class ProjectToolbar(gtk.Toolbar):
         self.activity = pc
 
         # Label for showing status
-        self.activity.results_label = gtk.Label( _("D = 1 C = 1 DxC = 1 "))
+        self.activity.results_label = gtk.Label("1.0 × 1.0 = 1.0")
         self.activity.results_label.show()
         self.activity.results_toolitem = gtk.ToolItem()
         self.activity.results_toolitem.add(self.activity.results_label)

@@ -1,3 +1,8 @@
+3
+
+* Update results label during moves
+* Handle condition when C is to the left of D
+
 2
 
 * Save position in Journal

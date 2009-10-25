@@ -112,19 +112,7 @@ def hit(spr,pos):
     if x>spr.x+spr.width: return False
     if y<spr.y: return False
     if y>spr.y+spr.height: return False
-    if isinstance(spr.image,gtk.gdk.Pixmap): return True
-    if hasattr(spr, 'proto') and hasattr(spr.proto, 'name') and \
-        spr.proto.name == 'journal':
-            return True
-    dx,dy = x-spr.x, y-spr.y
-    try:
-        return ord(spr.image.get_pixels()[(dy*spr.width+dx)*4+3]) == 255
-    except IndexError:
-        if hasattr(spr, 'proto') and hasattr(spr.proto, 'name'):
-            print spr.proto.name
-        print "IndexError: string index out of range" + str(dx) + " " \
-            + str(dy) + " " + str(spr.width) + " " + str(spr.height)
-        return True
+    return True
 
 def draw_label(spr, label, myscale, center_flag="False", vert_pos="middle"):
     fd = pango.FontDescription('Sans')
