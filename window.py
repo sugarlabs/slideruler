@@ -160,14 +160,16 @@ def _mouse_move_cb(win, event, tw):
         move(tw.C.spr,(tw.C.spr.x+dx,tw.C.spr.y))
         move(tw.C_tab_left.spr,(tw.C_tab_left.spr.x+dx,tw.C_tab_left.spr.y))
         move(tw.C_tab_right.spr,(tw.C_tab_right.spr.x+dx,tw.C_tab_right.spr.y))
+    """
+    # A slider doesn't move relative to D
     elif tw.press == tw.A.spr or \
          tw.press == tw.A_tab_left.spr or \
          tw.press == tw.A_tab_right.spr:
         move(tw.A.spr,(tw.A.spr.x+dx,tw.A.spr.y))
         move(tw.A_tab_left.spr,(tw.A_tab_left.spr.x+dx,tw.A_tab_left.spr.y))
         move(tw.A_tab_right.spr,(tw.A_tab_right.spr.x+dx,tw.A_tab_right.spr.y))
-    else: # what else?
-        move(tw.press,(tw.press.x+dx,tw.press.y))
+    """
+
     # reset drag position
     tw.dragpos = x
     _update_slider_labels(tw)
@@ -199,9 +201,8 @@ def _button_release_cb(win, event, tw):
 def _update_results_label(tw):
     if tw.slider_on_top == "A":
         # calculate the values for D, A, and D*A (under the redicule)
-        tw.activity.results_label.set_text(str(_calc_D(tw)) + " × " + 
-                                           str(_calc_A(tw)) + " = " +
-                                           str(_calc_DA(tw)*tw.factor))
+        tw.activity.results_label.set_text(" √ " + str(_calc_A(tw)) + 
+                                           " = " + str(_calc_DA(tw)*tw.factor))
     else:
         # calculate the values for D, C, and D*C (under the redicule)
         tw.activity.results_label.set_text(str(_calc_D(tw)) + " × " + 
