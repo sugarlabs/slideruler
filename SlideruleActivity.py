@@ -48,6 +48,7 @@ _logger = logging.getLogger("sliderule-activity")
 
 from sprites import *
 import window
+from constants import *
 
 #
 # Sugar activity
@@ -130,28 +131,62 @@ class SlideruleActivity(activity.Activity):
 
         # Read the dpi from the Journal
         try:
+            self.tw.A.spr.x = int(self.metadata['A'])
+            self.tw.A_tab_left.spr.x = int(self.metadata['A'])
+            self.tw.A_tab_right.spr.x = int(self.metadata['A'])+SWIDTH-100
             self.tw.C.spr.x = int(self.metadata['C'])
-            self.tw.C_tab.spr.x = int(self.metadata['C'])
+            self.tw.C_tab_left.spr.x = int(self.metadata['C'])
+            self.tw.C_tab_right.spr.x = int(self.metadata['C'])+SWIDTH-100
             self.tw.D.spr.x = int(self.metadata['D'])
             self.tw.R.spr.x = int(self.metadata['R'])
             self.tw.R_tab_top.spr.x = int(self.metadata['R'])
             self.tw.R_tab_bot.spr.x = int(self.metadata['R'])
+            self.tw.slider_on_top = self.metadata['slider']
+            if self.tw.slider_on_top == 'A':
+                self._show_a()
+            else:
+                self._show_c()
             window._update_results_label(self.tw)
             window._update_slider_labels(self.tw)
         except:
+            self._show_c()
             pass
 
-
     def _c_slider_cb(self, button):
+        self._show_c()
         return True
 
+    def _show_c(self):
+        hide(self.tw.A.spr)
+        hide(self.tw.A_tab_left.spr)
+        hide(self.tw.A_tab_right.spr)
+        self.tw.C.draw_slider(1000)
+        self.tw.C_tab_left.draw_slider(1000)
+        self.tw.C_tab_right.draw_slider(1000)
+        self.tw.slider_on_top = "C"
+
     def _a_slider_cb(self, button):
+        self._show_a()
+        return True
+
+    def _show_a(self):
+        hide(self.tw.C.spr)
+        hide(self.tw.C_tab_left.spr)
+        hide(self.tw.C_tab_right.spr)
+        self.tw.A.draw_slider(1000)
+        self.tw.A_tab_left.draw_slider(1000)
+        self.tw.A_tab_right.draw_slider(1000)
+        self.tw.slider_on_top = "A"
         return True
 
     """
     Write the slider positions to the Journal
     """
     def write_file(self, file_path):
+        _logger.debug("Write slider on top: " + self.tw.slider_on_top)
+        self.metadata['slider'] = self.tw.slider_on_top
+        _logger.debug("Write A offset: " + str(self.tw.A.spr.x))
+        self.metadata['A'] = str(self.tw.A.spr.x)
         _logger.debug("Write C offset: " + str(self.tw.C.spr.x))
         self.metadata['C'] = str(self.tw.C.spr.x)
         _logger.debug("Write D offset: " + str(self.tw.D.spr.x))

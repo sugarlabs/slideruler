@@ -76,23 +76,33 @@ def new_window(canvas, path, parent=None):
 
     # Open the sliders
     y = 50
+    tw.A = Sprite(tw,"A",0,y+60,SWIDTH,SHEIGHT)
+    tw.A_tab_left = Sprite(tw,"tab",0,y+3*SHEIGHT,100,SHEIGHT,False)
+    tw.A_tab_right = Sprite(tw,"tab",SWIDTH+100,y+3*SHEIGHT,100,SHEIGHT,False)
+    tw.C = Sprite(tw,"C",0,y+60,SWIDTH,SHEIGHT)
+    tw.C_tab_left = Sprite(tw,"tab",0,y+3*SHEIGHT,100,SHEIGHT,False)
+    tw.C_tab_right = Sprite(tw,"tab",SWIDTH-100,y+3*SHEIGHT,100,SHEIGHT,False)
+    tw.D = Sprite(tw,"D",0,y+2*SHEIGHT,SWIDTH,SHEIGHT)
     tw.R = Sprite(tw,"reticule",0,y+SHEIGHT,100,2*SHEIGHT,False)
     tw.R_tab_top = Sprite(tw,"tab",0,y,100,60,False)
     tw.R_tab_bot = Sprite(tw,"tab",0,y+3*SHEIGHT,100,SHEIGHT,False)
-    tw.C = Sprite(tw,"C",0,y+60,SWIDTH,SHEIGHT)
-    tw.C_tab = Sprite(tw,"tab",0,y+3*SHEIGHT,100,SHEIGHT,False)
-    tw.D = Sprite(tw,"D",0,y+2*SHEIGHT,SWIDTH,SHEIGHT)
+    tw.slider_on_top = 'C'
 
     setlabel(tw.R.spr,"")
+    setlabel(tw.A.spr,"")
     setlabel(tw.C.spr,"")
     setlabel(tw.D.spr,"")
     _update_slider_labels(tw)
     _update_results_label(tw)
 
+    tw.A.draw_slider(500)
+    tw.A_tab_left.draw_slider(500)
+    tw.A_tab_right.draw_slider(500)
     tw.C.draw_slider()
-    tw.C_tab.draw_slider()
+    tw.C_tab_left.draw_slider()
+    tw.C_tab_right.draw_slider()
     tw.D.draw_slider()
-    tw.R.draw_slider()
+    tw.R.draw_slider(2000)
     tw.R_tab_top.draw_slider()
     tw.R_tab_bot.draw_slider()
 
@@ -132,7 +142,11 @@ def _mouse_move_cb(win, event, tw):
         move(tw.R_tab_top.spr,(tw.R_tab_top.spr.x+dx,tw.R_tab_top.spr.y))
         move(tw.R_tab_bot.spr,(tw.R_tab_bot.spr.x+dx,tw.R_tab_bot.spr.y))
         move(tw.C.spr,(tw.C.spr.x+dx,tw.C.spr.y))
-        move(tw.C_tab.spr,(tw.C_tab.spr.x+dx,tw.C_tab.spr.y))
+        move(tw.C_tab_left.spr,(tw.C_tab_left.spr.x+dx,tw.C_tab_left.spr.y))
+        move(tw.C_tab_right.spr,(tw.C_tab_right.spr.x+dx,tw.C_tab_right.spr.y))
+        move(tw.A.spr,(tw.A.spr.x+dx,tw.A.spr.y))
+        move(tw.A_tab_left.spr,(tw.A_tab_left.spr.x+dx,tw.A_tab_left.spr.y))
+        move(tw.A_tab_right.spr,(tw.A_tab_right.spr.x+dx,tw.A_tab_right.spr.y))
         move(tw.D.spr,(tw.D.spr.x+dx,tw.D.spr.y))
     elif tw.press == tw.R_tab_top.spr or \
          tw.press == tw.R_tab_bot.spr or \
@@ -140,9 +154,18 @@ def _mouse_move_cb(win, event, tw):
         move(tw.R.spr,(tw.R.spr.x+dx,tw.R.spr.y))
         move(tw.R_tab_top.spr,(tw.R_tab_top.spr.x+dx,tw.R_tab_top.spr.y))
         move(tw.R_tab_bot.spr,(tw.R_tab_bot.spr.x+dx,tw.R_tab_bot.spr.y))
-    elif tw.press == tw.C.spr or tw.press == tw.C_tab.spr:
+    elif tw.press == tw.C.spr or \
+         tw.press == tw.C_tab_left.spr or \
+         tw.press == tw.C_tab_right.spr:
         move(tw.C.spr,(tw.C.spr.x+dx,tw.C.spr.y))
-        move(tw.C_tab.spr,(tw.C_tab.spr.x+dx,tw.C_tab.spr.y))
+        move(tw.C_tab_left.spr,(tw.C_tab_left.spr.x+dx,tw.C_tab_left.spr.y))
+        move(tw.C_tab_right.spr,(tw.C_tab_right.spr.x+dx,tw.C_tab_right.spr.y))
+    elif tw.press == tw.A.spr or \
+         tw.press == tw.A_tab_left.spr or \
+         tw.press == tw.A_tab_right.spr:
+        move(tw.A.spr,(tw.A.spr.x+dx,tw.A.spr.y))
+        move(tw.A_tab_left.spr,(tw.A_tab_left.spr.x+dx,tw.A_tab_left.spr.y))
+        move(tw.A_tab_right.spr,(tw.A_tab_right.spr.x+dx,tw.A_tab_right.spr.y))
     else: # what else?
         move(tw.press,(tw.press.x+dx,tw.press.y))
     # reset drag position
@@ -151,9 +174,16 @@ def _mouse_move_cb(win, event, tw):
     _update_results_label(tw)
 
 def _update_slider_labels(tw):
-    setlabel(tw.C_tab.spr,str(_calc_D(tw)))
-    setlabel(tw.R_tab_top.spr,str(_calc_C(tw)))
-    setlabel(tw.R_tab_bot.spr,str(_calc_DC(tw)))
+    setlabel(tw.A_tab_left.spr,str(_calc_D(tw)))
+    setlabel(tw.C_tab_left.spr,str(_calc_D(tw)))
+    setlabel(tw.A_tab_right.spr,str(_calc_D(tw)))
+    setlabel(tw.C_tab_right.spr,str(_calc_D(tw)))
+    if tw.slider_on_top == "A":
+        setlabel(tw.R_tab_top.spr,str(_calc_A(tw)))
+        setlabel(tw.R_tab_bot.spr,str(_calc_DA(tw)))
+    else:
+        setlabel(tw.R_tab_top.spr,str(_calc_C(tw)))
+        setlabel(tw.R_tab_bot.spr,str(_calc_DC(tw)))
     return True
 
 
@@ -167,10 +197,16 @@ def _button_release_cb(win, event, tw):
     _update_results_label(tw)
 
 def _update_results_label(tw):
-    # calculate the values for D, C, and D*C (under the redicule)
-    tw.activity.results_label.set_text(str(_calc_D(tw)) + " × " + 
-                                       str(_calc_C(tw)) + " = " +
-                                       str(_calc_DC(tw)*tw.factor))
+    if tw.slider_on_top == "A":
+        # calculate the values for D, A, and D*A (under the redicule)
+        tw.activity.results_label.set_text(str(_calc_D(tw)) + " × " + 
+                                           str(_calc_A(tw)) + " = " +
+                                           str(_calc_DA(tw)*tw.factor))
+    else:
+        # calculate the values for D, C, and D*C (under the redicule)
+        tw.activity.results_label.set_text(str(_calc_D(tw)) + " × " + 
+                                           str(_calc_C(tw)) + " = " +
+                                           str(_calc_DC(tw)*tw.factor))
     tw.activity.results_label.show()
     return True
 
@@ -181,8 +217,18 @@ def _calc_C(tw):
     C = math.exp(dx/SCALE)
     return float(int(C*100)/100.)
 
+def _calc_A(tw):
+    dx = tw.R.spr.x - tw.A.spr.x
+    if dx < 0:
+        dx = math.log(10.)*SCALE + dx
+    A = math.exp(2*dx/SCALE) # two-decade rule
+    return float(int(A*100)/100.)
+
 def _calc_D(tw):
-    dx = tw.C.spr.x - tw.D.spr.x
+    if tw.slider_on_top == "A":
+        dx = tw.A.spr.x - tw.D.spr.x
+    else:
+        dx = tw.C.spr.x - tw.D.spr.x
     if dx < 0:
         dx = math.log(10.)*SCALE + dx
         tw.factor = 10
@@ -197,6 +243,13 @@ def _calc_DC(tw):
         dx = math.log(10.)*SCALE + dx
     DC = math.exp(dx/SCALE)
     return float(int(DC*100)/100.)
+
+def _calc_DA(tw):
+    dx = tw.R.spr.x - tw.D.spr.x    
+    if dx < 0:
+        dx = math.log(100.)*SCALE + dx
+    DA = math.exp(dx/SCALE)
+    return float(int(DA*100)/100.)
 
 def _expose_cb(win, event, tw):
     redrawsprites(tw)

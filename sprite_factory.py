@@ -39,8 +39,8 @@ class Sprite:
         else:
             self.spr.label = "1.0"
 
-    def draw_slider(self):
-        setlayer(self.spr,1000)
+    def draw_slider(self, layer=1000):
+        setlayer(self.spr, layer)
         draw(self.spr)
 
     def load_image(self, file, name, w, h):
