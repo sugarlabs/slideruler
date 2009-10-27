@@ -77,8 +77,6 @@ def new_window(canvas, path, parent=None):
     # Open the sliders
     y = 50
     tw.A = Sprite(tw,"A",0,y+60,SWIDTH,SHEIGHT)
-    tw.A_tab_left = Sprite(tw,"tab",0,y+3*SHEIGHT,100,SHEIGHT,False)
-    tw.A_tab_right = Sprite(tw,"tab",SWIDTH+100,y+3*SHEIGHT,100,SHEIGHT,False)
     tw.C = Sprite(tw,"C",0,y+60,SWIDTH,SHEIGHT)
     tw.C_tab_left = Sprite(tw,"tab",0,y+3*SHEIGHT,100,SHEIGHT,False)
     tw.C_tab_right = Sprite(tw,"tab",SWIDTH-100,y+3*SHEIGHT,100,SHEIGHT,False)
@@ -96,8 +94,6 @@ def new_window(canvas, path, parent=None):
     _update_results_label(tw)
 
     tw.A.draw_slider(500)
-    tw.A_tab_left.draw_slider(500)
-    tw.A_tab_right.draw_slider(500)
     tw.C.draw_slider()
     tw.C_tab_left.draw_slider()
     tw.C_tab_right.draw_slider()
@@ -136,7 +132,7 @@ def _mouse_move_cb(win, event, tw):
     x, y = map(int, event.get_coords())
     # redicule doesn't use offset
     dx = x-tw.dragpos
-    if tw.press == tw.D.spr:
+    if tw.press == tw.D.spr or tw.press == tw.A.spr:
         # everything moves
         move(tw.R.spr,(tw.R.spr.x+dx,tw.R.spr.y))
         move(tw.R_tab_top.spr,(tw.R_tab_top.spr.x+dx,tw.R_tab_top.spr.y))
@@ -145,8 +141,6 @@ def _mouse_move_cb(win, event, tw):
         move(tw.C_tab_left.spr,(tw.C_tab_left.spr.x+dx,tw.C_tab_left.spr.y))
         move(tw.C_tab_right.spr,(tw.C_tab_right.spr.x+dx,tw.C_tab_right.spr.y))
         move(tw.A.spr,(tw.A.spr.x+dx,tw.A.spr.y))
-        move(tw.A_tab_left.spr,(tw.A_tab_left.spr.x+dx,tw.A_tab_left.spr.y))
-        move(tw.A_tab_right.spr,(tw.A_tab_right.spr.x+dx,tw.A_tab_right.spr.y))
         move(tw.D.spr,(tw.D.spr.x+dx,tw.D.spr.y))
     elif tw.press == tw.R_tab_top.spr or \
          tw.press == tw.R_tab_bot.spr or \
@@ -160,15 +154,6 @@ def _mouse_move_cb(win, event, tw):
         move(tw.C.spr,(tw.C.spr.x+dx,tw.C.spr.y))
         move(tw.C_tab_left.spr,(tw.C_tab_left.spr.x+dx,tw.C_tab_left.spr.y))
         move(tw.C_tab_right.spr,(tw.C_tab_right.spr.x+dx,tw.C_tab_right.spr.y))
-    """
-    # A slider doesn't move relative to D
-    elif tw.press == tw.A.spr or \
-         tw.press == tw.A_tab_left.spr or \
-         tw.press == tw.A_tab_right.spr:
-        move(tw.A.spr,(tw.A.spr.x+dx,tw.A.spr.y))
-        move(tw.A_tab_left.spr,(tw.A_tab_left.spr.x+dx,tw.A_tab_left.spr.y))
-        move(tw.A_tab_right.spr,(tw.A_tab_right.spr.x+dx,tw.A_tab_right.spr.y))
-    """
 
     # reset drag position
     tw.dragpos = x
@@ -176,9 +161,7 @@ def _mouse_move_cb(win, event, tw):
     _update_results_label(tw)
 
 def _update_slider_labels(tw):
-    setlabel(tw.A_tab_left.spr,str(_calc_D(tw)))
     setlabel(tw.C_tab_left.spr,str(_calc_D(tw)))
-    setlabel(tw.A_tab_right.spr,str(_calc_D(tw)))
     setlabel(tw.C_tab_right.spr,str(_calc_D(tw)))
     if tw.slider_on_top == "A":
         setlabel(tw.R_tab_top.spr,str(_calc_A(tw)))

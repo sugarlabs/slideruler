@@ -132,8 +132,6 @@ class SlideruleActivity(activity.Activity):
         # Read the dpi from the Journal
         try:
             self.tw.A.spr.x = int(self.metadata['A'])
-            self.tw.A_tab_left.spr.x = int(self.metadata['A'])
-            self.tw.A_tab_right.spr.x = int(self.metadata['A'])+SWIDTH-100
             self.tw.C.spr.x = int(self.metadata['C'])
             self.tw.C_tab_left.spr.x = int(self.metadata['C'])
             self.tw.C_tab_right.spr.x = int(self.metadata['C'])+SWIDTH-100
@@ -158,8 +156,6 @@ class SlideruleActivity(activity.Activity):
 
     def _show_c(self):
         hide(self.tw.A.spr)
-        hide(self.tw.A_tab_left.spr)
-        hide(self.tw.A_tab_right.spr)
         self.tw.C.draw_slider(1000)
         self.tw.C_tab_left.draw_slider(1000)
         self.tw.C_tab_right.draw_slider(1000)
@@ -174,8 +170,6 @@ class SlideruleActivity(activity.Activity):
         hide(self.tw.C_tab_left.spr)
         hide(self.tw.C_tab_right.spr)
         self.tw.A.draw_slider(1000)
-        self.tw.A_tab_left.draw_slider(1000)
-        self.tw.A_tab_right.draw_slider(1000)
         self.tw.slider_on_top = "A"
         return True
 
@@ -208,15 +202,15 @@ class ProjectToolbar(gtk.Toolbar):
         self.activity.c_sliders = ToolButton( "C" )
         self.activity.c_sliders.set_tooltip(_('C'))
         self.activity.c_sliders.props.sensitive = True
-        self.activity.c_sliders.connect('clicked', self.activity._c_sliders_cb)
+        self.activity.c_sliders.connect('clicked', self.activity._c_slider_cb)
         self.insert(self.activity.c_sliders, -1)
         self.activity.c_sliders.show()
 
         # A slider
-        self.activity.a_sliders = ToolButton( "C" )
-        self.activity.a_sliders.set_tooltip(_('C'))
+        self.activity.a_sliders = ToolButton( "A" )
+        self.activity.a_sliders.set_tooltip(_('A'))
         self.activity.a_sliders.props.sensitive = True
-        self.activity.a_sliders.connect('clicked', self.activity._a_sliders_cb)
+        self.activity.a_sliders.connect('clicked', self.activity._a_slider_cb)
         self.insert(self.activity.a_sliders, -1)
         self.activity.a_sliders.show()
 
