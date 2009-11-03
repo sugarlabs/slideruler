@@ -14,10 +14,14 @@ images/D.svg
 images/reticule.svg
 images/C.svg
 po/Sliderule.pot
-icons/blank-out.svg
-icons/buxton.svg
-icons/blank-in.svg
+
+
+
 constants.py
 sprite_factory.py
 activity/activity-sliderule.png
 images/tab.svg
+A.py
+images/A.svg
+icons/A.svg
+icons/C.svg

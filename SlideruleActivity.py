@@ -68,7 +68,7 @@ class SlideruleActivity(activity.Activity):
             activity_button.show()
 
             # C slider
-            self.c_slider = ToolButton( "C" )
+            self.c_slider = ToolButton( "Con" )
             self.c_slider.set_tooltip(_('C'))
             self.c_slider.props.sensitive = True
             self.c_slider.connect('clicked', self._c_slider_cb)
@@ -76,7 +76,7 @@ class SlideruleActivity(activity.Activity):
             self.c_slider.show()
 
             # A slider
-            self.a_slider = ToolButton( "A" )
+            self.a_slider = ToolButton( "Aoff" )
             self.a_slider.set_tooltip(_('A'))
             self.a_slider.props.sensitive = True
             self.a_slider.connect('clicked', self._a_slider_cb)
@@ -155,6 +155,8 @@ class SlideruleActivity(activity.Activity):
         return True
 
     def _show_c(self):
+        self.c_slider.set_icon("Con")
+        self.a_slider.set_icon("Aoff")
         hide(self.tw.A.spr)
         self.tw.C.draw_slider(1000)
         self.tw.C_tab_left.draw_slider(1000)
@@ -166,6 +168,8 @@ class SlideruleActivity(activity.Activity):
         return True
 
     def _show_a(self):
+        self.c_slider.set_icon("Coff")
+        self.a_slider.set_icon("Aon")
         hide(self.tw.C.spr)
         hide(self.tw.C_tab_left.spr)
         hide(self.tw.C_tab_right.spr)
@@ -199,7 +203,7 @@ class ProjectToolbar(gtk.Toolbar):
         self.activity = pc
 
         # C slider
-        self.activity.c_sliders = ToolButton( "C" )
+        self.activity.c_sliders = ToolButton( "Con" )
         self.activity.c_sliders.set_tooltip(_('C'))
         self.activity.c_sliders.props.sensitive = True
         self.activity.c_sliders.connect('clicked', self.activity._c_slider_cb)
@@ -207,7 +211,7 @@ class ProjectToolbar(gtk.Toolbar):
         self.activity.c_sliders.show()
 
         # A slider
-        self.activity.a_sliders = ToolButton( "A" )
+        self.activity.a_sliders = ToolButton( "Aoff" )
         self.activity.a_sliders.set_tooltip(_('A'))
         self.activity.a_sliders.props.sensitive = True
         self.activity.a_sliders.connect('clicked', self.activity._a_slider_cb)
