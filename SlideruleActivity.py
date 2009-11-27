@@ -129,7 +129,7 @@ class SlideruleActivity(activity.Activity):
                                                  'images/'), \
                                     self)
 
-        # Read the dpi from the Journal
+        # Read the slider positions from the Journal
         try:
             self.tw.A.spr.x = int(self.metadata['A'])
             self.tw.C.spr.x = int(self.metadata['C'])
@@ -148,7 +148,6 @@ class SlideruleActivity(activity.Activity):
             window._update_slider_labels(self.tw)
         except:
             self._show_c()
-            pass
 
     def _c_slider_cb(self, button):
         self._show_c()
@@ -203,20 +202,20 @@ class ProjectToolbar(gtk.Toolbar):
         self.activity = pc
 
         # C slider
-        self.activity.c_sliders = ToolButton( "Con" )
-        self.activity.c_sliders.set_tooltip(_('C'))
-        self.activity.c_sliders.props.sensitive = True
-        self.activity.c_sliders.connect('clicked', self.activity._c_slider_cb)
-        self.insert(self.activity.c_sliders, -1)
-        self.activity.c_sliders.show()
+        self.activity.c_slider = ToolButton( "Con" )
+        self.activity.c_slider.set_tooltip(_('C'))
+        self.activity.c_slider.props.sensitive = True
+        self.activity.c_slider.connect('clicked', self.activity._c_slider_cb)
+        self.insert(self.activity.c_slider, -1)
+        self.activity.c_slider.show()
 
         # A slider
-        self.activity.a_sliders = ToolButton( "Aoff" )
-        self.activity.a_sliders.set_tooltip(_('A'))
-        self.activity.a_sliders.props.sensitive = True
-        self.activity.a_sliders.connect('clicked', self.activity._a_slider_cb)
-        self.insert(self.activity.a_sliders, -1)
-        self.activity.a_sliders.show()
+        self.activity.a_slider = ToolButton( "Aoff" )
+        self.activity.a_slider.set_tooltip(_('A'))
+        self.activity.a_slider.props.sensitive = True
+        self.activity.a_slider.connect('clicked', self.activity._a_slider_cb)
+        self.insert(self.activity.a_slider, -1)
+        self.activity.a_slider.show()
 
         # Label for showing status
         self.activity.results_label = gtk.Label("1.0 × 1.0 = 1.0")
