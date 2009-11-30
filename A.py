@@ -43,6 +43,29 @@ print "       x=\"5\""
 print "       y=\"32\""
 print "       style=\"font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;\">A</tspan></text>"
 
+
+ln = str(float(int( (math.log(math.pi)*SCALE/2 + OFFSET)*10 )/10.))
+h1 = "38"; h2 = "59"; h3 = "35"
+print "  <text style=\"font-size:12px;fill:#000000;\">"
+print "      <tspan"
+print "       x=\"" + str(ln) + "\""
+print "       y=\"" + h3 + "\""
+print "       style=\"font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;\">π</tspan></text>"
+print "   <path"
+print "       d=\"M " + ln + "," + h1 + " L " + ln + "," + h2 + "\""
+print "       style=\"fill:none;stroke:#FF0000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1\" />"
+
+ln = str(float(int( (math.log(math.e)*SCALE/2 + OFFSET)*10 )/10.))
+h1 = "38"; h2 = "59"; h3 = "35"
+print "  <text style=\"font-size:12px;fill:#000000;\">"
+print "      <tspan"
+print "       x=\"" + str(ln) + "\""
+print "       y=\"" + h3 + "\""
+print "       style=\"font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;\">e</tspan></text>"
+print "   <path"
+print "       d=\"M " + ln + "," + h1 + " L " + ln + "," + h2 + "\""
+print "       style=\"fill:none;stroke:#FF0000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1\" />"
+
 for i in range(100,200):
     ln = str(float(int( (math.log(i/100.)*SCALE/2 + OFFSET)*10 )/10.))
     if int((i/10)*10) == i:
