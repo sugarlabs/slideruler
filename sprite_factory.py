@@ -27,25 +27,23 @@ import os.path
 from sprites import *
 
 #
-# class for defining individual cards
+# class for defining individual slider parts
 #
-class Sprite:
-    def __init__(self, tw, name, x, y, w, h, name_label=True):
+class Slider:
+    def __init__(self, sprites, path, name, x, y, w, h, name_label=True):
         # create sprite from svg file
-        self.spr = sprNew(tw, x, y,
-                          self.load_image(tw.path,name,w,h))
+        self.spr = Sprite(sprites, x, y,
+                          self.load_image(path,name,w,h))
         if name_label is True:
             self.spr.label = name
         else:
             self.spr.label = "1.0"
 
     def draw_slider(self, layer=1000):
-        setlayer(self.spr, layer)
-        draw(self.spr)
+        self.spr.set_layer(layer)
+        self.spr.draw()
 
-    def load_image(self, file, name, w, h):
-        return gtk.gdk.pixbuf_new_from_file_at_size(os.path.join(file + 
-                                                                 name + 
-                                                                 '.svg'),
-                                                    w, h)
+    def load_image(self, path, name, w, h):
+        return gtk.gdk.pixbuf_new_from_file_at_size(
+            os.path.join(path+name+'.svg'), int(w), int(h))
 

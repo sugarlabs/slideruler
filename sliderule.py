@@ -77,6 +77,8 @@ class SlideruleMain:
                                             'images/'))
         self.tw.win = self.win
         self.tw.activity = self
+        self.tw.A.spr.hide()        
+        self.tw.slider_on_top = "C"
 
     def set_title(self, title):
         self.win.set_title(title)

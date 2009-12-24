@@ -34,6 +34,7 @@ except:
     GRID_CELL_SIZE = 0
 
 from sprite_factory import *
+from sprites import *
 
 class srWindow: pass
 
@@ -67,29 +68,25 @@ def new_window(canvas, path, parent=None):
     tw.canvas.connect("motion-notify-event", _mouse_move_cb, tw)
     tw.width = gtk.gdk.screen_width()
     tw.height = gtk.gdk.screen_height()-GRID_CELL_SIZE
-    tw.area = tw.canvas.window
-    tw.gc = tw.area.new_gc()
-    tw.cm = tw.gc.get_colormap()
-    tw.msgcolor = tw.cm.alloc_color('black')
-    tw.sprites = []
+    tw.sprites = Sprites(tw.canvas)
     tw.scale = 1
 
     # Open the sliders
     y = 50
-    tw.A = Sprite(tw,"A",0,y+60,SWIDTH,SHEIGHT)
-    tw.C = Sprite(tw,"C",0,y+60,SWIDTH,SHEIGHT)
-    tw.C_tab_left = Sprite(tw,"tab",0,y+3*SHEIGHT,100,SHEIGHT,False)
-    tw.C_tab_right = Sprite(tw,"tab",SWIDTH-100,y+3*SHEIGHT,100,SHEIGHT,False)
-    tw.D = Sprite(tw,"D",0,y+2*SHEIGHT,SWIDTH,SHEIGHT)
-    tw.R = Sprite(tw,"reticule",0,y+SHEIGHT,100,2*SHEIGHT,False)
-    tw.R_tab_top = Sprite(tw,"tab",0,y,100,60,False)
-    tw.R_tab_bot = Sprite(tw,"tab",0,y+3*SHEIGHT,100,SHEIGHT,False)
+    tw.A = Slider(tw.sprites,tw.path,"A",0,y+60,SWIDTH,SHEIGHT)
+    tw.C = Slider(tw.sprites,tw.path,"C",0,y+60,SWIDTH,SHEIGHT)
+    tw.C_tab_left = Slider(tw.sprites,tw.path,"tab",0,y+3*SHEIGHT,100,SHEIGHT,False)
+    tw.C_tab_right = Slider(tw.sprites,tw.path,"tab",SWIDTH-100,y+3*SHEIGHT,100,SHEIGHT,False)
+    tw.D = Slider(tw.sprites,tw.path,"D",0,y+2*SHEIGHT,SWIDTH,SHEIGHT)
+    tw.R = Slider(tw.sprites,tw.path,"reticule",0,y+SHEIGHT,100,2*SHEIGHT,False)
+    tw.R_tab_top = Slider(tw.sprites,tw.path,"tab",0,y,100,60,False)
+    tw.R_tab_bot = Slider(tw.sprites,tw.path,"tab",0,y+3*SHEIGHT,100,SHEIGHT,False)
     tw.slider_on_top = 'C'
 
-    setlabel(tw.R.spr,"")
-    setlabel(tw.A.spr,"")
-    setlabel(tw.C.spr,"")
-    setlabel(tw.D.spr,"")
+    tw.R.spr.set_label("")
+    tw.A.spr.set_label("")
+    tw.C.spr.set_label("")
+    tw.D.spr.set_label("")
     _update_slider_labels(tw)
     _update_results_label(tw)
 
@@ -98,9 +95,9 @@ def new_window(canvas, path, parent=None):
     tw.C_tab_left.draw_slider()
     tw.C_tab_right.draw_slider()
     tw.D.draw_slider()
-    tw.R.draw_slider(2000)
-    tw.R_tab_top.draw_slider()
     tw.R_tab_bot.draw_slider()
+    tw.R_tab_top.draw_slider()
+    tw.R.draw_slider(2000)
 
     # Start calculating
     tw.factor = 1
@@ -116,7 +113,7 @@ def _button_press_cb(win, event, tw):
     win.grab_focus()
     x, y = map(int, event.get_coords())
     tw.dragpos = x
-    spr = findsprite(tw,(x,y))
+    spr = tw.sprites.find_sprite((x,y))
     tw.press = spr
     return True
 
@@ -134,26 +131,29 @@ def _mouse_move_cb(win, event, tw):
     dx = x-tw.dragpos
     if tw.press == tw.D.spr or tw.press == tw.A.spr:
         # everything moves
-        move(tw.R.spr,(tw.R.spr.x+dx,tw.R.spr.y))
-        move(tw.R_tab_top.spr,(tw.R_tab_top.spr.x+dx,tw.R_tab_top.spr.y))
-        move(tw.R_tab_bot.spr,(tw.R_tab_bot.spr.x+dx,tw.R_tab_bot.spr.y))
-        move(tw.C.spr,(tw.C.spr.x+dx,tw.C.spr.y))
-        move(tw.C_tab_left.spr,(tw.C_tab_left.spr.x+dx,tw.C_tab_left.spr.y))
-        move(tw.C_tab_right.spr,(tw.C_tab_right.spr.x+dx,tw.C_tab_right.spr.y))
-        move(tw.A.spr,(tw.A.spr.x+dx,tw.A.spr.y))
-        move(tw.D.spr,(tw.D.spr.x+dx,tw.D.spr.y))
+        tw.C.spr.move((tw.C.spr.x+dx,tw.C.spr.y))
+        tw.C_tab_left.spr.move((tw.C_tab_left.spr.x+dx,tw.C_tab_left.spr.y))
+        tw.C_tab_right.spr.move((tw.C_tab_right.spr.x+dx,tw.C_tab_right.spr.y))
+        tw.A.spr.move((tw.A.spr.x+dx,tw.A.spr.y))
+        tw.D.spr.move((tw.D.spr.x+dx,tw.D.spr.y))
+        tw.R_tab_top.spr.move((tw.R_tab_top.spr.x+dx,tw.R_tab_top.spr.y))
+        tw.R_tab_bot.spr.move((tw.R_tab_bot.spr.x+dx,tw.R_tab_bot.spr.y))
+        tw.R.spr.move((tw.R.spr.x+dx,tw.R.spr.y))
+        tw.R.spr.show()
     elif tw.press == tw.R_tab_top.spr or \
          tw.press == tw.R_tab_bot.spr or \
          tw.press == tw.R.spr:
-        move(tw.R.spr,(tw.R.spr.x+dx,tw.R.spr.y))
-        move(tw.R_tab_top.spr,(tw.R_tab_top.spr.x+dx,tw.R_tab_top.spr.y))
-        move(tw.R_tab_bot.spr,(tw.R_tab_bot.spr.x+dx,tw.R_tab_bot.spr.y))
+        tw.R_tab_top.spr.move((tw.R_tab_top.spr.x+dx,tw.R_tab_top.spr.y))
+        tw.R_tab_bot.spr.move((tw.R_tab_bot.spr.x+dx,tw.R_tab_bot.spr.y))
+        tw.R.spr.move((tw.R.spr.x+dx,tw.R.spr.y))
+        tw.R.spr.show()
     elif tw.press == tw.C.spr or \
          tw.press == tw.C_tab_left.spr or \
          tw.press == tw.C_tab_right.spr:
-        move(tw.C.spr,(tw.C.spr.x+dx,tw.C.spr.y))
-        move(tw.C_tab_left.spr,(tw.C_tab_left.spr.x+dx,tw.C_tab_left.spr.y))
-        move(tw.C_tab_right.spr,(tw.C_tab_right.spr.x+dx,tw.C_tab_right.spr.y))
+        tw.C.spr.move((tw.C.spr.x+dx,tw.C.spr.y))
+        tw.C_tab_left.spr.move((tw.C_tab_left.spr.x+dx,tw.C_tab_left.spr.y))
+        tw.C_tab_right.spr.move((tw.C_tab_right.spr.x+dx,tw.C_tab_right.spr.y))
+        tw.R.spr.show()
 
     # reset drag position
     tw.dragpos = x
@@ -161,16 +161,15 @@ def _mouse_move_cb(win, event, tw):
     _update_results_label(tw)
 
 def _update_slider_labels(tw):
-    setlabel(tw.C_tab_left.spr,str(_calc_D(tw)))
-    setlabel(tw.C_tab_right.spr,str(_calc_D(tw)))
+    tw.C_tab_left.spr.set_label(str(_calc_D(tw)))
+    tw.C_tab_right.spr.set_label(str(_calc_D(tw)))
     if tw.slider_on_top == "A":
-        setlabel(tw.R_tab_top.spr,str(_calc_A(tw)))
-        setlabel(tw.R_tab_bot.spr,str(_calc_DA(tw)))
+        tw.R_tab_top.spr.set_label(str(_calc_A(tw)))
+        tw.R_tab_bot.spr.set_label(str(_calc_DA(tw)))
     else:
-        setlabel(tw.R_tab_top.spr,str(_calc_C(tw)))
-        setlabel(tw.R_tab_bot.spr,str(_calc_DC(tw)))
+        tw.R_tab_top.spr.set_label(str(_calc_C(tw)))
+        tw.R_tab_bot.spr.set_label(str(_calc_DC(tw)))
     return True
-
 
 #
 # Button release
@@ -181,17 +180,20 @@ def _button_release_cb(win, event, tw):
     tw.press = None
     _update_results_label(tw)
 
-def _update_results_label(tw):
+def _update_results_label(tw): 
     if tw.slider_on_top == "A":
         # calculate the values for D, A, and D*A (under the redicule)
-        tw.activity.results_label.set_text(" √ " + str(_calc_A(tw)) + 
-                                           " = " + str(_calc_DA(tw)*tw.factor))
+        s = " √ " + str(_calc_A(tw)) + " = " + str(_calc_DA(tw)*tw.factor)
     else:
         # calculate the values for D, C, and D*C (under the redicule)
-        tw.activity.results_label.set_text(str(_calc_D(tw)) + " × " + 
-                                           str(_calc_C(tw)) + " = " +
-                                           str(_calc_DC(tw)*tw.factor))
-    tw.activity.results_label.show()
+        s = str(_calc_D(tw)) + " × " + str(_calc_C(tw)) + " = " + \
+                                       str(_calc_DC(tw)*tw.factor)
+    if tw.sugar is True:
+        tw.activity.results_label.set_text(s)
+        tw.activity.results_label.show()
+    else:
+        if hasattr(tw,"win"):
+            tw.win.set_title("%s: %s" % (_("Sliderule"),s))
     return True
 
 def _calc_C(tw):
@@ -236,7 +238,7 @@ def _calc_DA(tw):
     return float(int(DA*100)/100.)
 
 def _expose_cb(win, event, tw):
-    redrawsprites(tw)
+    tw.sprites.redraw_sprites()
     return True
 
 def _destroy_cb(win, event, tw):
