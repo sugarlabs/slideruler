@@ -63,7 +63,7 @@ class Sprites:
             self.list.remove(spr)
 
     def find_sprite(self, pos):
-        list = self.list
+        list = self.list[:]
         list.reverse()
         for spr in list:
             if spr.hit(pos): return spr
