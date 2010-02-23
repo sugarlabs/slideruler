@@ -131,29 +131,26 @@ def _mouse_move_cb(win, event, tw):
     dx = x-tw.dragpos
     if tw.press == tw.D.spr or tw.press == tw.A.spr:
         # everything moves
-        tw.C.spr.move((tw.C.spr.x+dx,tw.C.spr.y))
-        tw.C_tab_left.spr.move((tw.C_tab_left.spr.x+dx,tw.C_tab_left.spr.y))
-        tw.C_tab_right.spr.move((tw.C_tab_right.spr.x+dx,tw.C_tab_right.spr.y))
-        tw.A.spr.move((tw.A.spr.x+dx,tw.A.spr.y))
-        tw.D.spr.move((tw.D.spr.x+dx,tw.D.spr.y))
-        tw.R_tab_top.spr.move((tw.R_tab_top.spr.x+dx,tw.R_tab_top.spr.y))
-        tw.R_tab_bot.spr.move((tw.R_tab_bot.spr.x+dx,tw.R_tab_bot.spr.y))
-        tw.R.spr.move((tw.R.spr.x+dx,tw.R.spr.y))
-        tw.R.spr.show()
+        tw.C.spr.move_relative((dx,0))
+        tw.C_tab_left.spr.move_relative((dx,0))
+        tw.C_tab_right.spr.move_relative((dx,0))
+        tw.A.spr.move_relative((dx,0))
+        tw.D.spr.move_relative((dx,0))
+        tw.R_tab_top.spr.move_relative((dx,0))
+        tw.R_tab_bot.spr.move_relative((dx,0))
+        tw.R.spr.move_relative((dx,0))
     elif tw.press == tw.R_tab_top.spr or \
          tw.press == tw.R_tab_bot.spr or \
          tw.press == tw.R.spr:
-        tw.R_tab_top.spr.move((tw.R_tab_top.spr.x+dx,tw.R_tab_top.spr.y))
-        tw.R_tab_bot.spr.move((tw.R_tab_bot.spr.x+dx,tw.R_tab_bot.spr.y))
-        tw.R.spr.move((tw.R.spr.x+dx,tw.R.spr.y))
-        tw.R.spr.show()
+        tw.R_tab_top.spr.move_relative((dx,0))
+        tw.R_tab_bot.spr.move_relative((dx,0))
+        tw.R.spr.move_relative((dx,0))
     elif tw.press == tw.C.spr or \
          tw.press == tw.C_tab_left.spr or \
          tw.press == tw.C_tab_right.spr:
-        tw.C.spr.move((tw.C.spr.x+dx,tw.C.spr.y))
-        tw.C_tab_left.spr.move((tw.C_tab_left.spr.x+dx,tw.C_tab_left.spr.y))
-        tw.C_tab_right.spr.move((tw.C_tab_right.spr.x+dx,tw.C_tab_right.spr.y))
-        tw.R.spr.show()
+        tw.C.spr.move_relative((dx,0))
+        tw.C_tab_left.spr.move_relative((dx,0))
+        tw.C_tab_right.spr.move_relative((dx,0))
 
     # reset drag position
     tw.dragpos = x
@@ -197,24 +194,31 @@ def _update_results_label(tw):
     return True
 
 def _calc_C(tw):
-    dx = tw.R.spr.x - tw.C.spr.x    
+    rx,ry = tw.R.spr.get_xy()
+    cx,cy = tw.C.spr.get_xy()
+    dx = rx-cx
     if dx < 0:
         dx = math.log(10.)*SCALE + dx
     C = math.exp(dx/SCALE)
     return float(int(C*100)/100.)
 
 def _calc_A(tw):
-    dx = tw.R.spr.x - tw.A.spr.x
+    rx,ry = tw.R.spr.get_xy()
+    ax,ay = tw.A.spr.get_xy()
+    dx = rx-ax
     if dx < 0:
         dx = math.log(10.)*SCALE + dx
     A = math.exp(2*dx/SCALE) # two-decade rule
     return float(int(A*100)/100.)
 
 def _calc_D(tw):
+    x,y = tw.D.spr.get_xy()
     if tw.slider_on_top == "A":
-        dx = tw.A.spr.x - tw.D.spr.x
+        ax,ay = tw.A.spr.get_xy()
+        dx = ax-x
     else:
-        dx = tw.C.spr.x - tw.D.spr.x
+        cx,cy = tw.C.spr.get_xy()
+        dx = cx-x
     if dx < 0:
         dx = math.log(10.)*SCALE + dx
         tw.factor = 10
@@ -224,14 +228,18 @@ def _calc_D(tw):
     return float(int(D*100)/100.)
 
 def _calc_DC(tw):
-    dx = tw.R.spr.x - tw.D.spr.x    
+    rx,ry = tw.R.spr.get_xy()
+    x,y = tw.D.spr.get_xy()
+    dx = rx-x
     if dx < 0:
         dx = math.log(10.)*SCALE + dx
     DC = math.exp(dx/SCALE)
     return float(int(DC*100)/100.)
 
 def _calc_DA(tw):
-    dx = tw.R.spr.x - tw.D.spr.x    
+    rx,ry = tw.R.spr.get_xy()
+    x,y = tw.D.spr.get_xy()
+    dx = rx-x
     if dx < 0:
         dx = math.log(100.)*SCALE + dx
     DA = math.exp(dx/SCALE)

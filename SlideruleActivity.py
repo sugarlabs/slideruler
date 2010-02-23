@@ -131,14 +131,15 @@ class SlideruleActivity(activity.Activity):
 
         # Read the slider positions from the Journal
         try:
-            self.tw.A.spr.x = int(self.metadata['A'])
-            self.tw.C.spr.x = int(self.metadata['C'])
-            self.tw.C_tab_left.spr.x = int(self.metadata['C'])
-            self.tw.C_tab_right.spr.x = int(self.metadata['C'])+SWIDTH-100
-            self.tw.D.spr.x = int(self.metadata['D'])
-            self.tw.R.spr.x = int(self.metadata['R'])
-            self.tw.R_tab_top.spr.x = int(self.metadata['R'])
-            self.tw.R_tab_bot.spr.x = int(self.metadata['R'])
+            self.tw.A.spr.move_relative((int(self.metadata['A']),0))
+            self.tw.C.spr.move_relative((int(self.metadata['C']),0))
+            self.tw.C_tab_left.spr.move_relative((int(self.metadata['C']),0))
+            self.tw.C_tab_right.spr.move_relative((int(self.metadata['C'])+\
+                                                   SWIDTH-100,0))
+            self.tw.D.spr.move_relative((int(self.metadata['D']),0))
+            self.tw.R.spr.move_relative((int(self.metadata['R']),0))
+            self.tw.R_tab_top.spr.move_relative((int(self.metadata['R']),0))
+            self.tw.R_tab_bot.spr.move_relative((int(self.metadata['R']),0))
             self.tw.slider_on_top = self.metadata['slider']
             if self.tw.slider_on_top == 'A':
                 self._show_a()
@@ -156,7 +157,7 @@ class SlideruleActivity(activity.Activity):
     def _show_c(self):
         self.c_slider.set_icon("Con")
         self.a_slider.set_icon("Aoff")
-        hide(self.tw.A.spr)
+        self.tw.A.spr.hide()
         self.tw.C.draw_slider(1000)
         self.tw.C_tab_left.draw_slider(1000)
         self.tw.C_tab_right.draw_slider(1000)
@@ -169,9 +170,9 @@ class SlideruleActivity(activity.Activity):
     def _show_a(self):
         self.c_slider.set_icon("Coff")
         self.a_slider.set_icon("Aon")
-        hide(self.tw.C.spr)
-        hide(self.tw.C_tab_left.spr)
-        hide(self.tw.C_tab_right.spr)
+        self.tw.C.spr.hide()
+        self.tw.C_tab_left.spr.hide()
+        self.tw.C_tab_right.spr.hide()
         self.tw.A.draw_slider(1000)
         self.tw.slider_on_top = "A"
         return True
@@ -182,14 +183,18 @@ class SlideruleActivity(activity.Activity):
     def write_file(self, file_path):
         _logger.debug("Write slider on top: " + self.tw.slider_on_top)
         self.metadata['slider'] = self.tw.slider_on_top
-        _logger.debug("Write A offset: " + str(self.tw.A.spr.x))
-        self.metadata['A'] = str(self.tw.A.spr.x)
-        _logger.debug("Write C offset: " + str(self.tw.C.spr.x))
-        self.metadata['C'] = str(self.tw.C.spr.x)
-        _logger.debug("Write D offset: " + str(self.tw.D.spr.x))
-        self.metadata['D'] = str(self.tw.D.spr.x)
-        _logger.debug("Write r offset: " + str(self.tw.R.spr.x))
-        self.metadata['R'] = str(self.tw.R.spr.x)
+        x,y = self.tw.A.spr.get_xy()
+        _logger.debug("Write A offset: " + str(x))
+        self.metadata['A'] = str(x)
+        x,y = self.tw.C.spr.get_xy()
+        _logger.debug("Write C offset: " + str(x))
+        self.metadata['C'] = str(x)
+        x,y = self.tw.D.spr.get_xy()
+        _logger.debug("Write D offset: " + str(x))
+        self.metadata['D'] = str(x)
+        x,y = self.tw.R.spr.get_xy()
+        _logger.debug("Write r offset: " + str(x))
+        self.metadata['R'] = str(x)
 
 
 #
