@@ -277,9 +277,9 @@ def _calc_L2(tw):
     dx = rx-lx
     if dx < 0:
         dx = math.log(10.)*SCALE + dx
-        L2 = (dx/SCALE)/math.log(10)-1.0
+        L2 = 10*((dx/SCALE)/math.log(10)-1.0)
     else:
-        L2 = (dx/SCALE)/math.log(10)
+        L2 = 10*(dx/SCALE)/math.log(10)
     return float(int(L2*100)/100.)
 
 def _calc_L(tw):
@@ -288,9 +288,9 @@ def _calc_L(tw):
     dx = lx-x
     if dx < 0:
         dx = math.log(10.)*SCALE + dx
-        L = (dx/SCALE)/math.log(10)-1.0
+        L = 10*((dx/SCALE)/math.log(10)-1.0)
     else:
-        L = (dx/SCALE)/math.log(10)
+        L = 10*(dx/SCALE)/math.log(10)
     return float(int(L*100)/100.)
 
 def _calc_LL(tw):
@@ -299,9 +299,9 @@ def _calc_LL(tw):
     dx = rx-x
     if dx < 0:
         dx = math.log(10.)*SCALE + dx
-        LL = (dx/SCALE)/math.log(10)-1.0
+        LL = 10*((dx/SCALE)/math.log(10)-1.0)
     else:
-        LL = (dx/SCALE)/math.log(10)
+        LL = 10*(dx/SCALE)/math.log(10)
     return float(int(LL*100)/100.)
 
 def _expose_cb(win, event, tw):

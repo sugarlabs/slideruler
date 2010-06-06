@@ -44,7 +44,7 @@ for i in range(0,101):
         print "      <tspan"
         print "       x=\"" + str(ln) + "\""
         print "       y=\"" + h3 + "\""
-        print "       style=\"font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;\">" + str(float(int(i)*10/SCALE)) + "</tspan></text>"
+        print "       style=\"font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;\">" + str(float(int(i)*100/SCALE)) + "</tspan></text>"
     elif int((i/5)*5) == i:
         h1 = "40"; h2 = "59";
     else:
