@@ -1,23 +1,15 @@
 # -*- coding: utf-8 -*-
-#Copyright (c) 2009, Walter Bender
+#Copyright (c) 2009,2010 Walter Bender
 
-#Permission is hereby granted, free of charge, to any person obtaining a copy
-#of this software and associated documentation files (the "Software"), to deal
-#in the Software without restriction, including without limitation the rights
-#to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-#copies of the Software, and to permit persons to whom the Software is
-#furnished to do so, subject to the following conditions:
-
-#The above copyright notice and this permission notice shall be included in
-#all copies or substantial portions of the Software.
-
-#THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-#IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-#FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-#AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-#LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-#OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-#THE SOFTWARE.
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 3 of the License, or
+# (at your option) any later version.
+#
+# You should have received a copy of the GNU Lesser General Public
+# License along with this library; if not, write to the
+# Free Software Foundation, Inc., 59 Temple Place - Suite 330,
+# Boston, MA 02111-1307, USA.
 
 import pygtk
 pygtk.require('2.0')
@@ -83,6 +75,14 @@ class SlideruleActivity(activity.Activity):
             toolbar_box.toolbar.insert(self.a_slider, -1)
             self.a_slider.show()
 
+            # L slider
+            self.l_slider = ToolButton( "Loff" )
+            self.l_slider.set_tooltip(_('L'))
+            self.l_slider.props.sensitive = True
+            self.l_slider.connect('clicked', self._l_slider_cb)
+            toolbar_box.toolbar.insert(self.l_slider, -1)
+            self.l_slider.show()
+
             # Label for showing status
             self.results_label = gtk.Label("1.0 × 1.0 = 1.0")
             self.results_label.show()
@@ -131,6 +131,14 @@ class SlideruleActivity(activity.Activity):
 
         # Read the slider positions from the Journal
         try:
+            self.tw.L.spr.move_relative((int(self.metadata['L']),0))
+            self.tw.L2.spr.move_relative((int(self.metadata['L2']),0))
+            self.tw.L2_tab_left.spr.move_relative((int(self.metadata['L2']),0))
+            self.tw.L2_tab_right.spr.move_relative((int(self.metadata['L2'])+\
+                                                   SWIDTH-100,0))
+        except:
+            pass
+        try:
             self.tw.A.spr.move_relative((int(self.metadata['A']),0))
             self.tw.C.spr.move_relative((int(self.metadata['C']),0))
             self.tw.C_tab_left.spr.move_relative((int(self.metadata['C']),0))
@@ -143,6 +151,8 @@ class SlideruleActivity(activity.Activity):
             self.tw.slider_on_top = self.metadata['slider']
             if self.tw.slider_on_top == 'A':
                 self._show_a()
+            elif self.tw.slider_on_top == 'L':
+                self._show_l()
             else:
                 self._show_c()
             window._update_results_label(self.tw)
@@ -150,17 +160,31 @@ class SlideruleActivity(activity.Activity):
         except:
             self._show_c()
 
+    def _hide_all(self):
+        self.a_slider.set_icon("Aoff")
+        self.c_slider.set_icon("Coff")
+        self.l_slider.set_icon("Loff")
+        self.tw.A.spr.hide()
+        self.tw.C.spr.hide()
+        self.tw.C_tab_left.spr.hide()
+        self.tw.C_tab_right.spr.hide()
+        self.tw.D.spr.hide()
+        self.tw.L.spr.hide()
+        self.tw.L2.spr.hide()
+        self.tw.L2_tab_left.spr.hide()
+        self.tw.L2_tab_right.spr.hide()
+
     def _c_slider_cb(self, button):
         self._show_c()
         return True
 
     def _show_c(self):
+        self._hide_all()
         self.c_slider.set_icon("Con")
-        self.a_slider.set_icon("Aoff")
-        self.tw.A.spr.hide()
         self.tw.C.draw_slider(1000)
         self.tw.C_tab_left.draw_slider(1000)
         self.tw.C_tab_right.draw_slider(1000)
+        self.tw.D.draw_slider(1000)
         self.tw.slider_on_top = "C"
 
     def _a_slider_cb(self, button):
@@ -168,14 +192,25 @@ class SlideruleActivity(activity.Activity):
         return True
 
     def _show_a(self):
-        self.c_slider.set_icon("Coff")
+        self._hide_all()
         self.a_slider.set_icon("Aon")
-        self.tw.C.spr.hide()
-        self.tw.C_tab_left.spr.hide()
-        self.tw.C_tab_right.spr.hide()
         self.tw.A.draw_slider(1000)
+        self.tw.D.draw_slider(1000)
         self.tw.slider_on_top = "A"
         return True
+
+    def _l_slider_cb(self, button):
+        self._show_l()
+        return True
+
+    def _show_l(self):
+        self._hide_all()
+        self.l_slider.set_icon("Lon")
+        self.tw.L.draw_slider(1000)
+        self.tw.L2.draw_slider(1000)
+        self.tw.L2_tab_left.draw_slider(1000)
+        self.tw.L2_tab_right.draw_slider(1000)
+        self.tw.slider_on_top = "L"
 
     """
     Write the slider positions to the Journal
@@ -195,6 +230,12 @@ class SlideruleActivity(activity.Activity):
         x,y = self.tw.R.spr.get_xy()
         _logger.debug("Write r offset: " + str(x))
         self.metadata['R'] = str(x)
+        x,y = self.tw.L.spr.get_xy()
+        _logger.debug("Write L offset: " + str(x))
+        self.metadata['L'] = str(x)
+        x,y = self.tw.L2.spr.get_xy()
+        _logger.debug("Write L2 offset: " + str(x))
+        self.metadata['L2'] = str(x)
 
 
 #
@@ -221,6 +262,14 @@ class ProjectToolbar(gtk.Toolbar):
         self.activity.a_slider.connect('clicked', self.activity._a_slider_cb)
         self.insert(self.activity.a_slider, -1)
         self.activity.a_slider.show()
+
+        # L slider
+        self.activity.l_slider = ToolButton( "Loff" )
+        self.activity.l_slider.set_tooltip(_('L'))
+        self.activity.l_slider.props.sensitive = True
+        self.activity.l_slider.connect('clicked', self.activity._l_slider_cb)
+        self.insert(self.activity.l_slider, -1)
+        self.activity.l_slider.show()
 
         # Label for showing status
         self.activity.results_label = gtk.Label("1.0 × 1.0 = 1.0")

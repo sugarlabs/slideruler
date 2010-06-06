@@ -1,24 +1,16 @@
 #!/usr/bin/env python
 
-#Copyright (c) 2009, Walter Bender
+#Copyright (c) 2009, 2010 Walter Bender
 
-#Permission is hereby granted, free of charge, to any person obtaining a copy
-#of this software and associated documentation files (the "Software"), to deal
-#in the Software without restriction, including without limitation the rights
-#to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-#copies of the Software, and to permit persons to whom the Software is
-#furnished to do so, subject to the following conditions:
-
-#The above copyright notice and this permission notice shall be included in
-#all copies or substantial portions of the Software.
-
-#THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-#IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-#FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-#AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-#LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-#OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-#THE SOFTWARE.
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 3 of the License, or
+# (at your option) any later version.
+#
+# You should have received a copy of the GNU Lesser General Public
+# License along with this library; if not, write to the
+# Free Software Foundation, Inc., 59 Temple Place - Suite 330,
+# Boston, MA 02111-1307, USA.
 
 import pygtk
 pygtk.require('2.0')
@@ -50,6 +42,9 @@ class SlideruleMain:
         menu_items = gtk.MenuItem(_("A"))
         menu.append(menu_items)
         menu_items.connect("activate", self._a_cb)
+        menu_items = gtk.MenuItem(_("L"))
+        menu.append(menu_items)
+        menu_items.connect("activate", self._l_cb)
         menu_items.show()
         root_menu = gtk.MenuItem("Tools")
         root_menu.show()
@@ -78,6 +73,10 @@ class SlideruleMain:
         self.tw.win = self.win
         self.tw.activity = self
         self.tw.A.spr.hide()        
+        self.tw.L.spr.hide()
+        self.tw.L2.spr.hide()
+        self.tw.L2_tab_left.spr.hide()
+        self.tw.L2_tab_right.spr.hide()
         self.tw.slider_on_top = "C"
 
     def set_title(self, title):
@@ -85,9 +84,14 @@ class SlideruleMain:
 
     def _c_cb(self, widget):
         self.tw.A.spr.hide()
+        self.tw.L.spr.hide()
+        self.tw.L2.spr.hide()
+        self.tw.L2_tab_left.spr.hide()
+        self.tw.L2_tab_right.spr.hide()
         self.tw.C.draw_slider(1000)
         self.tw.C_tab_left.draw_slider(1000)
         self.tw.C_tab_right.draw_slider(1000)
+        self.tw.D.draw_slider(1000)
         self.tw.slider_on_top = "C"
         return True
 
@@ -95,8 +99,26 @@ class SlideruleMain:
         self.tw.C.spr.hide()
         self.tw.C_tab_left.spr.hide()
         self.tw.C_tab_right.spr.hide()
+        self.tw.L.spr.hide()
+        self.tw.L2.spr.hide()
+        self.tw.L2_tab_left.spr.hide()
+        self.tw.L2_tab_right.spr.hide()
         self.tw.A.draw_slider(1000)
+        self.tw.D.draw_slider(1000)
         self.tw.slider_on_top = "A"
+        return True
+
+    def _l_cb(self, widget):
+        self.tw.C.spr.hide()
+        self.tw.A.spr.hide()
+        self.tw.D.spr.hide()
+        self.tw.C_tab_left.spr.hide()
+        self.tw.C_tab_right.spr.hide()
+        self.tw.L.draw_slider(1000)
+        self.tw.L2.draw_slider(1000)
+        self.tw.L2_tab_left.draw_slider(1000)
+        self.tw.L2_tab_right.draw_slider(1000)
+        self.tw.slider_on_top = "L"
         return True
 
 def main():
