@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-21 08:52+0000\n"
+"POT-Creation-Date: 2010-06-06 14:33-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,40 +16,32 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: activity/activity.info:2
+#: activity/activity.info:2 /home/walter/Desktop/sliderule/window.py:219
 msgid "Sliderule"
 msgstr ""
 
-#: /home/walter/Desktop/sliderule/SlideruleActivity.py:94
+#: /home/walter/Desktop/sliderule/SlideruleActivity.py:64
+#: /home/walter/Desktop/sliderule/SlideruleActivity.py:252
+#: /home/walter/Desktop/sliderule/sliderule.py:38
+msgid "C"
+msgstr ""
+
+#: /home/walter/Desktop/sliderule/SlideruleActivity.py:72
+#: /home/walter/Desktop/sliderule/SlideruleActivity.py:260
+#: /home/walter/Desktop/sliderule/sliderule.py:42
+msgid "A"
+msgstr ""
+
+#: /home/walter/Desktop/sliderule/SlideruleActivity.py:80
+#: /home/walter/Desktop/sliderule/SlideruleActivity.py:268
+#: /home/walter/Desktop/sliderule/sliderule.py:45
+msgid "L"
+msgstr ""
+
+#: /home/walter/Desktop/sliderule/SlideruleActivity.py:114
 msgid "Project"
 msgstr ""
 
-#: /home/walter/Desktop/sliderule/SlideruleActivity.py:124
-msgid "D = 1 C = 1 DxC = 1 "
-msgstr ""
-
-#: /home/walter/Desktop/sliderule/sliderule.py:43
-#: /home/walter/Desktop/sliderule/sliderule.py:156
-msgid "CardSort"
-msgstr ""
-
-#: /home/walter/Desktop/sliderule/sliderule.py:44
-msgid "click to rotate; drag to swap"
-msgstr ""
-
-#: /home/walter/Desktop/sliderule/sliderule.py:48
-msgid "Toggle blank card"
-msgstr ""
-
-#: /home/walter/Desktop/sliderule/sliderule.py:51
-msgid "Apply rotation sets"
-msgstr ""
-
-#: /home/walter/Desktop/sliderule/sliderule.py:54
-msgid "Solve it"
-msgstr ""
-
-#: /home/walter/Desktop/sliderule/sliderule.py:153
-#: /home/walter/Desktop/sliderule/sliderule.py:157
-msgid "You solved the puzzle."
+#: /home/walter/Desktop/sliderule/sliderule.py:33
+msgid "Slide Rule"
 msgstr ""
