@@ -61,7 +61,7 @@ class SlideruleActivity(activity.Activity):
 
             # C slider
             self.c_slider = ToolButton( "Con" )
-            self.c_slider.set_tooltip(_('C'))
+            self.c_slider.set_tooltip(_('multiply/divide'))
             self.c_slider.props.sensitive = True
             self.c_slider.connect('clicked', self._c_slider_cb)
             toolbar_box.toolbar.insert(self.c_slider, -1)
@@ -69,7 +69,7 @@ class SlideruleActivity(activity.Activity):
 
             # A slider
             self.a_slider = ToolButton( "Aoff" )
-            self.a_slider.set_tooltip(_('A'))
+            self.a_slider.set_tooltip(_('square/square root'))
             self.a_slider.props.sensitive = True
             self.a_slider.connect('clicked', self._a_slider_cb)
             toolbar_box.toolbar.insert(self.a_slider, -1)
@@ -77,7 +77,7 @@ class SlideruleActivity(activity.Activity):
 
             # L slider
             self.l_slider = ToolButton( "Loff" )
-            self.l_slider.set_tooltip(_('L'))
+            self.l_slider.set_tooltip(_('add/subtract'))
             self.l_slider.props.sensitive = True
             self.l_slider.connect('clicked', self._l_slider_cb)
             toolbar_box.toolbar.insert(self.l_slider, -1)
