@@ -1,6 +1,6 @@
 [Activity]
 name = Sliderule
-activity_version = 10
+activity_version = 11
 license = GPLv3
 bundle_id = org.sugarlabs.SlideruleActivity
 exec = sugar-activity SlideruleActivity.SlideruleActivity
