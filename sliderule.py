@@ -19,29 +19,34 @@ import gtk
 from gettext import gettext as _
 import os
 
-from sprites import *
-import window
-from constants import *
+from window import SlideRule
+
 
 class SlideruleMain:
+
     def __init__(self):
         self.r = 0
         self.tw = None
         # create a new window
         self.win = gtk.Window(gtk.WINDOW_TOPLEVEL)
         self.win.maximize()
-        self.win.set_title("%s: %s" % (_("Slide Rule"),
-                           ("1.0 x 1.0 = 1.0")))
-        self.win.connect("delete_event", lambda w,e: gtk.main_quit())
+        self.win.set_title("%s: %s" % (_('Slide Rule'),
+                           ('1.0 x 1.0 = 1.0')))
+        self.win.connect('delete_event', lambda w,e: gtk.main_quit())
 
         menu = gtk.Menu()
         menu_items = gtk.MenuItem(_("C"))
         menu.append(menu_items)
         menu_items.connect("activate", self._c_cb)
         menu_items.show()
+        menu_items = gtk.MenuItem(_("CI"))
+        menu.append(menu_items)
+        menu_items.connect("activate", self._ci_cb)
+        menu_items.show()
         menu_items = gtk.MenuItem(_("A"))
         menu.append(menu_items)
         menu_items.connect("activate", self._a_cb)
+        menu_items.show()
         menu_items = gtk.MenuItem(_("L"))
         menu.append(menu_items)
         menu_items.connect("activate", self._l_cb)
@@ -67,12 +72,14 @@ class SlideruleMain:
         self.win.show_all()
 
         # Join the activity
-        self.tw = window.new_window(canvas, \
-                               os.path.join(os.path.abspath('.'), \
-                                            'images/'))
+        self.tw = SlideRule(canvas, os.path.join(os.path.abspath('.'),
+                                                 'images/'))
         self.tw.win = self.win
         self.tw.activity = self
         self.tw.A.spr.hide()        
+        self.tw.CI.spr.hide()        
+        self.tw.CI_tab_left.spr.hide()
+        self.tw.CI_tab_right.spr.hide()
         self.tw.L.spr.hide()
         self.tw.L2.spr.hide()
         self.tw.L2_tab_left.spr.hide()
@@ -92,7 +99,26 @@ class SlideruleMain:
         self.tw.C_tab_left.draw_slider(1000)
         self.tw.C_tab_right.draw_slider(1000)
         self.tw.D.draw_slider(1000)
+        self.tw.CI.spr.hide()
+        self.tw.CI_tab_left.spr.hide()
+        self.tw.CI_tab_right.spr.hide()
         self.tw.slider_on_top = "C"
+        return True
+
+    def _ci_cb(self, widget):
+        self.tw.A.spr.hide()
+        self.tw.L.spr.hide()
+        self.tw.L2.spr.hide()
+        self.tw.L2_tab_left.spr.hide()
+        self.tw.L2_tab_right.spr.hide()
+        self.tw.C.spr.hide()
+        self.tw.C_tab_left.spr.hide()
+        self.tw.C_tab_right.spr.hide()
+        self.tw.CI.draw_slider(1000)
+        self.tw.CI_tab_left.draw_slider(1000)
+        self.tw.CI_tab_right.draw_slider(1000)
+        self.tw.D.draw_slider(1000)
+        self.tw.slider_on_top = "CI"
         return True
 
     def _a_cb(self, widget):
@@ -105,6 +131,9 @@ class SlideruleMain:
         self.tw.L2_tab_right.spr.hide()
         self.tw.A.draw_slider(1000)
         self.tw.D.draw_slider(1000)
+        self.tw.CI.spr.hide()
+        self.tw.CI_tab_left.spr.hide()
+        self.tw.CI_tab_right.spr.hide()
         self.tw.slider_on_top = "A"
         return True
 
@@ -118,8 +147,12 @@ class SlideruleMain:
         self.tw.L2.draw_slider(1000)
         self.tw.L2_tab_left.draw_slider(1000)
         self.tw.L2_tab_right.draw_slider(1000)
+        self.tw.CI.spr.hide()
+        self.tw.CI_tab_left.spr.hide()
+        self.tw.CI_tab_right.spr.hide()
         self.tw.slider_on_top = "L"
         return True
+
 
 def main():
     gtk.main()
