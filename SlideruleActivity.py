@@ -41,10 +41,11 @@ import locale
 import os.path
 
 import logging
-_logger = logging.getLogger("sliderule-activity")
+_logger = logging.getLogger('sliderule-activity')
 
 from window import SlideRule
 from constants import SWIDTH
+
 
 def _button_factory(icon_name, tooltip, callback, toolbar, cb_arg=None,
                     accelerator=None):
@@ -147,10 +148,10 @@ class SlideruleActivity(activity.Activity):
             self.sr._update_slider_labels()
 
     def _hide_all(self):
-        self.a_slider.set_icon("Aoff")
-        self.c_slider.set_icon("Coff")
-        self.ci_slider.set_icon("CIoff")
-        self.l_slider.set_icon("Loff")
+        self.a_slider.set_icon('Aoff')
+        self.c_slider.set_icon('Coff')
+        self.ci_slider.set_icon('CIoff')
+        self.l_slider.set_icon('Loff')
         self.sr.A.spr.hide()
         self.sr.C.spr.hide()
         self.sr.CI.spr.hide()
@@ -170,12 +171,12 @@ class SlideruleActivity(activity.Activity):
 
     def _show_c(self):
         self._hide_all()
-        self.c_slider.set_icon("Con")
+        self.c_slider.set_icon('Con')
         self.sr.C.draw_slider(1000)
         self.sr.C_tab_left.draw_slider(1000)
         self.sr.C_tab_right.draw_slider(1000)
         self.sr.D.draw_slider(1000)
-        self.sr.slider_on_top = "C"
+        self.sr.slider_on_top = 'C'
 
     def _ci_slider_cb(self, button):
         self._show_ci()
@@ -183,12 +184,12 @@ class SlideruleActivity(activity.Activity):
 
     def _show_ci(self):
         self._hide_all()
-        self.ci_slider.set_icon("CIon")
+        self.ci_slider.set_icon('CIon')
         self.sr.CI.draw_slider(1000)
         self.sr.CI_tab_left.draw_slider(1000)
         self.sr.CI_tab_right.draw_slider(1000)
         self.sr.D.draw_slider(1000)
-        self.sr.slider_on_top = "CI"
+        self.sr.slider_on_top = 'CI'
 
     def _a_slider_cb(self, button):
         self._show_a()
@@ -196,10 +197,10 @@ class SlideruleActivity(activity.Activity):
 
     def _show_a(self):
         self._hide_all()
-        self.a_slider.set_icon("Aon")
+        self.a_slider.set_icon('Aon')
         self.sr.A.draw_slider(1000)
         self.sr.D.draw_slider(1000)
-        self.sr.slider_on_top = "A"
+        self.sr.slider_on_top = 'A'
         return True
 
     def _l_slider_cb(self, button):
@@ -208,39 +209,31 @@ class SlideruleActivity(activity.Activity):
 
     def _show_l(self):
         self._hide_all()
-        self.l_slider.set_icon("Lon")
+        self.l_slider.set_icon('Lon')
         self.sr.L.draw_slider(1000)
         self.sr.L2.draw_slider(1000)
         self.sr.L2_tab_left.draw_slider(1000)
         self.sr.L2_tab_right.draw_slider(1000)
-        self.sr.slider_on_top = "L"
+        self.sr.slider_on_top = 'L'
 
     """
     Write the slider positions to the Journal
     """
     def write_file(self, file_path):
-        _logger.debug("Write slider on top: " + self.sr.slider_on_top)
         self.metadata['slider'] = self.sr.slider_on_top
         x, y = self.sr.A.spr.get_xy()
-        _logger.debug("Write A offset: " + str(x))
         self.metadata['A'] = str(x)
         x, y = self.sr.C.spr.get_xy()
-        _logger.debug("Write C offset: " + str(x))
         self.metadata['C'] = str(x)
         x, y = self.sr.CI.spr.get_xy()
-        _logger.debug("Write CI offset: " + str(x))
         self.metadata['CI'] = str(x)
         x, y = self.sr.D.spr.get_xy()
-        _logger.debug("Write D offset: " + str(x))
         self.metadata['D'] = str(x)
         x, y = self.sr.R.spr.get_xy()
-        _logger.debug("Write r offset: " + str(x))
         self.metadata['R'] = str(x)
         x, y = self.sr.L.spr.get_xy()
-        _logger.debug("Write L offset: " + str(x))
         self.metadata['L'] = str(x)
         x, y = self.sr.L2.spr.get_xy()
-        _logger.debug("Write L2 offset: " + str(x))
         self.metadata['L2'] = str(x)
 
     def _setup_toolbars(self, have_toolbox):

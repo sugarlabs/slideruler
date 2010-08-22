@@ -26,7 +26,7 @@ class SlideruleMain:
 
     def __init__(self):
         self.r = 0
-        self.tw = None
+        self.sr = None
         # create a new window
         self.win = gtk.Window(gtk.WINDOW_TOPLEVEL)
         self.win.maximize()
@@ -72,85 +72,62 @@ class SlideruleMain:
         self.win.show_all()
 
         # Join the activity
-        self.tw = SlideRule(canvas, os.path.join(os.path.abspath('.'),
+        self.sr = SlideRule(canvas, os.path.join(os.path.abspath('.'),
                                                  'images/'))
-        self.tw.win = self.win
-        self.tw.activity = self
-        self.tw.A.spr.hide()        
-        self.tw.CI.spr.hide()        
-        self.tw.CI_tab_left.spr.hide()
-        self.tw.CI_tab_right.spr.hide()
-        self.tw.L.spr.hide()
-        self.tw.L2.spr.hide()
-        self.tw.L2_tab_left.spr.hide()
-        self.tw.L2_tab_right.spr.hide()
-        self.tw.slider_on_top = "C"
+        self.sr.win = self.win
+        self.sr.activity = self
+        self.hide_all()
+        self._c_cb(None)
+
+    def hide_all(self):
+        self.sr.A.spr.hide()        
+        self.sr.C.spr.hide()        
+        self.sr.C_tab_left.spr.hide()
+        self.sr.C_tab_right.spr.hide()
+        self.sr.CI.spr.hide()        
+        self.sr.CI_tab_left.spr.hide()
+        self.sr.CI_tab_right.spr.hide()
+        self.sr.L.spr.hide()
+        self.sr.L2.spr.hide()
+        self.sr.L2_tab_left.spr.hide()
+        self.sr.L2_tab_right.spr.hide()
+        self.sr.slider_on_top = "C"
 
     def set_title(self, title):
         self.win.set_title(title)
 
     def _c_cb(self, widget):
-        self.tw.A.spr.hide()
-        self.tw.L.spr.hide()
-        self.tw.L2.spr.hide()
-        self.tw.L2_tab_left.spr.hide()
-        self.tw.L2_tab_right.spr.hide()
-        self.tw.C.draw_slider(1000)
-        self.tw.C_tab_left.draw_slider(1000)
-        self.tw.C_tab_right.draw_slider(1000)
-        self.tw.D.draw_slider(1000)
-        self.tw.CI.spr.hide()
-        self.tw.CI_tab_left.spr.hide()
-        self.tw.CI_tab_right.spr.hide()
-        self.tw.slider_on_top = "C"
+        self.hide_all()
+        self.sr.C.draw_slider(1000)
+        self.sr.C_tab_left.draw_slider(1000)
+        self.sr.C_tab_right.draw_slider(1000)
+        self.sr.D.draw_slider(1000)
+        self.sr.slider_on_top = "C"
         return True
 
     def _ci_cb(self, widget):
-        self.tw.A.spr.hide()
-        self.tw.L.spr.hide()
-        self.tw.L2.spr.hide()
-        self.tw.L2_tab_left.spr.hide()
-        self.tw.L2_tab_right.spr.hide()
-        self.tw.C.spr.hide()
-        self.tw.C_tab_left.spr.hide()
-        self.tw.C_tab_right.spr.hide()
-        self.tw.CI.draw_slider(1000)
-        self.tw.CI_tab_left.draw_slider(1000)
-        self.tw.CI_tab_right.draw_slider(1000)
-        self.tw.D.draw_slider(1000)
-        self.tw.slider_on_top = "CI"
+        self.hide_all()
+        self.sr.CI.draw_slider(1000)
+        self.sr.CI_tab_left.draw_slider(1000)
+        self.sr.CI_tab_right.draw_slider(1000)
+        self.sr.D.draw_slider(1000)
+        self.sr.slider_on_top = "CI"
         return True
 
     def _a_cb(self, widget):
-        self.tw.C.spr.hide()
-        self.tw.C_tab_left.spr.hide()
-        self.tw.C_tab_right.spr.hide()
-        self.tw.L.spr.hide()
-        self.tw.L2.spr.hide()
-        self.tw.L2_tab_left.spr.hide()
-        self.tw.L2_tab_right.spr.hide()
-        self.tw.A.draw_slider(1000)
-        self.tw.D.draw_slider(1000)
-        self.tw.CI.spr.hide()
-        self.tw.CI_tab_left.spr.hide()
-        self.tw.CI_tab_right.spr.hide()
-        self.tw.slider_on_top = "A"
+        self.hide_all()
+        self.sr.A.draw_slider(1000)
+        self.sr.D.draw_slider(1000)
+        self.sr.slider_on_top = "A"
         return True
 
     def _l_cb(self, widget):
-        self.tw.C.spr.hide()
-        self.tw.A.spr.hide()
-        self.tw.D.spr.hide()
-        self.tw.C_tab_left.spr.hide()
-        self.tw.C_tab_right.spr.hide()
-        self.tw.L.draw_slider(1000)
-        self.tw.L2.draw_slider(1000)
-        self.tw.L2_tab_left.draw_slider(1000)
-        self.tw.L2_tab_right.draw_slider(1000)
-        self.tw.CI.spr.hide()
-        self.tw.CI_tab_left.spr.hide()
-        self.tw.CI_tab_right.spr.hide()
-        self.tw.slider_on_top = "L"
+        self.hide_all()
+        self.sr.L.draw_slider(1000)
+        self.sr.L2.draw_slider(1000)
+        self.sr.L2_tab_left.draw_slider(1000)
+        self.sr.L2_tab_right.draw_slider(1000)
+        self.sr.slider_on_top = "L"
         return True
 
 
