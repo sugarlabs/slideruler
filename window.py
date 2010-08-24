@@ -225,34 +225,49 @@ class SlideRule():
         """ Update toolbar label. """
         if self.slider_on_top == 'A':
             # calculate the values for D, A, and D * A (under the redicule)
-            s = " √ " + str(self._calc_A()) + " = " + \
-                str(self._calc_DA() * self.factor) + \
-                "\t\t" + str(self._calc_DA() * self.factor) + "² = " + \
-                str(self._calc_A())
+            A = str(self._calc_A())
+            DA = str(self._calc_DA() * self.factor)
+            s = " √ %s = %s\t\t%s² = %s" % (A, DA, DA, A)
         elif self.slider_on_top == 'L':
-            # calculate the values for L2, L, and L2 + L (under the redicule)
-            if self._calc_L() < 0:
-                s = str(self._calc_L2()) + " – " + str(-self._calc_L()) + \
-                    " = " + str(self._calc_LL()) + "\t\t" + \
-                    str(self._calc_LL()) + " + " + str(-self._calc_L()) + \
-                    " = " + str(self._calc_L2())
+            # calculate the values for L, L2, and L + L2 (under the redicule)
+            # using ndash to display a minus sign
+            L = self._calc_L()
+            if L < 0:
+                Lstr = "–" + str(-L)
             else:
-                s = str(self._calc_L2()) + " + " + str(self._calc_L()) + \
-                    " = " + str(self._calc_LL()) + "\t\t" + \
-                    str(self._calc_LL()) + " – " + str(self._calc_L()) + \
-                    " = " + str(self._calc_L2())
+                Lstr = str(L)
+
+            L2 = self._calc_L2()
+            if L2 < 0:
+                operator1 = "–"
+                operator2 = "+"
+                L2str = str(-L2)
+            else:
+                operator1 = "+"
+                operator2 = "–"
+                L2str = str(L2)
+
+            LL = self._calc_LL()
+            if LL < 0:
+                LLstr = "–" + str(-LL)
+            else:
+                LLstr = str(LL)
+
+            s = "%s %s %s = %s\t\t%s %s %s = %s" % (Lstr, operator1, L2str,
+                                                    LLstr, LLstr, operator2,
+                                                    L2str, Lstr)
         elif self.slider_on_top == 'CI':
             # calculate the values for D, CI, and D / CI (under the redicule)
-            s = str(self._calc_D()) + " / " + str(self._calc_CI()) + " = " + \
-                str(self._calc_DC()/10 * self.factor) + "\t\t" + \
-                str(self._calc_DC()/10 * self.factor) + " × " + \
-                str(self._calc_CI()) + " = " + str(self._calc_D())
+            D = str(self._calc_D())
+            CI = str(self._calc_CI())
+            DC = str(self._calc_DC() / 10 * self.factor)
+            s = "%s / %s = %s\t\t%s × %s = %s" % (D, CI, DC, DC, CI, D)
         else:
             # calculate the values for D, C, and D * C (under the redicule)
-            s = str(self._calc_D()) + " × " + str(self._calc_C()) + " = " + \
-                str(self._calc_DC() * self.factor) + "\t\t" + \
-                str(self._calc_DC() * self.factor) + " / " + \
-                str(self._calc_C()) + " = " + str(self._calc_D())
+            D = str(self._calc_D())
+            C = str(self._calc_C())
+            DC = str(self._calc_DC() * self.factor)
+            s = "%s × %s = %s\t\t%s / %s = %s" % (D, C, DC, DC, C, D)
         if self.sugar is True:
             self.activity.results_label.set_text(s)
             self.activity.results_label.show()
