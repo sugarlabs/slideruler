@@ -105,8 +105,8 @@ class SlideRule():
         self.D.spr.set_label('')
         self.L.spr.set_label('')
         self.L2.spr.set_label('')
-        self._update_slider_labels()
-        self._update_results_label()
+        self.update_slider_labels()
+        self.update_results_label()
 
         self.A.draw_slider(500)
         self.C.draw_slider()
@@ -190,10 +190,10 @@ class SlideRule():
 
         # reset drag position
         self.dragpos = x
-        self._update_slider_labels()
-        self._update_results_label()
+        self.update_slider_labels()
+        self.update_results_label()
 
-    def _update_slider_labels(self):
+    def update_slider_labels(self):
         """ Based on the current alignment of the rules, calculate labels. """
         self.C_tab_left.spr.set_label(str(self._calc_D()))
         self.C_tab_right.spr.set_label(str(self._calc_D()))
@@ -219,9 +219,9 @@ class SlideRule():
         if self.press == None:
             return True
         self.press = None
-        self._update_results_label()
+        self.update_results_label()
 
-    def _update_results_label(self):
+    def update_results_label(self):
         """ Update toolbar label. """
         if self.slider_on_top == 'A':
             # calculate the values for D, A, and D * A (under the redicule)

@@ -91,7 +91,6 @@ class SlideruleMain:
         self.sr.L2.spr.hide()
         self.sr.L2_tab_left.spr.hide()
         self.sr.L2_tab_right.spr.hide()
-        self.sr.slider_on_top = "C"
 
     def set_title(self, title):
         self.win.set_title(title)
@@ -103,6 +102,8 @@ class SlideruleMain:
         self.sr.C_tab_right.draw_slider(1000)
         self.sr.D.draw_slider(1000)
         self.sr.slider_on_top = "C"
+        self.sr.update_slider_labels()
+        self.sr.update_results_label()
         return True
 
     def _ci_cb(self, widget):
@@ -112,6 +113,8 @@ class SlideruleMain:
         self.sr.CI_tab_right.draw_slider(1000)
         self.sr.D.draw_slider(1000)
         self.sr.slider_on_top = "CI"
+        self.sr.update_slider_labels()
+        self.sr.update_results_label()
         return True
 
     def _a_cb(self, widget):
@@ -119,6 +122,8 @@ class SlideruleMain:
         self.sr.A.draw_slider(1000)
         self.sr.D.draw_slider(1000)
         self.sr.slider_on_top = "A"
+        self.sr.update_slider_labels()
+        self.sr.update_results_label()
         return True
 
     def _l_cb(self, widget):
@@ -128,6 +133,8 @@ class SlideruleMain:
         self.sr.L2_tab_left.draw_slider(1000)
         self.sr.L2_tab_right.draw_slider(1000)
         self.sr.slider_on_top = "L"
+        self.sr.update_slider_labels()
+        self.sr.update_results_label()
         return True
 
 

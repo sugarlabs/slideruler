@@ -144,8 +144,8 @@ class SlideruleActivity(activity.Activity):
                 self._show_ci()
             else:
                 self._show_c()
-            self.sr._update_results_label()
-            self.sr._update_slider_labels()
+            self.sr.update_results_label()
+            self.sr.update_slider_labels()
 
     def _hide_all(self):
         self.a_slider.set_icon('Aoff')
@@ -177,6 +177,8 @@ class SlideruleActivity(activity.Activity):
         self.sr.C_tab_right.draw_slider(1000)
         self.sr.D.draw_slider(1000)
         self.sr.slider_on_top = 'C'
+        self.sr.update_slider_labels()
+        self.sr.update_results_label()
 
     def _ci_slider_cb(self, button):
         self._show_ci()
@@ -190,6 +192,8 @@ class SlideruleActivity(activity.Activity):
         self.sr.CI_tab_right.draw_slider(1000)
         self.sr.D.draw_slider(1000)
         self.sr.slider_on_top = 'CI'
+        self.sr.update_slider_labels()
+        self.sr.update_results_label()
 
     def _a_slider_cb(self, button):
         self._show_a()
@@ -201,7 +205,8 @@ class SlideruleActivity(activity.Activity):
         self.sr.A.draw_slider(1000)
         self.sr.D.draw_slider(1000)
         self.sr.slider_on_top = 'A'
-        return True
+        self.sr.update_slider_labels()
+        self.sr.update_results_label()
 
     def _l_slider_cb(self, button):
         self._show_l()
@@ -215,6 +220,8 @@ class SlideruleActivity(activity.Activity):
         self.sr.L2_tab_left.draw_slider(1000)
         self.sr.L2_tab_right.draw_slider(1000)
         self.sr.slider_on_top = 'L'
+        self.sr.update_slider_labels()
+        self.sr.update_results_label()
 
     """
     Write the slider positions to the Journal
