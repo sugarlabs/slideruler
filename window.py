@@ -226,23 +226,33 @@ class SlideRule():
         if self.slider_on_top == 'A':
             # calculate the values for D, A, and D * A (under the redicule)
             s = " √ " + str(self._calc_A()) + " = " + \
-                str(self._calc_DA() * self.factor)
+                str(self._calc_DA() * self.factor) + \
+                "\t\t" + str(self._calc_DA() * self.factor) + "² = " + \
+                str(self._calc_A())
         elif self.slider_on_top == 'L':
             # calculate the values for L2, L, and L2 + L (under the redicule)
             if self._calc_L() < 0:
                 s = str(self._calc_L2()) + " – " + str(-self._calc_L()) + \
-                    " = " + str(self._calc_LL())
+                    " = " + str(self._calc_LL()) + "\t\t" + \
+                    str(self._calc_LL()) + " + " + str(-self._calc_L()) + \
+                    " = " + str(self._calc_L2())
             else:
                 s = str(self._calc_L2()) + " + " + str(self._calc_L()) + \
-                    " = " + str(self._calc_LL())
+                    " = " + str(self._calc_LL()) + "\t\t" + \
+                    str(self._calc_LL()) + " – " + str(self._calc_L()) + \
+                    " = " + str(self._calc_L2())
         elif self.slider_on_top == 'CI':
             # calculate the values for D, CI, and D / CI (under the redicule)
             s = str(self._calc_D()) + " / " + str(self._calc_CI()) + " = " + \
-                str(self._calc_DC()/10 * self.factor)
+                str(self._calc_DC()/10 * self.factor) + "\t\t" + \
+                str(self._calc_DC()/10 * self.factor) + " × " + \
+                str(self._calc_CI()) + " = " + str(self._calc_D())
         else:
             # calculate the values for D, C, and D * C (under the redicule)
             s = str(self._calc_D()) + " × " + str(self._calc_C()) + " = " + \
-                str(self._calc_DC() * self.factor)
+                str(self._calc_DC() * self.factor) + "\t\t" + \
+                str(self._calc_DC() * self.factor) + " / " + \
+                str(self._calc_C()) + " = " + str(self._calc_D())
         if self.sugar is True:
             self.activity.results_label.set_text(s)
             self.activity.results_label.show()
