@@ -72,6 +72,8 @@ class SlideRule():
                         0, y + 60, SWIDTH, SHEIGHT)
         self.S = Slider(self.sprites, self.path, 'S',
                         0, y + 60, SWIDTH, SHEIGHT)
+        self.T = Slider(self.sprites, self.path, 'T',
+                        0, y + 60, SWIDTH, SHEIGHT)
         self.C = Slider(self.sprites, self.path, 'C',
                         0, y + 60, SWIDTH, SHEIGHT)
         self.CI = Slider(self.sprites, self.path, 'CI',
@@ -109,6 +111,7 @@ class SlideRule():
         self.A.spr.set_label('')
         self.K.spr.set_label('')
         self.S.spr.set_label('')
+        self.T.spr.set_label('')
         self.C.spr.set_label('')
         self.CI.spr.set_label('')
         self.D.spr.set_label('')
@@ -120,6 +123,7 @@ class SlideRule():
         self.A.draw_slider(500)
         self.K.draw_slider()
         self.S.draw_slider()
+        self.T.draw_slider()
         self.C.draw_slider()
         self.C_tab_left.draw_slider()
         self.C_tab_right.draw_slider()
@@ -158,7 +162,8 @@ class SlideRule():
         x, y = map(int, event.get_coords())
         # redicule doesn't use offset
         dx = x - self.dragpos
-        if self.press in [self.D.spr, self.A.spr, self.K.spr, self.S.spr]:
+        if self.press in [self.D.spr, self.A.spr, self.K.spr, self.S.spr,
+                          self.T.spr]:
             # everything moves
             self.C.spr.move_relative((dx, 0))
             self.C_tab_left.spr.move_relative((dx, 0))
@@ -169,6 +174,7 @@ class SlideRule():
             self.A.spr.move_relative((dx, 0))
             self.K.spr.move_relative((dx, 0))
             self.S.spr.move_relative((dx, 0))
+            self.T.spr.move_relative((dx, 0))
             self.D.spr.move_relative((dx, 0))
             self.R_tab_top.spr.move_relative((dx, 0))
             self.R_tab_bot.spr.move_relative((dx, 0))
@@ -223,6 +229,9 @@ class SlideRule():
         elif self.slider_on_top == 'S':
             self.R_tab_top.spr.set_label(str(self._calc_S()))
             self.R_tab_bot.spr.set_label(str(self._calc_DS()))
+        elif self.slider_on_top == 'T':
+            self.R_tab_top.spr.set_label(str(self._calc_T()))
+            self.R_tab_bot.spr.set_label(str(self._calc_DT()))
         elif self.slider_on_top == 'L':
             self.R_tab_top.spr.set_label(str(self._calc_L2()))
             self.R_tab_bot.spr.set_label(str(self._calc_LL()))
@@ -243,23 +252,23 @@ class SlideRule():
     def update_results_label(self):
         """ Update toolbar label. """
         if self.slider_on_top == 'A':
-            # calculate the values for DA, A (under the redicule)
             A = str(self._calc_A())
             DA = str(self._calc_DA() * self.factor)
             s = " √ %s = %s\t\t%s² = %s" % (A, DA, DA, A)
         elif self.slider_on_top == 'K':
-            # calculate the values for DK, K (under the redicule)
             K = str(self._calc_K())
             DK = str(self._calc_DK() * self.factor)
             s = " ∛ %s = %s\t\t%s³ = %s" % (K, DK, DK, K)
         elif self.slider_on_top == 'S':
-            # calculate the values for DS, S (under the redicule)
             S = str(self._calc_S())
-            DS = str(self._calc_DS() * self.factor)
+            DS = str(self._calc_DS())
             s = " sin(%s) = %s\t\tasin(%s) = %s" % (S, DS, DS, S)
+        elif self.slider_on_top == 'T':
+            T = str(self._calc_T())
+            DT = str(self._calc_DT())
+            s = " tan(%s) = %s\t\tatan(%s) = %s" % (T, DT, DT, T)
         elif self.slider_on_top == 'L':
-            # calculate the values for L, L2, and L + L2 (under the redicule)
-            # using ndash to display a minus sign
+            # use ndash to display a minus sign
             L = self._calc_L()
             if L < 0:
                 Lstr = "–" + str(-L)
@@ -286,13 +295,11 @@ class SlideRule():
                                                     LLstr, LLstr, operator2,
                                                     L2str, Lstr)
         elif self.slider_on_top == 'CI':
-            # calculate the values for D, CI, and D / CI (under the redicule)
             D = str(self._calc_D())
             CI = str(self._calc_CI())
             DC = str(self._calc_DC() / 10 * self.factor)
             s = "%s / %s = %s\t\t%s × %s = %s" % (D, CI, DC, DC, CI, D)
         else:
-            # calculate the values for D, C, and D * C (under the redicule)
             D = str(self._calc_D())
             C = str(self._calc_C())
             DC = str(self._calc_DC() * self.factor)
@@ -339,6 +346,18 @@ class SlideRule():
         r = math.asin(s)
         S = 180.0 * r / math.pi
         return float(int(S * 10) / 10.)
+
+    def _calc_T(self):
+        rx, ry = self.R.spr.get_xy()
+        tx, ty = self.T.spr.get_xy()
+        dx = rx - tx
+        dx /= SCALE
+        t = math.exp(dx)/10 # sine
+        if t > 1.0:
+            t = 1.0
+        r = math.atan(t)
+        T = 180.0 * r / math.pi
+        return float(int(T * 10) / 10.)
 
     def _calc_K(self):
         rx, ry = self.R.spr.get_xy()
@@ -399,8 +418,19 @@ class SlideRule():
         rx, ry = self.R.spr.get_xy()
         x, y = self.D.spr.get_xy()
         dx = rx - x
-        DA = math.exp(dx / SCALE)
-        return float(int(DA * 100) / 1000.)
+        DS = math.exp(dx / SCALE)
+        if DS > 10:
+            DS = 10.
+        return float(int(DS * 100) / 1000.)
+
+    def _calc_DT(self):
+        rx, ry = self.R.spr.get_xy()
+        x, y = self.D.spr.get_xy()
+        dx = rx - x
+        DT = math.exp(dx / SCALE)
+        if DT > 10:
+            DT = 10.
+        return float(int(DT * 100) / 1000.)
 
     def _calc_L2(self):
         rx, ry = self.R.spr.get_xy()
