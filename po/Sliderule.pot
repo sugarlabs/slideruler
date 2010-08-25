@@ -8,58 +8,78 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-08-22 12:48-0400\n"
+"POT-Creation-Date: 2010-08-25 18:07-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: activity/activity.info:2 /home/walter/Desktop/sliderule/window.py:251
+#: activity/activity.info:2
 msgid "Sliderule"
 msgstr ""
 
-#: /home/walter/Desktop/sliderule/SlideruleActivity.py:260
+#: /home/walter/Desktop/sliderule/SlideruleActivity.py:300
 msgid "Project"
 msgstr ""
 
-#: /home/walter/Desktop/sliderule/SlideruleActivity.py:266
-msgid "multiply/divide"
-msgstr ""
-
-#: /home/walter/Desktop/sliderule/SlideruleActivity.py:268
-msgid "inverse"
-msgstr ""
-
-#: /home/walter/Desktop/sliderule/SlideruleActivity.py:270
-msgid "square/square root"
-msgstr ""
-
-#: /home/walter/Desktop/sliderule/SlideruleActivity.py:272
+#: /home/walter/Desktop/sliderule/SlideruleActivity.py:306
 msgid "add/subtract"
 msgstr ""
 
-#: /home/walter/Desktop/sliderule/SlideruleActivity.py:275
-msgid "1.0 × 1.0 = 1.0"
+#: /home/walter/Desktop/sliderule/SlideruleActivity.py:308
+msgid "multiply/divide"
+msgstr ""
+
+#: /home/walter/Desktop/sliderule/SlideruleActivity.py:310
+msgid "inverse"
+msgstr ""
+
+#: /home/walter/Desktop/sliderule/SlideruleActivity.py:312
+msgid "square/square root"
+msgstr ""
+
+#: /home/walter/Desktop/sliderule/SlideruleActivity.py:314
+msgid "cube/cube root"
+msgstr ""
+
+#: /home/walter/Desktop/sliderule/SlideruleActivity.py:316
+msgid "sin, asin"
+msgstr ""
+
+#: /home/walter/Desktop/sliderule/SlideruleActivity.py:318
+msgid "tan, atan"
 msgstr ""
 
 #: /home/walter/Desktop/sliderule/sliderule.py:33
 msgid "Slide Rule"
 msgstr ""
 
-#: /home/walter/Desktop/sliderule/sliderule.py:38
+#: /home/walter/Desktop/sliderule/sliderule.py:37
+msgid "L"
+msgstr ""
+
+#: /home/walter/Desktop/sliderule/sliderule.py:41
 msgid "C"
 msgstr ""
 
-#: /home/walter/Desktop/sliderule/sliderule.py:42
+#: /home/walter/Desktop/sliderule/sliderule.py:45
 msgid "CI"
 msgstr ""
 
-#: /home/walter/Desktop/sliderule/sliderule.py:46
+#: /home/walter/Desktop/sliderule/sliderule.py:49
 msgid "A"
 msgstr ""
 
-#: /home/walter/Desktop/sliderule/sliderule.py:50
-msgid "L"
+#: /home/walter/Desktop/sliderule/sliderule.py:53
+msgid "K"
+msgstr ""
+
+#: /home/walter/Desktop/sliderule/sliderule.py:57
+msgid "S"
+msgstr ""
+
+#: /home/walter/Desktop/sliderule/sliderule.py:61
+msgid "T"
 msgstr ""
