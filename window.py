@@ -62,8 +62,15 @@ class SlideRule():
         self.scale = 1
 
         # Open the sliders
+        self.results_label = Slider(self.sprites, self.path, 'label',
+                                    int((self.width-600)/2),
+                                    int(self.height-SHEIGHT), 600, SHEIGHT)
         y = 50
         self.A = Slider(self.sprites, self.path, 'A',
+                        0, y + 60, SWIDTH, SHEIGHT)
+        self.K = Slider(self.sprites, self.path, 'K',
+                        0, y + 60, SWIDTH, SHEIGHT)
+        self.S = Slider(self.sprites, self.path, 'S',
                         0, y + 60, SWIDTH, SHEIGHT)
         self.C = Slider(self.sprites, self.path, 'C',
                         0, y + 60, SWIDTH, SHEIGHT)
@@ -100,6 +107,8 @@ class SlideRule():
 
         self.R.spr.set_label('')
         self.A.spr.set_label('')
+        self.K.spr.set_label('')
+        self.S.spr.set_label('')
         self.C.spr.set_label('')
         self.CI.spr.set_label('')
         self.D.spr.set_label('')
@@ -109,6 +118,8 @@ class SlideRule():
         self.update_results_label()
 
         self.A.draw_slider(500)
+        self.K.draw_slider()
+        self.S.draw_slider()
         self.C.draw_slider()
         self.C_tab_left.draw_slider()
         self.C_tab_right.draw_slider()
@@ -147,7 +158,7 @@ class SlideRule():
         x, y = map(int, event.get_coords())
         # redicule doesn't use offset
         dx = x - self.dragpos
-        if self.press == self.D.spr or self.press == self.A.spr:
+        if self.press in [self.D.spr, self.A.spr, self.K.spr, self.S.spr]:
             # everything moves
             self.C.spr.move_relative((dx, 0))
             self.C_tab_left.spr.move_relative((dx, 0))
@@ -156,6 +167,8 @@ class SlideRule():
             self.CI_tab_left.spr.move_relative((dx, 0))
             self.CI_tab_right.spr.move_relative((dx, 0))
             self.A.spr.move_relative((dx, 0))
+            self.K.spr.move_relative((dx, 0))
+            self.S.spr.move_relative((dx, 0))
             self.D.spr.move_relative((dx, 0))
             self.R_tab_top.spr.move_relative((dx, 0))
             self.R_tab_bot.spr.move_relative((dx, 0))
@@ -204,6 +217,12 @@ class SlideRule():
         if self.slider_on_top == 'A':
             self.R_tab_top.spr.set_label(str(self._calc_A()))
             self.R_tab_bot.spr.set_label(str(self._calc_DA()))
+        elif self.slider_on_top == 'K':
+            self.R_tab_top.spr.set_label(str(self._calc_K()))
+            self.R_tab_bot.spr.set_label(str(self._calc_DK()))
+        elif self.slider_on_top == 'S':
+            self.R_tab_top.spr.set_label(str(self._calc_S()))
+            self.R_tab_bot.spr.set_label(str(self._calc_DS()))
         elif self.slider_on_top == 'L':
             self.R_tab_top.spr.set_label(str(self._calc_L2()))
             self.R_tab_bot.spr.set_label(str(self._calc_LL()))
@@ -268,12 +287,8 @@ class SlideRule():
             C = str(self._calc_C())
             DC = str(self._calc_DC() * self.factor)
             s = "%s × %s = %s\t\t%s / %s = %s" % (D, C, DC, DC, C, D)
-        if self.sugar is True:
-            self.activity.results_label.set_text(s)
-            self.activity.results_label.show()
-        else:
-            if hasattr(self, 'win'):
-                self.win.set_title("%s: %s" % (_('Sliderule'), s))
+
+        self.results_label.spr.set_label(s)
         return True
 
     def _calc_C(self):
@@ -301,7 +316,28 @@ class SlideRule():
         if dx < 0:
             dx = math.log(10.) * SCALE + dx
         A = math.exp(2 * dx / SCALE) # two-decade rule
-        return float(int(A * 100) / 100.)
+        return float(int(A * 10) / 10.)
+
+    def _calc_S(self):
+        rx, ry = self.R.spr.get_xy()
+        sx, sy = self.S.spr.get_xy()
+        dx = rx - sx
+        dx /= SCALE
+        s = math.exp(dx)/10 # sine
+        if s > 1.0:
+            s = 1.0
+        r = math.asin(s)
+        S = 180.0 * r / math.pi
+        return float(int(S * 10) / 10.)
+
+    def _calc_K(self):
+        rx, ry = self.R.spr.get_xy()
+        kx, ky = self.K.spr.get_xy()
+        dx = rx - kx
+        if dx < 0:
+            dx = math.log(10.) * SCALE + dx
+        K = math.exp(3 * dx / SCALE) # three-decade rule
+        return float(int(K * 10) / 10.)
 
     def _calc_D(self):
         x, y = self.D.spr.get_xy()
@@ -339,6 +375,22 @@ class SlideRule():
             dx = math.log(100.) * SCALE + dx
         DA = math.exp(dx / SCALE)
         return float(int(DA * 100) / 100.)
+
+    def _calc_DK(self):
+        rx, ry = self.R.spr.get_xy()
+        x, y = self.D.spr.get_xy()
+        dx = rx - x
+        if dx < 0:
+            dx = math.log(100.) * SCALE + dx
+        DA = math.exp(dx / SCALE)
+        return float(int(DA * 100) / 100.)
+
+    def _calc_DS(self):
+        rx, ry = self.R.spr.get_xy()
+        x, y = self.D.spr.get_xy()
+        dx = rx - x
+        DA = math.exp(dx / SCALE)
+        return float(int(DA * 100) / 1000.)
 
     def _calc_L2(self):
         rx, ry = self.R.spr.get_xy()

@@ -67,18 +67,6 @@ def _button_factory(icon_name, tooltip, callback, toolbar, cb_arg=None,
     return my_button
 
 
-def _label_factory(label, toolbar):
-    """ Factory for adding a label to a toolbar """
-    my_label = gtk.Label(label)
-    my_label.set_line_wrap(True)
-    my_label.show()
-    _toolitem = gtk.ToolItem()
-    _toolitem.add(my_label)
-    toolbar.insert(_toolitem, -1)
-    _toolitem.show()
-    return my_label
-
-
 def _separator_factory(toolbar, visible=True, expand=False):
     """ Factory for adding a separator to a toolbar """
     _separator = gtk.SeparatorToolItem()
@@ -118,18 +106,22 @@ class SlideruleActivity(activity.Activity):
                                                    SWIDTH - 100, 0))
         if 'A' in self.metadata:
             self.sr.A.spr.move_relative((int(self.metadata['A']), 0))
+        if 'K' in self.metadata:
+            self.sr.K.spr.move_relative((int(self.metadata['K']), 0))
+        if 'S' in self.metadata:
+            self.sr.S.spr.move_relative((int(self.metadata['S']), 0))
+        if 'D' in self.metadata:
+            self.sr.D.spr.move_relative((int(self.metadata['D']), 0))
         if 'C' in self.metadata:
             self.sr.C.spr.move_relative((int(self.metadata['C']), 0))
             self.sr.C_tab_left.spr.move_relative((int(self.metadata['C']), 0))
-            self.sr.C_tab_right.spr.move_relative((int(self.metadata['C']) +\
+            self.sr.C_tab_right.spr.move_relative((int(self.metadata['C']) + \
                                                    SWIDTH - 100, 0))
         if 'CI' in self.metadata:
             self.sr.CI.spr.move_relative((int(self.metadata['CI']), 0))
             self.sr.CI_tab_left.spr.move_relative((int(self.metadata['CI']), 0))
-            self.sr.CI_tab_right.spr.move_relative((int(self.metadata['CI']) +\
+            self.sr.CI_tab_right.spr.move_relative((int(self.metadata['CI']) + \
                                                    SWIDTH - 100, 0))
-        if 'D' in self.metadata:
-            self.sr.D.spr.move_relative((int(self.metadata['D']), 0))
         if 'R' in self.metadata:
             self.sr.R.spr.move_relative((int(self.metadata['R']), 0))
             self.sr.R_tab_top.spr.move_relative((int(self.metadata['R']), 0))
@@ -149,10 +141,14 @@ class SlideruleActivity(activity.Activity):
 
     def _hide_all(self):
         self.a_slider.set_icon('Aoff')
+        self.k_slider.set_icon('Koff')
+        self.s_slider.set_icon('Soff')
         self.c_slider.set_icon('Coff')
         self.ci_slider.set_icon('CIoff')
         self.l_slider.set_icon('Loff')
         self.sr.A.spr.hide()
+        self.sr.K.spr.hide()
+        self.sr.S.spr.hide()
         self.sr.C.spr.hide()
         self.sr.CI.spr.hide()
         self.sr.C_tab_left.spr.hide()
@@ -208,6 +204,32 @@ class SlideruleActivity(activity.Activity):
         self.sr.update_slider_labels()
         self.sr.update_results_label()
 
+    def _k_slider_cb(self, button):
+        self._show_k()
+        return True
+
+    def _show_k(self):
+        self._hide_all()
+        self.k_slider.set_icon('Kon')
+        self.sr.K.draw_slider(1000)
+        self.sr.D.draw_slider(1000)
+        self.sr.slider_on_top = 'K'
+        self.sr.update_slider_labels()
+        self.sr.update_results_label()
+
+    def _s_slider_cb(self, button):
+        self._show_s()
+        return True
+
+    def _show_s(self):
+        self._hide_all()
+        self.s_slider.set_icon('Son')
+        self.sr.S.draw_slider(1000)
+        self.sr.D.draw_slider(1000)
+        self.sr.slider_on_top = 'S'
+        self.sr.update_slider_labels()
+        self.sr.update_results_label()
+
     def _l_slider_cb(self, button):
         self._show_l()
         return True
@@ -230,6 +252,10 @@ class SlideruleActivity(activity.Activity):
         self.metadata['slider'] = self.sr.slider_on_top
         x, y = self.sr.A.spr.get_xy()
         self.metadata['A'] = str(x)
+        x, y = self.sr.K.spr.get_xy()
+        self.metadata['K'] = str(x)
+        x, y = self.sr.S.spr.get_xy()
+        self.metadata['S'] = str(x)
         x, y = self.sr.C.spr.get_xy()
         self.metadata['C'] = str(x)
         x, y = self.sr.CI.spr.get_xy()
@@ -269,7 +295,7 @@ class SlideruleActivity(activity.Activity):
             toolbox.set_current_toolbar(1)
             toolbar = project_toolbar
 
-        # Add the buttons and labels to the toolbars
+        # Add the buttons to the toolbars
         self.l_slider = _button_factory('Loff', _('add/subtract'),
                                         self._l_slider_cb, toolbar)
         self.c_slider = _button_factory('Con', _('multiply/divide'),
@@ -278,8 +304,10 @@ class SlideruleActivity(activity.Activity):
                                         self._ci_slider_cb, toolbar)
         self.a_slider = _button_factory('Aoff', _('square/square root'),
                                         self._a_slider_cb, toolbar)
-        _separator_factory(toolbar, True, False)
-        self.results_label = _label_factory(_('1.0 × 1.0 = 1.0'), toolbar)
+        self.k_slider = _button_factory('Koff', _('cube/cube root'),
+                                        self._k_slider_cb, toolbar)
+        self.s_slider = _button_factory('Soff', _('sin, asin'),
+                                        self._s_slider_cb, toolbar)
 
         if _have_toolbox:
             _separator_factory(toolbox.toolbar, False, True)
