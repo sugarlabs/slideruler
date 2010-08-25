@@ -104,16 +104,13 @@ class SlideruleActivity(activity.Activity):
             self.sr.L2_tab_left.spr.move_relative((int(self.metadata['L2']), 0))
             self.sr.L2_tab_right.spr.move_relative((int(self.metadata['L2']) +\
                                                    SWIDTH - 100, 0))
-        if 'A' in self.metadata:
-            self.sr.A.spr.move_relative((int(self.metadata['A']), 0))
-        if 'K' in self.metadata:
-            self.sr.K.spr.move_relative((int(self.metadata['K']), 0))
-        if 'S' in self.metadata:
-            self.sr.S.spr.move_relative((int(self.metadata['S']), 0))
-        if 'T' in self.metadata:
-            self.sr.T.spr.move_relative((int(self.metadata['T']), 0))
         if 'D' in self.metadata:
-            self.sr.D.spr.move_relative((int(self.metadata['D']), 0))
+            Doffset = int(self.metadata['D'])
+            self.sr.D.spr.move_relative((Doffset, 0))
+            self.sr.A.spr.move_relative((Doffset, 0))
+            self.sr.K.spr.move_relative((Doffset, 0))
+            self.sr.S.spr.move_relative((Doffset, 0))
+            self.sr.T.spr.move_relative((Doffset, 0))
         if 'C' in self.metadata:
             self.sr.C.spr.move_relative((int(self.metadata['C']), 0))
             self.sr.C_tab_left.spr.move_relative((int(self.metadata['C']), 0))
@@ -266,14 +263,6 @@ class SlideruleActivity(activity.Activity):
     """
     def write_file(self, file_path):
         self.metadata['slider'] = self.sr.slider_on_top
-        x, y = self.sr.A.spr.get_xy()
-        self.metadata['A'] = str(x)
-        x, y = self.sr.K.spr.get_xy()
-        self.metadata['K'] = str(x)
-        x, y = self.sr.S.spr.get_xy()
-        self.metadata['S'] = str(x)
-        x, y = self.sr.T.spr.get_xy()
-        self.metadata['T'] = str(x)
         x, y = self.sr.C.spr.get_xy()
         self.metadata['C'] = str(x)
         x, y = self.sr.CI.spr.get_xy()
