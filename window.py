@@ -62,9 +62,16 @@ class SlideRule():
         self.scale = 1
 
         # Open the sliders
-        self.results_label = Slider(self.sprites, self.path, 'label',
-                                    int((self.width-600)/2),
-                                    int(self.height-SHEIGHT), 600, SHEIGHT)
+        if self.sugar:
+            self.results_label = Slider(self.sprites, self.path, 'label',
+                                        int((self.width - 600) / 2),
+                                        int(self.height - SHEIGHT),
+                                        600, SHEIGHT)
+        else:
+            self.results_label = Slider(self.sprites, self.path, 'label',
+                                        int((self.width - 600) / 2),
+                                        int(self.height - 4 * SHEIGHT),
+                                        600, SHEIGHT)
         y = 50
         self.A = Slider(self.sprites, self.path, 'A',
                         0, y + 60, SWIDTH, SHEIGHT)
