@@ -243,10 +243,20 @@ class SlideRule():
     def update_results_label(self):
         """ Update toolbar label. """
         if self.slider_on_top == 'A':
-            # calculate the values for D, A, and D * A (under the redicule)
+            # calculate the values for DA, A (under the redicule)
             A = str(self._calc_A())
             DA = str(self._calc_DA() * self.factor)
             s = " √ %s = %s\t\t%s² = %s" % (A, DA, DA, A)
+        elif self.slider_on_top == 'K':
+            # calculate the values for DK, K (under the redicule)
+            K = str(self._calc_K())
+            DK = str(self._calc_DK() * self.factor)
+            s = " ∛ %s = %s\t\t%s³ = %s" % (K, DK, DK, K)
+        elif self.slider_on_top == 'S':
+            # calculate the values for DS, S (under the redicule)
+            S = str(self._calc_S())
+            DS = str(self._calc_DS() * self.factor)
+            s = " sin(%s) = %s\t\tasin(%s) = %s" % (S, DS, DS, S)
         elif self.slider_on_top == 'L':
             # calculate the values for L, L2, and L + L2 (under the redicule)
             # using ndash to display a minus sign
