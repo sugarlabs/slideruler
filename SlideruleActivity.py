@@ -270,14 +270,14 @@ class SlideruleActivity(activity.Activity):
             toolbar = project_toolbar
 
         # Add the buttons and labels to the toolbars
+        self.l_slider = _button_factory('Loff', _('add/subtract'),
+                                        self._l_slider_cb, toolbar)
         self.c_slider = _button_factory('Con', _('multiply/divide'),
                                         self._c_slider_cb, toolbar)
         self.ci_slider = _button_factory('CIoff', _('inverse'),
                                         self._ci_slider_cb, toolbar)
         self.a_slider = _button_factory('Aoff', _('square/square root'),
                                         self._a_slider_cb, toolbar)
-        self.l_slider = _button_factory('Loff', _('add/subtract'),
-                                        self._l_slider_cb, toolbar)
         _separator_factory(toolbar, True, False)
         self.results_label = _label_factory(_('1.0 × 1.0 = 1.0'), toolbar)
 
