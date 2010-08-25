@@ -20,214 +20,427 @@
        x="94.2892240962"
        y="35"
        style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">6</tspan></text>
+  <text style="font-size:12px;fill:#ff0000;">
+      <tspan
+       x="94.2892240962"
+       y="20"
+       style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">174</tspan></text>
    <path
        d="M 94.2892240962,38 L 94.2892240962,59"
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
+   <path
+       d="M 174.014369554,40 L 174.014369554,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
   <text style="font-size:12px;fill:#000000;">
       <tspan
        x="247.779329167"
        y="35"
        style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">7</tspan></text>
+  <text style="font-size:12px;fill:#ff0000;">
+      <tspan
+       x="247.779329167"
+       y="20"
+       style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">173</tspan></text>
    <path
        d="M 247.779329167,38 L 247.779329167,59"
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
+   <path
+       d="M 316.403727303,40 L 316.403727303,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
   <text style="font-size:12px;fill:#000000;">
       <tspan
        x="380.54830301"
        y="35"
        style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">8</tspan></text>
+  <text style="font-size:12px;fill:#ff0000;">
+      <tspan
+       x="380.54830301"
+       y="20"
+       style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">172</tspan></text>
    <path
        d="M 380.54830301,38 L 380.54830301,59"
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
+   <path
+       d="M 440.753495259,40 L 440.753495259,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
   <text style="font-size:12px;fill:#000000;">
       <tspan
        x="497.466982554"
        y="35"
        style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">9</tspan></text>
+  <text style="font-size:12px;fill:#ff0000;">
+      <tspan
+       x="497.466982554"
+       y="20"
+       style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">171</tspan></text>
    <path
        d="M 497.466982554,38 L 497.466982554,59"
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
+   <path
+       d="M 551.063766666,40 L 551.063766666,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
   <text style="font-size:12px;fill:#000000;">
       <tspan
        x="601.861098859"
        y="35"
        style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">10</tspan></text>
+  <text style="font-size:12px;fill:#ff0000;">
+      <tspan
+       x="601.861098859"
+       y="20"
+       style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">170</tspan></text>
    <path
        d="M 601.861098859,38 L 601.861098859,59"
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
+   <path
+       d="M 650.129760579,40 L 650.129760579,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
   <text style="font-size:12px;fill:#000000;">
       <tspan
        x="696.102717494"
        y="35"
        style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">11</tspan></text>
+  <text style="font-size:12px;fill:#ff0000;">
+      <tspan
+       x="696.102717494"
+       y="20"
+       style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">169</tspan></text>
    <path
        d="M 696.102717494,38 L 696.102717494,59"
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
+   <path
+       d="M 739.981848263,40 L 739.981848263,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
   <text style="font-size:12px;fill:#000000;">
       <tspan
        x="781.943240185"
        y="35"
        style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">12</tspan></text>
+  <text style="font-size:12px;fill:#ff0000;">
+      <tspan
+       x="781.943240185"
+       y="20"
+       style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">168</tspan></text>
    <path
        d="M 781.943240185,38 L 781.943240185,59"
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
+   <path
+       d="M 822.141403095,40 L 822.141403095,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
   <text style="font-size:12px;fill:#000000;">
       <tspan
        x="860.712656302"
        y="35"
        style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">13</tspan></text>
+  <text style="font-size:12px;fill:#ff0000;">
+      <tspan
+       x="860.712656302"
+       y="20"
+       style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">167</tspan></text>
    <path
        d="M 860.712656302,38 L 860.712656302,59"
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
+   <path
+       d="M 897.777875972,40 L 897.777875972,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
   <text style="font-size:12px;fill:#000000;">
       <tspan
        x="933.444742619"
        y="35"
        style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">14</tspan></text>
+  <text style="font-size:12px;fill:#ff0000;">
+      <tspan
+       x="933.444742619"
+       y="20"
+       style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">166</tspan></text>
    <path
        d="M 933.444742619,38 L 933.444742619,59"
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
+   <path
+       d="M 967.809594037,40 L 967.809594037,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
   <text style="font-size:12px;fill:#000000;">
       <tspan
        x="1000.95896397"
        y="35"
        style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">15</tspan></text>
+  <text style="font-size:12px;fill:#ff0000;">
+      <tspan
+       x="1000.95896397"
+       y="20"
+       style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">165</tspan></text>
    <path
        d="M 1000.95896397,38 L 1000.95896397,59"
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
+   <path
+       d="M 1032.97086841,40 L 1032.97086841,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
   <text style="font-size:12px;fill:#000000;">
       <tspan
        x="1063.91588757"
        y="35"
        style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">16</tspan></text>
+  <text style="font-size:12px;fill:#ff0000;">
+      <tspan
+       x="1063.91588757"
+       y="20"
+       style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">164</tspan></text>
    <path
        d="M 1063.91588757,38 L 1063.91588757,59"
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
+   <path
+       d="M 1093.85808136,40 L 1093.85808136,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
   <text style="font-size:12px;fill:#000000;">
       <tspan
        x="1122.85576813"
        y="35"
        style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">17</tspan></text>
+  <text style="font-size:12px;fill:#ff0000;">
+      <tspan
+       x="1122.85576813"
+       y="20"
+       style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">163</tspan></text>
    <path
        d="M 1122.85576813,38 L 1122.85576813,59"
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
+   <path
+       d="M 1150.9621905,40 L 1150.9621905,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
   <text style="font-size:12px;fill:#000000;">
       <tspan
        x="1178.22608737"
        y="35"
        style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">18</tspan></text>
+  <text style="font-size:12px;fill:#ff0000;">
+      <tspan
+       x="1178.22608737"
+       y="20"
+       style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">162</tspan></text>
    <path
        d="M 1178.22608737,38 L 1178.22608737,59"
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
+   <path
+       d="M 1204.69218758,40 L 1204.69218758,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
   <text style="font-size:12px;fill:#000000;">
       <tspan
        x="1230.40163764"
        y="35"
        style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">19</tspan></text>
+  <text style="font-size:12px;fill:#ff0000;">
+      <tspan
+       x="1230.40163764"
+       y="20"
+       style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">161</tspan></text>
    <path
        d="M 1230.40163764,38 L 1230.40163764,59"
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
+   <path
+       d="M 1255.39237396,40 L 1255.39237396,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
   <text style="font-size:12px;fill:#000000;">
       <tspan
        x="1279.69944795"
        y="35"
        style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">20</tspan></text>
+  <text style="font-size:12px;fill:#ff0000;">
+      <tspan
+       x="1279.69944795"
+       y="20"
+       style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">160</tspan></text>
    <path
        d="M 1279.69944795,38 L 1279.69944795,59"
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
+   <path
+       d="M 1303.35531091,40 L 1303.35531091,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
   <text style="font-size:12px;fill:#000000;">
       <tspan
        x="1326.39006462"
        y="35"
        style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">21</tspan></text>
+  <text style="font-size:12px;fill:#ff0000;">
+      <tspan
+       x="1326.39006462"
+       y="20"
+       style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">159</tspan></text>
    <path
        d="M 1326.39006462,38 L 1326.39006462,59"
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
+   <path
+       d="M 1348.83168247,40 L 1348.83168247,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
   <text style="font-size:12px;fill:#000000;">
       <tspan
        x="1370.70620508"
        y="35"
        style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">22</tspan></text>
+  <text style="font-size:12px;fill:#ff0000;">
+      <tspan
+       x="1370.70620508"
+       y="20"
+       style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">158</tspan></text>
    <path
        d="M 1370.70620508,38 L 1370.70620508,59"
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
+   <path
+       d="M 1392.03791406,40 L 1392.03791406,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
   <text style="font-size:12px;fill:#000000;">
       <tspan
        x="1412.84948653"
        y="35"
        style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">23</tspan></text>
+  <text style="font-size:12px;fill:#ff0000;">
+      <tspan
+       x="1412.84948653"
+       y="20"
+       style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">157</tspan></text>
    <path
        d="M 1412.84948653,38 L 1412.84948653,59"
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
+   <path
+       d="M 1433.16213312,40 L 1433.16213312,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
   <text style="font-size:12px;fill:#000000;">
       <tspan
        x="1452.99572141"
        y="35"
        style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">24</tspan></text>
+  <text style="font-size:12px;fill:#ff0000;">
+      <tspan
+       x="1452.99572141"
+       y="20"
+       style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">156</tspan></text>
    <path
        d="M 1452.99572141,38 L 1452.99572141,59"
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
+   <path
+       d="M 1472.3688866,40 L 1472.3688866,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
   <text style="font-size:12px;fill:#000000;">
       <tspan
        x="1491.29913109"
        y="35"
        style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">25</tspan></text>
+  <text style="font-size:12px;fill:#ff0000;">
+      <tspan
+       x="1491.29913109"
+       y="20"
+       style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">155</tspan></text>
    <path
        d="M 1491.29913109,38 L 1491.29913109,59"
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
+   <path
+       d="M 1509.80291411,40 L 1509.80291411,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
   <text style="font-size:12px;fill:#000000;">
       <tspan
        x="1527.89573267"
        y="35"
        style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">26</tspan></text>
+  <text style="font-size:12px;fill:#ff0000;">
+      <tspan
+       x="1527.89573267"
+       y="20"
+       style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">154</tspan></text>
    <path
        d="M 1527.89573267,38 L 1527.89573267,59"
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
+   <path
+       d="M 1545.59219485,40 L 1545.59219485,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
   <text style="font-size:12px;fill:#000000;">
       <tspan
        x="1562.90608615"
        y="35"
        style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">27</tspan></text>
+  <text style="font-size:12px;fill:#ff0000;">
+      <tspan
+       x="1562.90608615"
+       y="20"
+       style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">153</tspan></text>
    <path
        d="M 1562.90608615,38 L 1562.90608615,59"
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
+   <path
+       d="M 1579.85042981,40 L 1579.85042981,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
   <text style="font-size:12px;fill:#000000;">
       <tspan
        x="1596.43754168"
        y="35"
        style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">28</tspan></text>
+  <text style="font-size:12px;fill:#ff0000;">
+      <tspan
+       x="1596.43754168"
+       y="20"
+       style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">152</tspan></text>
    <path
        d="M 1596.43754168,38 L 1596.43754168,59"
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
+   <path
+       d="M 1612.67908026,40 L 1612.67908026,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
   <text style="font-size:12px;fill:#000000;">
       <tspan
        x="1628.58609231"
        y="35"
        style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">29</tspan></text>
+  <text style="font-size:12px;fill:#ff0000;">
+      <tspan
+       x="1628.58609231"
+       y="20"
+       style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">151</tspan></text>
    <path
        d="M 1628.58609231,38 L 1628.58609231,59"
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
+   <path
+       d="M 1644.16905467,40 L 1644.16905467,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
   <text style="font-size:12px;fill:#000000;">
       <tspan
        x="1659.43791243"
        y="35"
        style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">30</tspan></text>
+  <text style="font-size:12px;fill:#ff0000;">
+      <tspan
+       x="1659.43791243"
+       y="20"
+       style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">150</tspan></text>
    <path
        d="M 1659.43791243,38 L 1659.43791243,59"
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
+   <path
+       d="M 1674.40211411,40 L 1674.40211411,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
   <text style="font-size:12px;fill:#000000;">
       <tspan
        x="1689.07064381"
        y="35"
        style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">31</tspan></text>
+  <text style="font-size:12px;fill:#ff0000;">
+      <tspan
+       x="1689.07064381"
+       y="20"
+       style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">149</tspan></text>
    <path
        d="M 1689.07064381,38 L 1689.07064381,59"
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
+   <path
+       d="M 1703.45205089,40 L 1703.45205089,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
   <text style="font-size:12px;fill:#000000;">
       <tspan
        x="1717.55447732"
        y="35"
        style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">32</tspan></text>
+  <text style="font-size:12px;fill:#ff0000;">
+      <tspan
+       x="1717.55447732"
+       y="20"
+       style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">148</tspan></text>
    <path
        d="M 1717.55447732,38 L 1717.55447732,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
@@ -244,6 +457,11 @@
        x="1821.19147801"
        y="35"
        style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">36</tspan></text>
+  <text style="font-size:12px;fill:#ff0000;">
+      <tspan
+       x="1821.19147801"
+       y="20"
+       style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">144</tspan></text>
    <path
        d="M 1821.19147801,38 L 1821.19147801,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
@@ -260,6 +478,11 @@
        x="1910.64417216"
        y="35"
        style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">40</tspan></text>
+  <text style="font-size:12px;fill:#ff0000;">
+      <tspan
+       x="1910.64417216"
+       y="20"
+       style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">140</tspan></text>
    <path
        d="M 1910.64417216,38 L 1910.64417216,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
@@ -276,6 +499,11 @@
        x="1988.24998543"
        y="35"
        style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">44</tspan></text>
+  <text style="font-size:12px;fill:#ff0000;">
+      <tspan
+       x="1988.24998543"
+       y="20"
+       style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">136</tspan></text>
    <path
        d="M 1988.24998543,38 L 1988.24998543,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
@@ -292,6 +520,11 @@
        x="2055.72075962"
        y="35"
        style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">48</tspan></text>
+  <text style="font-size:12px;fill:#ff0000;">
+      <tspan
+       x="2055.72075962"
+       y="20"
+       style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">132</tspan></text>
    <path
        d="M 2055.72075962,38 L 2055.72075962,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
@@ -308,6 +541,11 @@
        x="2114.34155049"
        y="35"
        style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">52</tspan></text>
+  <text style="font-size:12px;fill:#ff0000;">
+      <tspan
+       x="2114.34155049"
+       y="20"
+       style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">128</tspan></text>
    <path
        d="M 2114.34155049,38 L 2114.34155049,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
@@ -324,6 +562,11 @@
        x="2165.09529086"
        y="35"
        style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">56</tspan></text>
+  <text style="font-size:12px;fill:#ff0000;">
+      <tspan
+       x="2165.09529086"
+       y="20"
+       style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">124</tspan></text>
    <path
        d="M 2165.09529086,38 L 2165.09529086,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
@@ -340,6 +583,11 @@
        x="2208.74405677"
        y="35"
        style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">60</tspan></text>
+  <text style="font-size:12px;fill:#ff0000;">
+      <tspan
+       x="2208.74405677"
+       y="20"
+       style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">120</tspan></text>
    <path
        d="M 2208.74405677,38 L 2208.74405677,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
@@ -356,6 +604,11 @@
        x="2245.88373025"
        y="35"
        style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">64</tspan></text>
+  <text style="font-size:12px;fill:#ff0000;">
+      <tspan
+       x="2245.88373025"
+       y="20"
+       style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">116</tspan></text>
    <path
        d="M 2245.88373025,38 L 2245.88373025,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
@@ -372,6 +625,11 @@
        x="2302.40330307"
        y="35"
        style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">72</tspan></text>
+  <text style="font-size:12px;fill:#ff0000;">
+      <tspan
+       x="2302.40330307"
+       y="20"
+       style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">108</tspan></text>
    <path
        d="M 2302.40330307,38 L 2302.40330307,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
@@ -388,6 +646,11 @@
        x="2337.27626153"
        y="35"
        style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">80</tspan></text>
+  <text style="font-size:12px;fill:#ff0000;">
+      <tspan
+       x="2337.27626153"
+       y="20"
+       style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">100</tspan></text>
    <path
        d="M 2337.27626153,38 L 2337.27626153,59"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
