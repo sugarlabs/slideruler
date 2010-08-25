@@ -110,6 +110,8 @@ class SlideruleActivity(activity.Activity):
             self.sr.K.spr.move_relative((int(self.metadata['K']), 0))
         if 'S' in self.metadata:
             self.sr.S.spr.move_relative((int(self.metadata['S']), 0))
+        if 'T' in self.metadata:
+            self.sr.T.spr.move_relative((int(self.metadata['T']), 0))
         if 'D' in self.metadata:
             self.sr.D.spr.move_relative((int(self.metadata['D']), 0))
         if 'C' in self.metadata:
@@ -149,6 +151,7 @@ class SlideruleActivity(activity.Activity):
         self.sr.A.spr.hide()
         self.sr.K.spr.hide()
         self.sr.S.spr.hide()
+        self.sr.T.spr.hide()
         self.sr.C.spr.hide()
         self.sr.CI.spr.hide()
         self.sr.C_tab_left.spr.hide()
@@ -230,6 +233,19 @@ class SlideruleActivity(activity.Activity):
         self.sr.update_slider_labels()
         self.sr.update_results_label()
 
+    def _t_slider_cb(self, button):
+        self._show_t()
+        return True
+
+    def _show_t(self):
+        self._hide_all()
+        self.t_slider.set_icon('Ton')
+        self.sr.T.draw_slider(1000)
+        self.sr.D.draw_slider(1000)
+        self.sr.slider_on_top = 'T'
+        self.sr.update_slider_labels()
+        self.sr.update_results_label()
+
     def _l_slider_cb(self, button):
         self._show_l()
         return True
@@ -256,6 +272,8 @@ class SlideruleActivity(activity.Activity):
         self.metadata['K'] = str(x)
         x, y = self.sr.S.spr.get_xy()
         self.metadata['S'] = str(x)
+        x, y = self.sr.T.spr.get_xy()
+        self.metadata['T'] = str(x)
         x, y = self.sr.C.spr.get_xy()
         self.metadata['C'] = str(x)
         x, y = self.sr.CI.spr.get_xy()
@@ -308,6 +326,8 @@ class SlideruleActivity(activity.Activity):
                                         self._k_slider_cb, toolbar)
         self.s_slider = _button_factory('Soff', _('sin, asin'),
                                         self._s_slider_cb, toolbar)
+        self.t_slider = _button_factory('Toff', _('tan, atan'),
+                                        self._t_slider_cb, toolbar)
 
         if _have_toolbox:
             _separator_factory(toolbox.toolbar, False, True)
