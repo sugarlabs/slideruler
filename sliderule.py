@@ -27,14 +27,17 @@ class SlideruleMain:
     def __init__(self):
         self.r = 0
         self.sr = None
-        # create a new window
+
         self.win = gtk.Window(gtk.WINDOW_TOPLEVEL)
         self.win.maximize()
-        self.win.set_title("%s: %s" % (_('Slide Rule'),
-                           ('1.0 x 1.0 = 1.0')))
+        self.win.set_title(_('Slide Rule'))
         self.win.connect('delete_event', lambda w,e: gtk.main_quit())
 
         menu = gtk.Menu()
+        menu_items = gtk.MenuItem(_("L"))
+        menu.append(menu_items)
+        menu_items.connect("activate", self._l_cb)
+        menu_items.show()
         menu_items = gtk.MenuItem(_("C"))
         menu.append(menu_items)
         menu_items.connect("activate", self._c_cb)
@@ -47,15 +50,22 @@ class SlideruleMain:
         menu.append(menu_items)
         menu_items.connect("activate", self._a_cb)
         menu_items.show()
-        menu_items = gtk.MenuItem(_("L"))
+        menu_items = gtk.MenuItem(_("K"))
         menu.append(menu_items)
-        menu_items.connect("activate", self._l_cb)
+        menu_items.connect("activate", self._k_cb)
+        menu_items.show()
+        menu_items = gtk.MenuItem(_("S"))
+        menu.append(menu_items)
+        menu_items.connect("activate", self._s_cb)
+        menu_items.show()
+        menu_items = gtk.MenuItem(_("T"))
+        menu.append(menu_items)
+        menu_items.connect("activate", self._t_cb)
         menu_items.show()
         root_menu = gtk.MenuItem("Tools")
         root_menu.show()
         root_menu.set_submenu(menu)
 
-        # A vbox to put a menu and the canvas in:
         vbox = gtk.VBox(False, 0)
         self.win.add(vbox)
         vbox.show()
@@ -71,7 +81,6 @@ class SlideruleMain:
         menu_bar.append(root_menu)
         self.win.show_all()
 
-        # Join the activity
         self.sr = SlideRule(canvas, os.path.join(os.path.abspath('.'),
                                                  'images/'))
         self.sr.win = self.win
@@ -80,11 +89,14 @@ class SlideruleMain:
         self._c_cb(None)
 
     def hide_all(self):
-        self.sr.A.spr.hide()        
-        self.sr.C.spr.hide()        
+        self.sr.A.spr.hide()
+        self.sr.K.spr.hide()
+        self.sr.S.spr.hide()
+        self.sr.T.spr.hide()
+        self.sr.C.spr.hide()
         self.sr.C_tab_left.spr.hide()
         self.sr.C_tab_right.spr.hide()
-        self.sr.CI.spr.hide()        
+        self.sr.CI.spr.hide()
         self.sr.CI_tab_left.spr.hide()
         self.sr.CI_tab_right.spr.hide()
         self.sr.L.spr.hide()
@@ -122,6 +134,33 @@ class SlideruleMain:
         self.sr.A.draw_slider(1000)
         self.sr.D.draw_slider(1000)
         self.sr.slider_on_top = "A"
+        self.sr.update_slider_labels()
+        self.sr.update_results_label()
+        return True
+
+    def _k_cb(self, widget):
+        self.hide_all()
+        self.sr.K.draw_slider(1000)
+        self.sr.D.draw_slider(1000)
+        self.sr.slider_on_top = "K"
+        self.sr.update_slider_labels()
+        self.sr.update_results_label()
+        return True
+
+    def _s_cb(self, widget):
+        self.hide_all()
+        self.sr.S.draw_slider(1000)
+        self.sr.D.draw_slider(1000)
+        self.sr.slider_on_top = "S"
+        self.sr.update_slider_labels()
+        self.sr.update_results_label()
+        return True
+
+    def _t_cb(self, widget):
+        self.hide_all()
+        self.sr.T.draw_slider(1000)
+        self.sr.D.draw_slider(1000)
+        self.sr.slider_on_top = "T"
         self.sr.update_slider_labels()
         self.sr.update_results_label()
         return True
