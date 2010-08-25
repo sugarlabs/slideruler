@@ -1,3 +1,9 @@
+13
+
+* added K (cube), S (sine), and T (tangent) scales
+* cleaned up results display
+* moved display results off of toolbar
+
 12
 
 * update labels when switching scales
