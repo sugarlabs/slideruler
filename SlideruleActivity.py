@@ -60,17 +60,16 @@ _FUNCTIONS = [_FL, _FC, _FCI, _FA, _FK, _FS, _FT, _UD]
 
 _A = _('log²')
 _C = _('log')
-_CI = _('1/log')
 _K = _('log³')
 _S = _('sin')
 _T = _('tan')
-_L = _('linear')
-_TOP_SCALES = [_L, _C, _CI, _A, _K, _S, _T]
+_L2 = _('linear')
+_TOP_SCALES = [_L2, _C, _A, _K, _S, _T]
 
 _D = _('log')
-_CI2 = _('1/log')
-_L2 = _('linear')
-_BOT_SCALES = [_L2, _D, _CI2]
+_CI = _('1/log')
+_L = _('linear')
+_BOT_SCALES = [_L, _D, _CI]
 
 
 def _combo_factory(combo_array, default, tooltip, callback, toolbar):
@@ -83,8 +82,8 @@ def _combo_factory(combo_array, default, tooltip, callback, toolbar):
 
     for i, s in enumerate(combo_array):
         my_combo.append_item(i, s, None)
-        if s == default:
-            my_combo.set_active(i)
+        # if s == default:
+        #     my_combo.set_active(i)
 
     toolbar.insert(ToolComboBox(my_combo), -1)
     return my_combo
@@ -139,7 +138,6 @@ class SlideruleActivity(activity.Activity):
 
         self._setup_toolbars(_have_toolbox)
 
-        # Create a canvas
         canvas = gtk.DrawingArea()
         canvas.set_size_request(gtk.gdk.screen_width(),
                                 gtk.gdk.screen_height())
@@ -147,7 +145,6 @@ class SlideruleActivity(activity.Activity):
         canvas.show()
         self.show_all()
 
-        # Initialize the canvas
         self.sr = SlideRule(canvas, os.path.join(activity.get_bundle_path(),
                                                  'images/'), self)
 
@@ -166,15 +163,11 @@ class SlideruleActivity(activity.Activity):
             self.sr.K.spr.move_relative((Doffset, 0))
             self.sr.S.spr.move_relative((Doffset, 0))
             self.sr.T.spr.move_relative((Doffset, 0))
+            self.sr.CI.spr.move_relative((Doffset, 0))
         if 'C' in self.metadata:
             self.sr.C.spr.move_relative((int(self.metadata['C']), 0))
             self.sr.C_tab_left.spr.move_relative((int(self.metadata['C']), 0))
             self.sr.C_tab_right.spr.move_relative((int(self.metadata['C']) + \
-                                                   SWIDTH - 100, 0))
-        if 'CI' in self.metadata:
-            self.sr.CI.spr.move_relative((int(self.metadata['CI']), 0))
-            self.sr.CI_tab_left.spr.move_relative((int(self.metadata['CI']), 0))
-            self.sr.CI_tab_right.spr.move_relative((int(self.metadata['CI']) + \
                                                    SWIDTH - 100, 0))
         if 'R' in self.metadata:
             self.sr.R.spr.move_relative((int(self.metadata['R']), 0))
@@ -193,20 +186,16 @@ class SlideruleActivity(activity.Activity):
                 self._show_s()
             elif self.sr.slider_on_top == 'T':
                 self._show_t()
-            elif self.sr.slider_on_top == 'CI':
-                self._show_ci()
             else:
                 self._show_c()
-            self.sr.update_results_label()
-            self.sr.update_slider_labels()
+        else:
+            self._show_c()
 
     def write_file(self, file_path):
         """ Write the slider positions to the Journal """
         self.metadata['slider'] = self.sr.slider_on_top
         x, y = self.sr.C.spr.get_xy()
         self.metadata['C'] = str(x)
-        x, y = self.sr.CI.spr.get_xy()
-        self.metadata['CI'] = str(x)
         x, y = self.sr.D.spr.get_xy()
         self.metadata['D'] = str(x)
         x, y = self.sr.R.spr.get_xy()
@@ -217,144 +206,179 @@ class SlideruleActivity(activity.Activity):
         self.metadata['L2'] = str(x)
 
     def _hide_all(self):
+        self._hide_top()
+        self._hide_bottom()
+
+    def _hide_top(self):
         self.sr.A.spr.hide()
         self.sr.K.spr.hide()
         self.sr.S.spr.hide()
         self.sr.T.spr.hide()
         self.sr.C.spr.hide()
-        self.sr.CI.spr.hide()
         self.sr.C_tab_left.spr.hide()
         self.sr.C_tab_right.spr.hide()
-        self.sr.CI_tab_left.spr.hide()
-        self.sr.CI_tab_right.spr.hide()
-        self.sr.D.spr.hide()
-        self.sr.L.spr.hide()
         self.sr.L2.spr.hide()
         self.sr.L2_tab_left.spr.hide()
         self.sr.L2_tab_right.spr.hide()
 
-    def _show_c(self):
+    def _hide_bottom(self):
+        self.sr.D.spr.hide()
+        self.sr.CI.spr.hide()
+        self.sr.L.spr.hide()
+
+    def _show(self, top, bottom, function):
         self._hide_all()
-        self.t_button.set_icon('Con')
-        self.b_button.set_icon('Don')
-        self._top_combo.set_active(_TOP_SCALES.index(_C))
-        self._bot_combo.set_active(_BOT_SCALES.index(_D))
-        self._function_combo.set_active(_FUNCTIONS.index(_FC))
-        self.sr.C.draw_slider(1000)
-        self.sr.C_tab_left.draw_slider(1000)
-        self.sr.C_tab_right.draw_slider(1000)
-        self.sr.D.draw_slider(1000)
-        self.sr.slider_on_top = 'C'
+        self._top_combo.set_active(_TOP_SCALES.index(top))
+        self._set_top_slider()
+        self._bottom_combo.set_active(_BOT_SCALES.index(bottom))
+        self._set_bottom_slider()
+        self._function_combo.set_active(_FUNCTIONS.index(function))
         self.sr.update_slider_labels()
         self.sr.update_results_label()
+
+    def _set_top_slider(self):
+        """ Move the top slider onto top layer """
+        self._hide_top()
+        if self.sr.slider_on_top == 'C':
+            self.sr.C.draw_slider(1000)
+            self.sr.C_tab_left.draw_slider(1000)
+            self.sr.C_tab_right.draw_slider(1000)
+        elif self.sr.slider_on_top == 'A':
+            self.sr.A.draw_slider(1000)
+        elif self.sr.slider_on_top == 'K':
+            self.sr.K.draw_slider(1000)
+        elif self.sr.slider_on_top == 'S':
+            self.sr.S.draw_slider(1000)
+        elif self.sr.slider_on_top == 'T':
+            self.sr.T.draw_slider(1000)
+        elif self.sr.slider_on_top == 'L2':
+            self.sr.L2.draw_slider(1000)
+            self.sr.L2_tab_left.draw_slider(1000)
+            self.sr.L2_tab_right.draw_slider(1000)
+        self.top_button.set_icon(self.sr.slider_on_top + 'on')
+
+    def _set_bottom_slider(self):
+        """ Move the bottom slider onto top layer """
+        self._hide_bottom()
+        if self.sr.slider_on_bottom == 'D':
+            self.sr.D.draw_slider(1000)
+        elif self.sr.slider_on_bottom == 'CI':
+            self.sr.CI.draw_slider(1000)
+        elif self.sr.slider_on_bottom == 'L':
+            self.sr.L.draw_slider(1000)
+        self.bottom_button.set_icon(self.sr.slider_on_bottom + 'on')
+
+    def _predefined_function(self):
+        """ Return the predefined function that matches the sliders """
+        if not hasattr(self, 'sr'):
+            return None
+        if self.sr.slider_on_top == 'C' and self.sr.slider_on_bottom == 'D':
+            return self._show_c
+        elif self.sr.slider_on_top == 'C' and self.sr.slider_on_bottom == 'CI':
+            return self._show_ci
+        elif self.sr.slider_on_top == 'A' and self.sr.slider_on_bottom == 'D':
+            return self._show_a
+        elif self.sr.slider_on_top == 'K' and self.sr.slider_on_bottom == 'D':
+            return self._show_k
+        elif self.sr.slider_on_top == 'S' and self.sr.slider_on_bottom == 'D':
+            return self._show_s
+        elif self.sr.slider_on_top == 'T' and self.sr.slider_on_bottom == 'D':
+            return self._show_t
+        elif self.sr.slider_on_top == 'L2' and self.sr.slider_on_bottom == 'L':
+            return self._show_l
+        return None
+
+    # Predefined functions
+    def _show_c(self):
+        """ basic log scale """
+        self.sr.slider_on_top = 'C'
+        self.sr.slider_on_bottom = 'D'
+        self._show(_C, _D, _FC)
+        self.sr.D.draw_slider(1000)
 
     def _show_ci(self):
-        self._hide_all()
-        self.t_button.set_icon('CIon')
-        self.b_button.set_icon('Don')
-        self._top_combo.set_active(_TOP_SCALES.index(_CI))
-        self._bot_combo.set_active(_BOT_SCALES.index(_D))
-        self._function_combo.set_active(_FUNCTIONS.index(_FCI))
+        """ Inverse scale """
+        self.sr.slider_on_top = 'C'
+        self.sr.slider_on_bottom = 'CI'
+        self._show(_C, _CI, _FCI)
         self.sr.CI.draw_slider(1000)
-        self.sr.CI_tab_left.draw_slider(1000)
-        self.sr.CI_tab_right.draw_slider(1000)
-        self.sr.D.draw_slider(1000)
-        self.sr.slider_on_top = 'CI'
-        self.sr.update_slider_labels()
-        self.sr.update_results_label()
 
     def _show_a(self):
-        self._hide_all()
-        self.t_button.set_icon('Aon')
-        self.b_button.set_icon('Don')
-        self._top_combo.set_active(_TOP_SCALES.index(_A))
-        self._bot_combo.set_active(_BOT_SCALES.index(_D))
-        self._function_combo.set_active(_FUNCTIONS.index(_FA))
-        self.sr.A.draw_slider(1000)
-        self.sr.D.draw_slider(1000)
+        """ two-decade scale """
         self.sr.slider_on_top = 'A'
-        self.sr.update_slider_labels()
-        self.sr.update_results_label()
+        self.sr.slider_on_bottom = 'D'
+        self._show(_A, _D, _FA)
+        self.sr.D.draw_slider(1000)
 
     def _show_k(self):
-        self._hide_all()
-        self.t_button.set_icon('Kon')
-        self.b_button.set_icon('Don')
-        self._top_combo.set_active(_TOP_SCALES.index(_K))
-        self._bot_combo.set_active(_BOT_SCALES.index(_D))
-        self._function_combo.set_active(_FUNCTIONS.index(_FK))
-        self.sr.K.draw_slider(1000)
-        self.sr.D.draw_slider(1000)
+        """ three-decade scale """
         self.sr.slider_on_top = 'K'
-        self.sr.update_slider_labels()
-        self.sr.update_results_label()
+        self.sr.slider_on_bottom = 'D'
+        self._show(_K, _D, _FK)
+        self.sr.D.draw_slider(1000)
 
     def _show_s(self):
-        self._hide_all()
-        self.t_button.set_icon('Son')
-        self.b_button.set_icon('Don')
-        self._top_combo.set_active(_TOP_SCALES.index(_S))
-        self._bot_combo.set_active(_BOT_SCALES.index(_D))
-        self._function_combo.set_active(_FUNCTIONS.index(_FS))
-        self.sr.S.draw_slider(1000)
-        self.sr.D.draw_slider(1000)
+        """ Sine """
         self.sr.slider_on_top = 'S'
-        self.sr.update_slider_labels()
-        self.sr.update_results_label()
+        self.sr.slider_on_bottom = 'D'
+        self._show(_S, _D, _FS)
+        self.sr.D.draw_slider(1000)
 
     def _show_t(self):
-        self._hide_all()
-        self.t_button.set_icon('Ton')
-        self.b_button.set_icon('Don')
-        self._top_combo.set_active(_TOP_SCALES.index(_T))
-        self._bot_combo.set_active(_BOT_SCALES.index(_D))
-        self._function_combo.set_active(_FUNCTIONS.index(_FT))
-        self.sr.T.draw_slider(1000)
-        self.sr.D.draw_slider(1000)
+        """ Tangent """
         self.sr.slider_on_top = 'T'
-        self.sr.update_slider_labels()
-        self.sr.update_results_label()
+        self.sr.slider_on_bottom = 'D'
+        self._show(_T, _D, _FT)
+        self.sr.D.draw_slider(1000)
 
     def _show_l(self):
-        self._hide_all()
-        self.t_button.set_icon('Lon')
-        self.b_button.set_icon('Lon')
-        self._top_combo.set_active(_TOP_SCALES.index(_L))
-        self._bot_combo.set_active(_BOT_SCALES.index(_L2))
-        self._function_combo.set_active(_FUNCTIONS.index(_FL))
+        """ Linear scale """
+        self.sr.slider_on_top = 'L2'
+        self.sr.slider_on_bottom = 'L'
+        self._show(_L2, _L, _FL)
         self.sr.L.draw_slider(1000)
-        self.sr.L2.draw_slider(1000)
-        self.sr.L2_tab_left.draw_slider(1000)
-        self.sr.L2_tab_right.draw_slider(1000)
-        self.sr.slider_on_top = 'L'
-        self.sr.update_slider_labels()
-        self.sr.update_results_label()
+
+    def _function_combo_cb(self, arg=None):
+        """ Read value from predefined-functions combo box """
+        _functions_dictionary = {_FA: self._show_a, _FC: self._show_c,
+                                 _FK: self._show_k, _FS: self._show_s,
+                                 _FT: self._show_t, _FL: self._show_l,
+                                 _FCI: self._show_ci}
+        try:
+            _functions_dictionary[
+                _FUNCTIONS[self._function_combo.get_active()]]()
+        except KeyError:
+            # 'user defined'
+            pass
 
     def _top_combo_cb(self, arg=None):
         """ Read value from top combo box """
-        top_dictionary = {_A: self._show_a, _C: self._show_c, _K: self._show_k,
-                          _S: self._show_s, _T: self._show_t, _L: self._show_l, 
-                          _CI: self._show_ci} 
-        if hasattr(self, '_top_combo'):
-            top_dictionary[_TOP_SCALES[self._top_combo.get_active()]]()
+        _top_dictionary = {_C: 'C', _A: 'A', _K: 'K', _S: 'S', _T: 'T',
+                           _L2: 'L2'}
+        self.sr.slider_on_top = _top_dictionary[
+            _TOP_SCALES[self._top_combo.get_active()]]
+        function = self._predefined_function()
+        if function is not None:
+            function()
         else:
-            _logger.debug("no top_combo yet")
+            self._function_combo.set_active(_FUNCTIONS.index(_UD))
+            self._set_top_slider()
+            self.sr.update_slider_labels()
+            self.sr.update_results_label()
 
-    def _fun_combo_cb(self, arg=None):
-        """ Read value from function combo box """
-        fun_dictionary = {_FA: self._show_a, _FC: self._show_c,
-                          _FK: self._show_k, _FS: self._show_s,
-                          _FT: self._show_t, _FL: self._show_l, 
-                          _FCI: self._show_ci} 
-        if hasattr(self, '_function_combo'):
-            fun_dictionary[_FUNCTIONS[self._function_combo.get_active()]]()
+    def _bottom_combo_cb(self, arg=None):
+        """ Read value from bottom combo box """
+        _bottom_dictionary = {_D: 'D', _CI: 'CI', _L: 'L'}
+        self.sr.slider_on_bottom = _bottom_dictionary[
+            _BOT_SCALES[self._bottom_combo.get_active()]]
+        function = self._predefined_function()
+        if function is not None:
+            function()
         else:
-            _logger.debug("no function_combo yet")
-
-
-    def _bot_combo_cb(self, arg=None):
-        #TODO: reset function combo
-        return
+            self._function_combo.set_active(_FUNCTIONS.index(_UD))
+            self._set_bottom_slider()
+            self.sr.update_slider_labels()
+            self.sr.update_results_label()
 
     def _dummy_cb(self, arg=None):
         return
@@ -386,17 +410,19 @@ class SlideruleActivity(activity.Activity):
             toolbar = project_toolbar
 
         # Add the buttons to the toolbars
-        self.t_button = _button_factory('Con', _('top scale'), self._dummy_cb,
-                                        toolbar)
+        self.top_button = _button_factory('Con', _('top scale'),
+                                          self._dummy_cb, toolbar)
         self._top_combo = _combo_factory(_TOP_SCALES, _C, _('top scale'),
                                          self._top_combo_cb, toolbar)
-        self.b_button = _button_factory('Don', _('bottom scale'),
-                                        self._dummy_cb, toolbar)
-        self._bot_combo = _combo_factory(_BOT_SCALES, _D, _('bot scale'),
-                                         self._bot_combo_cb, toolbar)
+        _separator_factory(toolbar, visible=False)
+        _separator_factory(toolbar, visible=False)
+        self.bottom_button = _button_factory('Don', _('bottom scale'),
+                                             self._dummy_cb, toolbar)
+        self._bottom_combo = _combo_factory(_BOT_SCALES, _D, _('bot scale'),
+                                         self._bottom_combo_cb, toolbar)
         _separator_factory(toolbar)
         self._function_combo = _combo_factory(_FUNCTIONS, _FC, _('function'),
-                                              self._fun_combo_cb, toolbar)
+                                              self._function_combo_cb, toolbar)
 
         if _have_toolbox:
             _separator_factory(toolbox.toolbar, False, True)
