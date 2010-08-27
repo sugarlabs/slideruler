@@ -1,3 +1,8 @@
+14
+
+* switched from buttons to combo boxes in order to enable user-definable combinations
+* code reorder in order to accomodate user-definable combinations
+
 13
 
 * added K (cube), S (sine), and T (tangent) scales
