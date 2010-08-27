@@ -21,6 +21,14 @@ import os
 
 from window import SlideRule
 
+_FA = _('square/square root')
+_FC = _('multiply/divide')
+_FCI = _('inverse')
+_FK = _('cube/cube root')
+_FS = _('sin, asin')
+_FT = _('tan, atan')
+_FL = _('add/subtract')
+
 
 class SlideruleMain:
 
@@ -34,31 +42,31 @@ class SlideruleMain:
         self.win.connect('delete_event', lambda w,e: gtk.main_quit())
 
         menu = gtk.Menu()
-        menu_items = gtk.MenuItem(_("L"))
+        menu_items = gtk.MenuItem(_("L") + ' ' + _FL)
         menu.append(menu_items)
         menu_items.connect("activate", self._l_cb)
         menu_items.show()
-        menu_items = gtk.MenuItem(_("C"))
+        menu_items = gtk.MenuItem(_("C") + ' ' + _FC)
         menu.append(menu_items)
         menu_items.connect("activate", self._c_cb)
         menu_items.show()
-        menu_items = gtk.MenuItem(_("CI"))
+        menu_items = gtk.MenuItem(_("CI") + ' ' + _FCI)
         menu.append(menu_items)
         menu_items.connect("activate", self._ci_cb)
         menu_items.show()
-        menu_items = gtk.MenuItem(_("A"))
+        menu_items = gtk.MenuItem(_("A") + ' ' + _FA)
         menu.append(menu_items)
         menu_items.connect("activate", self._a_cb)
         menu_items.show()
-        menu_items = gtk.MenuItem(_("K"))
+        menu_items = gtk.MenuItem(_("K") + ' ' + _FK)
         menu.append(menu_items)
         menu_items.connect("activate", self._k_cb)
         menu_items.show()
-        menu_items = gtk.MenuItem(_("S"))
+        menu_items = gtk.MenuItem(_("S") + ' ' + _FS)
         menu.append(menu_items)
         menu_items.connect("activate", self._s_cb)
         menu_items.show()
-        menu_items = gtk.MenuItem(_("T"))
+        menu_items = gtk.MenuItem(_("T") + ' ' + _FT)
         menu.append(menu_items)
         menu_items.connect("activate", self._t_cb)
         menu_items.show()
@@ -97,8 +105,6 @@ class SlideruleMain:
         self.sr.C_tab_left.spr.hide()
         self.sr.C_tab_right.spr.hide()
         self.sr.CI.spr.hide()
-        self.sr.CI_tab_left.spr.hide()
-        self.sr.CI_tab_right.spr.hide()
         self.sr.L.spr.hide()
         self.sr.L2.spr.hide()
         self.sr.L2_tab_left.spr.hide()
@@ -114,6 +120,7 @@ class SlideruleMain:
         self.sr.C_tab_right.draw_slider(1000)
         self.sr.D.draw_slider(1000)
         self.sr.slider_on_top = "C"
+        self.sr.slider_on_bottom = "D"
         self.sr.update_slider_labels()
         self.sr.update_results_label()
         return True
@@ -121,10 +128,9 @@ class SlideruleMain:
     def _ci_cb(self, widget):
         self.hide_all()
         self.sr.CI.draw_slider(1000)
-        self.sr.CI_tab_left.draw_slider(1000)
-        self.sr.CI_tab_right.draw_slider(1000)
-        self.sr.D.draw_slider(1000)
-        self.sr.slider_on_top = "CI"
+        self.sr.C.draw_slider(1000)
+        self.sr.slider_on_bottom = "CI"
+        self.sr.slider_on_top = "C"
         self.sr.update_slider_labels()
         self.sr.update_results_label()
         return True
@@ -134,6 +140,7 @@ class SlideruleMain:
         self.sr.A.draw_slider(1000)
         self.sr.D.draw_slider(1000)
         self.sr.slider_on_top = "A"
+        self.sr.slider_on_bottom = "D"
         self.sr.update_slider_labels()
         self.sr.update_results_label()
         return True
@@ -143,6 +150,7 @@ class SlideruleMain:
         self.sr.K.draw_slider(1000)
         self.sr.D.draw_slider(1000)
         self.sr.slider_on_top = "K"
+        self.sr.slider_on_bottom = "D"
         self.sr.update_slider_labels()
         self.sr.update_results_label()
         return True
@@ -152,6 +160,7 @@ class SlideruleMain:
         self.sr.S.draw_slider(1000)
         self.sr.D.draw_slider(1000)
         self.sr.slider_on_top = "S"
+        self.sr.slider_on_bottom = "D"
         self.sr.update_slider_labels()
         self.sr.update_results_label()
         return True
@@ -161,6 +170,7 @@ class SlideruleMain:
         self.sr.T.draw_slider(1000)
         self.sr.D.draw_slider(1000)
         self.sr.slider_on_top = "T"
+        self.sr.slider_on_bottom = "D"
         self.sr.update_slider_labels()
         self.sr.update_results_label()
         return True
@@ -171,7 +181,8 @@ class SlideruleMain:
         self.sr.L2.draw_slider(1000)
         self.sr.L2_tab_left.draw_slider(1000)
         self.sr.L2_tab_right.draw_slider(1000)
-        self.sr.slider_on_top = "L"
+        self.sr.slider_on_top = "L2"
+        self.sr.slider_on_bottom = "L"
         self.sr.update_slider_labels()
         self.sr.update_results_label()
         return True
