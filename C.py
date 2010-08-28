@@ -11,99 +11,96 @@
 # Free Software Foundation, Inc., 59 Temple Place - Suite 330,
 # Boston, MA 02111-1307, USA.
 
-from constants import *
+from constants import SWIDTH, SHEIGHT, OFFSET, SCALE, HTOP1, HTOP2, HTOP3
 import math
 
-# header
-print "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>"
-print "<!-- Created with Emacs -->"
-print "<svg"
-print "   xmlns:svg=\"http://www.w3.org/2000/svg\""
-print "   xmlns=\"http://www.w3.org/2000/svg\""
-print "   version=\"1.0\""
-print "   width=\"" + str(SWIDTH) + "\""
-print "   height=\"" + str(SHEIGHT) + "\">"
-print "  <g>"
 
-print "   <path"
-print "       d=\"M 0.0,30 L 2400,30\""
-print "       style=\"fill:none;stroke:#ffffff;stroke-width:60px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1\" />"
+htop1 = HTOP1
+htop2 = HTOP2
+htop3 = HTOP3
+offset1 = 5
+offset2 = 7
+offset3 = -12
 
-print "  <text style=\"font-size:12px;fill:#000000;\">"
-print "      <tspan"
-print "       x=\"5\""
-print "       y=\"32\""
-print "       style=\"font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;\">C</tspan></text>"
+def mark(offset, height3, height2, height1, string=None):
+    ln = float(int((offset * SCALE + OFFSET) * 10) / 10.)
+    if string is not None:
+        print '  <text style="font-size:12px;fill:#000000;">'
+        print '      <tspan'
+        print '       x="%f"' % (ln)
+        print '       y="%d"' % (height3)
+        print '       style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">%s</tspan></text>' % (string)
+    print '  <path'
+    print '       d="M %f,%d,%f,%d"' % (ln, height1, ln, height2)
+    print '       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />'
 
-ln = str(float(int( (math.log(math.pi)*SCALE + OFFSET)*10 )/10.))
-h1 = "38"; h2 = "59"; h3 = "35"
-print "  <text style=\"font-size:12px;fill:#000000;\">"
-print "      <tspan"
-print "       x=\"" + str(ln) + "\""
-print "       y=\"" + h3 + "\""
-print "       style=\"font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;\">π</tspan></text>"
-print "   <path"
-print "       d=\"M " + ln + "," + h1 + " L " + ln + "," + h2 + "\""
-print "       style=\"fill:none;stroke:#FF0000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1\" />"
 
-ln = str(float(int( (math.log(math.e)*SCALE + OFFSET)*10 )/10.))
-h1 = "38"; h2 = "59"; h3 = "35"
-print "  <text style=\"font-size:12px;fill:#000000;\">"
-print "      <tspan"
-print "       x=\"" + str(ln) + "\""
-print "       y=\"" + h3 + "\""
-print "       style=\"font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;\">e</tspan></text>"
-print "   <path"
-print "       d=\"M " + ln + "," + h1 + " L " + ln + "," + h2 + "\""
-print "       style=\"fill:none;stroke:#FF0000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1\" />"
+def special_mark(offset, height3, height2, height1, string):
+    ln = float(int((offset * SCALE + OFFSET) * 10) / 10.)
+    print '  <text style="font-size:12px;fill:#0000ff;">'
+    print '      <tspan'
+    print '       x="%f"' % (ln)
+    print '       y="%d"' % (height3)
+    print '       style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">%s</tspan></text>' % (string)
+    print '  <path'
+    print '       d="M %f,%d,%f,%d"' % (ln, height1, ln, height2)
+    print '       style="fill:none;stroke:#0000ff;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />'
+
+
+def header(name):
+    print '<?xml version="1.0" encoding="UTF-8" standalone="no"?>'
+    print '<!-- Created with Emacs -->'
+    print '<svg'
+    print '   xmlns:svg="http://www.w3.org/2000/svg"'
+    print '   xmlns="http://www.w3.org/2000/svg"'
+    print '   version="1.0"'
+    print '   width="%s"' % (SWIDTH)
+    print '   height="%s">' % (SHEIGHT)
+    print '  <g>'
+    print '  <path'
+    print '       d="M 0,0 L 0,60 L 2400,60 L 2400,0 Z"'
+    print '       style="fill:#ffffff;stroke:none;stroke-width:0px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />'
+    print '  <text style="font-size:12px;fill:#000000;">'
+    print '      <tspan'
+    print '       x="5"'
+    print '       y="32"'
+    print '       style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">%s</tspan></text>' % (name)
+
+
+def footer():
+    print '  </g>'
+    print '</svg>'
+
+
+header('C')
 
 for i in range(100,200):
-    ln = str(float(int( (math.log(i/100.)*SCALE + OFFSET)*10 )/10.))
-    if int((i/10)*10) == i:
-        h1 = "38"; h2 = "59"; h3 = "35"
-        print "  <text style=\"font-size:12px;fill:#000000;\">"
-        print "      <tspan"
-        print "       x=\"" + str(ln) + "\""
-        print "       y=\"" + h3 + "\""
-        print "       style=\"font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;\">" + str(float(int(i)*10/SCALE)) + "</tspan></text>"
-    elif int((i/5)*5) == i:
-        h1 = "40"; h2 = "59";
+    if int((i / 10) * 10) == i:
+        mark(math.log(i / 100.), htop3, htop2, htop1,
+             str(float(int(i) * 10 / SCALE)))
+    elif int((i / 5) * 5) == i:
+        mark(math.log(i / 100.), htop3, htop2, htop1 + offset1)
     else:
-        h1 = "42"; h2 = "59";
-    print "   <path"
-    print "       d=\"M " + ln + "," + h1 + " L " + ln + "," + h2 + "\""
-    print "       style=\"fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1\" />"
-for i in range(200,500,2):
-    ln = str(float(int( (math.log(i/100.)*SCALE + OFFSET)*10 )/10.))
-    if int((i/10)*10) == i:
-        h1 = "38"; h2 = "59"; h3 = "35"
-        if int((i/100)*100) == i:
-            print "  <text style=\"font-size:12px;fill:#000000;\">"
-            print "      <tspan"
-            print "       x=\"" + str(ln) + "\""
-            print "       y=\"" + h3 + "\""
-            print "       style=\"font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;\">" + str(float(int(i)*10/SCALE)) + "</tspan></text>"
-    else:
-        h1 = "40"; h2 = "59";
-    print "   <path"
-    print "       d=\"M " + ln + "," + h1 + " L " + ln + "," + h2 + "\""
-    print "       style=\"fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1\" />"
-for i in range(500,1005,5):
-    ln = str(float(int( (math.log(i/100.)*SCALE + OFFSET)*10 )/10.))
-    if int((i/10)*10) == i:
-        h1 = "38"; h2 = "59"; h3 = "35"
-        if int((i/100)*100) == i:
-            print "  <text style=\"font-size:12px;fill:#000000;\">"
-            print "      <tspan"
-            print "       x=\"" + str(ln) + "\""
-            print "       y=\"" + h3 + "\""
-            print "       style=\"font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;\">" + str(float(int(i)*10/SCALE)) + "</tspan></text>"
-    else:
-        h1 = "40"; h2 = "59";
-    print "   <path"
-    print "       d=\"M " + ln + "," + h1 + " L " + ln + "," + h2 + "\""
-    print "       style=\"fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1\" />"
+        mark(math.log(i / 100.), htop3, htop2, htop1 + offset2)
 
-# footer
-print "  </g>"
-print "</svg>"
+for i in range(200,400,2):
+    if int((i / 10)*10) == i:
+        mark(math.log(i / 100.), htop3, htop2, htop1,
+             str(float(int(i) * 10 / SCALE)))
+    else:
+        mark(math.log(i/100.), htop3, htop2, htop1 + offset1)
+
+for i in range(400,1005,5):
+    if int((i / 10)* 10) == i:
+        if int((i / 50) * 50) == i:
+            mark(math.log(i / 100.), htop3, htop2, htop1,
+                 str(float(int(i) * 10 / SCALE)))
+        else:
+            mark(math.log(i / 100.), htop3, htop2, htop1)
+    else:
+        mark(math.log(i / 100.), htop3, htop2, htop1 + offset1)
+
+special_mark(math.log(math.pi), htop3 + offset3, htop2, htop1, 'π')
+special_mark(math.log(math.e), htop3 + offset3, htop2, htop1, 'e')
+
+footer()
