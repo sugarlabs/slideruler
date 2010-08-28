@@ -22,14 +22,11 @@ from sprites import *
 # class for defining individual slider parts
 #
 class Slider:
-    def __init__(self, sprites, path, name, x, y, w, h, name_label=True):
+    """ Create a sprite for a slider """
+    def __init__(self, sprites, path, name, x, y, w, h):
         # create sprite from svg file
         self.spr = Sprite(sprites, x, y,
                           self.load_image(path,name,w,h))
-        if name_label is True:
-            self.spr.label = name
-        else:
-            self.spr.label = "1.0"
 
     def draw_slider(self, layer=1000):
         self.spr.set_layer(layer)
@@ -39,3 +36,26 @@ class Slider:
         return gtk.gdk.pixbuf_new_from_file_at_size(
             os.path.join(path+name+'.svg'), int(w), int(h))
 
+class Tab:
+    def __init__(self, sprites, path, name, x, y, w, h):
+        # create sprite from svg file
+        self.spr = Sprite(sprites, x, y,
+                          self.load_image(path,name,w,h))
+        self.spr.label = "1.0"
+
+    def draw_slider(self, layer=1000):
+        self.spr.set_layer(layer)
+        self.spr.draw()
+
+    def load_image(self, path, name, w, h):
+        return gtk.gdk.pixbuf_new_from_file_at_size(
+            os.path.join(path+name+'.svg'), int(w), int(h))
+
+
+def svg_str_to_pixbuf(svg_string):
+    """ Load pixbuf from SVG string. """
+    pl = gtk.gdk.PixbufLoader('svg')
+    pl.write(svg_string)
+    pl.close()
+    pixbuf = pl.get_pixbuf()
+    return pixbuf

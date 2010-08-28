@@ -25,8 +25,8 @@ try:
 except:
     GRID_CELL_SIZE = 0
 
-from sprite_factory import *
-from sprites import *
+from sprite_factory import Slider, Tab
+from sprites import Sprites
 
 
 class SlideRule():
@@ -62,17 +62,12 @@ class SlideRule():
         self.scale = 1
 
         # Open the sliders
-        if self.sugar:
-            self.results_label = Slider(self.sprites, self.path, 'label',
-                                        int((self.width - 600) / 2),
-                                        int(self.height - SHEIGHT),
-                                        600, SHEIGHT)
-        else:
-            self.results_label = Slider(self.sprites, self.path, 'label',
-                                        int((self.width - 600) / 2),
-                                        int(self.height - 4 * SHEIGHT),
-                                        600, SHEIGHT)
         y = 50
+        self.results_label = Slider(self.sprites, self.path, 'label',
+                                        int((self.width - 600) / 2),
+                                        y + 4 * SHEIGHT,
+                                        600, SHEIGHT)
+
         self.A = Slider(self.sprites, self.path, 'A',
                         0, y + 60, SWIDTH, SHEIGHT)
         self.K = Slider(self.sprites, self.path, 'K',
@@ -93,22 +88,20 @@ class SlideRule():
         self.D = Slider(self.sprites, self.path, 'D',
                         0, y + 2 * SHEIGHT, SWIDTH, SHEIGHT)
 
-        self.C_tab_left = Slider(self.sprites, self.path, 'tab',
-                                 0, y + 3 * SHEIGHT, 100, SHEIGHT, False)
-        self.C_tab_right = Slider(self.sprites, self.path, 'tab',
-                                  SWIDTH-100, y + 3 * SHEIGHT, 100, SHEIGHT,
-                                  False)
-        self.L2_tab_left = Slider(self.sprites, self.path, 'tab',
-                                  0, y + 3 * SHEIGHT, 100, SHEIGHT, False)
-        self.L2_tab_right = Slider(self.sprites, self.path, 'tab',
-                                   SWIDTH-100, y + 3 * SHEIGHT, 100, SHEIGHT,
-                                   False)
+        self.C_tab_left = Tab(self.sprites, self.path, 'tab',
+                              0, y + 3 * SHEIGHT, 100, SHEIGHT)
+        self.C_tab_right = Tab(self.sprites, self.path, 'tab',
+                               SWIDTH-100, y + 3 * SHEIGHT, 100, SHEIGHT)
+        self.L2_tab_left = Tab(self.sprites, self.path, 'tab',
+                               0, y + 3 * SHEIGHT, 100, SHEIGHT)
+        self.L2_tab_right = Tab(self.sprites, self.path, 'tab',
+                                SWIDTH-100, y + 3 * SHEIGHT, 100, SHEIGHT)
         self.R = Slider(self.sprites, self.path, 'reticule',
-                        0, y + SHEIGHT, 100, 2 * SHEIGHT, False)
-        self.R_tab_top = Slider(self.sprites, self.path, 'tab',
-                                0, y, 100, 60, False)
-        self.R_tab_bot = Slider(self.sprites, self.path, 'tab',
-                                0, y + 3 * SHEIGHT, 100, SHEIGHT, False)
+                        0, y + SHEIGHT, 100, 2 * SHEIGHT)
+        self.R_tab_top = Tab(self.sprites, self.path, 'tab',
+                             0, y, 100, 60)
+        self.R_tab_bot = Tab(self.sprites, self.path, 'tab',
+                             0, y + 3 * SHEIGHT, 100, SHEIGHT)
 
         self.slider_on_top = 'C'
         self.slider_on_bottom = 'D'
