@@ -50,13 +50,13 @@ from constants import SWIDTH
 
 _FA = _('square/square root')
 _FC = _('multiply/divide')
-_FDI = _('inverse')
+_FCI = _('divide/multiply')
 _FK = _('cube/cube root')
 _FS = _('sin, asin')
 _FT = _('tan, atan')
 _FL = _('add/subtract')
 _UD = _('user defined')
-_FUNCTIONS = [_FL, _FC, _FDI, _FA, _FK, _FS, _FT, _UD]
+_FUNCTIONS = [_FL, _FC, _FCI, _FA, _FK, _FS, _FT, _UD]
 
 _A = _('log²')
 _C = _('log')
@@ -314,7 +314,7 @@ class SlideruleActivity(activity.Activity):
             return None
         if self.sr.slider_on_top == 'C' and self.sr.slider_on_bottom == 'D':
             return self._show_c
-        elif self.sr.slider_on_top == 'C' and self.sr.slider_on_bottom == 'DI':
+        elif self.sr.slider_on_top == 'CI' and self.sr.slider_on_bottom == 'D':
             return self._show_ci
         elif self.sr.slider_on_top == 'A' and self.sr.slider_on_bottom == 'D':
             return self._show_a
@@ -338,10 +338,10 @@ class SlideruleActivity(activity.Activity):
 
     def _show_ci(self):
         """ Inverse scale """
-        self.sr.slider_on_top = 'C'
-        self.sr.slider_on_bottom = 'DI'
-        self._show(_C, _DI, _FDI)
-        self.sr.DI.draw_slider(1000)
+        self.sr.slider_on_top = 'CI'
+        self.sr.slider_on_bottom = 'D'
+        self._show(_CI, _D, _FCI)
+        self.sr.D.draw_slider(1000)
 
     def _show_a(self):
         """ two-decade scale """
@@ -423,7 +423,7 @@ class SlideruleActivity(activity.Activity):
         _functions_dictionary = {_FA: self._show_a, _FC: self._show_c,
                                  _FK: self._show_k, _FS: self._show_s,
                                  _FT: self._show_t, _FL: self._show_l,
-                                 _FDI: self._show_ci}
+                                 _FCI: self._show_ci}
         try:
             _functions_dictionary[
                 _FUNCTIONS[self._function_combo.get_active()]]()

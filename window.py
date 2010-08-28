@@ -392,6 +392,11 @@ class SlideRule():
                 C = str(self._calc_C())
                 DC = str(self._calc_D_results() * self.factor)
                 s = "%s × %s = %s\t\t%s / %s = %s" % (D, C, DC, DC, C, D)
+            elif self.slider_on_top == 'CI':
+                D = str(self._calc_D())
+                CI = str(self._calc_CI())
+                DCI = str(self._calc_D_results() * self.factor / 10.)
+                s = "%s / %s = %s\t\t%s × %s = %s" % (D, CI, DCI, DCI, CI, D)
         elif self.slider_on_bottom == 'L2':
             if self.slider_on_top == 'L':
                 # use ndash to display a minus sign
@@ -420,12 +425,6 @@ class SlideRule():
                 s = "%s %s %s = %s\t\t%s %s %s = %s" % (L2str, operator1, Lstr,
                                                         LLstr, LLstr,
                                                         operator2, Lstr, L2str)
-        elif self.slider_on_bottom == 'DI':
-            if self.slider_on_top == 'C':
-                DI = str(self._calc_DI())
-                C = str(self._calc_C())
-                DIC = str(self._calc_DI_results() * self.factor)
-                s = "%s / %s = %s\t\t%s × %s = %s" % (DI, C, DIC, DIC, C, DI)
         self.results_label.spr.set_label(s)
 
     # Calculate the value of individual scales
