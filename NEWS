@@ -1,6 +1,7 @@
 14
 
-* switched from buttons to combo boxes in order to enable user-definable combinations
+* switched to combo boxes in order to enable user-definable combinations
+* added button to realign slides
 * code reorder in order to accomodate user-definable combinations
 
 13
@@ -19,7 +20,6 @@
 * more verbose tooltips
 * CI (inverse) scale
 * general code cleanup
-
 
 10
 
