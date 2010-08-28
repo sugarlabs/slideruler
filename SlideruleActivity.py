@@ -154,8 +154,8 @@ class SlideruleActivity(activity.Activity):
         if 'L2' in self.metadata:
             self.sr.L2.spr.move_relative((int(self.metadata['L2']), 0))
             self.sr.L2_tab_left.spr.move_relative((int(self.metadata['L2']), 0))
-            self.sr.L2_tab_right.spr.move_relative((int(self.metadata['L2']) +\
-                                                   SWIDTH - 100, 0))
+            self.sr.L2_tab_right.spr.move_relative((int(self.metadata['L2']),
+                                                    0))
         if 'D' in self.metadata:
             Doffset = int(self.metadata['D'])
             self.sr.D.spr.move_relative((Doffset, 0))
@@ -167,8 +167,7 @@ class SlideruleActivity(activity.Activity):
         if 'C' in self.metadata:
             self.sr.C.spr.move_relative((int(self.metadata['C']), 0))
             self.sr.C_tab_left.spr.move_relative((int(self.metadata['C']), 0))
-            self.sr.C_tab_right.spr.move_relative((int(self.metadata['C']) + \
-                                                   SWIDTH - 100, 0))
+            self.sr.C_tab_right.spr.move_relative((int(self.metadata['C']), 0))
         if 'R' in self.metadata:
             self.sr.R.spr.move_relative((int(self.metadata['R']), 0))
             self.sr.R_tab_top.spr.move_relative((int(self.metadata['R']), 0))
@@ -338,6 +337,24 @@ class SlideruleActivity(activity.Activity):
         self._show(_L2, _L, _FL)
         self.sr.L.draw_slider(1000)
 
+    def _realign_cb(self, arg=None):
+        """ Realign all sliders with the D scale. """
+        dx, dy = self.sr.D.spr.get_xy()
+        cx, cy = self.sr.C.spr.get_xy()
+        lx, ly = self.sr.L2.spr.get_xy()
+        self.sr.C.spr.move((dx, cy))
+        self.sr.A.spr.move((dx, cy))
+        self.sr.K.spr.move((dx, cy))
+        self.sr.S.spr.move((dx, cy))
+        self.sr.T.spr.move((dx, cy))
+        self.sr.L2.spr.move((dx, cy))
+        self.sr.L.spr.move((dx, dy))
+        self.sr.CI.spr.move((dx, dy))
+        self.sr.C_tab_left.spr.move_relative((dx-cx, 0))
+        self.sr.C_tab_right.spr.move_relative((dx-cx, 0))
+        self.sr.L2_tab_left.spr.move_relative((dx-lx, 0))
+        self.sr.L2_tab_right.spr.move_relative((dx-lx, 0))
+
     def _function_combo_cb(self, arg=None):
         """ Read value from predefined-functions combo box """
         _functions_dictionary = {_FA: self._show_a, _FC: self._show_c,
@@ -410,19 +427,20 @@ class SlideruleActivity(activity.Activity):
             toolbar = project_toolbar
 
         # Add the buttons to the toolbars
+        self._function_combo = _combo_factory(_FUNCTIONS, _FC, _('function'),
+                                              self._function_combo_cb, toolbar)
+        _separator_factory(toolbar)
         self.top_button = _button_factory('Con', _('top scale'),
                                           self._dummy_cb, toolbar)
         self._top_combo = _combo_factory(_TOP_SCALES, _C, _('top scale'),
                                          self._top_combo_cb, toolbar)
-        _separator_factory(toolbar, visible=False)
-        _separator_factory(toolbar, visible=False)
         self.bottom_button = _button_factory('Don', _('bottom scale'),
                                              self._dummy_cb, toolbar)
         self._bottom_combo = _combo_factory(_BOT_SCALES, _D, _('bot scale'),
                                          self._bottom_combo_cb, toolbar)
-        _separator_factory(toolbar)
-        self._function_combo = _combo_factory(_FUNCTIONS, _FC, _('function'),
-                                              self._function_combo_cb, toolbar)
+        _separator_factory(toolbox.toolbar)
+        self.realign_button = _button_factory('realign', _('realign slides'),
+                                             self._realign_cb, toolbar)
 
         if _have_toolbox:
             _separator_factory(toolbox.toolbar, False, True)
