@@ -78,12 +78,14 @@ class SlideRule():
                         0, y + 60, SWIDTH, SHEIGHT)
         self.C = Slider(self.sprites, self.path, 'C',
                         0, y + 60, SWIDTH, SHEIGHT)
-        self.L2 = Slider(self.sprites, self.path, 'L2',
+        self.CI = Slider(self.sprites, self.path, 'CI',
+                        0, y + 60, SWIDTH, SHEIGHT)
+        self.L = Slider(self.sprites, self.path, 'L',
                          0, y + 60, SWIDTH, SHEIGHT)
 
-        self.CI = Slider(self.sprites, self.path, 'CI',
+        self.DI = Slider(self.sprites, self.path, 'DI',
                          0, y + 2 * SHEIGHT, SWIDTH, SHEIGHT)
-        self.L = Slider(self.sprites, self.path, 'L',
+        self.L2 = Slider(self.sprites, self.path, 'L2',
                         0, y + 2 * SHEIGHT, SWIDTH, SHEIGHT)
         self.D = Slider(self.sprites, self.path, 'D',
                         0, y + 2 * SHEIGHT, SWIDTH, SHEIGHT)
@@ -92,6 +94,10 @@ class SlideRule():
                               0, y + 3 * SHEIGHT, 100, SHEIGHT)
         self.C_tab_right = Tab(self.sprites, self.path, 'tab',
                                SWIDTH-100, y + 3 * SHEIGHT, 100, SHEIGHT)
+        self.CI_tab_left = Tab(self.sprites, self.path, 'tab',
+                               0, y + 3 * SHEIGHT, 100, SHEIGHT)
+        self.CI_tab_right = Tab(self.sprites, self.path, 'tab',
+                                SWIDTH-100, y + 3 * SHEIGHT, 100, SHEIGHT)
         self.A_tab_left = Tab(self.sprites, self.path, 'tab',
                               0, y + 3 * SHEIGHT, 100, SHEIGHT)
         self.A_tab_right = Tab(self.sprites, self.path, 'tab',
@@ -108,9 +114,9 @@ class SlideRule():
                               0, y + 3 * SHEIGHT, 100, SHEIGHT)
         self.T_tab_right = Tab(self.sprites, self.path, 'tab',
                                SWIDTH-100, y + 3 * SHEIGHT, 100, SHEIGHT)
-        self.L2_tab_left = Tab(self.sprites, self.path, 'tab',
+        self.L_tab_left = Tab(self.sprites, self.path, 'tab',
                                0, y + 3 * SHEIGHT, 100, SHEIGHT)
-        self.L2_tab_right = Tab(self.sprites, self.path, 'tab',
+        self.L_tab_right = Tab(self.sprites, self.path, 'tab',
                                 SWIDTH-100, y + 3 * SHEIGHT, 100, SHEIGHT)
 
         self.R = Slider(self.sprites, self.path, 'reticule',
@@ -131,8 +137,9 @@ class SlideRule():
         self.C.spr.set_label('')
         self.CI.spr.set_label('')
         self.D.spr.set_label('')
-        self.L.spr.set_label('')
+        self.DI.spr.set_label('')
         self.L2.spr.set_label('')
+        self.L.spr.set_label('')
 
         self.A.draw_slider(500)
         self.A_tab_left.draw_slider()
@@ -150,14 +157,17 @@ class SlideRule():
         self.C_tab_left.draw_slider()
         self.C_tab_right.draw_slider()
         self.CI.draw_slider()
+        self.CI_tab_left.draw_slider()
+        self.CI_tab_right.draw_slider()
         self.D.draw_slider()
+        self.DI.draw_slider()
         self.R_tab_bot.draw_slider()
         self.R_tab_top.draw_slider()
         self.R.draw_slider(2000)
-        self.L.draw_slider()
         self.L2.draw_slider()
-        self.L2_tab_left.draw_slider()
-        self.L2_tab_right.draw_slider()
+        self.L.draw_slider()
+        self.L_tab_left.draw_slider()
+        self.L_tab_right.draw_slider()
 
         self.update_slider_labels()
         self.update_results_label()
@@ -184,11 +194,14 @@ class SlideRule():
         x, y = map(int, event.get_coords())
         # redicule doesn't use offset
         dx = x - self.dragpos
-        if self.press in [self.D.spr, self.CI.spr, self.L.spr]:
+        if self.press in [self.D.spr, self.DI.spr, self.L2.spr]:
             self.C.spr.move_relative((dx, 0))
             self.C_tab_left.spr.move_relative((dx, 0))
             self.C_tab_right.spr.move_relative((dx, 0))
             self.CI.spr.move_relative((dx, 0))
+            self.CI_tab_left.spr.move_relative((dx, 0))
+            self.CI_tab_right.spr.move_relative((dx, 0))
+            self.DI.spr.move_relative((dx, 0))
             self.A.spr.move_relative((dx, 0))
             self.A_tab_left.spr.move_relative((dx, 0))
             self.A_tab_right.spr.move_relative((dx, 0))
@@ -201,10 +214,10 @@ class SlideRule():
             self.T.spr.move_relative((dx, 0))
             self.T_tab_left.spr.move_relative((dx, 0))
             self.T_tab_right.spr.move_relative((dx, 0))
-            self.L.spr.move_relative((dx, 0))
             self.L2.spr.move_relative((dx, 0))
-            self.L2_tab_left.spr.move_relative((dx, 0))
-            self.L2_tab_right.spr.move_relative((dx, 0))
+            self.L.spr.move_relative((dx, 0))
+            self.L_tab_left.spr.move_relative((dx, 0))
+            self.L_tab_right.spr.move_relative((dx, 0))
             self.D.spr.move_relative((dx, 0))
             self.R_tab_top.spr.move_relative((dx, 0))
             self.R_tab_bot.spr.move_relative((dx, 0))
@@ -221,6 +234,12 @@ class SlideRule():
             self.C.spr.move_relative((dx, 0))
             self.C_tab_left.spr.move_relative((dx, 0))
             self.C_tab_right.spr.move_relative((dx, 0))
+        elif self.press == self.CI.spr or \
+             self.press == self.CI_tab_left.spr or \
+             self.press == self.CI_tab_right.spr:
+            self.CI.spr.move_relative((dx, 0))
+            self.CI_tab_left.spr.move_relative((dx, 0))
+            self.CI_tab_right.spr.move_relative((dx, 0))
         elif self.press == self.A.spr or \
              self.press == self.A_tab_left.spr or \
              self.press == self.A_tab_right.spr:
@@ -245,62 +264,45 @@ class SlideRule():
             self.T.spr.move_relative((dx, 0))
             self.T_tab_left.spr.move_relative((dx, 0))
             self.T_tab_right.spr.move_relative((dx, 0))
-        elif self.press == self.L2.spr or \
-             self.press == self.L2_tab_left.spr or \
-             self.press == self.L2_tab_right.spr:
-            self.L2.spr.move_relative((dx, 0))
-            self.L2_tab_left.spr.move_relative((dx, 0))
-            self.L2_tab_right.spr.move_relative((dx, 0))
+        elif self.press == self.L.spr or \
+             self.press == self.L_tab_left.spr or \
+             self.press == self.L_tab_right.spr:
+            self.L.spr.move_relative((dx, 0))
+            self.L_tab_left.spr.move_relative((dx, 0))
+            self.L_tab_right.spr.move_relative((dx, 0))
 
         # reset drag position
         self.dragpos = x
         self.update_slider_labels()
         self.update_results_label()
 
+    def _update_top(self, function):
+        self.C_tab_left.spr.set_label(str(function()))
+        self.C_tab_right.spr.set_label(str(function()))
+        self.CI_tab_left.spr.set_label(str(function()))
+        self.CI_tab_right.spr.set_label(str(function()))
+        self.A_tab_left.spr.set_label(str(function()))
+        self.A_tab_right.spr.set_label(str(function()))
+        self.K_tab_left.spr.set_label(str(function()))
+        self.K_tab_right.spr.set_label(str(function()))
+        self.S_tab_left.spr.set_label(str(function()))
+        self.S_tab_right.spr.set_label(str(function()))
+        self.T_tab_left.spr.set_label(str(function()))
+        self.T_tab_right.spr.set_label(str(function()))
+        self.L_tab_left.spr.set_label(str(function()))
+        self.L_tab_right.spr.set_label(str(function()))
+
     def update_slider_labels(self):
         """ Based on the current alignment of the rules, calculate labels. """
         if self.slider_on_bottom == 'D':
-            self.C_tab_left.spr.set_label(str(self._calc_D()))
-            self.C_tab_right.spr.set_label(str(self._calc_D()))
-            self.A_tab_left.spr.set_label(str(self._calc_D()))
-            self.A_tab_right.spr.set_label(str(self._calc_D()))
-            self.K_tab_left.spr.set_label(str(self._calc_D()))
-            self.K_tab_right.spr.set_label(str(self._calc_D()))
-            self.S_tab_left.spr.set_label(str(self._calc_D()))
-            self.S_tab_right.spr.set_label(str(self._calc_D()))
-            self.T_tab_left.spr.set_label(str(self._calc_D()))
-            self.T_tab_right.spr.set_label(str(self._calc_D()))
-            self.L2_tab_left.spr.set_label(str(self._calc_D()))
-            self.L2_tab_right.spr.set_label(str(self._calc_D()))
+            self._update_top(self._calc_D)
             self.R_tab_bot.spr.set_label(str(self._calc_D_results()))
-        elif self.slider_on_bottom == 'CI':
-            self.C_tab_left.spr.set_label(str(self._calc_CI()))
-            self.C_tab_right.spr.set_label(str(self._calc_CI()))
-            self.A_tab_left.spr.set_label(str(self._calc_CI()))
-            self.A_tab_right.spr.set_label(str(self._calc_CI()))
-            self.K_tab_left.spr.set_label(str(self._calc_CI()))
-            self.K_tab_right.spr.set_label(str(self._calc_CI()))
-            self.S_tab_left.spr.set_label(str(self._calc_CI()))
-            self.S_tab_right.spr.set_label(str(self._calc_CI()))
-            self.T_tab_left.spr.set_label(str(self._calc_CI()))
-            self.T_tab_right.spr.set_label(str(self._calc_CI()))
-            self.L2_tab_left.spr.set_label(str(self._calc_CI()))
-            self.L2_tab_right.spr.set_label(str(self._calc_CI()))
-            self.R_tab_bot.spr.set_label(str(self._calc_CI_results()))
+        elif self.slider_on_bottom == 'DI':
+            self._update_top(self._calc_DI)
+            self.R_tab_bot.spr.set_label(str(self._calc_DI_results()))
         else:
-            self.C_tab_left.spr.set_label(str(self._calc_L()))
-            self.C_tab_right.spr.set_label(str(self._calc_L()))
-            self.A_tab_left.spr.set_label(str(self._calc_L()))
-            self.A_tab_right.spr.set_label(str(self._calc_L()))
-            self.K_tab_left.spr.set_label(str(self._calc_L()))
-            self.K_tab_right.spr.set_label(str(self._calc_L()))
-            self.S_tab_left.spr.set_label(str(self._calc_L()))
-            self.S_tab_right.spr.set_label(str(self._calc_L()))
-            self.T_tab_left.spr.set_label(str(self._calc_L()))
-            self.T_tab_right.spr.set_label(str(self._calc_L()))
-            self.L2_tab_left.spr.set_label(str(self._calc_L()))
-            self.L2_tab_right.spr.set_label(str(self._calc_L()))
-            self.R_tab_bot.spr.set_label(str(self._calc_L_results()))
+            self._update_top(self._calc_L2)
+            self.R_tab_bot.spr.set_label(str(self._calc_L2_results()))
 
         if self.slider_on_top == 'A':
             self.R_tab_top.spr.set_label(str(self._calc_A()))
@@ -310,8 +312,10 @@ class SlideRule():
             self.R_tab_top.spr.set_label(str(self._calc_S()))
         elif self.slider_on_top == 'T':
             self.R_tab_top.spr.set_label(str(self._calc_T()))
-        elif self.slider_on_top == 'L2':
-            self.R_tab_top.spr.set_label(str(self._calc_L2()))
+        elif self.slider_on_top == 'L':
+            self.R_tab_top.spr.set_label(str(self._calc_L()))
+        elif self.slider_on_top == 'CI':
+            self.R_tab_top.spr.set_label(str(self._calc_CI()))
         else:
             self.R_tab_top.spr.set_label(str(self._calc_C()))
 
@@ -355,40 +359,40 @@ class SlideRule():
                 C = str(self._calc_C())
                 DC = str(self._calc_D_results() * self.factor)
                 s = "%s × %s = %s\t\t%s / %s = %s" % (D, C, DC, DC, C, D)
-        elif self.slider_on_bottom == 'L':
-            if self.slider_on_top == 'L2':
+        elif self.slider_on_bottom == 'L2':
+            if self.slider_on_top == 'L':
                 # use ndash to display a minus sign
-                L = self._calc_L()
-                if L < 0:
-                    Lstr = "–" + str(-L)
-                else:
-                    Lstr = str(L)
-
                 L2 = self._calc_L2()
                 if L2 < 0:
+                    L2str = "–" + str(-L2)
+                else:
+                    L2str = str(L2)
+
+                L = self._calc_L()
+                if L < 0:
                     operator1 = "–"
                     operator2 = "+"
-                    L2str = str(-L2)
+                    Lstr = str(-L)
                 else:
                     operator1 = "+"
                     operator2 = "–"
-                    L2str = str(L2)
+                    Lstr = str(L)
 
-                LL2 = self._calc_L_results()
-                if LL2 < 0:
-                    LL2str = "–" + str(-LL2)
+                LL = self._calc_L2_results()
+                if LL < 0:
+                    LLstr = "–" + str(-LL)
                 else:
-                    LL2str = str(LL2)
+                    LLstr = str(LL)
 
-                s = "%s %s %s = %s\t\t%s %s %s = %s" % (Lstr, operator1, L2str,
-                                                        LL2str, LL2str,
-                                                        operator2, L2str, Lstr)
-        elif self.slider_on_bottom == 'CI':
+                s = "%s %s %s = %s\t\t%s %s %s = %s" % (L2str, operator1, Lstr,
+                                                        LLstr, LLstr,
+                                                        operator2, Lstr, L2str)
+        elif self.slider_on_bottom == 'DI':
             if self.slider_on_top == 'C':
-                CI = str(self._calc_CI())
+                DI = str(self._calc_DI())
                 C = str(self._calc_C())
-                CIC = str(self._calc_CI_results() * self.factor)
-                s = "%s / %s = %s\t\t%s × %s = %s" % (CI, C, CIC, CIC, C, CI)
+                DIC = str(self._calc_DI_results() * self.factor)
+                s = "%s / %s = %s\t\t%s × %s = %s" % (DI, C, DIC, DIC, C, DI)
         self.results_label.spr.set_label(s)
 
     # Calculate the value of individual scales
@@ -401,6 +405,16 @@ class SlideRule():
             dx = math.log(10.) * SCALE + dx
         C = math.exp(dx / SCALE)
         return float(int(C * 100) / 100.)
+
+    def _calc_CI(self):
+        """ CO scale is read from the reticule. """
+        rx, ry = self.R.spr.get_xy()
+        cx, cy = self.CI.spr.get_xy()
+        dx = rx - cx
+        if dx < 0:
+            dx = math.log(10.) * SCALE + dx
+        CI = math.exp(dx / SCALE)
+        return float(int((10./CI) * 100) / 100.)
 
     def _calc_A(self):
         """ A scale is read from the reticule. """
@@ -448,17 +462,17 @@ class SlideRule():
         K = math.exp(3 * dx / SCALE)
         return float(int(K * 10) / 10.)
 
-    def _calc_L2(self):
-        """ L2 scale is read from the reticule. """
+    def _calc_L(self):
+        """ L scale is read from the reticule. """
         rx, ry = self.R.spr.get_xy()
-        lx, ly = self.L2.spr.get_xy()
+        lx, ly = self.L.spr.get_xy()
         dx = rx - lx
         if dx < 0:
             dx = math.log(10.) * SCALE + dx
-            L2 = 10 * ((dx / SCALE) / math.log(10) - 1.0)
+            L = 10 * ((dx / SCALE) / math.log(10) - 1.0)
         else:
-            L2 = 10 * (dx / SCALE) / math.log(10)
-        return float(int(L2 * 100) / 100.)
+            L = 10 * (dx / SCALE) / math.log(10)
+        return float(int(L * 100) / 100.)
 
     def _calc_dx(self, x):
         """ Calcualate the offset between the top and bottom sliders """
@@ -466,14 +480,16 @@ class SlideRule():
             x2, y2 = self.A.spr.get_xy()
         elif self.slider_on_top == 'C':
             x2, y2 = self.C.spr.get_xy()
+        elif self.slider_on_top == 'CI':
+            x2, y2 = self.CI.spr.get_xy()
         elif self.slider_on_top == 'K':
             x2, y2 = self.K.spr.get_xy()
         elif self.slider_on_top == 'S':
             x2, y2 = self.S.spr.get_xy()
         elif self.slider_on_top == 'T':
             x2, y2 = self.T.spr.get_xy()
-        elif self.slider_on_top == 'L2':
-            x2, y2 = self.L2.spr.get_xy()
+        elif self.slider_on_top == 'L':
+            x2, y2 = self.L.spr.get_xy()
         else:
             x2 = x
         return x2 - x
@@ -490,21 +506,21 @@ class SlideRule():
         D = math.exp(dx / SCALE)
         return float(int(D * 100) / 100.)
 
-    def _calc_CI(self):
-        """ CI scale is read from the position of the top slider """
-        x, y = self.CI.spr.get_xy()
+    def _calc_DI(self):
+        """ DI scale is read from the position of the top slider """
+        x, y = self.DI.spr.get_xy()
         dx = self._calc_dx(x)
         if dx < 0:
             dx = math.log(10.) * SCALE + dx
             self.factor = 0.1
         else:
             self.factor = 1
-        CI = math.exp(dx / SCALE)
-        return float(int((10.0 / CI) * 100)) / 100.
+        DI = math.exp(dx / SCALE)
+        return float(int((10.0 / DI) * 100)) / 100.
 
-    def _calc_L(self):
+    def _calc_L2(self):
         """ L scale is read from the position of the top slider """
-        x, y = self.L.spr.get_xy()
+        x, y = self.L2.spr.get_xy()
         dx = self._calc_dx(x)
         if dx < 0:
             dx = math.log(10.) * SCALE + dx
@@ -523,18 +539,18 @@ class SlideRule():
         D = math.exp(dx / SCALE)
         return float(int(D * 100) / 100.)
 
-    def _calc_CI_results(self):
+    def _calc_DI_results(self):
         rx, ry = self.R.spr.get_xy()
-        x, y = self.CI.spr.get_xy()
+        x, y = self.DI.spr.get_xy()
         dx = rx - x
         if dx < 0:
             dx = math.log(10.) * SCALE + dx
-        CI = math.exp(dx / SCALE)
-        return float(int((10.0 / CI) * 100) / 100.)
+        DI = math.exp(dx / SCALE)
+        return float(int((10.0 / DI) * 100) / 100.)
 
-    def _calc_L_results(self):
+    def _calc_L2_results(self):
         rx, ry = self.R.spr.get_xy()
-        x, y = self.L.spr.get_xy()
+        x, y = self.L2.spr.get_xy()
         dx = rx - x
         if dx < 0:
             dx = math.log(10.) * SCALE + dx
