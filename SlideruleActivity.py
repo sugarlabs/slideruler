@@ -209,13 +209,21 @@ class SlideruleActivity(activity.Activity):
         self._hide_bottom()
 
     def _hide_top(self):
-        self.sr.A.spr.hide()
-        self.sr.K.spr.hide()
-        self.sr.S.spr.hide()
-        self.sr.T.spr.hide()
         self.sr.C.spr.hide()
         self.sr.C_tab_left.spr.hide()
         self.sr.C_tab_right.spr.hide()
+        self.sr.A.spr.hide()
+        self.sr.A_tab_left.spr.hide()
+        self.sr.A_tab_right.spr.hide()
+        self.sr.K.spr.hide()
+        self.sr.K_tab_left.spr.hide()
+        self.sr.K_tab_right.spr.hide()
+        self.sr.S.spr.hide()
+        self.sr.S_tab_left.spr.hide()
+        self.sr.S_tab_right.spr.hide()
+        self.sr.T.spr.hide()
+        self.sr.T_tab_left.spr.hide()
+        self.sr.T_tab_right.spr.hide()
         self.sr.L2.spr.hide()
         self.sr.L2_tab_left.spr.hide()
         self.sr.L2_tab_right.spr.hide()
@@ -244,12 +252,20 @@ class SlideruleActivity(activity.Activity):
             self.sr.C_tab_right.draw_slider(1000)
         elif self.sr.slider_on_top == 'A':
             self.sr.A.draw_slider(1000)
+            self.sr.A_tab_left.draw_slider(1000)
+            self.sr.A_tab_right.draw_slider(1000)
         elif self.sr.slider_on_top == 'K':
             self.sr.K.draw_slider(1000)
+            self.sr.K_tab_left.draw_slider(1000)
+            self.sr.K_tab_right.draw_slider(1000)
         elif self.sr.slider_on_top == 'S':
             self.sr.S.draw_slider(1000)
+            self.sr.S_tab_left.draw_slider(1000)
+            self.sr.S_tab_right.draw_slider(1000)
         elif self.sr.slider_on_top == 'T':
             self.sr.T.draw_slider(1000)
+            self.sr.T_tab_left.draw_slider(1000)
+            self.sr.T_tab_right.draw_slider(1000)
         elif self.sr.slider_on_top == 'L2':
             self.sr.L2.draw_slider(1000)
             self.sr.L2_tab_left.draw_slider(1000)
@@ -341,7 +357,11 @@ class SlideruleActivity(activity.Activity):
         """ Realign all sliders with the D scale. """
         dx, dy = self.sr.D.spr.get_xy()
         cx, cy = self.sr.C.spr.get_xy()
-        lx, ly = self.sr.L2.spr.get_xy()
+        ax, y = self.sr.A.spr.get_xy()
+        kx, y = self.sr.K.spr.get_xy()
+        sx, y = self.sr.S.spr.get_xy()
+        tx, y = self.sr.T.spr.get_xy()
+        lx, y = self.sr.L2.spr.get_xy()
         self.sr.C.spr.move((dx, cy))
         self.sr.A.spr.move((dx, cy))
         self.sr.K.spr.move((dx, cy))
@@ -352,8 +372,18 @@ class SlideruleActivity(activity.Activity):
         self.sr.CI.spr.move((dx, dy))
         self.sr.C_tab_left.spr.move_relative((dx-cx, 0))
         self.sr.C_tab_right.spr.move_relative((dx-cx, 0))
+        self.sr.A_tab_left.spr.move_relative((sx-ax, 0))
+        self.sr.A_tab_right.spr.move_relative((dx-ax, 0))
+        self.sr.K_tab_left.spr.move_relative((dx-kx, 0))
+        self.sr.K_tab_right.spr.move_relative((dx-kx, 0))
+        self.sr.S_tab_left.spr.move_relative((dx-sx, 0))
+        self.sr.S_tab_right.spr.move_relative((dx-sx, 0))
+        self.sr.T_tab_left.spr.move_relative((dx-tx, 0))
+        self.sr.T_tab_right.spr.move_relative((dx-tx, 0))
         self.sr.L2_tab_left.spr.move_relative((dx-lx, 0))
         self.sr.L2_tab_right.spr.move_relative((dx-lx, 0))
+        self.sr.update_slider_labels()
+        self.sr.update_results_label()
 
     def _function_combo_cb(self, arg=None):
         """ Read value from predefined-functions combo box """
