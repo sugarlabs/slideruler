@@ -70,7 +70,11 @@ _TOP_SCALES = [_L, _C, _CI, _A, _K, _S, _T]
 _D = _C
 _DI = _CI
 _L2 = _L
-_BOT_SCALES = [_L2, _D, _DI]
+_A2 = _A
+_K2 = _K
+_S2 = _S
+_T2 = _T
+_BOT_SCALES = [_L2, _D, _DI, _A2, _K2, _S2, _T2]
 
 
 def _combo_factory(combo_array, default, tooltip, callback, toolbar):
@@ -163,6 +167,11 @@ class SlideruleActivity(activity.Activity):
             self.sr.S.spr.move_relative((Doffset, 0))
             self.sr.T.spr.move_relative((Doffset, 0))
             self.sr.DI.spr.move_relative((Doffset, 0))
+            self.sr.L2.spr.move_relative((Doffset, 0))
+            self.sr.A2.spr.move_relative((Doffset, 0))
+            self.sr.K2.spr.move_relative((Doffset, 0))
+            self.sr.S2.spr.move_relative((Doffset, 0))
+            self.sr.T2.spr.move_relative((Doffset, 0))
         if 'C' in self.metadata:
             self.sr.C.spr.move_relative((int(self.metadata['C']), 0))
             self.sr.C_tab_left.spr.move_relative((int(self.metadata['C']), 0))
@@ -198,8 +207,6 @@ class SlideruleActivity(activity.Activity):
         self.metadata['D'] = str(x)
         x, y = self.sr.R.spr.get_xy()
         self.metadata['R'] = str(x)
-        x, y = self.sr.L2.spr.get_xy()
-        self.metadata['L2'] = str(x)
         x, y = self.sr.L.spr.get_xy()
         self.metadata['L'] = str(x)
 
@@ -234,6 +241,10 @@ class SlideruleActivity(activity.Activity):
         self.sr.D.spr.hide()
         self.sr.DI.spr.hide()
         self.sr.L2.spr.hide()
+        self.sr.A2.spr.hide()
+        self.sr.K2.spr.hide()
+        self.sr.S2.spr.hide()
+        self.sr.T2.spr.hide()
 
     def _show(self, top, bottom, function):
         self._hide_all()
@@ -287,6 +298,14 @@ class SlideruleActivity(activity.Activity):
             self.sr.DI.draw_slider(1000)
         elif self.sr.slider_on_bottom == 'L2':
             self.sr.L2.draw_slider(1000)
+        elif self.sr.slider_on_bottom == 'A2':
+            self.sr.A2.draw_slider(1000)
+        elif self.sr.slider_on_bottom == 'K2':
+            self.sr.K2.draw_slider(1000)
+        elif self.sr.slider_on_bottom == 'S2':
+            self.sr.S2.draw_slider(1000)
+        elif self.sr.slider_on_bottom == 'T2':
+            self.sr.T2.draw_slider(1000)
         self.bottom_button.set_icon(self.sr.slider_on_bottom + 'on')
 
     def _predefined_function(self):
@@ -377,6 +396,10 @@ class SlideruleActivity(activity.Activity):
         self.sr.T.spr.move((dx, cy))
         self.sr.L.spr.move((dx, cy))
         self.sr.L2.spr.move((dx, dy))
+        self.sr.A2.spr.move((dx, dy))
+        self.sr.K2.spr.move((dx, dy))
+        self.sr.S2.spr.move((dx, dy))
+        self.sr.T2.spr.move((dx, dy))
         self.sr.DI.spr.move((dx, dy))
         self.sr.C_tab_left.spr.move_relative((dx-cx, 0))
         self.sr.C_tab_right.spr.move_relative((dx-cx, 0))
@@ -425,7 +448,8 @@ class SlideruleActivity(activity.Activity):
 
     def _bottom_combo_cb(self, arg=None):
         """ Read value from bottom combo box """
-        _bottom_dictionary = {_D: 'D', _DI: 'DI', _L2: 'L2'}
+        _bottom_dictionary = {_D: 'D', _DI: 'DI', _L2: 'L2', _A2: 'A2',
+                              _K2: 'K2', _S2: 'S2', _T2: 'T2'}
         self.sr.slider_on_bottom = _bottom_dictionary[
             _BOT_SCALES[self._bottom_combo.get_active()]]
         function = self._predefined_function()

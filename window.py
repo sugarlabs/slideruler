@@ -85,9 +85,17 @@ class SlideRule():
 
         self.DI = Slider(self.sprites, self.path, 'DI',
                          0, y + 2 * SHEIGHT, SWIDTH, SHEIGHT)
+        self.D = Slider(self.sprites, self.path, 'D',
+                        0, y + 2 * SHEIGHT, SWIDTH, SHEIGHT)
         self.L2 = Slider(self.sprites, self.path, 'L2',
                         0, y + 2 * SHEIGHT, SWIDTH, SHEIGHT)
-        self.D = Slider(self.sprites, self.path, 'D',
+        self.A2 = Slider(self.sprites, self.path, 'A2',
+                        0, y + 2 * SHEIGHT, SWIDTH, SHEIGHT)
+        self.K2 = Slider(self.sprites, self.path, 'K2',
+                        0, y + 2 * SHEIGHT, SWIDTH, SHEIGHT)
+        self.S2 = Slider(self.sprites, self.path, 'S2',
+                        0, y + 2 * SHEIGHT, SWIDTH, SHEIGHT)
+        self.T2 = Slider(self.sprites, self.path, 'T2',
                         0, y + 2 * SHEIGHT, SWIDTH, SHEIGHT)
 
         self.C_tab_left = Tab(self.sprites, self.path, 'tab',
@@ -139,6 +147,10 @@ class SlideRule():
         self.D.spr.set_label('')
         self.DI.spr.set_label('')
         self.L2.spr.set_label('')
+        self.A2.spr.set_label('')
+        self.K2.spr.set_label('')
+        self.S2.spr.set_label('')
+        self.T2.spr.set_label('')
         self.L.spr.set_label('')
 
         self.A.draw_slider(500)
@@ -168,6 +180,10 @@ class SlideRule():
         self.L.draw_slider()
         self.L_tab_left.draw_slider()
         self.L_tab_right.draw_slider()
+        self.A2.draw_slider()
+        self.K2.draw_slider()
+        self.S2.draw_slider()
+        self.T2.draw_slider()
 
         self.update_slider_labels()
         self.update_results_label()
@@ -194,7 +210,8 @@ class SlideRule():
         x, y = map(int, event.get_coords())
         # redicule doesn't use offset
         dx = x - self.dragpos
-        if self.press in [self.D.spr, self.DI.spr, self.L2.spr]:
+        if self.press in [self.D.spr, self.DI.spr, self.L2.spr, self.T2.spr,
+                          self.A2.spr, self.K2.spr, self.S2.spr]:
             self.C.spr.move_relative((dx, 0))
             self.C_tab_left.spr.move_relative((dx, 0))
             self.C_tab_right.spr.move_relative((dx, 0))
@@ -215,6 +232,10 @@ class SlideRule():
             self.T_tab_left.spr.move_relative((dx, 0))
             self.T_tab_right.spr.move_relative((dx, 0))
             self.L2.spr.move_relative((dx, 0))
+            self.T2.spr.move_relative((dx, 0))
+            self.S2.spr.move_relative((dx, 0))
+            self.A2.spr.move_relative((dx, 0))
+            self.K2.spr.move_relative((dx, 0))
             self.L.spr.move_relative((dx, 0))
             self.L_tab_left.spr.move_relative((dx, 0))
             self.L_tab_right.spr.move_relative((dx, 0))
@@ -300,6 +321,18 @@ class SlideRule():
         elif self.slider_on_bottom == 'DI':
             self._update_top(self._calc_DI)
             self.R_tab_bot.spr.set_label(str(self._calc_DI_results()))
+        elif self.slider_on_bottom == 'A2':
+            self._update_top(self._calc_A2)
+            self.R_tab_bot.spr.set_label(str(self._calc_A2_results()))
+        elif self.slider_on_bottom == 'K2':
+            self._update_top(self._calc_K2)
+            self.R_tab_bot.spr.set_label(str(self._calc_K2_results()))
+        elif self.slider_on_bottom == 'S2':
+            self._update_top(self._calc_S2)
+            self.R_tab_bot.spr.set_label(str(self._calc_S2_results()))
+        elif self.slider_on_bottom == 'T2':
+            self._update_top(self._calc_T2)
+            self.R_tab_bot.spr.set_label(str(self._calc_T2_results()))
         else:
             self._update_top(self._calc_L2)
             self.R_tab_bot.spr.set_label(str(self._calc_L2_results()))
@@ -529,6 +562,58 @@ class SlideRule():
             L = 10 * (dx / SCALE) / math.log(10)
         return float(int(L * 100) / 100.)
 
+    def _calc_A2(self):
+        """ A2 scale is read from the position of the top slider """
+        x, y = self.A2.spr.get_xy()
+        dx = self._calc_dx(x)
+        if dx < 0:
+            dx = math.log(10.) * SCALE + dx
+            self.factor = 10
+        else:
+            self.factor = 1
+        A2 = math.exp(2 * dx / SCALE)
+        return float(int(A2 * 100) / 100.)
+
+    def _calc_K2(self):
+        """ K2 scale is read from the position of the top slider """
+        x, y = self.K2.spr.get_xy()
+        dx = self._calc_dx(x)
+        if dx < 0:
+            dx = math.log(10.) * SCALE + dx
+            self.factor = 10
+        else:
+            self.factor = 1
+        K2 = math.exp(3 * dx / SCALE)
+        return float(int(K2 * 100) / 100.)
+
+    def _calc_S2(self):
+        """ S2 scale is read from the position of the top slider """
+        x, y = self.S2.spr.get_xy()
+        dx = self._calc_dx(x)
+        if dx < 0:
+            dx = math.log(10.) * SCALE + dx
+        dx /= SCALE
+        s = math.exp(dx)/10
+        if s > 1.0:
+            s = 1.0
+        r = math.asin(s)
+        S = 180.0 * r / math.pi
+        return float(int(S * 10) / 10.)
+
+    def _calc_T2(self):
+        """ T2 scale is read from the position of the top slider """
+        x, y = self.T2.spr.get_xy()
+        dx = self._calc_dx(x)
+        if dx < 0:
+            dx = math.log(10.) * SCALE + dx
+        dx /= SCALE
+        t = math.exp(dx)/10
+        if t > 1.0:
+            t = 1.0
+        r = math.atan(t)
+        T = 180.0 * r / math.pi
+        return float(int(T * 10) / 10.)
+
     # Calculate results under redicule
     def _calc_D_results(self):
         rx, ry = self.R.spr.get_xy()
@@ -558,6 +643,52 @@ class SlideRule():
         else:
             L = 10 * (dx / SCALE) / math.log(10)
         return float(int(L * 100) / 100.)
+
+    def _calc_A2_results(self):
+        rx, ry = self.R.spr.get_xy()
+        x, y = self.A2.spr.get_xy()
+        dx = rx - x
+        if dx < 0:
+            dx = math.log(10.) * SCALE + dx
+        A2 = math.exp(2 * dx / SCALE)
+        return float(int(A2 * 100) / 100.)
+
+    def _calc_K2_results(self):
+        rx, ry = self.R.spr.get_xy()
+        x, y = self.K2.spr.get_xy()
+        dx = rx - x
+        if dx < 0:
+            dx = math.log(10.) * SCALE + dx
+        K2 = math.exp(3 * dx / SCALE)
+        return float(int(K2 * 100) / 100.)
+
+    def _calc_S2_results(self):
+        rx, ry = self.R.spr.get_xy()
+        x, y = self.S2.spr.get_xy()
+        dx = rx - x
+        if dx < 0:
+            dx = math.log(10.) * SCALE + dx
+        dx /= SCALE
+        s = math.exp(dx)/10
+        if s > 1.0:
+            s = 1.0
+        r = math.asin(s)
+        S = 180.0 * r / math.pi
+        return float(int(S * 10) / 10.)
+
+    def _calc_T2_results(self):
+        rx, ry = self.R.spr.get_xy()
+        x, y = self.T2.spr.get_xy()
+        dx = rx - x
+        if dx < 0:
+            dx = math.log(10.) * SCALE + dx
+        dx /= SCALE
+        t = math.exp(dx)/10
+        if t > 1.0:
+            t = 1.0
+        r = math.atan(t)
+        T = 180.0 * r / math.pi
+        return float(int(T * 10) / 10.)
 
     def _expose_cb(self, win, event):
         self.sprites.redraw_sprites()
