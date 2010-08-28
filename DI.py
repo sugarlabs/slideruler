@@ -36,7 +36,7 @@ print "       y=\"32\""
 print "       style=\"font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;\">CI</tspan></text>"
 
 ln = str(float(SWIDTH - int((math.log(math.pi)*SCALE + OFFSET)*10 )/10.))
-h1 = "38"; h2 = "59"; h3 = "35"
+h1 = "0"; h2 = "19"; h3 = "32"
 print "  <text style=\"font-size:12px;fill:#000000;\">"
 print "      <tspan"
 print "       x=\"" + str(ln) + "\""
@@ -47,7 +47,7 @@ print "       d=\"M " + ln + "," + h1 + " L " + ln + "," + h2 + "\""
 print "       style=\"fill:none;stroke:#FF0000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1\" />"
 
 ln = str(float(SWIDTH - int((math.log(math.e)*SCALE + OFFSET)*10 )/10.))
-h1 = "38"; h2 = "59"; h3 = "35"
+h1 = "0"; h2 = "19"; h3 = "32"
 print "  <text style=\"font-size:12px;fill:#000000;\">"
 print "      <tspan"
 print "       x=\"" + str(ln) + "\""
@@ -60,23 +60,23 @@ print "       style=\"fill:none;stroke:#FF0000;stroke-width:1px;stroke-linecap:s
 for i in range(100,200):
     ln = str(float(SWIDTH - int((math.log(i/100.)*SCALE + OFFSET)*10 )/10.))
     if int((i/10)*10) == i:
-        h1 = "38"; h2 = "59"; h3 = "35"
+        h1 = "0"; h2 = "19"; h3 = "32"
         print "  <text style=\"font-size:12px;fill:#000000;\">"
         print "      <tspan"
         print "       x=\"" + str(ln) + "\""
         print "       y=\"" + h3 + "\""
         print "       style=\"font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;\">" + str(float(int(i)*10/SCALE)) + "</tspan></text>"
     elif int((i/5)*5) == i:
-        h1 = "40"; h2 = "59";
+        h1 = "0"; h2 = "17";
     else:
-        h1 = "42"; h2 = "59";
+        h1 = "0"; h2 = "15";
     print "   <path"
     print "       d=\"M " + ln + "," + h1 + " L " + ln + "," + h2 + "\""
     print "       style=\"fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1\" />"
 for i in range(200,500,2):
     ln = str(float(SWIDTH - int((math.log(i/100.)*SCALE + OFFSET)*10 )/10.))
     if int((i/10)*10) == i:
-        h1 = "38"; h2 = "59"; h3 = "35"
+        h1 = "0"; h2 = "19"; h3 = "32"
         if int((i/100)*100) == i:
             print "  <text style=\"font-size:12px;fill:#000000;\">"
             print "      <tspan"
@@ -84,14 +84,14 @@ for i in range(200,500,2):
             print "       y=\"" + h3 + "\""
             print "       style=\"font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;\">" + str(float(int(i)*10/SCALE)) + "</tspan></text>"
     else:
-        h1 = "40"; h2 = "59";
+        h1 = "0"; h2 = "17";
     print "   <path"
     print "       d=\"M " + ln + "," + h1 + " L " + ln + "," + h2 + "\""
     print "       style=\"fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1\" />"
 for i in range(500,1005,5):
     ln = str(float(SWIDTH - int((math.log(i/100.)*SCALE + OFFSET)*10 )/10.))
     if int((i/10)*10) == i:
-        h1 = "38"; h2 = "59"; h3 = "35"
+        h1 = "0"; h2 = "19"; h3 = "32"
         if int((i/100)*100) == i:
             print "  <text style=\"font-size:12px;fill:#000000;\">"
             print "      <tspan"
@@ -99,7 +99,7 @@ for i in range(500,1005,5):
             print "       y=\"" + h3 + "\""
             print "       style=\"font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;\">" + str(float(int(i)*10/SCALE)) + "</tspan></text>"
     else:
-        h1 = "40"; h2 = "59";
+        h1 = "0"; h2 = "17";
     print "   <path"
     print "       d=\"M " + ln + "," + h1 + " L " + ln + "," + h2 + "\""
     print "       style=\"fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1\" />"
