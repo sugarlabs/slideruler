@@ -36,22 +36,22 @@ def main():
         else:
             mark(math.log(i / 100.), htop3, htop2, htop1 + offset2)
 
-        for i in range(200,400,2):
-            if int((i / 10)*10) == i:
-                mark(math.log(i / 100.), htop3, htop2, htop1,
-                     str(float(int(i) * 10 / SCALE)))
-            else:
-                mark(math.log(i/100.), htop3, htop2, htop1 + offset1)
+    for i in range(200,400,2):
+        if int((i / 10)*10) == i:
+            mark(math.log(i / 100.), htop3, htop2, htop1,
+                 str(float(int(i) * 10 / SCALE)))
+        else:
+            mark(math.log(i/100.), htop3, htop2, htop1 + offset1)
 
-        for i in range(400,1005,5):
-            if int((i / 10)* 10) == i:
-                if int((i / 50) * 50) == i:
-                    mark(math.log(i / 100.), htop3, htop2,
-                         htop1, str(float(int(i) * 10 / SCALE)))
-                else:
-                    mark(math.log(i / 100.), htop3, htop2, htop1)
+    for i in range(400,1005,5):
+        if int((i / 10)* 10) == i:
+            if int((i / 50) * 50) == i:
+                mark(math.log(i / 100.), htop3, htop2,
+                     htop1, str(float(int(i) * 10 / SCALE)))
             else:
-                mark(math.log(i / 100.), htop3, htop2, htop1 + offset1)
+                mark(math.log(i / 100.), htop3, htop2, htop1)
+        else:
+            mark(math.log(i / 100.), htop3, htop2, htop1 + offset1)
 
     special_mark(math.log(math.pi), htop3 + offset3, htop2, htop1, 'π')
     special_mark(math.log(math.e), htop3 + offset3, htop2, htop1, 'e')

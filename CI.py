@@ -12,7 +12,7 @@
 # Boston, MA 02111-1307, USA.
 
 from constants import SWIDTH, SHEIGHT, OFFSET, SCALE, HTOP1, HTOP2, HTOP3
-from C import mark, special_mark, header, footer
+from C import header, footer, mark, special_mark
 import math
 
 htop1 = HTOP1
@@ -22,12 +22,11 @@ offset1 = 5
 offset2 = 7
 offset3 = -12
 
-
 def main():
 
     header('CI')
 
-    for i in range(100,200):
+    for i in range(100, 200):
         if int((i / 10) * 10) == i:
             mark(math.log(i / 100.), htop3, htop2, htop1,
                  str(float(int(i) * 10 / SCALE)), flip=True)
@@ -36,28 +35,25 @@ def main():
         else:
             mark(math.log(i / 100.), htop3, htop2, htop1 + offset2, flip=True)
 
-        for i in range(200,400,2):
-            if int((i / 10)*10) == i:
-                mark(math.log(i / 100.), htop3, htop2, htop1,
-                     str(float(int(i) * 10 / SCALE)), flip=True)
-            else:
-                mark(math.log(i/100.), htop3, htop2, htop1 + offset1, flip=True)
+    for i in range(200, 400, 2):
+        if int((i / 10)*10) == i:
+            mark(math.log(i / 100.), htop3, htop2, htop1,
+                 str(float(int(i) * 10 / SCALE)), flip=True)
+        else:
+            mark(math.log(i/100.), htop3, htop2, htop1 + offset1, flip=True)
 
-        for i in range(400,1005,5):
-            if int((i / 10)* 10) == i:
-                if int((i / 50) * 50) == i:
-                    mark(math.log(i / 100.), htop3, htop2,
-                         htop1, str(float(int(i) * 10 / SCALE)), flip=True)
-                else:
-                    mark(math.log(i / 100.), htop3, htop2, htop1, flip=True)
+    for i in range(400, 1005, 5):
+        if int((i / 10)* 10) == i:
+            if int((i / 50) * 50) == i:
+                mark(math.log(i / 100.), htop3, htop2,
+                     htop1, str(float(int(i) * 10 / SCALE)), flip=True)
             else:
-                mark(math.log(i / 100.), htop3, htop2, htop1 + offset1,
-                     flip=True)
+                mark(math.log(i / 100.), htop3, htop2, htop1, flip=True)
+        else:
+            mark(math.log(i / 100.), htop3, htop2, htop1 + offset1, flip=True)
 
-    special_mark(math.log(math.pi), htop3 + offset3, htop2, htop1, 'π',
-                 flip=True)
-    special_mark(math.log(math.e), htop3 + offset3, htop2, htop1, 'e',
-                 flip=True)
+    special_mark(math.pi,  htop3 + offset3, htop2, htop1, 'π', flip=True)
+    special_mark(math.e, htop3 + offset3, htop2, htop1, 'e', flip=True)
 
     footer()
     return 0

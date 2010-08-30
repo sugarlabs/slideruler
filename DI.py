@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-#Copyright (c) 2009, Walter Bender
+#Copyright (c) 2009,10 Walter Bender
 
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -11,99 +11,55 @@
 # Free Software Foundation, Inc., 59 Temple Place - Suite 330,
 # Boston, MA 02111-1307, USA.
 
-from constants import *
+from constants import SWIDTH, SHEIGHT, OFFSET, SCALE, HTOP1, HTOP2, HTOP3
+from C import mark, special_mark, header, footer
 import math
 
-# header
-print "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>"
-print "<!-- Created with Emacs -->"
-print "<svg"
-print "   xmlns:svg=\"http://www.w3.org/2000/svg\""
-print "   xmlns=\"http://www.w3.org/2000/svg\""
-print "   version=\"1.0\""
-print "   width=\"" + str(SWIDTH) + "\""
-print "   height=\"" + str(SHEIGHT) + "\">"
-print "  <g>"
+htop1 = SHEIGHT - HTOP1
+htop2 = SHEIGHT - HTOP2
+htop3 = SHEIGHT - HTOP3 + 12
+offset1 = - 5
+offset2 = - 7
+offset3 = 12
 
-print "   <path"
-print "       d=\"M 0.0,30 L 2400,30\""
-print "       style=\"fill:none;stroke:#ffffff;stroke-width:60px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1\" />"
 
-print "  <text style=\"font-size:12px;fill:#000000;\">"
-print "      <tspan"
-print "       x=\"5\""
-print "       y=\"32\""
-print "       style=\"font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;\">CI</tspan></text>"
+def main():
 
-ln = str(float(SWIDTH - int((math.log(math.pi)*SCALE + OFFSET)*10 )/10.))
-h1 = "0"; h2 = "19"; h3 = "32"
-print "  <text style=\"font-size:12px;fill:#000000;\">"
-print "      <tspan"
-print "       x=\"" + str(ln) + "\""
-print "       y=\"" + h3 + "\""
-print "       style=\"font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;\">π</tspan></text>"
-print "   <path"
-print "       d=\"M " + ln + "," + h1 + " L " + ln + "," + h2 + "\""
-print "       style=\"fill:none;stroke:#FF0000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1\" />"
+    header('DI')
 
-ln = str(float(SWIDTH - int((math.log(math.e)*SCALE + OFFSET)*10 )/10.))
-h1 = "0"; h2 = "19"; h3 = "32"
-print "  <text style=\"font-size:12px;fill:#000000;\">"
-print "      <tspan"
-print "       x=\"" + str(ln) + "\""
-print "       y=\"" + h3 + "\""
-print "       style=\"font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;\">e</tspan></text>"
-print "   <path"
-print "       d=\"M " + ln + "," + h1 + " L " + ln + "," + h2 + "\""
-print "       style=\"fill:none;stroke:#FF0000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1\" />"
+    for i in range(100,200):
+        if int((i / 10) * 10) == i:
+            mark(math.log(i / 100.), htop3, htop2, htop1,
+                 str(float(int(i) * 10 / SCALE)), flip=True)
+        elif int((i / 5) * 5) == i:
+            mark(math.log(i / 100.), htop3, htop2, htop1 + offset1, flip=True)
+        else:
+            mark(math.log(i / 100.), htop3, htop2, htop1 + offset2, flip=True)
 
-for i in range(100,200):
-    ln = str(float(SWIDTH - int((math.log(i/100.)*SCALE + OFFSET)*10 )/10.))
-    if int((i/10)*10) == i:
-        h1 = "0"; h2 = "19"; h3 = "32"
-        print "  <text style=\"font-size:12px;fill:#000000;\">"
-        print "      <tspan"
-        print "       x=\"" + str(ln) + "\""
-        print "       y=\"" + h3 + "\""
-        print "       style=\"font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;\">" + str(float(int(i)*10/SCALE)) + "</tspan></text>"
-    elif int((i/5)*5) == i:
-        h1 = "0"; h2 = "17";
-    else:
-        h1 = "0"; h2 = "15";
-    print "   <path"
-    print "       d=\"M " + ln + "," + h1 + " L " + ln + "," + h2 + "\""
-    print "       style=\"fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1\" />"
-for i in range(200,500,2):
-    ln = str(float(SWIDTH - int((math.log(i/100.)*SCALE + OFFSET)*10 )/10.))
-    if int((i/10)*10) == i:
-        h1 = "0"; h2 = "19"; h3 = "32"
-        if int((i/100)*100) == i:
-            print "  <text style=\"font-size:12px;fill:#000000;\">"
-            print "      <tspan"
-            print "       x=\"" + str(ln) + "\""
-            print "       y=\"" + h3 + "\""
-            print "       style=\"font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;\">" + str(float(int(i)*10/SCALE)) + "</tspan></text>"
-    else:
-        h1 = "0"; h2 = "17";
-    print "   <path"
-    print "       d=\"M " + ln + "," + h1 + " L " + ln + "," + h2 + "\""
-    print "       style=\"fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1\" />"
-for i in range(500,1005,5):
-    ln = str(float(SWIDTH - int((math.log(i/100.)*SCALE + OFFSET)*10 )/10.))
-    if int((i/10)*10) == i:
-        h1 = "0"; h2 = "19"; h3 = "32"
-        if int((i/100)*100) == i:
-            print "  <text style=\"font-size:12px;fill:#000000;\">"
-            print "      <tspan"
-            print "       x=\"" + str(ln) + "\""
-            print "       y=\"" + h3 + "\""
-            print "       style=\"font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;\">" + str(float(int(i)*10/SCALE)) + "</tspan></text>"
-    else:
-        h1 = "0"; h2 = "17";
-    print "   <path"
-    print "       d=\"M " + ln + "," + h1 + " L " + ln + "," + h2 + "\""
-    print "       style=\"fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1\" />"
+    for i in range(200,400,2):
+        if int((i / 10)*10) == i:
+            mark(math.log(i / 100.), htop3, htop2, htop1,
+                 str(float(int(i) * 10 / SCALE)), flip=True)
+        else:
+            mark(math.log(i/100.), htop3, htop2, htop1 + offset1, flip=True)
 
-# footer
-print "  </g>"
-print "</svg>"
+    for i in range(400,1005,5):
+        if int((i / 10)* 10) == i:
+            if int((i / 50) * 50) == i:
+                mark(math.log(i / 100.), htop3, htop2,
+                     htop1, str(float(int(i) * 10 / SCALE)), flip=True)
+            else:
+                mark(math.log(i / 100.), htop3, htop2, htop1, flip=True)
+        else:
+            mark(math.log(i / 100.), htop3, htop2, htop1 + offset1, flip=True)
+
+    special_mark(math.log(math.pi), htop3 + offset3, htop2, htop1, 'π',
+                 flip=True)
+    special_mark(math.log(math.e), htop3 + offset3, htop2, htop1, 'e',
+                 flip=True)
+
+    footer()
+    return 0
+
+if __name__ == "__main__":
+    main()
