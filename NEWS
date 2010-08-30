@@ -1,7 +1,8 @@
 14
 
-* switched to combo boxes in order to enable user-definable combinations
+* switched to combo boxes in order to enable user-definable combinations (#2225)
 * added button to realign slides
+* added keyboard shortcuts (e.g., arrow keys to move slides)
 * code reorder in order to accomodate user-definable combinations
 
 13

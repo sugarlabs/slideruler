@@ -13,6 +13,7 @@
 
 from constants import SWIDTH, SHEIGHT, OFFSET, SCALE, HTOP1, HTOP2, HTOP3
 from C import header, footer, mark, special_mark
+
 import math
 
 htop1 = HTOP1

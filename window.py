@@ -164,6 +164,9 @@ class SlideRule():
             self._move_slides(self.D.spr, -self.D.spr.get_xy()[0])
         elif k == 'Return' or k == 'BackSpace':
             self.parent.realign_cb()
+            self.R_tab_top.spr.move((150, self.R_tab_top.spr.get_xy()[1]))
+            self.R_tab_bottom.spr.move((150, self.R_tab_bottom.spr.get_xy()[1]))
+            self.R.spr.move((150, self.R.spr.get_xy()[1]))
         return True
 
     def _make_slider(self, name, y):

@@ -27,6 +27,7 @@ class Slider:
         # create sprite from svg file
         self.spr = Sprite(sprites, x, y,
                           self.load_image(path,name,w,h))
+        self.name = name
 
     def draw_slider(self, layer=1000):
         self.spr.set_layer(layer)
@@ -59,3 +60,5 @@ def svg_str_to_pixbuf(svg_string):
     pl.close()
     pixbuf = pl.get_pixbuf()
     return pixbuf
+
+
