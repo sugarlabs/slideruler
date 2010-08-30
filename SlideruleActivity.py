@@ -45,7 +45,8 @@ import os.path
 import logging
 _logger = logging.getLogger('sliderule-activity')
 
-from window import SlideRule
+from window import SlideRule, move_slider_and_tabs, draw_slider_and_tabs, \
+                   hide_slider_and_tabs
 from constants import SWIDTH
 
 _FA = _('square/square root')
@@ -153,89 +154,97 @@ class SlideruleActivity(activity.Activity):
         self.sr = SlideRule(canvas, os.path.join(activity.get_bundle_path(),
                                                  'images/'), self)
 
-        # Read the slider positions from the Journal
+        # Rfead the slider positions from the Journal
+        if 'C' in self.metadata:
+            move_slider_and_tabs(self.sr.C, self.sr.C_tab_left,
+                                 self.sr.C_tab_right,
+                                 int(self.metadata['C']), 0)
+        if 'CI' in self.metadata:
+            move_slider_and_tabs(self.sr.CI, self.sr.CI_tab_left,
+                                 self.sr.CI_tab_right,
+                                 int(self.metadata['CI']), 0)
         if 'L' in self.metadata:
-            self.sr.L.spr.move_relative((int(self.metadata['L']), 0))
-            self.sr.L_tab_left.spr.move_relative((int(self.metadata['L']), 0))
-            self.sr.L_tab_right.spr.move_relative((int(self.metadata['L']), 0))
+            move_slider_and_tabs(self.sr.L, self.sr.L_tab_left,
+                                 self.sr.L_tab_right,
+                                 int(self.metadata['L']), 0)
+        if 'A' in self.metadata:
+            move_slider_and_tabs(self.sr.A, self.sr.A_tab_left,
+                                 self.sr.A_tab_right,
+                                 int(self.metadata['A']), 0)
+        if 'K' in self.metadata:
+            move_slider_and_tabs(self.sr.K, self.sr.K_tab_left,
+                                 self.sr.K_tab_right,
+                                 int(self.metadata['K']), 0)
+        if 'S' in self.metadata:
+            move_slider_and_tabs(self.sr.S, self.sr.S_tab_left,
+                                 self.sr.S_tab_right,
+                                 int(self.metadata['S']), 0)
+        if 'T' in self.metadata:
+            move_slider_and_tabs(self.sr.T, self.sr.T_tab_left,
+                                 self.sr.T_tab_right,
+                                 int(self.metadata['T']), 0)
+        if 'R' in self.metadata:
+            move_slider_and_tabs(self.sr.R, self.sr.R_tab_top,
+                                 self.sr.R_tab_bottom,
+                                 int(self.metadata['R']), 0)
         if 'D' in self.metadata:
             Doffset = int(self.metadata['D'])
             self.sr.D.spr.move_relative((Doffset, 0))
-            self.sr.CI.spr.move_relative((Doffset, 0))
-            self.sr.A.spr.move_relative((Doffset, 0))
-            self.sr.K.spr.move_relative((Doffset, 0))
-            self.sr.S.spr.move_relative((Doffset, 0))
-            self.sr.T.spr.move_relative((Doffset, 0))
             self.sr.DI.spr.move_relative((Doffset, 0))
             self.sr.L2.spr.move_relative((Doffset, 0))
             self.sr.A2.spr.move_relative((Doffset, 0))
             self.sr.K2.spr.move_relative((Doffset, 0))
             self.sr.S2.spr.move_relative((Doffset, 0))
             self.sr.T2.spr.move_relative((Doffset, 0))
-        if 'C' in self.metadata:
-            self.sr.C.spr.move_relative((int(self.metadata['C']), 0))
-            self.sr.C_tab_left.spr.move_relative((int(self.metadata['C']), 0))
-            self.sr.C_tab_right.spr.move_relative((int(self.metadata['C']), 0))
-        if 'R' in self.metadata:
-            self.sr.R.spr.move_relative((int(self.metadata['R']), 0))
-            self.sr.R_tab_top.spr.move_relative((int(self.metadata['R']), 0))
-            self.sr.R_tab_bot.spr.move_relative((int(self.metadata['R']), 0))
         if 'slider' in self.metadata:
             _logger.debug("restoring %s" % (self.metadata['slider']))
             self.sr.slider_on_top = self.metadata['slider']
             if self.sr.slider_on_top == 'A':
-                self._show_a()
+                self.show_a()
             elif self.sr.slider_on_top == 'L':
-                self._show_l()
+                self.show_l()
             elif self.sr.slider_on_top == 'K':
-                self._show_k()
+                self.show_k()
             elif self.sr.slider_on_top == 'S':
-                self._show_s()
+                self.show_s()
             elif self.sr.slider_on_top == 'T':
-                self._show_t()
+                self.show_t()
             else:
-                self._show_c()
+                self.show_c()
         else:
-            self._show_c()
+            self.show_c()
 
     def write_file(self, file_path):
         """ Write the slider positions to the Journal """
         self.metadata['slider'] = self.sr.slider_on_top
-        x, y = self.sr.C.spr.get_xy()
-        self.metadata['C'] = str(x)
-        x, y = self.sr.D.spr.get_xy()
-        self.metadata['D'] = str(x)
-        x, y = self.sr.R.spr.get_xy()
-        self.metadata['R'] = str(x)
-        x, y = self.sr.L.spr.get_xy()
-        self.metadata['L'] = str(x)
+        self.metadata['C'] = str(self.sr.C.spr.get_xy()[0])
+        self.metadata['D'] = str(self.sr.D.spr.get_xy()[0])
+        self.metadata['R'] = str(self.sr.R.spr.get_xy()[0])
+        self.metadata['L'] = str(self.sr.L.spr.get_xy()[0])
+        self.metadata['A'] = str(self.sr.A.spr.get_xy()[0])
+        self.metadata['K'] = str(self.sr.K.spr.get_xy()[0])
+        self.metadata['S'] = str(self.sr.S.spr.get_xy()[0])
+        self.metadata['T'] = str(self.sr.T.spr.get_xy()[0])
 
     def _hide_all(self):
         self._hide_top()
         self._hide_bottom()
 
     def _hide_top(self):
-        self.sr.C.spr.hide()
-        self.sr.C_tab_left.spr.hide()
-        self.sr.C_tab_right.spr.hide()
-        self.sr.CI.spr.hide()
-        self.sr.CI_tab_left.spr.hide()
-        self.sr.CI_tab_right.spr.hide()
-        self.sr.A.spr.hide()
-        self.sr.A_tab_left.spr.hide()
-        self.sr.A_tab_right.spr.hide()
-        self.sr.K.spr.hide()
-        self.sr.K_tab_left.spr.hide()
-        self.sr.K_tab_right.spr.hide()
-        self.sr.S.spr.hide()
-        self.sr.S_tab_left.spr.hide()
-        self.sr.S_tab_right.spr.hide()
-        self.sr.T.spr.hide()
-        self.sr.T_tab_left.spr.hide()
-        self.sr.T_tab_right.spr.hide()
-        self.sr.L.spr.hide()
-        self.sr.L_tab_left.spr.hide()
-        self.sr.L_tab_right.spr.hide()
+        hide_slider_and_tabs(self.sr.C, self.sr.C_tab_left,
+                             self.sr.C_tab_right)
+        hide_slider_and_tabs(self.sr.CI, self.sr.CI_tab_left,
+                             self.sr.CI_tab_right)
+        hide_slider_and_tabs(self.sr.A, self.sr.A_tab_left,
+                             self.sr.A_tab_right)
+        hide_slider_and_tabs(self.sr.K, self.sr.K_tab_left,
+                             self.sr.K_tab_right)
+        hide_slider_and_tabs(self.sr.S, self.sr.S_tab_left,
+                             self.sr.S_tab_right)
+        hide_slider_and_tabs(self.sr.T, self.sr.T_tab_left,
+                             self.sr.T_tab_right)
+        hide_slider_and_tabs(self.sr.L, self.sr.L_tab_left,
+                             self.sr.L_tab_right)
 
     def _hide_bottom(self):
         self.sr.D.spr.hide()
@@ -246,7 +255,7 @@ class SlideruleActivity(activity.Activity):
         self.sr.S2.spr.hide()
         self.sr.T2.spr.hide()
 
-    def _show(self, top, bottom, function):
+    def _show_slides(self, top, bottom, function):
         self._hide_all()
         self._top_combo.set_active(_TOP_SCALES.index(top))
         self._set_top_slider()
@@ -260,33 +269,26 @@ class SlideruleActivity(activity.Activity):
         """ Move the top slider onto top layer """
         self._hide_top()
         if self.sr.slider_on_top == 'C':
-            self.sr.C.draw_slider(1000)
-            self.sr.C_tab_left.draw_slider(1000)
-            self.sr.C_tab_right.draw_slider(1000)
+            draw_slider_and_tabs(self.sr.C, self.sr.C_tab_left,
+                                 self.sr.C_tab_right)
         elif self.sr.slider_on_top == 'CI':
-            self.sr.CI.draw_slider(1000)
-            self.sr.CI_tab_left.draw_slider(1000)
-            self.sr.CI_tab_right.draw_slider(1000)
+            draw_slider_and_tabs(self.sr.CI, self.sr.CI_tab_left,
+                                 self.sr.CI_tab_right)
         elif self.sr.slider_on_top == 'A':
-            self.sr.A.draw_slider(1000)
-            self.sr.A_tab_left.draw_slider(1000)
-            self.sr.A_tab_right.draw_slider(1000)
+            draw_slider_and_tabs(self.sr.A, self.sr.A_tab_left,
+                                 self.sr.A_tab_right)
         elif self.sr.slider_on_top == 'K':
-            self.sr.K.draw_slider(1000)
-            self.sr.K_tab_left.draw_slider(1000)
-            self.sr.K_tab_right.draw_slider(1000)
+            draw_slider_and_tabs(self.sr.K, self.sr.K_tab_left,
+                                 self.sr.K_tab_right)
         elif self.sr.slider_on_top == 'S':
-            self.sr.S.draw_slider(1000)
-            self.sr.S_tab_left.draw_slider(1000)
-            self.sr.S_tab_right.draw_slider(1000)
+            draw_slider_and_tabs(self.sr.S, self.sr.S_tab_left,
+                                 self.sr.S_tab_right)
         elif self.sr.slider_on_top == 'T':
-            self.sr.T.draw_slider(1000)
-            self.sr.T_tab_left.draw_slider(1000)
-            self.sr.T_tab_right.draw_slider(1000)
+            draw_slider_and_tabs(self.sr.T, self.sr.T_tab_left,
+                                 self.sr.T_tab_right)
         elif self.sr.slider_on_top == 'L':
-            self.sr.L.draw_slider(1000)
-            self.sr.L_tab_left.draw_slider(1000)
-            self.sr.L_tab_right.draw_slider(1000)
+            draw_slider_and_tabs(self.sr.L, self.sr.L_tab_left,
+                                 self.sr.L_tab_right)
         self.top_button.set_icon(self.sr.slider_on_top + 'on')
 
     def _set_bottom_slider(self):
@@ -313,72 +315,72 @@ class SlideruleActivity(activity.Activity):
         if not hasattr(self, 'sr'):
             return None
         if self.sr.slider_on_top == 'C' and self.sr.slider_on_bottom == 'D':
-            return self._show_c
+            return self.show_c
         elif self.sr.slider_on_top == 'CI' and self.sr.slider_on_bottom == 'D':
-            return self._show_ci
+            return self.show_ci
         elif self.sr.slider_on_top == 'A' and self.sr.slider_on_bottom == 'D':
-            return self._show_a
+            return self.show_a
         elif self.sr.slider_on_top == 'K' and self.sr.slider_on_bottom == 'D':
-            return self._show_k
+            return self.show_k
         elif self.sr.slider_on_top == 'S' and self.sr.slider_on_bottom == 'D':
-            return self._show_s
+            return self.show_s
         elif self.sr.slider_on_top == 'T' and self.sr.slider_on_bottom == 'D':
-            return self._show_t
+            return self.show_t
         elif self.sr.slider_on_top == 'L' and self.sr.slider_on_bottom == 'L2':
-            return self._show_l
+            return self.show_l
         return None
 
     # Predefined functions
-    def _show_c(self):
+    def show_c(self):
         """ basic log scale """
         self.sr.slider_on_top = 'C'
         self.sr.slider_on_bottom = 'D'
-        self._show(_C, _D, _FC)
+        self._show_slides(_C, _D, _FC)
         self.sr.D.draw_slider(1000)
 
-    def _show_ci(self):
+    def show_ci(self):
         """ Inverse scale """
         self.sr.slider_on_top = 'CI'
         self.sr.slider_on_bottom = 'D'
-        self._show(_CI, _D, _FCI)
+        self._show_slides(_CI, _D, _FCI)
         self.sr.D.draw_slider(1000)
 
-    def _show_a(self):
+    def show_a(self):
         """ two-decade scale """
         self.sr.slider_on_top = 'A'
         self.sr.slider_on_bottom = 'D'
-        self._show(_A, _D, _FA)
+        self._show_slides(_A, _D, _FA)
         self.sr.D.draw_slider(1000)
 
-    def _show_k(self):
+    def show_k(self):
         """ three-decade scale """
         self.sr.slider_on_top = 'K'
         self.sr.slider_on_bottom = 'D'
-        self._show(_K, _D, _FK)
+        self._show_slides(_K, _D, _FK)
         self.sr.D.draw_slider(1000)
 
-    def _show_s(self):
+    def show_s(self):
         """ Sine """
         self.sr.slider_on_top = 'S'
         self.sr.slider_on_bottom = 'D'
-        self._show(_S, _D, _FS)
+        self._show_slides(_S, _D, _FS)
         self.sr.D.draw_slider(1000)
 
-    def _show_t(self):
+    def show_t(self):
         """ Tangent """
         self.sr.slider_on_top = 'T'
         self.sr.slider_on_bottom = 'D'
-        self._show(_T, _D, _FT)
+        self._show_slides(_T, _D, _FT)
         self.sr.D.draw_slider(1000)
 
-    def _show_l(self):
+    def show_l(self):
         """ Linear scale """
         self.sr.slider_on_top = 'L'
         self.sr.slider_on_bottom = 'L2'
-        self._show(_L, _L2, _FL)
+        self._show_slides(_L, _L2, _FL)
         self.sr.L.draw_slider(1000)
 
-    def _realign_cb(self, arg=None):
+    def realign_cb(self, arg=None):
         """ Realign all sliders with the D scale. """
         dx, dy = self.sr.D.spr.get_xy()
         cx, cy = self.sr.C.spr.get_xy()
@@ -420,10 +422,10 @@ class SlideruleActivity(activity.Activity):
 
     def _function_combo_cb(self, arg=None):
         """ Read value from predefined-functions combo box """
-        _functions_dictionary = {_FA: self._show_a, _FC: self._show_c,
-                                 _FK: self._show_k, _FS: self._show_s,
-                                 _FT: self._show_t, _FL: self._show_l,
-                                 _FCI: self._show_ci}
+        _functions_dictionary = {_FA: self.show_a, _FC: self.show_c,
+                                 _FK: self.show_k, _FS: self.show_s,
+                                 _FT: self.show_t, _FL: self.show_l,
+                                 _FCI: self.show_ci}
         try:
             _functions_dictionary[
                 _FUNCTIONS[self._function_combo.get_active()]]()
@@ -504,7 +506,7 @@ class SlideruleActivity(activity.Activity):
                                          self._bottom_combo_cb, toolbar)
         _separator_factory(toolbox.toolbar)
         self.realign_button = _button_factory('realign', _('realign slides'),
-                                             self._realign_cb, toolbar)
+                                             self.realign_cb, toolbar)
 
         if _have_toolbox:
             _separator_factory(toolbox.toolbar, False, True)
