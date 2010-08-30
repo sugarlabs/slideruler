@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-#Copyright (c) 2010, Walter Bender
+#Copyright (c) 2009,2010 Walter Bender
 
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -11,112 +11,82 @@
 # Free Software Foundation, Inc., 59 Temple Place - Suite 330,
 # Boston, MA 02111-1307, USA.
 
-from constants import *
+from constants import SWIDTH, SHEIGHT, OFFSET, SCALE, HTOP1, HTOP2, HTOP3
+from C import header, footer, mark, special_mark
+
 import math
 
-# header
-print "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>"
-print "<!-- Created with Emacs -->"
-print "<svg"
-print "   xmlns:svg=\"http://www.w3.org/2000/svg\""
-print "   xmlns=\"http://www.w3.org/2000/svg\""
-print "   version=\"1.0\""
-print "   width=\"" + str(SWIDTH) + "\""
-print "   height=\"" + str(SHEIGHT) + "\">"
-print "  <g>"
 
-print "   <path"
-print "       d=\"M 0.0,30 L 2400,30\""
-print "       style=\"fill:none;stroke:#ffffff;stroke-width:60px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1\" />"
+htop1 = HTOP1
+htop2 = HTOP2
+htop3 = HTOP3
+offset1 = 5
+offset2 = 7
+offset3 = -12
 
-print "  <text style=\"font-size:12px;fill:#000000;\">"
-print "      <tspan"
-print "       x=\"5\""
-print "       y=\"32\""
-print "       style=\"font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;\">S</tspan></text>"
 
-for i in range(12, 64):
-    r = float(i)/2 * math.pi / 180.
+def main():
+
+    header('S')
+
+    for i in range(12, 32):
+        r = float(i) / 2 * math.pi / 180.
+        s = math.sin(r)
+        if (i / 2) * 2 == i:
+            mark(math.log(s * 10.), htop3, htop2, htop1, str(int(i / 2)))
+            if int((i / 4) * 4) == i:
+                special_mark(math.log(s * 10.), htop3 + offset3, htop2, htop1,
+                             str(int(180 - i / 2)))
+        else:
+            mark(math.log(s * 10.), htop3, htop2, htop1 + offset1)
+
+    for i in range(32, 64):
+        r = float(i) / 2 * math.pi / 180.
+        s = math.sin(r)
+        if (i / 4) * 4 == i:
+            mark(math.log(s * 10.), htop3, htop2, htop1, str(int(i / 2)))
+            if int((i / 4) * 4) == i:
+                special_mark(math.log(s * 10.), htop3 + offset3, htop2, htop1,
+                             str(int(180 - i / 2)))
+        else:
+            mark(math.log(s * 10.), htop3, htop2, htop1 + offset1)
+
+    for i in range(64, 120, 2):
+        r = float(i) / 2 * math.pi / 180.
+        s = math.sin(r)
+        if (i / 4) * 4 == i:
+            mark(math.log(s * 10.), htop3, htop2, htop1, str(int(i / 2)))
+            if (i / 8) * 8 == i:
+                special_mark(math.log(s * 10.), htop3 + offset3, htop2, htop1,
+                            str(180 - i / 2))
+        else:
+            mark(math.log(s * 10.), htop3, htop2, htop1 + offset1)
+
+    for i in range(120, 160, 4):
+        r = float(i) / 2 * math.pi / 180.
+        s = math.sin(r)
+        if (i / 8) * 8 == i:
+            mark(math.log(s * 10.), htop3, htop2, htop1, str(int(i / 2)))
+            if (i / 16) * 16 == i:
+                special_mark(math.log(s * 10.), htop3 + offset3, htop2, htop1,
+                            str(180 - i / 2))
+        else:
+            mark(math.log(s * 10.), htop3, htop2, htop1 + offset1)
+
+    for i in range(160, 180, 2):
+        r = float(i) / 2 * math.pi / 180.
+        s = math.sin(r)
+        if (i / 20) * 20 == i:
+            mark(math.log(s * 10.), htop3, htop2, htop1, str(int(i / 2)))
+            special_mark(math.log(s * 10.), htop3 + offset3, htop2, htop1,
+                         str(180 - i / 2))
+
+    r = 90. * math.pi / 180.
     s = math.sin(r)
-    ln = str(float(math.log(s*10)*SCALE + OFFSET))
-    if int(i/2) == i/2.0:
-        h1 = "38"; h2 = "59"; h3 = "35"
-        print "  <text style=\"font-size:12px;fill:#000000;\">"
-        print "      <tspan"
-        print "       x=\"" + ln + "\""
-        print "       y=\"" + h3 + "\""
-        print "       style=\"font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;\">" + str(int(i/2)) + "</tspan></text>"
-        h3 = "20"
-        print "  <text style=\"font-size:12px;fill:#ff0000;\">"
-        print "      <tspan"
-        print "       x=\"" + ln + "\""
-        print "       y=\"" + h3 + "\""
-        print "       style=\"font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;\">" + str(int(180-(i/2))) + "</tspan></text>"
-    else:
-        h1 = "40"; h2 = "59";
-    print "   <path"
-    print "       d=\"M " + ln + "," + h1 + " L " + ln + "," + h2 + "\""
-    print "       style=\"fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1\" />"
-for i in range(32, 63, 2):
-    r = float(i) * math.pi / 180.
-    s = math.sin(r)
-    ln = str(float(math.log(s*10)*SCALE + OFFSET))
-    h1 = "38"; h2 = "59"; h3 = "35"
-    print "  <text style=\"font-size:12px;fill:#000000;\">"
-    print "      <tspan"
-    print "       x=\"" + ln + "\""
-    print "       y=\"" + h3 + "\""
-    print "       style=\"font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;\">" + str(i) + "</tspan></text>"
-    if i/4*4 == i:
-        h3 = "20"
-        print "  <text style=\"font-size:12px;fill:#ff0000;\">"
-        print "      <tspan"
-        print "       x=\"" + ln + "\""
-        print "       y=\"" + h3 + "\""
-        print "       style=\"font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;\">" + str(int(180-i)) + "</tspan></text>"
-    print "   <path"
-    print "       d=\"M " + ln + "," + h1 + " L " + ln + "," + h2 + "\""
-    print "       style=\"fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1\" />"
-for i in range(64, 83, 4):
-    r = float(i) * math.pi / 180.
-    s = math.sin(r)
-    ln = str(float(math.log(s*10)*SCALE + OFFSET))
-    if int(i/4*4) == i:
-        h1 = "38"; h2 = "59"; h3 = "35"
-        print "  <text style=\"font-size:12px;fill:#000000;\">"
-        print "      <tspan"
-        print "       x=\"" + ln + "\""
-        print "       y=\"" + h3 + "\""
-        print "       style=\"font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;\">" + str(i) + "</tspan></text>"
-        if i/8*8 == i:
-            h3 = "20"
-            print "  <text style=\"font-size:12px;fill:#ff0000;\">"
-            print "      <tspan"
-            print "       x=\"" + ln + "\""
-            print "       y=\"" + h3 + "\""
-            print "       style=\"font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;\">" + str(int(180-i)) + "</tspan></text>"
-    elif int((i/2)*2) == i:
-        h1 = "40"; h2 = "59";
-    else:
-        h1 = "42"; h2 = "59";
-    print "   <path"
-    print "       d=\"M " + ln + "," + h1 + " L " + ln + "," + h2 + "\""
-    print "       style=\"fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1\" />"
+    mark(math.log(s * 10.), htop3, htop2, htop1, '90')
 
-i = 90
-r = float(i) * math.pi / 180.
-s = math.sin(r)
-ln = str(float(math.log(s*10)*SCALE + OFFSET))
-h1 = "38"; h2 = "59"; h3 = "35"
-print "  <text style=\"font-size:12px;fill:#000000;\">"
-print "      <tspan"
-print "       x=\"" + ln + "\""
-print "       y=\"" + h3 + "\""
-print "       style=\"font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;\">" + str(i) + "</tspan></text>"
-print "   <path"
-print "       d=\"M " + ln + "," + h1 + " L " + ln + "," + h2 + "\""
-print "       style=\"fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1\" />"
+    footer()
+    return 0
 
-# footer
-print "  </g>"
-print "</svg>"
+if __name__ == "__main__":
+    main()
