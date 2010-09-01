@@ -54,7 +54,7 @@ def special_mark(offset, height3, height2, height1, string, flip=False):
     print '       style="fill:none;stroke:#0000ff;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />'
 
 
-def header(name):
+def header(name, x=5):
     print '<?xml version="1.0" encoding="UTF-8" standalone="no"?>'
     print '<!-- Created with Emacs -->'
     print '<svg'
@@ -69,7 +69,7 @@ def header(name):
     print '       style="fill:#ffffff;stroke:none;stroke-width:0px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />'
     print '  <text style="font-size:12px;fill:#000000;">'
     print '      <tspan'
-    print '       x="5"'
+    print '       x="%d"' % (x)
     print '       y="32"'
     print '       style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">%s</tspan></text>' % (name)
 

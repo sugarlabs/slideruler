@@ -27,7 +27,7 @@ offset3 = 12
 
 def main():
 
-    header('LLn')
+    header('LLn', 25)
 
     for i in range(100, 200):
         if int((i / 10) * 10) == i:
