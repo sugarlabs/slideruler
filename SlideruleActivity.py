@@ -511,7 +511,6 @@ class SlideruleActivity(activity.Activity):
         # Add the buttons to the toolbars
         self._function_combo = _combo_factory(_FUNCTIONS, _FC, _('function'),
                                               self._function_combo_cb, toolbar)
-        _separator_factory(toolbar)
         self.top_button = _button_factory('Con', _('top scale'),
                                           self._dummy_cb, toolbar)
         self._top_combo = _combo_factory(_TOP_SCALES, _C, _('top scale'),
