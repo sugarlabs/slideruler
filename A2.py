@@ -26,7 +26,7 @@ offset3 = 12
 
 def main():
 
-    header('A')
+    header('B')
 
     for i in range(100, 200):
         if int((i / 10) * 10) == i:
