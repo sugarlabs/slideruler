@@ -25,45 +25,24 @@ offset2 = - 7
 offset3 = 12
 
 
+
 def main():
 
-    header('LLn', 25)
+    header('LLn', 10)
 
-    for i in range(100, 200):
-        if int((i / 10) * 10) == i:
-            s = math.log(float(i * 10 / SCALE))
-            mark(math.log(i / 100.), htop3, htop2, htop1,
-                 str(float(int(s*100))/100.))
-        elif int((i / 5) * 5) == i:
-            mark(math.log(i / 100.), htop3, htop2, htop1 + offset1)
+    x = 0.0
+    i = 0
+    while x < math.log(10):
+        if i/5*5 == i:
+            mark(x, htop3, htop2, htop1,
+                 str(float(int(x*100))/100.))
         else:
-            mark(math.log(i / 100.), htop3, htop2, htop1 + offset2)
+            mark(x, htop3, htop2, htop1 + offset1)
+        x += math.log(math.e)/100
+        i += 1
 
-    for i in range(200, 340, 2):
-        if int((i / 10)*10) == i:
-            s = math.log(float(i * 10 / SCALE))
-            mark(math.log(i / 100.), htop3, htop2, htop1,
-                 str(float(int(s*100))/100.))
-        else:
-            mark(math.log(i/100.), htop3, htop2, htop1 + offset1)
-
-    for i in range(340, 1005, 5):
-        if int((i / 10)* 10) == i:
-            if int((i / 50) * 50) == i:
-                s = math.log(float(i * 10 / SCALE))
-                mark(math.log(i / 100.), htop3, htop2, htop1,
-                     str(float(int(s*100))/100.))
-            else:
-                mark(math.log(i / 100.), htop3, htop2, htop1)
-        else:
-            mark(math.log(i / 100.), htop3, htop2, htop1 + offset1)
-
-    s = math.log(float(math.pi))
-    special_mark(math.log(math.pi), htop3 + offset3, htop2, htop1,
-                 str(float(int(s*100))/100.))
-    s = math.log(float(math.e))
-    special_mark(math.log(math.e), htop3 + offset3, htop2, htop1,
-                 str(float(int(s*100))/100.))
+    s = math.log(10)
+    mark(s, htop3 + offset3, htop2, htop1)
     footer()
     return 0
 
