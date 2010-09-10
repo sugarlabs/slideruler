@@ -31,7 +31,7 @@ def mark(offset, height3, height2, height1, string=None, flip=False,
         svg += '      <tspan\n'
         svg += '       x="%0.2f"\n' % (ln)
         svg += '       y="%d"\n' % (height3)
-        svg += '       style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">%d</tspan></text>\n' % (int(string))
+        svg += '       style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">%0.4f</tspan></text>\n' % (string)
     svg += '  <path\n'
     svg += '       d="M %0.2f,%d,%0.2f,%d"\n' % (ln, height1, ln, height2)
     svg += '       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />\n'
@@ -46,27 +46,49 @@ def make_slide(label, offset_function, label_function, x=None):
     else:
         header(label, x)
 
-    for i in range(23, 181):
-        if int((i / 4) * 4) == i:
-            mark(offset_function(i / 4.), slide3, slide2, slide1,
-                 label_function(i / 4.))
+    for i in range(100, 200):
+        if int((i / 10) * 10) == i:
+            mark(offset_function(i / 100.), slide3, slide2, slide1,
+                 label_function(i / 100.))
+        elif int((i / 5) * 5) == i:
+            mark(offset_function(i / 100.), slide3, slide2,
+                 slide1 + slide_offset1)
         else:
-            mark(offset_function(i / 4.), slide3, slide2,
+            mark(offset_function(i / 100.), slide3, slide2,
                  slide1 + slide_offset2)
+
+    for i in range(200, 400, 2):
+        if int((i / 20) * 20) == i:
+            mark(offset_function(i / 100.), slide3, slide2, slide1,
+                 label_function(i / 100.))
+        elif int((i / 10) * 10) == i:
+            mark(offset_function(i / 100.), slide3, slide2, slide1)
+        else:
+            mark(math.log(i/100., 10), slide3, slide2, slide1 + slide_offset1)
+
+    for i in range(400, 1005, 5):
+        if int((i / 50) * 50) == i:
+            mark(offset_function(i / 100.), slide3, slide2, slide1,
+                 label_function(i / 100.))
+        elif int((i / 10) * 10) == i:
+            mark(offset_function(i / 100.), slide3, slide2, slide1)
+        else:
+            mark(offset_function(i / 100.), slide3, slide2,
+                 slide1 + slide_offset1)
 
     footer()
 
 
 def main():
-    """ Tangent scale for slide (top scale) """
+    """ Log Log scale for slide (top scale) """
 
     def offset_function(x):
-        return math.log(10 * math.tan(float(x) * math.pi / 180.), 10)
+        return math.log(x, 10)
 
     def label_function(x):
-        return x
+        return math.exp(x / 1000.)
 
-    make_slide('T', offset_function, label_function)
+    make_slide('LL0', offset_function, label_function, x=10)
     return 0
 
 

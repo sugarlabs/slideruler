@@ -14,105 +14,201 @@
 from constants import SWIDTH, SHEIGHT, OFFSET, SCALE, HTOP1, HTOP2, HTOP3
 import math
 
+# position constants for SLIDE
+slide1 = HTOP1
+slide2 = HTOP2
+slide3 = HTOP3
+slide_offset1 = 5
+slide_offset2 = 7
+slide_offset3 = -12
 
-htop1 = HTOP1
-htop2 = HTOP2
-htop3 = HTOP3
-offset1 = 5
-offset2 = 7
-offset3 = -12
-log10 = math.log(10)
+# position constants for STATOR
+stator1 = SHEIGHT - HTOP1
+stator2 = SHEIGHT - HTOP2
+stator3 = SHEIGHT - HTOP3 + 12
+stator_offset1 = - 5
+stator_offset2 = - 7
+stator_offset3 = 12
 
-def mark(offset, height3, height2, height1, string=None, flip=False):
+log10 = 1 # math.log(10, 10)
+
+
+def mark(offset, height3, height2, height1, string=None, flip=False,
+         scale=1.0):
+    """ Plot marks in a range from 1 to 10 along the length of the slide """
+    svg = ''
+    scale *= float(SWIDTH - 2 * OFFSET) / SCALE
     if flip:
-        ln = float(int(((log10 - offset) * SCALE + OFFSET) * 10) / 10.)
+        ln = float((log10 - offset) * SCALE + OFFSET)
     else:
-        ln = float(int((offset * SCALE + OFFSET) * 10) / 10.)
+        ln = offset * SCALE * scale + OFFSET
     if string is not None:
-        print '  <text style="font-size:12px;fill:#000000;">'
-        print '      <tspan'
-        print '       x="%f"' % (ln)
-        print '       y="%d"' % (height3)
-        print '       style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">%s</tspan></text>' % (string)
-    print '  <path'
-    print '       d="M %f,%d,%f,%d"' % (ln, height1, ln, height2)
-    print '       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />'
+        svg += '  <text style="font-size:12px;fill:#000000;">\n'
+        svg += '      <tspan\n'
+        svg += '       x="%0.2f"\n' % (ln)
+        svg += '       y="%d"\n' % (height3)
+        svg += '       style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">%0.1f</tspan></text>\n' % (string)
+    svg += '  <path\n'
+    svg += '       d="M %0.2f,%d,%0.2f,%d"\n' % (ln, height1, ln, height2)
+    svg += '       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />\n'
+    print svg
 
 
-def special_mark(offset, height3, height2, height1, string, flip=False):
+def special_mark(offset, height3, height2, height1, string, flip=False,
+                 scale=1.0):
+    """ Plot special marsk, e.g., e and pi """
+    svg = ''
+    scale *= float(SWIDTH - 2 * OFFSET) / SCALE
     if flip:
-        ln = float(int(((log10 - offset) * SCALE + OFFSET) * 10) / 10.)
+        ln = (log10 - offset) * SCALE * scale + OFFSET
     else:
-        ln = float(int((offset * SCALE + OFFSET) * 10) / 10.)
-    print '  <text style="font-size:12px;fill:#0000ff;">'
-    print '      <tspan'
-    print '       x="%f"' % (ln)
-    print '       y="%d"' % (height3)
-    print '       style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">%s</tspan></text>' % (string)
-    print '  <path'
-    print '       d="M %f,%d,%f,%d"' % (ln, height1, ln, height2)
-    print '       style="fill:none;stroke:#0000ff;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />'
+        ln = offset * SCALE * scale + OFFSET
+    svg += '  <text style="font-size:12px;fill:#0000ff;">\n'
+    svg += '      <tspan\n'
+    svg += '       x="%0.2f"\n' % (ln)
+    svg += '       y="%d"\n' % (height3)
+    svg += '       style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">%s</tspan></text>\n' % (string)
+    svg += '  <path\n'
+    svg += '       d="M %0.2f,%d,%0.2f,%d"\n' % (ln, height1, ln, height2)
+    svg += '       style="fill:none;stroke:#0000ff;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />\n'
+    print svg
 
 
 def header(name, x=5):
-    print '<?xml version="1.0" encoding="UTF-8" standalone="no"?>'
-    print '<!-- Created with Emacs -->'
-    print '<svg'
-    print '   xmlns:svg="http://www.w3.org/2000/svg"'
-    print '   xmlns="http://www.w3.org/2000/svg"'
-    print '   version="1.0"'
-    print '   width="%s"' % (SWIDTH)
-    print '   height="%s">' % (SHEIGHT)
-    print '  <g>'
-    print '  <path'
-    print '       d="M 0,0 L 0,60 L 2400,60 L 2400,0 Z"'
-    print '       style="fill:#ffffff;stroke:none;stroke-width:0px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />'
-    print '  <text style="font-size:12px;fill:#000000;">'
-    print '      <tspan'
-    print '       x="%d"' % (x)
-    print '       y="32"'
-    print '       style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">%s</tspan></text>' % (name)
+    """ The SVG header """
+    svg = ''
+    svg += '<?xml version="1.0" encoding="UTF-8" standalone="no"?>\n'
+    svg += '<!-- Created with Emacs -->\n'
+    svg += '<svg\n'
+    svg += '   xmlns:svg="http://www.w3.org/2000/svg"\n'
+    svg += '   xmlns="http://www.w3.org/2000/svg"\n'
+    svg += '   version="1.0"\n'
+    svg += '   width="%s"\n' % (SWIDTH)
+    svg += '   height="%s">\n' % (SHEIGHT)
+    svg += '  <g>\n'
+    svg += '  <path\n'
+    svg += '       d="M 0,0 L 0,60 L 2400,60 L 2400,0 Z"\n'
+    svg += '       style="fill:#ffffff;stroke:none;stroke-width:0px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />\n'
+    svg += '  <text style="font-size:12px;fill:#000000;">\n'
+    svg += '      <tspan\n'
+    svg += '       x="%d"\n' % (x)
+    svg += '       y="32"\n'
+    svg += '       style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">%s</tspan></text>' % (name)
+    print svg
 
 
 def footer():
-    print '  </g>'
-    print '</svg>'
+    """ The SVG footer """
+    svg = ''
+    svg += '  </g>\n'
+    svg += '</svg>\n'
+    print svg
 
-def main():
 
-    header('C')
+def make_slide(label, offset_function, label_function, x=None):
+    """ Generate marks along a slide using passed functions """
+
+    if x is None:
+        header(label)
+    else:
+        header(label, x)
 
     for i in range(100, 200):
         if int((i / 10) * 10) == i:
-            mark(math.log(i / 100.), htop3, htop2, htop1,
-                 str(float(int(i) * 10 / SCALE)))
+            mark(offset_function(i / 100.), slide3, slide2, slide1,
+                 label_function(i / 100.))
         elif int((i / 5) * 5) == i:
-            mark(math.log(i / 100.), htop3, htop2, htop1 + offset1)
+            mark(offset_function(i / 100.), slide3, slide2,
+                 slide1 + slide_offset1)
         else:
-            mark(math.log(i / 100.), htop3, htop2, htop1 + offset2)
+            mark(offset_function(i / 100.), slide3, slide2,
+                 slide1 + slide_offset2)
 
     for i in range(200, 400, 2):
-        if int((i / 10)*10) == i:
-            mark(math.log(i / 100.), htop3, htop2, htop1,
-                 str(float(int(i) * 10 / SCALE)))
+        if int((i / 10) * 10) == i:
+            mark(offset_function(i / 100.), slide3, slide2, slide1,
+                 label_function(i / 100.))
         else:
-            mark(math.log(i/100.), htop3, htop2, htop1 + offset1)
+            mark(offset_function(i / 100.), slide3, slide2,
+                 slide1 + slide_offset1)
 
     for i in range(400, 1005, 5):
         if int((i / 10)* 10) == i:
             if int((i / 50) * 50) == i:
-                mark(math.log(i / 100.), htop3, htop2,
-                     htop1, str(float(int(i) * 10 / SCALE)))
+                mark(offset_function(i / 100.), slide3, slide2, slide1,
+                     label_function(i / 100.))
             else:
-                mark(math.log(i / 100.), htop3, htop2, htop1)
+                mark(offset_function(i / 100.), slide3, slide2, slide1)
         else:
-            mark(math.log(i / 100.), htop3, htop2, htop1 + offset1)
+            mark(offset_function(i / 100.), slide3, slide2,
+                 slide1 + slide_offset1)
 
-    special_mark(math.log(math.pi), htop3 + offset3, htop2, htop1, 'π')
-    special_mark(math.log(math.e), htop3 + offset3, htop2, htop1, 'e')
+    special_mark(offset_function(math.pi), slide3 + slide_offset3,
+                 slide2, slide1, 'π')
+    special_mark(offset_function(math.e), slide3 + slide_offset3,
+                 slide2, slide1, 'e')
 
     footer()
+
+
+def make_stator(label, offset_function, label_function, x=None):
+    """ Generate marks along a stator using passed functions """
+
+    if x is None:
+        header(label)
+    else:
+        header(label, x)
+
+    for i in range(100, 200):
+        if int((i / 10) * 10) == i:
+            mark(offset_function(i / 100.), stator3, stator2, stator1,
+                 label_function(i / 100.))
+        elif int((i / 5) * 5) == i:
+            mark(offset_function(i / 100.), stator3, stator2,
+                 stator1 + stator_offset1)
+        else:
+            mark(offset_function(i / 100.), stator3, stator2,
+                 stator1 + stator_offset2)
+
+    for i in range(200, 400, 2):
+        if int((i / 10) * 10) == i:
+            mark(offset_function(i / 100.), stator3, stator2, stator1,
+                 label_function(i / 100.))
+        else:
+            mark(offset_function(i / 100.), stator3, stator2,
+                 stator1 + stator_offset1)
+
+    for i in range(400, 1005, 5):
+        if int((i / 10)* 10) == i:
+            if int((i / 50) * 50) == i:
+                mark(offset_function(i / 100.), stator3, stator2, stator1,
+                     label_function(i / 100.))
+            else:
+                mark(offset_function(i / 100.), stator3, stator2, stator1)
+        else:
+            mark(offset_function(i / 100.), stator3, stator2,
+                 stator1 + stator_offset1)
+
+    special_mark(offset_function(math.pi), stator3 + stator_offset3,
+                 stator2, stator1, 'π')
+    special_mark(offset_function(math.e), stator3 + stator_offset3,
+                 stator2, stator1, 'e')
+
+    footer()
+
+
+def main():
+    """ Log scale for slide (top scale) """
+
+    def offset_function(x):
+        return math.log(x, 10)
+
+    def label_function(x):
+        return x
+
+    make_slide('C', offset_function, label_function)
     return 0
+
 
 if __name__ == "__main__":
     main()

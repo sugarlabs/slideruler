@@ -12,14 +12,14 @@
        style="fill:#ffffff;stroke:none;stroke-width:0px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
   <text style="font-size:12px;fill:#000000;">
       <tspan
-       x="5"
+       x="10"
        y="32"
-       style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">D</tspan></text>
+       style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">LL0</tspan></text>
   <text style="font-size:12px;fill:#000000;">
       <tspan
        x="50.00"
        y="37"
-       style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">1.0</tspan></text>
+       style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">1.0010</tspan></text>
   <path
        d="M 50.00,22,50.00,1"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
@@ -64,7 +64,7 @@
       <tspan
        x="145.20"
        y="37"
-       style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">1.1</tspan></text>
+       style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">1.0011</tspan></text>
   <path
        d="M 145.20,22,145.20,1"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
@@ -109,7 +109,7 @@
       <tspan
        x="232.12"
        y="37"
-       style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">1.2</tspan></text>
+       style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">1.0012</tspan></text>
   <path
        d="M 232.12,22,232.12,1"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
@@ -154,7 +154,7 @@
       <tspan
        x="312.07"
        y="37"
-       style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">1.3</tspan></text>
+       style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">1.0013</tspan></text>
   <path
        d="M 312.07,22,312.07,1"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
@@ -199,7 +199,7 @@
       <tspan
        x="386.09"
        y="37"
-       style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">1.4</tspan></text>
+       style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">1.0014</tspan></text>
   <path
        d="M 386.09,22,386.09,1"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
@@ -244,7 +244,7 @@
       <tspan
        x="455.01"
        y="37"
-       style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">1.5</tspan></text>
+       style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">1.0015</tspan></text>
   <path
        d="M 455.01,22,455.01,1"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
@@ -289,7 +289,7 @@
       <tspan
        x="519.48"
        y="37"
-       style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">1.6</tspan></text>
+       style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">1.0016</tspan></text>
   <path
        d="M 519.48,22,519.48,1"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
@@ -334,7 +334,7 @@
       <tspan
        x="580.03"
        y="37"
-       style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">1.7</tspan></text>
+       style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">1.0017</tspan></text>
   <path
        d="M 580.03,22,580.03,1"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
@@ -379,7 +379,7 @@
       <tspan
        x="637.13"
        y="37"
-       style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">1.8</tspan></text>
+       style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">1.0018</tspan></text>
   <path
        d="M 637.13,22,637.13,1"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
@@ -424,7 +424,7 @@
       <tspan
        x="691.13"
        y="37"
-       style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">1.9</tspan></text>
+       style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">1.0019</tspan></text>
   <path
        d="M 691.13,22,691.13,1"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
@@ -469,7 +469,7 @@
       <tspan
        x="742.37"
        y="37"
-       style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">2.0</tspan></text>
+       style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">1.0020</tspan></text>
   <path
        d="M 742.37,22,742.37,1"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
@@ -490,11 +490,6 @@
        d="M 781.55,17,781.55,1"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
 
-  <text style="font-size:12px;fill:#000000;">
-      <tspan
-       x="791.10"
-       y="37"
-       style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">2.1</tspan></text>
   <path
        d="M 791.10,22,791.10,1"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
@@ -519,7 +514,7 @@
       <tspan
        x="837.57"
        y="37"
-       style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">2.2</tspan></text>
+       style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">1.0022</tspan></text>
   <path
        d="M 837.57,22,837.57,1"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
@@ -540,11 +535,6 @@
        d="M 873.25,17,873.25,1"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
 
-  <text style="font-size:12px;fill:#000000;">
-      <tspan
-       x="881.97"
-       y="37"
-       style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">2.3</tspan></text>
   <path
        d="M 881.97,22,881.97,1"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
@@ -569,7 +559,7 @@
       <tspan
        x="924.49"
        y="37"
-       style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">2.4</tspan></text>
+       style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">1.0024</tspan></text>
   <path
        d="M 924.49,22,924.49,1"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
@@ -590,11 +580,6 @@
        d="M 957.24,17,957.24,1"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
 
-  <text style="font-size:12px;fill:#000000;">
-      <tspan
-       x="965.26"
-       y="37"
-       style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">2.5</tspan></text>
   <path
        d="M 965.26,22,965.26,1"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
@@ -619,7 +604,7 @@
       <tspan
        x="1004.44"
        y="37"
-       style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">2.6</tspan></text>
+       style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">1.0026</tspan></text>
   <path
        d="M 1004.44,22,1004.44,1"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
@@ -640,11 +625,6 @@
        d="M 1034.71,17,1034.71,1"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
 
-  <text style="font-size:12px;fill:#000000;">
-      <tspan
-       x="1042.14"
-       y="37"
-       style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">2.7</tspan></text>
   <path
        d="M 1042.14,22,1042.14,1"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
@@ -669,7 +649,7 @@
       <tspan
        x="1078.46"
        y="37"
-       style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">2.8</tspan></text>
+       style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">1.0028</tspan></text>
   <path
        d="M 1078.46,22,1078.46,1"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
@@ -690,11 +670,6 @@
        d="M 1106.60,17,1106.60,1"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
 
-  <text style="font-size:12px;fill:#000000;">
-      <tspan
-       x="1113.52"
-       y="37"
-       style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">2.9</tspan></text>
   <path
        d="M 1113.52,22,1113.52,1"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
@@ -719,7 +694,7 @@
       <tspan
        x="1147.38"
        y="37"
-       style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">3.0</tspan></text>
+       style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">1.0030</tspan></text>
   <path
        d="M 1147.38,22,1147.38,1"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
@@ -740,11 +715,6 @@
        d="M 1173.67,17,1173.67,1"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
 
-  <text style="font-size:12px;fill:#000000;">
-      <tspan
-       x="1180.13"
-       y="37"
-       style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">3.1</tspan></text>
   <path
        d="M 1180.13,22,1180.13,1"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
@@ -769,7 +739,7 @@
       <tspan
        x="1211.84"
        y="37"
-       style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">3.2</tspan></text>
+       style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">1.0032</tspan></text>
   <path
        d="M 1211.84,22,1211.84,1"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
@@ -790,11 +760,6 @@
        d="M 1236.51,17,1236.51,1"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
 
-  <text style="font-size:12px;fill:#000000;">
-      <tspan
-       x="1242.58"
-       y="37"
-       style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">3.3</tspan></text>
   <path
        d="M 1242.58,22,1242.58,1"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
@@ -819,7 +784,7 @@
       <tspan
        x="1272.40"
        y="37"
-       style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">3.4</tspan></text>
+       style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">1.0034</tspan></text>
   <path
        d="M 1272.40,22,1272.40,1"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
@@ -840,11 +805,6 @@
        d="M 1295.63,17,1295.63,1"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
 
-  <text style="font-size:12px;fill:#000000;">
-      <tspan
-       x="1301.36"
-       y="37"
-       style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">3.5</tspan></text>
   <path
        d="M 1301.36,22,1301.36,1"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
@@ -869,7 +829,7 @@
       <tspan
        x="1329.50"
        y="37"
-       style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">3.6</tspan></text>
+       style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">1.0036</tspan></text>
   <path
        d="M 1329.50,22,1329.50,1"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
@@ -890,11 +850,6 @@
        d="M 1351.45,17,1351.45,1"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
 
-  <text style="font-size:12px;fill:#000000;">
-      <tspan
-       x="1356.86"
-       y="37"
-       style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">3.7</tspan></text>
   <path
        d="M 1356.86,22,1356.86,1"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
@@ -919,7 +874,7 @@
       <tspan
        x="1383.50"
        y="37"
-       style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">3.8</tspan></text>
+       style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">1.0038</tspan></text>
   <path
        d="M 1383.50,22,1383.50,1"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
@@ -940,11 +895,6 @@
        d="M 1404.31,17,1404.31,1"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
 
-  <text style="font-size:12px;fill:#000000;">
-      <tspan
-       x="1409.45"
-       y="37"
-       style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">3.9</tspan></text>
   <path
        d="M 1409.45,22,1409.45,1"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
@@ -969,7 +919,7 @@
       <tspan
        x="1434.74"
        y="37"
-       style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">4.0</tspan></text>
+       style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">1.0040</tspan></text>
   <path
        d="M 1434.74,22,1434.74,1"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
@@ -1014,7 +964,7 @@
       <tspan
        x="1552.39"
        y="37"
-       style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">4.5</tspan></text>
+       style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">1.0045</tspan></text>
   <path
        d="M 1552.39,22,1552.39,1"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
@@ -1059,7 +1009,7 @@
       <tspan
        x="1657.63"
        y="37"
-       style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">5.0</tspan></text>
+       style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">1.0050</tspan></text>
   <path
        d="M 1657.63,22,1657.63,1"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
@@ -1104,7 +1054,7 @@
       <tspan
        x="1752.83"
        y="37"
-       style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">5.5</tspan></text>
+       style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">1.0055</tspan></text>
   <path
        d="M 1752.83,22,1752.83,1"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
@@ -1149,7 +1099,7 @@
       <tspan
        x="1839.75"
        y="37"
-       style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">6.0</tspan></text>
+       style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">1.0060</tspan></text>
   <path
        d="M 1839.75,22,1839.75,1"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
@@ -1194,7 +1144,7 @@
       <tspan
        x="1919.70"
        y="37"
-       style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">6.5</tspan></text>
+       style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">1.0065</tspan></text>
   <path
        d="M 1919.70,22,1919.70,1"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
@@ -1239,7 +1189,7 @@
       <tspan
        x="1993.73"
        y="37"
-       style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">7.0</tspan></text>
+       style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">1.0070</tspan></text>
   <path
        d="M 1993.73,22,1993.73,1"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
@@ -1284,7 +1234,7 @@
       <tspan
        x="2062.64"
        y="37"
-       style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">7.5</tspan></text>
+       style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">1.0075</tspan></text>
   <path
        d="M 2062.64,22,2062.64,1"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
@@ -1329,7 +1279,7 @@
       <tspan
        x="2127.11"
        y="37"
-       style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">8.0</tspan></text>
+       style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">1.0080</tspan></text>
   <path
        d="M 2127.11,22,2127.11,1"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
@@ -1374,7 +1324,7 @@
       <tspan
        x="2187.66"
        y="37"
-       style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">8.5</tspan></text>
+       style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">1.0085</tspan></text>
   <path
        d="M 2187.66,22,2187.66,1"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
@@ -1419,7 +1369,7 @@
       <tspan
        x="2244.76"
        y="37"
-       style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">9.0</tspan></text>
+       style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">1.0090</tspan></text>
   <path
        d="M 2244.76,22,2244.76,1"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
@@ -1464,7 +1414,7 @@
       <tspan
        x="2298.76"
        y="37"
-       style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">9.5</tspan></text>
+       style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">1.0095</tspan></text>
   <path
        d="M 2298.76,22,2298.76,1"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
@@ -1509,28 +1459,10 @@
       <tspan
        x="2350.00"
        y="37"
-       style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">10.0</tspan></text>
+       style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">1.0101</tspan></text>
   <path
        d="M 2350.00,22,2350.00,1"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
-
-  <text style="font-size:12px;fill:#0000ff;">
-      <tspan
-       x="1193.44"
-       y="49"
-       style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">π</tspan></text>
-  <path
-       d="M 1193.44,22,1193.44,1"
-       style="fill:none;stroke:#0000ff;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
-
-  <text style="font-size:12px;fill:#0000ff;">
-      <tspan
-       x="1048.88"
-       y="49"
-       style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">e</tspan></text>
-  <path
-       d="M 1048.88,22,1048.88,1"
-       style="fill:none;stroke:#0000ff;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
 
   </g>
 </svg>
