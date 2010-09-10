@@ -66,6 +66,7 @@ def make_stator(label, offset_function, label_function, x=None):
     else:
         header(label, x)
 
+    mark(0, stator2, stator2, stator1)
     for i in range(23, 64):
         if int((i / 4) * 4) == i:
             mark(offset_function(i / 4.), stator3, stator2, stator1,

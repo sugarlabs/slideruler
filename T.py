@@ -46,6 +46,7 @@ def make_slide(label, offset_function, label_function, x=None):
     else:
         header(label, x)
 
+    mark(0, slide2, slide2, slide1)
     for i in range(23, 181):
         if int((i / 4) * 4) == i:
             mark(offset_function(i / 4.), slide3, slide2, slide1,

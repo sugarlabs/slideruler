@@ -16,6 +16,10 @@
        y="32"
        style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">T</tspan></text>
   <path
+       d="M 50.00,22,50.00,1"
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
+
+  <path
        d="M 56.92,15,56.92,1"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />
 

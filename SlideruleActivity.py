@@ -330,8 +330,7 @@ class SlideruleActivity(activity.Activity):
             self.sr.LLn2.draw_slider(1000)
         elif self.sr.slider_on_bottom == 'LL02':
             self.sr.LL02.draw_slider(1000)
-
-        self.bottom_button.set_icon(self.sr.slider_on_bottom + 'on')
+        self.bottom_button.set_icon(self.sr.slider_on_bottom)
 
     def _predefined_function(self):
         """ Return the predefined function that matches the sliders """
@@ -423,6 +422,7 @@ class SlideruleActivity(activity.Activity):
         self.sr.T.spr.move((dx, cy))
         self.sr.L.spr.move((dx, cy))
         self.sr.LLn.spr.move((dx, cy))
+        self.sr.LL0.spr.move((dx, cy))
         self.sr.A2.spr.move((dx, dy))
         self.sr.K2.spr.move((dx, dy))
         self.sr.S2.spr.move((dx, dy))
@@ -528,11 +528,11 @@ class SlideruleActivity(activity.Activity):
         # Add the buttons to the toolbars
         self._function_combo = _combo_factory(_FUNCTIONS, _FC, _('function'),
                                               self._function_combo_cb, toolbar)
-        self.top_button = _button_factory('Con', _('top scale'),
+        self.top_button = _button_factory('C', _('top scale'),
                                           self._dummy_cb, toolbar)
         self._top_combo = _combo_factory(_TOP_SCALES, _C, _('top scale'),
                                          self._top_combo_cb, toolbar)
-        self.bottom_button = _button_factory('Don', _('bottom scale'),
+        self.bottom_button = _button_factory('D', _('bottom scale'),
                                              self._dummy_cb, toolbar)
         self._bottom_combo = _combo_factory(_BOT_SCALES, _D, _('bot scale'),
                                          self._bottom_combo_cb, toolbar)

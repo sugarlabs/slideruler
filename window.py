@@ -11,7 +11,7 @@
 # Free Software Foundation, Inc., 59 Temple Place - Suite 330,
 # Boston, MA 02111-1307, USA.
 
-from constants import SHEIGHT, SWIDTH, SCALE
+from constants import SHEIGHT, SWIDTH, SCALE, OFFSET
 
 import pygtk
 pygtk.require('2.0')
@@ -45,6 +45,110 @@ def hide_slider_and_tabs(slider, tab_left, tab_right):
     slider.spr.hide()
     tab_left.spr.hide()
     tab_right.spr.hide()
+
+
+def round(x, precision=2):
+    if precision == 2:
+        return(float(int(x * 100 + 0.5) / 100.))
+    elif precision == 1:
+        return(float(int(x * 10 + 0.5) / 10.))
+    elif precision == 0:
+        return(int(x + 0.5))
+    else:
+        y = math.pow(10, precision)
+        return(float(int(x * y + 0.5) / y))
+
+
+def _calc_log(dx):
+    """ C and D scales """
+    rescale = 1
+    if dx < 0:
+        rescale = 0.1
+        dx += SWIDTH - (2.0 * OFFSET)
+    return round(math.exp(dx / SCALE) * rescale)
+
+
+def _calc_inverse_log(dx):
+    """ CI and DI scales """
+    rescale = 1
+    if dx < 0:
+        rescale = 0.1
+        dx += SWIDTH - (2.0 * OFFSET)
+    return round(10.0/ math.exp(dx / SCALE) * rescale)
+
+
+def _calc_log_squared(dx):
+    """ A and B scales """
+    rescale = 1
+    if dx < 0:
+        dx += SWIDTH - (2.0 * OFFSET)
+        rescale = 0.01
+    A = math.exp(2 * dx / SCALE) * rescale
+    if A > 50:
+        return round(A, 1)
+    else:
+        return round(A)
+
+
+def _calc_log_cubed(dx):
+    """ K scale """
+    rescale = 1
+    if dx < 0:
+        rescale = 0.001
+        dx += SWIDTH - (2.0 * OFFSET)
+    K = math.exp(3 * dx / SCALE) * rescale
+    if K > 500:
+        return round(K, 0)
+    elif K > 50:
+        return round(K, 1)
+    else:
+        return round(K)
+
+
+def _calc_log_log(dx):
+    """ LL0 scale """
+    if dx < 0:
+        dx += SWIDTH - (2.0 * OFFSET)
+    LL0 = math.exp(math.exp(dx / SCALE) / 1000)
+    if LL0 > 1.002:
+        return round(LL0, 5)
+    else:
+        return round(LL0, 6)
+
+
+def _calc_linear(dx):
+    """ L scale """
+    if dx < 0:
+        dx += SWIDTH - (2.0 * OFFSET)
+        return round(10 * ((dx / SCALE) / math.log(10) - 1.0))
+    else:
+        return round(10 * (dx / SCALE) / math.log(10))
+
+
+def _calc_sine(dx):
+    """ S scale """
+    dx /= SCALE
+    s = math.exp(dx)/10
+    if s > 1.0:
+        s = 1.0
+    S = 180.0 * math.asin(s) / math.pi
+    if S > 60:
+        return round(S, 1)
+    else:
+        return round(S)
+
+
+def _calc_tangent(dx):
+    """ T scale """
+    dx /= SCALE
+    t = math.exp(dx)/10
+    if t > 1.0:
+        t = 1.0
+    return round(180.0 * math.atan(t) / math.pi)
+
+
+def _calc_ln(dx):
+    return round(dx / SCALE)
 
 
 class SlideRule():
@@ -140,7 +244,6 @@ class SlideRule():
         self.update_slider_labels()
         self.update_results_label()
 
-        self.factor = 1
         self.press = None
         self.last = None
         self.dragpos = 0
@@ -236,7 +339,7 @@ class SlideRule():
                                  self.T_tab_right, dx, 0)
             move_slider_and_tabs(self.LLn, self.LLn_tab_left,
                                  self.LLn_tab_right, dx, 0)
-            move_slider_and_tabs(self.LL0, self.LLn_tab_left,
+            move_slider_and_tabs(self.LL0, self.LL0_tab_left,
                                  self.LL0_tab_right, dx, 0)
             self.D.spr.move_relative((dx, 0))
             self.DI.spr.move_relative((dx, 0))
@@ -304,24 +407,39 @@ class SlideRule():
         self.update_results_label()
 
     def _update_top(self, function):
-        self.C_tab_left.spr.set_label(str(function()))
-        self.C_tab_right.spr.set_label(str(function()))
-        self.CI_tab_left.spr.set_label(str(function()))
-        self.CI_tab_right.spr.set_label(str(function()))
-        self.A_tab_left.spr.set_label(str(function()))
-        self.A_tab_right.spr.set_label(str(function()))
-        self.K_tab_left.spr.set_label(str(function()))
-        self.K_tab_right.spr.set_label(str(function()))
-        self.S_tab_left.spr.set_label(str(function()))
-        self.S_tab_right.spr.set_label(str(function()))
-        self.T_tab_left.spr.set_label(str(function()))
-        self.T_tab_right.spr.set_label(str(function()))
-        self.L_tab_left.spr.set_label(str(function()))
-        self.L_tab_right.spr.set_label(str(function()))
-        self.LLn_tab_left.spr.set_label(str(function()))
-        self.LLn_tab_right.spr.set_label(str(function()))
-        self.LL0_tab_left.spr.set_label(str(function()))
-        self.LL0_tab_right.spr.set_label(str(function()))
+        v_left = function()
+        if self.slider_on_bottom == 'L2':
+            v_right = 10 + v_left
+        elif self.slider_on_bottom == 'D':
+            v_right = v_left * 10.
+        elif self.slider_on_bottom == 'A2':
+            v_right = v_left * 100.
+        elif self.slider_on_bottom == 'K2':
+            v_right = v_left * 1000.
+        elif self.slider_on_bottom == 'DI':
+            v_right = v_left / 10.
+        elif self.slider_on_bottom == 'LLn2':
+            v_right = round(math.log(10)) + v_left
+        else:
+            v_right = v_left
+        self.C_tab_left.spr.set_label(str(v_left))
+        self.C_tab_right.spr.set_label(str(v_right))
+        self.CI_tab_left.spr.set_label(str(v_left))
+        self.CI_tab_right.spr.set_label(str(v_right))
+        self.A_tab_left.spr.set_label(str(v_left))
+        self.A_tab_right.spr.set_label(str(v_right))
+        self.K_tab_left.spr.set_label(str(v_left))
+        self.K_tab_right.spr.set_label(str(v_right))
+        self.S_tab_left.spr.set_label(str(v_left))
+        self.S_tab_right.spr.set_label(str(v_right))
+        self.T_tab_left.spr.set_label(str(v_left))
+        self.T_tab_right.spr.set_label(str(v_right))
+        self.L_tab_left.spr.set_label(str(v_left))
+        self.L_tab_right.spr.set_label(str(v_right))
+        self.LLn_tab_left.spr.set_label(str(v_left))
+        self.LLn_tab_right.spr.set_label(str(v_right))
+        self.LL0_tab_left.spr.set_label(str(v_left))
+        self.LL0_tab_right.spr.set_label(str(v_right))
 
     def update_slider_labels(self):
         """ Based on the current alignment of the rules, calculate labels. """
@@ -387,12 +505,12 @@ class SlideRule():
             if self.slider_on_top == 'A':
                 if self.A.spr.get_xy()[0] == dx:
                     A = str(self._calc_A())
-                    DA = str(self._calc_D_results() * self.factor)
+                    DA = str(self._calc_D_results())
                     s = " √ %s = %s\t\t%s² = %s" % (A, DA, DA, A)
             elif self.slider_on_top == 'K':
                 if self.K.spr.get_xy()[0] == dx:
                     K = str(self._calc_K())
-                    DK = str(self._calc_D_results() * self.factor)
+                    DK = str(self._calc_D_results())
                     s = " ∛ %s = %s\t\t%s³ = %s" % (K, DK, DK, K)
             elif self.slider_on_top == 'S':
                 if self.S.spr.get_xy()[0] == dx:
@@ -407,12 +525,12 @@ class SlideRule():
             elif self.slider_on_top == 'C':
                 D = str(self._calc_D())
                 C = str(self._calc_C())
-                DC = str(self._calc_D_results() * self.factor)
+                DC = str(self._calc_D_results())
                 s = "%s × %s = %s\t\t%s / %s = %s" % (D, C, DC, DC, C, D)
             elif self.slider_on_top == 'CI':
                 D = str(self._calc_D())
                 CI = str(self._calc_CI())
-                DCI = str(self._calc_D_results() * self.factor / 10.)
+                DCI = str(self._calc_D_results() / 10.)
                 s = "%s / %s = %s\t\t%s × %s = %s" % (D, CI, DCI, DCI, CI, D)
         elif self.slider_on_bottom == 'L2':
             if self.slider_on_top == 'L':
@@ -444,90 +562,6 @@ class SlideRule():
                                                         operator2, Lstr, L2str)
         self.results_label.spr.set_label(s)
 
-    # Calculate the value of individual scales
-    def _r_offset(self, slider):
-        return self.R.spr.get_xy()[0] - slider.spr.get_xy()[0]
-
-    def _calc_C(self):
-        """ C scale is read from the reticule. """
-        dx = self._r_offset(self.C)
-        if dx < 0:
-            dx = math.log(10.) * SCALE + dx
-        C = math.exp(dx / SCALE)
-        return float(int(C * 100) / 100.)
-
-    def _calc_LLn(self):
-        """ LLn scale is read from the reticule. """
-        dx = self._r_offset(self.LLn)
-        if dx < 0:
-            dx = math.log(10.) * SCALE + dx
-        LLn = (dx / SCALE)
-        return float(int(LLn * 100) / 100.)
-
-    def _calc_LL0(self):
-        """ LL0 scale is read from the reticule. """
-        dx = self._r_offset(self.LL0)
-        if dx < 0:
-            dx = math.log(10.) * SCALE + dx
-        LL0 = (dx / SCALE)
-        return float(int(LL0 * 100) / 100.)
-
-    def _calc_CI(self):
-        """ CO scale is read from the reticule. """
-        dx = self._r_offset(self.CI)
-        if dx < 0:
-            dx = math.log(10.) * SCALE + dx
-        CI = math.exp(dx / SCALE)
-        return float(int((10./CI) * 100) / 100.)
-
-    def _calc_A(self):
-        """ A scale is read from the reticule. """
-        dx = self._r_offset(self.A)
-        if dx < 0:
-            dx = math.log(10.) * SCALE + dx
-        A = math.exp(2 * dx / SCALE)
-        return float(int(A * 10) / 10.)
-
-    def _calc_S(self):
-        """ S scale is read from the reticule. """
-        dx = self._r_offset(self.S)
-        dx /= SCALE
-        s = math.exp(dx)/10
-        if s > 1.0:
-            s = 1.0
-        r = math.asin(s)
-        S = 180.0 * r / math.pi
-        return float(int(S * 10) / 10.)
-
-    def _calc_T(self):
-        """ T scale is read from the reticule. """
-        dx = self._r_offset(self.T)
-        dx /= SCALE
-        t = math.exp(dx)/10
-        if t > 1.0:
-            t = 1.0
-        r = math.atan(t)
-        T = 180.0 * r / math.pi
-        return float(int(T * 10) / 10.)
-
-    def _calc_K(self):
-        """ K scale is read from the reticule. """
-        dx = self._r_offset(self.K)
-        if dx < 0:
-            dx = math.log(10.) * SCALE + dx
-        K = math.exp(3 * dx / SCALE)
-        return float(int(K * 10) / 10.)
-
-    def _calc_L(self):
-        """ L scale is read from the reticule. """
-        dx = self._r_offset(self.L)
-        if dx < 0:
-            dx = math.log(10.) * SCALE + dx
-            L = 10 * ((dx / SCALE) / math.log(10) - 1.0)
-        else:
-            L = 10 * (dx / SCALE) / math.log(10)
-        return float(int(L * 100) / 100.)
-
     def _top_slide_offset(self, x):
         """ Calcualate the offset between the top and bottom sliders """
         if self.slider_on_top == 'A':
@@ -550,176 +584,95 @@ class SlideRule():
             x2, y2 = self.LL0.spr.get_xy()
         return x2 - x
 
+    # Calculate the value of individual slides and stators
+
+    def _r_offset(self, slider):
+        return self.R.spr.get_xy()[0] - slider.spr.get_xy()[0]
+
+    def _calc_C(self):
+        return _calc_log(self._r_offset(self.C))
+        
     def _calc_D(self):
-        """ D scale is read from the position of the top slider """
-        dx = self._top_slide_offset(self.D.spr.get_xy()[0])
-        if dx < 0:
-            dx = math.log(10.) * SCALE + dx
-            self.factor = 10
-        else:
-            self.factor = 1
-        D = math.exp(dx / SCALE)
-        return float(int(D * 100) / 100.)
+        return _calc_log(self._top_slide_offset(self.D.spr.get_xy()[0]))
 
-    def _calc_LLn2(self):
-        """ LLn2 scale is read from the position of the top slider """
-        dx = self._top_slide_offset(self.LLn2.spr.get_xy()[0])
-        if dx < 0:
-            dx = math.log(10.) * SCALE + dx
-            self.factor = 10
-        else:
-            self.factor = 1
-        LLn = (dx / SCALE)
-        return float(int(LLn * 100) / 100.)
+    def _calc_D_results(self):
+        return _calc_log(self._r_offset(self.D))
 
-    def _calc_LL02(self):
-        """ LL02 scale is read from the position of the top slider """
-        dx = self._top_slide_offset(self.LL02.spr.get_xy()[0])
-        if dx < 0:
-            dx = math.log(10.) * SCALE + dx
-            self.factor = 10
-        else:
-            self.factor = 1
-        LL0 = (dx / SCALE)
-        return float(int(LL0 * 100) / 100.)
+    def _calc_CI(self):
+        return _calc_inverse_log(self._r_offset(self.CI))
 
     def _calc_DI(self):
-        """ DI scale is read from the position of the top slider """
-        dx = self._top_slide_offset(self.DI.spr.get_xy()[0])
-        if dx < 0:
-            dx = math.log(10.) * SCALE + dx
-            self.factor = 0.1
-        else:
-            self.factor = 1
-        DI = math.exp(dx / SCALE)
-        return float(int((10.0 / DI) * 100)) / 100.
-
-    def _calc_L2(self):
-        """ L scale is read from the position of the top slider """
-        dx = self._top_slide_offset(self.L2.spr.get_xy()[0])
-        if dx < 0:
-            dx = math.log(10.) * SCALE + dx
-            L = 10 * ((dx / SCALE) / math.log(10) - 1.0)
-        else:
-            L = 10 * (dx / SCALE) / math.log(10)
-        return float(int(L * 100) / 100.)
-
-    def _calc_A2(self):
-        """ A2 scale is read from the position of the top slider """
-        dx = self._top_slide_offset(self.A2.spr.get_xy()[0])
-        if dx < 0:
-            dx = math.log(10.) * SCALE + dx
-            self.factor = 10
-        else:
-            self.factor = 1
-        A2 = math.exp(2 * dx / SCALE)
-        return float(int(A2 * 100) / 100.)
-
-    def _calc_K2(self):
-        """ K2 scale is read from the position of the top slider """
-        dx = self._top_slide_offset(self.K2.spr.get_xy()[0])
-        if dx < 0:
-            dx = math.log(10.) * SCALE + dx
-            self.factor = 10
-        else:
-            self.factor = 1
-        K2 = math.exp(3 * dx / SCALE)
-        return float(int(K2 * 100) / 100.)
-
-    def _calc_S2(self):
-        """ S2 scale is read from the position of the top slider """
-        dx = self._top_slide_offset(self.S2.spr.get_xy()[0])
-        if dx < 0:
-            dx = math.log(10.) * SCALE + dx
-        dx /= SCALE
-        s = math.exp(dx)/10
-        if s > 1.0:
-            s = 1.0
-        r = math.asin(s)
-        S = 180.0 * r / math.pi
-        return float(int(S * 10) / 10.)
-
-    def _calc_T2(self):
-        """ T2 scale is read from the position of the top slider """
-        dx = self._top_slide_offset(self.T2.spr.get_xy()[0])
-        if dx < 0:
-            dx = math.log(10.) * SCALE + dx
-        dx /= SCALE
-        t = math.exp(dx)/10
-        if t > 1.0:
-            t = 1.0
-        r = math.atan(t)
-        T = 180.0 * r / math.pi
-        return float(int(T * 10) / 10.)
-
-    # Calculate results under redicule
-    def _calc_D_results(self):
-        dx = self._r_offset(self.D)
-        if dx < 0:
-            dx = math.log(10.) * SCALE + dx
-        D = math.exp(dx / SCALE)
-        return float(int(D * 100) / 100.)
-
-    def _calc_LLn2_results(self):
-        dx = self._r_offset(self.D)
-        if dx < 0:
-            dx = math.log(10.) * SCALE + dx
-        LLn = (dx / SCALE)
-        return float(int(LLn * 100) / 100.)
+        return _calc_inverse_log(
+            self._top_slide_offset(self.DI.spr.get_xy()[0]))
 
     def _calc_DI_results(self):
-        dx = self._r_offset(self.DI)
-        if dx < 0:
-            dx = math.log(10.) * SCALE + dx
-        DI = math.exp(dx / SCALE)
-        return float(int((10.0 / DI) * 100) / 100.)
+        return _calc_inverse_log(self._r_offset(self.DI))
 
-    def _calc_L2_results(self):
-        dx = self._r_offset(self.L2)
-        if dx < 0:
-            dx = math.log(10.) * SCALE + dx
-            L = 10 * ((dx / SCALE) / math.log(10) - 1.0)
-        else:
-            L = 10 * (dx / SCALE) / math.log(10)
-        return float(int(L * 100) / 100.)
+    def _calc_LLn(self):
+        return _calc_ln(self._r_offset(self.LLn))
+
+    def _calc_LLn2(self):
+        return _calc_ln(self._top_slide_offset(self.LLn2.spr.get_xy()[0]))
+
+    def _calc_LLn2_results(self):
+        return _calc_ln(self._r_offset(self.D))
+
+    def _calc_LL0(self):
+        return _calc_log_log(self._r_offset(self.LL0))
+
+    def _calc_LL02(self):
+        return _calc_log_log(self._top_slide_offset(self.LL02.spr.get_xy()[0]))
+
+    def _calc_LL02_results(self):
+        return _calc_log_log(self._r_offset(self.D))
+
+    def _calc_A(self):
+        return _calc_log_squared(self._r_offset(self.A))
+
+    def _calc_A2(self):
+         return _calc_log_squared(
+             self._top_slide_offset(self.A2.spr.get_xy()[0]))
 
     def _calc_A2_results(self):
-        dx = self._r_offset(self.A2)
-        if dx < 0:
-            dx = math.log(10.) * SCALE + dx
-        A2 = math.exp(2 * dx / SCALE)
-        return float(int(A2 * 100) / 100.)
+         return _calc_log_squared(self._r_offset(self.A2))
 
-    def _calc_K2_results(self):
-        dx = self._r_offset(self.K2)
-        if dx < 0:
-            dx = math.log(10.) * SCALE + dx
-        K2 = math.exp(3 * dx / SCALE)
-        return float(int(K2 * 100) / 100.)
+    def _calc_S(self):
+        return _calc_sine(self._r_offset(self.S))
+
+    def _calc_S2(self):
+        return _calc_sine(self._top_slide_offset(self.S2.spr.get_xy()[0]))
 
     def _calc_S2_results(self):
-        dx = self._r_offset(self.S2)
-        if dx < 0:
-            dx = math.log(10.) * SCALE + dx
-        dx /= SCALE
-        s = math.exp(dx)/10
-        if s > 1.0:
-            s = 1.0
-        r = math.asin(s)
-        S = 180.0 * r / math.pi
-        return float(int(S * 10) / 10.)
+        return _calc_sine(self._r_offset(self.S2))
+
+    def _calc_T(self):
+        return _calc_tangent(self._r_offset(self.T))
+
+    def _calc_T2(self):
+        return _calc_tangent(self._top_slide_offset(self.T2.spr.get_xy()[0]))
 
     def _calc_T2_results(self):
-        dx = self._r_offset(self.T2)
-        if dx < 0:
-            dx = math.log(10.) * SCALE + dx
-        dx /= SCALE
-        t = math.exp(dx)/10
-        if t > 1.0:
-            t = 1.0
-        r = math.atan(t)
-        T = 180.0 * r / math.pi
-        return float(int(T * 10) / 10.)
+        return _calc_tangent(self._r_offset(self.T2))
+
+    def _calc_K(self):
+        return _calc_log_cubed(self._r_offset(self.K))
+
+    def _calc_K2(self):
+        return _calc_log_cubed(self._top_slide_offset(self.K2.spr.get_xy()[0]))
+
+    def _calc_K2_results(self):
+        return _calc_log_cubed(self._r_offset(self.K2))
+
+    def _calc_L(self):
+        return _calc_linear(self._r_offset(self.L))
+
+    def _calc_L2(self):
+        return _calc_linear(self._top_slide_offset(self.L2.spr.get_xy()[0]))
+
+    def _calc_L2_results(self):
+        return _calc_linear(self._r_offset(self.L2))
+
+    # window manager misc. methods
 
     def _expose_cb(self, win, event):
         # self.sprite_list.refresh(event)

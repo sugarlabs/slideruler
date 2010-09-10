@@ -1,6 +1,8 @@
 15
 
 * added log log scale
+* major refactoring of calculations
+* major refactoring of slide, stator generation
 
 14
 
