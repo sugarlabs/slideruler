@@ -16,41 +16,103 @@ import gtk
 import gobject
 import os.path
 
-from sprites import *
+from constants import SHEIGHT, SWIDTH
+from sprites import Sprite
 
-#
-# class for defining individual slider parts
-#
-class Slider:
-    """ Create a sprite for a slider """
+
+class Stator():
+    """ Create a sprite for a stator """
     def __init__(self, sprites, path, name, x, y, w, h):
-        # create sprite from svg file
-        self.spr = Sprite(sprites, x, y,
-                          self.load_image(path,name,w,h))
+        self.spr = Sprite(sprites, x, y, file_to_pixbuf(path, name, w, h))
         self.name = name
 
-    def draw_slider(self, layer=1000):
+    def draw(self, layer=1000):
         self.spr.set_layer(layer)
         self.spr.draw()
 
-    def load_image(self, path, name, w, h):
-        return gtk.gdk.pixbuf_new_from_file_at_size(
-            os.path.join(path+name+'.svg'), int(w), int(h))
+    def match(self, sprite):
+        if self.spr == sprite:
+            return True
+        return False
 
-class Tab:
+    def move(self, dx, dy):
+        self.spr.move((dx, dy))
+
+    def move_relative(self, dx, dy):
+        self.spr.move_relative((dx, dy))
+
+    def hide(self):
+        self.spr.hide()
+
+
+class Slide(Stator):
+    """ Create a sprite for a slide """
     def __init__(self, sprites, path, name, x, y, w, h):
-        # create sprite from svg file
-        self.spr = Sprite(sprites, x, y,
-                          self.load_image(path,name,w,h))
+        self.spr = Sprite(sprites, x, y, file_to_pixbuf(path, name, w, h))
+        self.tab_dx = [0, SWIDTH - 100]
+        self.tab_dy = [2 * SHEIGHT, 2 * SHEIGHT]
+        self.tabs = []
+        self.tabs.append(Tab(sprites, path, 'tab', x + self.tab_dx[0],
+                             y + self.tab_dy[0], 100, SHEIGHT))
+        self.tabs.append(Tab(sprites, path, 'tab', x + self.tab_dx[1],
+                             y + self.tab_dy[1], 100, SHEIGHT))
+        self.name = name
+
+    def match(self, sprite):
+        if sprite == self.spr or sprite == self.tabs[0].spr or \
+                sprite == self.tabs[1].spr:
+            return True
+        return False
+
+    def draw(self, layer=1000):
+        self.spr.set_layer(layer)
+        self.spr.draw()
+        self.tabs[0].spr.set_layer(layer)
+        self.tabs[0].spr.draw()
+        self.tabs[1].spr.set_layer(layer)
+        self.tabs[1].spr.draw()
+
+    def move(self, dx, dy):
+        self.spr.move((dx, dy))
+        self.tabs[0].spr.move((dx + self.tab_dx[0], dy + self.tab_dy[0]))
+        self.tabs[1].spr.move((dx + self.tab_dx[1], dy + self.tab_dy[1]))
+
+    def move_relative(self, dx, dy):
+        self.spr.move_relative((dx, dy))
+        self.tabs[0].spr.move_relative((dx, dy))
+        self.tabs[1].spr.move_relative((dx, dy))
+
+    def hide(self):
+        self.spr.hide()
+        self.tabs[0].spr.hide()
+        self.tabs[1].spr.hide()
+
+
+class Reticule(Slide):
+    """ Create a sprite for a reticle """
+    def __init__(self, sprites, path, name, x, y, w, h):
+        self.spr = Sprite(sprites, x, y, file_to_pixbuf(path, name, w, h))
+        self.tab_dx = [0, 0]
+        self.tab_dy = [-SHEIGHT, 2 * SHEIGHT]
+        self.tabs = []
+        self.tabs.append(Tab(sprites, path, 'tab', x + self.tab_dx[0],
+                             y + self.tab_dy[0], 100, SHEIGHT))
+        self.tabs.append(Tab(sprites, path, 'tab', x + self.tab_dx[1],
+                             y + self.tab_dy[1], 100, SHEIGHT))
+        self.name = name
+
+
+class Tab():
+    """ Create tabs for the slide """
+    def __init__(self, sprites, path, name, x, y, w, h):
+        self.spr = Sprite(sprites, x, y, file_to_pixbuf(path, name, w, h))
         self.spr.label = "1.0"
 
-    def draw_slider(self, layer=1000):
-        self.spr.set_layer(layer)
-        self.spr.draw()
 
-    def load_image(self, path, name, w, h):
-        return gtk.gdk.pixbuf_new_from_file_at_size(
-            os.path.join(path+name+'.svg'), int(w), int(h))
+def file_to_pixbuf(path, name, w, h):
+    """ Load pixbuf from a file. """
+    return gtk.gdk.pixbuf_new_from_file_at_size(
+        os.path.join(path+name+'.svg'), int(w), int(h))
 
 
 def svg_str_to_pixbuf(svg_string):

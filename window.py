@@ -25,26 +25,8 @@ try:
 except:
     GRID_CELL_SIZE = 0
 
-from sprite_factory import Slider, Tab
+from sprite_factory import Slide, Stator, Reticule
 from sprites import Sprites
-
-
-def move_slider_and_tabs(slider, tab_left, tab_right, dx, dy):
-    slider.spr.move_relative((dx, dy))
-    tab_left.spr.move_relative((dx, dy))
-    tab_right.spr.move_relative((dx, dy))
-
-
-def draw_slider_and_tabs(slider, tab_left, tab_right, layer=1000):
-    slider.draw_slider(layer)
-    tab_left.draw_slider(layer)
-    tab_right.draw_slider(layer)
-
-
-def hide_slider_and_tabs(slider, tab_left, tab_right):
-    slider.spr.hide()
-    tab_left.spr.hide()
-    tab_right.spr.hide()
 
 
 def round(x, precision=2):
@@ -184,72 +166,61 @@ class SlideRule():
         self.width = gtk.gdk.screen_width()
         self.height = gtk.gdk.screen_height()-GRID_CELL_SIZE
         self.sprites = Sprites(self.canvas)
+        self.slides = []
+        self.stators = []
         self.scale = 1
 
-        # Open the sliders
+        # Open the slides
         y = 50
-        self.results_label = Slider(self.sprites, self.path, 'label',
+        self.results_label = Stator(self.sprites, self.path, 'label',
                                         int((self.width - 600) / 2),
                                         y + 4 * SHEIGHT,
                                         600, SHEIGHT)
 
-        self.C = self._make_slider('C', y + 60)
-        self.CI = self._make_slider('CI', y + 60)
-        self.L = self._make_slider('L', y + 60)
-        self.A = self._make_slider('A', y + 60)
-        self.K = self._make_slider('K', y + 60)
-        self.S = self._make_slider('S', y + 60)
-        self.T = self._make_slider('T', y + 60)
-        self.LLn = self._make_slider('LLn', y + 60)
-        self.LL0 = self._make_slider('LL0', y + 60)
+        self.slides.append(self._make_slide('C', y + SHEIGHT))
+        self.slides.append(self._make_slide('CI', y + SHEIGHT))
+        self.slides.append(self._make_slide('L', y + SHEIGHT))
+        self.slides.append(self._make_slide('A', y + SHEIGHT))
+        self.slides.append(self._make_slide('K', y + SHEIGHT))
+        self.slides.append(self._make_slide('S', y + SHEIGHT))
+        self.slides.append(self._make_slide('T', y + SHEIGHT))
+        self.slides.append(self._make_slide('LLn', y + SHEIGHT))
+        self.slides.append(self._make_slide('LL0', y + SHEIGHT))
 
-        self.D = self._make_slider('D', y + 2 * SHEIGHT)
-        self.DI = self._make_slider('DI', y + 2 * SHEIGHT)
-        self.L2 = self._make_slider('L2', y + 2 * SHEIGHT)
-        self.A2 = self._make_slider('A2', y + 2 * SHEIGHT)
-        self.K2 = self._make_slider('K2', y + 2 * SHEIGHT)
-        self.S2 = self._make_slider('S2', y + 2 * SHEIGHT)
-        self.T2 = self._make_slider('T2', y + 2 * SHEIGHT)
-        self.LLn2 = self._make_slider('LLn2', y + 2 * SHEIGHT)
-        self.LL02 = self._make_slider('LL02', y + 2 * SHEIGHT)
+        self.stators.append(self._make_stator('D', y + 2 * SHEIGHT))
+        self.stators.append(self._make_stator('DI', y + 2 * SHEIGHT))
+        self.stators.append(self._make_stator('L2', y + 2 * SHEIGHT))
+        self.stators.append(self._make_stator('B', y + 2 * SHEIGHT))
+        self.stators.append(self._make_stator('K2', y + 2 * SHEIGHT))
+        self.stators.append(self._make_stator('S2', y + 2 * SHEIGHT))
+        self.stators.append(self._make_stator('T2', y + 2 * SHEIGHT))
+        self.stators.append(self._make_stator('LLn2', y + 2 * SHEIGHT))
+        self.stators.append(self._make_stator('LL02', y + 2 * SHEIGHT))
 
-        self.C_tab_left = self._make_tab(0, y + 3 * SHEIGHT)
-        self.C_tab_right =  self._make_tab(SWIDTH - 100, y + 3 * SHEIGHT)
-        self.CI_tab_left = self._make_tab(0, y + 3 * SHEIGHT)
-        self.CI_tab_right =  self._make_tab(SWIDTH - 100, y + 3 * SHEIGHT)
-        self.L_tab_left = self._make_tab(0, y + 3 * SHEIGHT)
-        self.L_tab_right =  self._make_tab(SWIDTH - 100, y + 3 * SHEIGHT)
-        self.A_tab_left = self._make_tab(0, y + 3 * SHEIGHT)
-        self.A_tab_right =  self._make_tab(SWIDTH - 100, y + 3 * SHEIGHT)
-        self.K_tab_left = self._make_tab(0, y + 3 * SHEIGHT)
-        self.K_tab_right =  self._make_tab(SWIDTH - 100, y + 3 * SHEIGHT)
-        self.S_tab_left = self._make_tab(0, y + 3 * SHEIGHT)
-        self.S_tab_right =  self._make_tab(SWIDTH - 100, y + 3 * SHEIGHT)
-        self.T_tab_left = self._make_tab(0, y + 3 * SHEIGHT)
-        self.T_tab_right =  self._make_tab(SWIDTH - 100, y + 3 * SHEIGHT)
-        self.LLn_tab_left = self._make_tab(0, y + 3 * SHEIGHT)
-        self.LLn_tab_right =  self._make_tab(SWIDTH - 100, y + 3 * SHEIGHT)
-        self.LL0_tab_left = self._make_tab(0, y + 3 * SHEIGHT)
-        self.LL0_tab_right =  self._make_tab(SWIDTH - 100, y + 3 * SHEIGHT)
-        self.R_tab_top = self._make_tab(150, y)
-        self.R_tab_bottom = self._make_tab(150, y + 3 * SHEIGHT)
+        self.R = Reticule(self.sprites, self.path, 'reticule',
+                          150, y + SHEIGHT, 100, 2 * SHEIGHT)
+        self.R.draw(2000)
 
-        self.R = Slider(self.sprites, self.path, 'reticule',
-                        150, y + SHEIGHT, 100, 2 * SHEIGHT)
-        self.R.draw_slider(2000)
+        self.slide_on_top = self.name_to_slide('C')
+        self.stator_on_bottom = self.name_to_stator('D')
 
-        self.slider_on_top = 'C'
-        self.slider_on_bottom = 'D'
-
-        self.update_slider_labels()
+        self.update_slide_labels()
         self.update_results_label()
 
         self.press = None
         self.last = None
         self.dragpos = 0
 
+    def _expose_cb(self, win, event):
+        # self.sprite_list.refresh(event)
+        self.sprites.redraw_sprites()
+        return True
+
+    def _destroy_cb(self, win, event):
+        gtk.main_quit()
+
     def _keypress_cb(self, area, event):
-        """ Keypress: moving the sliders with the arrow keys """
+        """ Keypress: moving the slides with the arrow keys """
         k = gtk.gdk.keyval_name(event.keyval)
         if self.parent == None:
             return
@@ -272,32 +243,66 @@ class SlideRule():
         elif k == 'Right' or k == 'period':
             self._move_slides(self.last, 1)
         elif k == 'Home' or k == 'Pause':
-            self._move_slides(self.D.spr, -self.D.spr.get_xy()[0])
+            self._move_slides(self.name_to_stator('D').spr,
+                              -self.name_to_stator('D').spr.get_xy()[0])
         elif k == 'r':
-            self.R_tab_top.spr.move((150, self.R_tab_top.spr.get_xy()[1]))
-            self.R_tab_bottom.spr.move((150, self.R_tab_bottom.spr.get_xy()[1]))
-            self.R.spr.move((150, self.R.spr.get_xy()[1]))
-            self.update_slider_labels()
+            self.R.move(150, self.R.spr.get_xy()[1])
+            self.update_slide_labels()
             self.update_results_label()
         elif k == 'Return' or k == 'BackSpace':
             self.parent.realign_cb()
-            self.R_tab_top.spr.move((150, self.R_tab_top.spr.get_xy()[1]))
-            self.R_tab_bottom.spr.move((150, self.R_tab_bottom.spr.get_xy()[1]))
-            self.R.spr.move((150, self.R.spr.get_xy()[1]))
-            self.update_slider_labels()
+            self.R.move(150, self.R.spr.get_xy()[1])
+            self.update_slide_labels()
             self.update_results_label()
         return True
 
-    def _make_slider(self, name, y):
-        slider = Slider(self.sprites, self.path, name, 0, y, SWIDTH, SHEIGHT)
-        slider.spr.set_label('')
-        slider.draw_slider()
-        return slider
+    def _make_slide(self, name, y):
+        slide = Slide(self.sprites, self.path, name, 0, y, SWIDTH, SHEIGHT)
+        slide.spr.set_label('')
+        slide.draw()
+        return slide
 
-    def _make_tab(self, x, y):
-        tab = Tab(self.sprites, self.path, 'tab', x, y, 100, SHEIGHT)
-        tab.draw_slider()
-        return tab
+    def _make_stator(self, name, y):
+        stator = Stator(self.sprites, self.path, name, 0, y, SWIDTH, SHEIGHT)
+        stator.spr.set_label('')
+        stator.draw()
+        return stator
+
+    def name_to_slide(self, name):
+        for slide in self.slides:
+            if name == slide.name:
+                return slide
+        return self.slides[0]
+
+    def name_to_stator(self, name):
+        for stator in self.stators:
+            if name == stator.name:
+                return stator
+        return self.stators[0]
+
+    def sprite_in_stators(self, sprite):
+        for stator in self.stators:
+            if stator.match(sprite):
+                return True
+        return False
+
+    def find_stator(self, sprite):
+        for stator in self.stators:
+            if stator.match(sprite):
+                return stator
+        return None
+
+    def sprite_in_slides(self, sprite):
+        for slide in self.slides:
+            if slide.match(sprite):
+                return True
+        return False
+
+    def find_slide(self, sprite):
+        for slide in self.slides:
+            if slide.match(sprite):
+                return slide
+        return None
 
     def _button_press_cb(self, win, event):
         win.grab_focus()
@@ -321,174 +326,87 @@ class SlideRule():
         self.dragpos = x
 
     def _move_slides(self, sprite, dx):
-        if sprite in [self.D.spr, self.DI.spr, self.L2.spr, self.T2.spr,
-                      self.A2.spr, self.K2.spr, self.S2.spr, self.LLn2.spr]:
-            move_slider_and_tabs(self.C, self.C_tab_left,
-                                 self.C_tab_right, dx, 0)
-            move_slider_and_tabs(self.CI, self.CI_tab_left,
-                                 self.CI_tab_right, dx, 0)
-            move_slider_and_tabs(self.L, self.L_tab_left,
-                                 self.L_tab_right, dx, 0)
-            move_slider_and_tabs(self.A, self.A_tab_left,
-                                 self.A_tab_right, dx, 0)
-            move_slider_and_tabs(self.K, self.K_tab_left,
-                                 self.K_tab_right, dx, 0)
-            move_slider_and_tabs(self.S, self.S_tab_left,
-                                 self.S_tab_right, dx, 0)
-            move_slider_and_tabs(self.T, self.T_tab_left,
-                                 self.T_tab_right, dx, 0)
-            move_slider_and_tabs(self.LLn, self.LLn_tab_left,
-                                 self.LLn_tab_right, dx, 0)
-            move_slider_and_tabs(self.LL0, self.LL0_tab_left,
-                                 self.LL0_tab_right, dx, 0)
-            self.D.spr.move_relative((dx, 0))
-            self.DI.spr.move_relative((dx, 0))
-            self.L2.spr.move_relative((dx, 0))
-            self.T2.spr.move_relative((dx, 0))
-            self.S2.spr.move_relative((dx, 0))
-            self.A2.spr.move_relative((dx, 0))
-            self.K2.spr.move_relative((dx, 0))
-            self.LLn2.spr.move_relative((dx, 0))
-            self.LL02.spr.move_relative((dx, 0))
-            move_slider_and_tabs(self.R, self.R_tab_top,
-                                 self.R_tab_bottom, dx, 0)
-        elif sprite == self.R_tab_top.spr or \
-             sprite == self.R_tab_bottom.spr or \
-             sprite == self.R.spr:
-            move_slider_and_tabs(self.R, self.R_tab_top,
-                                 self.R_tab_bottom, dx, 0)
-        elif sprite == self.C.spr or \
-             sprite == self.C_tab_left.spr or \
-             sprite == self.C_tab_right.spr:
-            move_slider_and_tabs(self.C, self.C_tab_left,
-                                 self.C_tab_right, dx, 0)
-        elif sprite == self.CI.spr or \
-             sprite == self.CI_tab_left.spr or \
-             sprite == self.CI_tab_right.spr:
-            move_slider_and_tabs(self.CI, self.CI_tab_left,
-                                 self.CI_tab_right, dx, 0)
-        elif sprite == self.A.spr or \
-             sprite == self.A_tab_left.spr or \
-             sprite == self.A_tab_right.spr:
-            move_slider_and_tabs(self.A, self.A_tab_left,
-                                 self.A_tab_right, dx, 0)
-        elif sprite == self.K.spr or \
-             sprite == self.K_tab_left.spr or \
-             sprite == self.K_tab_right.spr:
-            move_slider_and_tabs(self.K, self.K_tab_left,
-                                 self.K_tab_right, dx, 0)
-        elif sprite == self.S.spr or \
-             sprite == self.S_tab_left.spr or \
-             sprite == self.S_tab_right.spr:
-            move_slider_and_tabs(self.S, self.S_tab_left,
-                                 self.S_tab_right, dx, 0)
-        elif sprite == self.T.spr or \
-             sprite == self.T_tab_left.spr or \
-             sprite == self.T_tab_right.spr:
-            move_slider_and_tabs(self.T, self.T_tab_left,
-                                 self.T_tab_right, dx, 0)
-        elif sprite == self.L.spr or \
-             sprite == self.L_tab_left.spr or \
-             sprite == self.L_tab_right.spr:
-            move_slider_and_tabs(self.L, self.L_tab_left,
-                                 self.L_tab_right, dx, 0)
-        elif sprite == self.LLn.spr or \
-             sprite == self.LLn_tab_left.spr or \
-             sprite == self.LLn_tab_right.spr:
-            move_slider_and_tabs(self.LLn, self.LLn_tab_left,
-                                 self.LLn_tab_right, dx, 0)
-        elif sprite == self.LL0.spr or \
-             sprite == self.LL0_tab_left.spr or \
-             sprite == self.LL0_tab_right.spr:
-            move_slider_and_tabs(self.LL0, self.LL0_tab_left,
-                                 self.LL0_tab_right, dx, 0)
-
-        self.update_slider_labels()
+        if self.sprite_in_stators(sprite):
+            for slide in self.slides:
+                slide.move_relative(dx, 0)
+            for stator in self.stators:
+                stator.move_relative(dx, 0)
+            self.R.move_relative(dx, 0)
+        elif self.R.match(sprite):
+            self.R.move_relative(dx, 0)
+        elif self.sprite_in_slides(sprite):
+            self.find_slide(sprite).move_relative(dx, 0)
+        self.update_slide_labels()
         self.update_results_label()
 
     def _update_top(self, function):
         v_left = function()
-        if self.slider_on_bottom == 'L2':
+        if self.stator_on_bottom.name == 'L2':
             v_right = 10 + v_left
-        elif self.slider_on_bottom == 'D':
+        elif self.stator_on_bottom.name == 'D':
             v_right = v_left * 10.
-        elif self.slider_on_bottom == 'A2':
+        elif self.stator_on_bottom.name == 'B':
             v_right = v_left * 100.
-        elif self.slider_on_bottom == 'K2':
+        elif self.stator_on_bottom.name == 'K2':
             v_right = v_left * 1000.
-        elif self.slider_on_bottom == 'DI':
+        elif self.stator_on_bottom.name == 'DI':
             v_right = v_left / 10.
-        elif self.slider_on_bottom == 'LLn2':
+        elif self.stator_on_bottom.name == 'LLn2':
             v_right = round(math.log(10)) + v_left
         else:
             v_right = v_left
-        self.C_tab_left.spr.set_label(str(v_left))
-        self.C_tab_right.spr.set_label(str(v_right))
-        self.CI_tab_left.spr.set_label(str(v_left))
-        self.CI_tab_right.spr.set_label(str(v_right))
-        self.A_tab_left.spr.set_label(str(v_left))
-        self.A_tab_right.spr.set_label(str(v_right))
-        self.K_tab_left.spr.set_label(str(v_left))
-        self.K_tab_right.spr.set_label(str(v_right))
-        self.S_tab_left.spr.set_label(str(v_left))
-        self.S_tab_right.spr.set_label(str(v_right))
-        self.T_tab_left.spr.set_label(str(v_left))
-        self.T_tab_right.spr.set_label(str(v_right))
-        self.L_tab_left.spr.set_label(str(v_left))
-        self.L_tab_right.spr.set_label(str(v_right))
-        self.LLn_tab_left.spr.set_label(str(v_left))
-        self.LLn_tab_right.spr.set_label(str(v_right))
-        self.LL0_tab_left.spr.set_label(str(v_left))
-        self.LL0_tab_right.spr.set_label(str(v_right))
+        for slide in self.slides:
+            slide.tabs[0].spr.set_label(str(v_left))
+            slide.tabs[1].spr.set_label(str(v_right))
 
-    def update_slider_labels(self):
+    def update_slide_labels(self):
         """ Based on the current alignment of the rules, calculate labels. """
-        if self.slider_on_bottom == 'L2':
+        if self.stator_on_bottom.name == 'L2':
             self._update_top(self._calc_L2)
-            self.R_tab_bottom.spr.set_label(str(self._calc_L2_results()))
-        elif self.slider_on_bottom == 'DI':
+            self.R.tabs[1].spr.set_label(str(self._calc_L2_results()))
+        elif self.stator_on_bottom.name == 'DI':
             self._update_top(self._calc_DI)
-            self.R_tab_bottom.spr.set_label(str(self._calc_DI_results()))
-        elif self.slider_on_bottom == 'A2':
-            self._update_top(self._calc_A2)
-            self.R_tab_bottom.spr.set_label(str(self._calc_A2_results()))
-        elif self.slider_on_bottom == 'K2':
+            self.R.tabs[1].spr.set_label(str(self._calc_DI_results()))
+        elif self.stator_on_bottom.name == 'B':
+            self._update_top(self._calc_B)
+            self.R.tabs[1].spr.set_label(str(self._calc_B_results()))
+        elif self.stator_on_bottom.name == 'K2':
             self._update_top(self._calc_K2)
-            self.R_tab_bottom.spr.set_label(str(self._calc_K2_results()))
-        elif self.slider_on_bottom == 'S2':
+            self.R.tabs[1].spr.set_label(str(self._calc_K2_results()))
+        elif self.stator_on_bottom.name == 'S2':
             self._update_top(self._calc_S2)
-            self.R_tab_bottom.spr.set_label(str(self._calc_S2_results()))
-        elif self.slider_on_bottom == 'T2':
+            self.R.tabs[1].spr.set_label(str(self._calc_S2_results()))
+        elif self.stator_on_bottom.name == 'T2':
             self._update_top(self._calc_T2)
-            self.R_tab_bottom.spr.set_label(str(self._calc_T2_results()))
-        elif self.slider_on_bottom == 'LLn2':
+            self.R.tabs[1].spr.set_label(str(self._calc_T2_results()))
+        elif self.stator_on_bottom.name == 'LLn2':
             self._update_top(self._calc_LLn2)
-            self.R_tab_bottom.spr.set_label(str(self._calc_LLn2_results()))
-        elif self.slider_on_bottom == 'LL02':
+            self.R.tabs[1].spr.set_label(str(self._calc_LLn2_results()))
+        elif self.stator_on_bottom.name == 'LL02':
             self._update_top(self._calc_LL02)
-            self.R_tab_bottom.spr.set_label(str(self._calc_LL02_results()))
+            self.R.tabs[1].spr.set_label(str(self._calc_LL02_results()))
         else:
             self._update_top(self._calc_D)
-            self.R_tab_bottom.spr.set_label(str(self._calc_D_results()))
+            self.R.tabs[1].spr.set_label(str(self._calc_D_results()))
 
-        if self.slider_on_top == 'A':
-            self.R_tab_top.spr.set_label(str(self._calc_A()))
-        elif self.slider_on_top == 'K':
-            self.R_tab_top.spr.set_label(str(self._calc_K()))
-        elif self.slider_on_top == 'S':
-            self.R_tab_top.spr.set_label(str(self._calc_S()))
-        elif self.slider_on_top == 'T':
-            self.R_tab_top.spr.set_label(str(self._calc_T()))
-        elif self.slider_on_top == 'L':
-            self.R_tab_top.spr.set_label(str(self._calc_L()))
-        elif self.slider_on_top == 'CI':
-            self.R_tab_top.spr.set_label(str(self._calc_CI()))
-        elif self.slider_on_top == 'LLn':
-            self.R_tab_top.spr.set_label(str(self._calc_LLn()))
-        elif self.slider_on_top == 'LL0':
-            self.R_tab_top.spr.set_label(str(self._calc_LL0()))
+        if self.slide_on_top.name == 'A':
+            self.R.tabs[0].spr.set_label(str(self._calc_A()))
+        elif self.slide_on_top.name == 'K':
+            self.R.tabs[0].spr.set_label(str(self._calc_K()))
+        elif self.slide_on_top.name == 'S':
+            self.R.tabs[0].spr.set_label(str(self._calc_S()))
+        elif self.slide_on_top.name == 'T':
+            self.R.tabs[0].spr.set_label(str(self._calc_T()))
+        elif self.slide_on_top.name == 'L':
+            self.R.tabs[0].spr.set_label(str(self._calc_L()))
+        elif self.slide_on_top.name == 'CI':
+            self.R.tabs[0].spr.set_label(str(self._calc_CI()))
+        elif self.slide_on_top.name == 'LLn':
+            self.R.tabs[0].spr.set_label(str(self._calc_LLn()))
+        elif self.slide_on_top.name == 'LL0':
+            self.R.tabs[0].spr.set_label(str(self._calc_LL0()))
         else:
-            self.R_tab_top.spr.set_label(str(self._calc_C()))
+            self.R.tabs[0].spr.set_label(str(self._calc_C()))
 
     def _button_release_cb(self, win, event):
         if self.press == None:
@@ -500,40 +418,40 @@ class SlideRule():
     def update_results_label(self):
         """ Update toolbar label with results of calculation. """
         s = ''
-        if self.slider_on_bottom == 'D':
-            dx, dy = self.D.spr.get_xy()
-            if self.slider_on_top == 'A':
-                if self.A.spr.get_xy()[0] == dx:
+        if self.stator_on_bottom.name == 'D':
+            dx = self.name_to_stator('D').spr.get_xy()[0]
+            if self.slide_on_top.name == 'A':
+                if self.name_to_slide('A').spr.get_xy()[0] == dx:
                     A = str(self._calc_A())
                     DA = str(self._calc_D_results())
                     s = " √ %s = %s\t\t%s² = %s" % (A, DA, DA, A)
-            elif self.slider_on_top == 'K':
-                if self.K.spr.get_xy()[0] == dx:
+            elif self.slide_on_top.name == 'K':
+                if self.name_to_slide('K').spr.get_xy()[0] == dx:
                     K = str(self._calc_K())
                     DK = str(self._calc_D_results())
                     s = " ∛ %s = %s\t\t%s³ = %s" % (K, DK, DK, K)
-            elif self.slider_on_top == 'S':
-                if self.S.spr.get_xy()[0] == dx:
+            elif self.slide_on_top.name == 'S':
+                if self.name_to_slide('S').spr.get_xy()[0] == dx:
                     S = str(self._calc_S())
                     DS = str(self._calc_D_results() / 10)
                     s = " sin(%s) = %s\t\tasin(%s) = %s" % (S, DS, DS, S)
-            elif self.slider_on_top == 'T':
-                if self.T.spr.get_xy()[0] == dx:
+            elif self.slide_on_top.name == 'T':
+                if self.name_to_slide('T').spr.get_xy()[0] == dx:
                     T = str(self._calc_T())
                     DT = str(self._calc_D_results() / 10)
                     s = " tan(%s) = %s\t\tatan(%s) = %s" % (T, DT, DT, T)
-            elif self.slider_on_top == 'C':
+            elif self.slide_on_top.name == 'C':
                 D = str(self._calc_D())
                 C = str(self._calc_C())
                 DC = str(self._calc_D_results())
                 s = "%s × %s = %s\t\t%s / %s = %s" % (D, C, DC, DC, C, D)
-            elif self.slider_on_top == 'CI':
+            elif self.slide_on_top.name == 'CI':
                 D = str(self._calc_D())
                 CI = str(self._calc_CI())
                 DCI = str(self._calc_D_results() / 10.)
                 s = "%s / %s = %s\t\t%s × %s = %s" % (D, CI, DCI, DCI, CI, D)
-        elif self.slider_on_bottom == 'L2':
-            if self.slider_on_top == 'L':
+        elif self.stator_on_bottom.name == 'L2':
+            if self.slide_on_top.name == 'L':
                 # use ndash to display a minus sign
                 L2 = self._calc_L2()
                 if L2 < 0:
@@ -563,121 +481,102 @@ class SlideRule():
         self.results_label.spr.set_label(s)
 
     def _top_slide_offset(self, x):
-        """ Calcualate the offset between the top and bottom sliders """
-        if self.slider_on_top == 'A':
-            x2, y2 = self.A.spr.get_xy()
-        elif self.slider_on_top == 'C':
-            x2, y2 = self.C.spr.get_xy()
-        elif self.slider_on_top == 'CI':
-            x2, y2 = self.CI.spr.get_xy()
-        elif self.slider_on_top == 'K':
-            x2, y2 = self.K.spr.get_xy()
-        elif self.slider_on_top == 'S':
-            x2, y2 = self.S.spr.get_xy()
-        elif self.slider_on_top == 'T':
-            x2, y2 = self.T.spr.get_xy()
-        elif self.slider_on_top == 'L':
-            x2, y2 = self.L.spr.get_xy()
-        elif self.slider_on_top == 'LLn':
-            x2, y2 = self.LLn.spr.get_xy()
-        elif self.slider_on_top == 'LL0':
-            x2, y2 = self.LL0.spr.get_xy()
+        """ Calcualate the offset between the top and bottom slides """
+        x2, y2 = self.slide_on_top.spr.get_xy()
         return x2 - x
 
     # Calculate the value of individual slides and stators
 
-    def _r_offset(self, slider):
-        return self.R.spr.get_xy()[0] - slider.spr.get_xy()[0]
+    def _r_offset(self, slide):
+        return self.R.spr.get_xy()[0] - slide.spr.get_xy()[0]
 
     def _calc_C(self):
-        return _calc_log(self._r_offset(self.C))
+        return _calc_log(self._r_offset(self.name_to_slide('C')))
         
     def _calc_D(self):
-        return _calc_log(self._top_slide_offset(self.D.spr.get_xy()[0]))
+        return _calc_log(self._top_slide_offset(
+                self.name_to_stator('D').spr.get_xy()[0]))
 
     def _calc_D_results(self):
-        return _calc_log(self._r_offset(self.D))
+        return _calc_log(self._r_offset(self.name_to_stator('D')))
 
     def _calc_CI(self):
-        return _calc_inverse_log(self._r_offset(self.CI))
+        return _calc_inverse_log(self._r_offset(self.name_to_slide('CI')))
 
     def _calc_DI(self):
         return _calc_inverse_log(
-            self._top_slide_offset(self.DI.spr.get_xy()[0]))
+            self._top_slide_offset(self.name_to_stator('DI').spr.get_xy()[0]))
 
     def _calc_DI_results(self):
-        return _calc_inverse_log(self._r_offset(self.DI))
+        return _calc_inverse_log(self._r_offset(self.name_to_stator('DI')))
 
     def _calc_LLn(self):
-        return _calc_ln(self._r_offset(self.LLn))
+        return _calc_ln(self._r_offset(self.name_to_slide('LLn')))
 
     def _calc_LLn2(self):
-        return _calc_ln(self._top_slide_offset(self.LLn2.spr.get_xy()[0]))
+        return _calc_ln(self._top_slide_offset(
+                self.name_to_stator('LLn2').spr.get_xy()[0]))
 
     def _calc_LLn2_results(self):
-        return _calc_ln(self._r_offset(self.D))
+        return _calc_ln(self._r_offset(self.name_to_stator('D')))
 
     def _calc_LL0(self):
-        return _calc_log_log(self._r_offset(self.LL0))
+        return _calc_log_log(self._r_offset(self.name_to_slide('LL0')))
 
     def _calc_LL02(self):
-        return _calc_log_log(self._top_slide_offset(self.LL02.spr.get_xy()[0]))
+        return _calc_log_log(self._top_slide_offset(
+                self.name_to_stator('LL02').spr.get_xy()[0]))
 
     def _calc_LL02_results(self):
-        return _calc_log_log(self._r_offset(self.D))
+        return _calc_log_log(self._r_offset(self.name_to_stator('D')))
 
     def _calc_A(self):
-        return _calc_log_squared(self._r_offset(self.A))
+        return _calc_log_squared(self._r_offset(self.name_to_slide('A')))
 
-    def _calc_A2(self):
+    def _calc_B(self):
          return _calc_log_squared(
-             self._top_slide_offset(self.A2.spr.get_xy()[0]))
+             self._top_slide_offset(self.name_to_stator('B').spr.get_xy()[0]))
 
-    def _calc_A2_results(self):
-         return _calc_log_squared(self._r_offset(self.A2))
+    def _calc_B_results(self):
+         return _calc_log_squared(self._r_offset(self.name_to_stator('B')))
 
     def _calc_S(self):
-        return _calc_sine(self._r_offset(self.S))
+        return _calc_sine(self._r_offset(self.name_to_slide('S')))
 
     def _calc_S2(self):
-        return _calc_sine(self._top_slide_offset(self.S2.spr.get_xy()[0]))
+        return _calc_sine(self._top_slide_offset(
+                self.name_to_stator('S2').spr.get_xy()[0]))
 
     def _calc_S2_results(self):
-        return _calc_sine(self._r_offset(self.S2))
+        return _calc_sine(self._r_offset(self.name_to_stator('S2')))
 
     def _calc_T(self):
-        return _calc_tangent(self._r_offset(self.T))
+        return _calc_tangent(self._r_offset(self.name_to_slide('T')))
 
     def _calc_T2(self):
-        return _calc_tangent(self._top_slide_offset(self.T2.spr.get_xy()[0]))
+        return _calc_tangent(self._top_slide_offset(
+                self.name_to_stator('T2').spr.get_xy()[0]))
 
     def _calc_T2_results(self):
-        return _calc_tangent(self._r_offset(self.T2))
+        return _calc_tangent(self._r_offset(self.name_to_stator('T2')))
 
     def _calc_K(self):
-        return _calc_log_cubed(self._r_offset(self.K))
+        return _calc_log_cubed(self._r_offset(self.name_to_slide('K')))
 
     def _calc_K2(self):
-        return _calc_log_cubed(self._top_slide_offset(self.K2.spr.get_xy()[0]))
+        return _calc_log_cubed(self._top_slide_offset(
+                self.name_to_stator('K2').spr.get_xy()[0]))
 
     def _calc_K2_results(self):
-        return _calc_log_cubed(self._r_offset(self.K2))
+        return _calc_log_cubed(self._r_offset(self.name_to_stator('K2')))
 
     def _calc_L(self):
-        return _calc_linear(self._r_offset(self.L))
+        return _calc_linear(self._r_offset(self.name_to_slide('L')))
 
     def _calc_L2(self):
-        return _calc_linear(self._top_slide_offset(self.L2.spr.get_xy()[0]))
+        return _calc_linear(self._top_slide_offset(
+                self.name_to_stator('L2').spr.get_xy()[0]))
 
     def _calc_L2_results(self):
-        return _calc_linear(self._r_offset(self.L2))
+        return _calc_linear(self._r_offset(self.name_to_stator('L2')))
 
-    # window manager misc. methods
-
-    def _expose_cb(self, win, event):
-        # self.sprite_list.refresh(event)
-        self.sprites.redraw_sprites()
-        return True
-
-    def _destroy_cb(self, win, event):
-        gtk.main_quit()
