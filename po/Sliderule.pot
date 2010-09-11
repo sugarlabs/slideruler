@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-09-03 09:15-0400\n"
+"POT-Creation-Date: 2010-09-10 19:02-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -91,28 +91,32 @@ msgstr ""
 msgid "log log"
 msgstr ""
 
-#: /home/walter/Desktop/sliderule/SlideruleActivity.py:506
+#: /home/walter/Desktop/sliderule/SlideruleActivity.py:70
+msgid "ln"
+msgstr ""
+
+#: /home/walter/Desktop/sliderule/SlideruleActivity.py:523
 msgid "Project"
 msgstr ""
 
-#: /home/walter/Desktop/sliderule/SlideruleActivity.py:512
+#: /home/walter/Desktop/sliderule/SlideruleActivity.py:529
 msgid "function"
 msgstr ""
 
-#: /home/walter/Desktop/sliderule/SlideruleActivity.py:515
-#: /home/walter/Desktop/sliderule/SlideruleActivity.py:517
+#: /home/walter/Desktop/sliderule/SlideruleActivity.py:531
+#: /home/walter/Desktop/sliderule/SlideruleActivity.py:533
 msgid "top scale"
 msgstr ""
 
-#: /home/walter/Desktop/sliderule/SlideruleActivity.py:519
+#: /home/walter/Desktop/sliderule/SlideruleActivity.py:535
 msgid "bottom scale"
 msgstr ""
 
-#: /home/walter/Desktop/sliderule/SlideruleActivity.py:521
+#: /home/walter/Desktop/sliderule/SlideruleActivity.py:537
 msgid "bot scale"
 msgstr ""
 
-#: /home/walter/Desktop/sliderule/SlideruleActivity.py:524
+#: /home/walter/Desktop/sliderule/SlideruleActivity.py:540
 #: /home/walter/Desktop/sliderule/sliderule.py:73
 msgid "realign slides"
 msgstr ""
