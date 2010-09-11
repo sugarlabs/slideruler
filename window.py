@@ -201,8 +201,8 @@ class SlideRule():
                           150, y + SHEIGHT, 100, 2 * SHEIGHT)
         self.R.draw(2000)
 
-        self.slide_on_top = self.name_to_slide('C')
-        self.stator_on_bottom = self.name_to_stator('D')
+        self.active_slide = self.name_to_slide('C')
+        self.active_stator = self.name_to_stator('D')
 
         self.update_slide_labels()
         self.update_results_label()
@@ -341,17 +341,17 @@ class SlideRule():
 
     def _update_top(self, function):
         v_left = function()
-        if self.stator_on_bottom.name == 'L2':
+        if self.active_stator.name == 'L2':
             v_right = 10 + v_left
-        elif self.stator_on_bottom.name == 'D':
+        elif self.active_stator.name == 'D':
             v_right = v_left * 10.
-        elif self.stator_on_bottom.name == 'B':
+        elif self.active_stator.name == 'B':
             v_right = v_left * 100.
-        elif self.stator_on_bottom.name == 'K2':
+        elif self.active_stator.name == 'K2':
             v_right = v_left * 1000.
-        elif self.stator_on_bottom.name == 'DI':
+        elif self.active_stator.name == 'DI':
             v_right = v_left / 10.
-        elif self.stator_on_bottom.name == 'LLn2':
+        elif self.active_stator.name == 'LLn2':
             v_right = round(math.log(10)) + v_left
         else:
             v_right = v_left
@@ -361,49 +361,49 @@ class SlideRule():
 
     def update_slide_labels(self):
         """ Based on the current alignment of the rules, calculate labels. """
-        if self.stator_on_bottom.name == 'L2':
+        if self.active_stator.name == 'L2':
             self._update_top(self._calc_L2)
             self.R.tabs[1].spr.set_label(str(self._calc_L2_results()))
-        elif self.stator_on_bottom.name == 'DI':
+        elif self.active_stator.name == 'DI':
             self._update_top(self._calc_DI)
             self.R.tabs[1].spr.set_label(str(self._calc_DI_results()))
-        elif self.stator_on_bottom.name == 'B':
+        elif self.active_stator.name == 'B':
             self._update_top(self._calc_B)
             self.R.tabs[1].spr.set_label(str(self._calc_B_results()))
-        elif self.stator_on_bottom.name == 'K2':
+        elif self.active_stator.name == 'K2':
             self._update_top(self._calc_K2)
             self.R.tabs[1].spr.set_label(str(self._calc_K2_results()))
-        elif self.stator_on_bottom.name == 'S2':
+        elif self.active_stator.name == 'S2':
             self._update_top(self._calc_S2)
             self.R.tabs[1].spr.set_label(str(self._calc_S2_results()))
-        elif self.stator_on_bottom.name == 'T2':
+        elif self.active_stator.name == 'T2':
             self._update_top(self._calc_T2)
             self.R.tabs[1].spr.set_label(str(self._calc_T2_results()))
-        elif self.stator_on_bottom.name == 'LLn2':
+        elif self.active_stator.name == 'LLn2':
             self._update_top(self._calc_LLn2)
             self.R.tabs[1].spr.set_label(str(self._calc_LLn2_results()))
-        elif self.stator_on_bottom.name == 'LL02':
+        elif self.active_stator.name == 'LL02':
             self._update_top(self._calc_LL02)
             self.R.tabs[1].spr.set_label(str(self._calc_LL02_results()))
         else:
             self._update_top(self._calc_D)
             self.R.tabs[1].spr.set_label(str(self._calc_D_results()))
 
-        if self.slide_on_top.name == 'A':
+        if self.active_slide.name == 'A':
             self.R.tabs[0].spr.set_label(str(self._calc_A()))
-        elif self.slide_on_top.name == 'K':
+        elif self.active_slide.name == 'K':
             self.R.tabs[0].spr.set_label(str(self._calc_K()))
-        elif self.slide_on_top.name == 'S':
+        elif self.active_slide.name == 'S':
             self.R.tabs[0].spr.set_label(str(self._calc_S()))
-        elif self.slide_on_top.name == 'T':
+        elif self.active_slide.name == 'T':
             self.R.tabs[0].spr.set_label(str(self._calc_T()))
-        elif self.slide_on_top.name == 'L':
+        elif self.active_slide.name == 'L':
             self.R.tabs[0].spr.set_label(str(self._calc_L()))
-        elif self.slide_on_top.name == 'CI':
+        elif self.active_slide.name == 'CI':
             self.R.tabs[0].spr.set_label(str(self._calc_CI()))
-        elif self.slide_on_top.name == 'LLn':
+        elif self.active_slide.name == 'LLn':
             self.R.tabs[0].spr.set_label(str(self._calc_LLn()))
-        elif self.slide_on_top.name == 'LL0':
+        elif self.active_slide.name == 'LL0':
             self.R.tabs[0].spr.set_label(str(self._calc_LL0()))
         else:
             self.R.tabs[0].spr.set_label(str(self._calc_C()))
@@ -418,41 +418,41 @@ class SlideRule():
     def update_results_label(self):
         """ Update toolbar label with results of calculation. """
         s = ''
-        if self.stator_on_bottom.name == 'D':
+        if self.active_stator.name == 'D':
             dx = self.name_to_stator('D').spr.get_xy()[0]
-            if self.slide_on_top.name == 'A':
+            if self.active_slide.name == 'A':
                 if self.name_to_slide('A').spr.get_xy()[0] == dx:
                     A = str(self._calc_A())
                     DA = str(self._calc_D_results())
                     s = " √ %s = %s\t\t%s² = %s" % (A, DA, DA, A)
-            elif self.slide_on_top.name == 'K':
+            elif self.active_slide.name == 'K':
                 if self.name_to_slide('K').spr.get_xy()[0] == dx:
                     K = str(self._calc_K())
                     DK = str(self._calc_D_results())
                     s = " ∛ %s = %s\t\t%s³ = %s" % (K, DK, DK, K)
-            elif self.slide_on_top.name == 'S':
+            elif self.active_slide.name == 'S':
                 if self.name_to_slide('S').spr.get_xy()[0] == dx:
                     S = str(self._calc_S())
                     DS = str(self._calc_D_results() / 10)
                     s = " sin(%s) = %s\t\tasin(%s) = %s" % (S, DS, DS, S)
-            elif self.slide_on_top.name == 'T':
+            elif self.active_slide.name == 'T':
                 if self.name_to_slide('T').spr.get_xy()[0] == dx:
                     T = str(self._calc_T())
                     DT = str(self._calc_D_results() / 10)
                     s = " tan(%s) = %s\t\tatan(%s) = %s" % (T, DT, DT, T)
-            elif self.slide_on_top.name == 'C':
+            elif self.active_slide.name == 'C':
                 D = str(self._calc_D())
                 C = str(self._calc_C())
                 DC = str(self._calc_D_results())
                 s = "%s × %s = %s\t\t%s / %s = %s" % (D, C, DC, DC, C, D)
-            elif self.slide_on_top.name == 'CI':
+            elif self.active_slide.name == 'CI':
                 D = str(self._calc_D())
                 CI = str(self._calc_CI())
                 DCI = str(self._calc_D_results() / 10.)
                 s = "%s / %s = %s\t\t%s × %s = %s" % (D, CI, DCI, DCI, CI, D)
-        elif self.stator_on_bottom.name == 'L2':
-            if self.slide_on_top.name == 'L':
-                # use ndash to display a minus sign
+        elif self.active_stator.name == 'L2':
+            if self.active_slide.name == 'L':
+                # use n dash to display a minus sign
                 L2 = self._calc_L2()
                 if L2 < 0:
                     L2str = "–" + str(-L2)
@@ -482,7 +482,7 @@ class SlideRule():
 
     def _top_slide_offset(self, x):
         """ Calcualate the offset between the top and bottom slides """
-        x2, y2 = self.slide_on_top.spr.get_xy()
+        x2, y2 = self.active_slide.spr.get_xy()
         return x2 - x
 
     # Calculate the value of individual slides and stators

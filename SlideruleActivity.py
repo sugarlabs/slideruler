@@ -157,61 +157,39 @@ class SlideruleActivity(activity.Activity):
         self.sr = SlideRule(canvas, os.path.join(activity.get_bundle_path(),
                                                  'images/'), self)
 
-        # Rfead the slider positions from the Journal
-        if 'C' in self.metadata:
-            self.sr.name_to_slide('C').move_relative(int(self.metadata['C']), 0)
-        if 'CI' in self.metadata:
-            self.sr.name_to_slide('CI').move_relative(int(self.metadata['CI']), 0)
-        if 'L' in self.metadata:
-            self.sr.name_to_slide('L').move_relative(int(self.metadata['L']), 0)
-        if 'A' in self.metadata:
-            self.sr.name_to_slide('A').move_relative(int(self.metadata['A']), 0)
-        if 'K' in self.metadata:
-            self.sr.name_to_slide('K').move_relative(int(self.metadata['K']), 0)
-        if 'S' in self.metadata:
-            self.sr.name_to_slide('S').move_relative(int(self.metadata['S']), 0)
-        if 'T' in self.metadata:
-            self.sr.name_to_slide('T').move_relative(int(self.metadata['T']), 0)
+        # Read the slider positions from the Journal
+        for name in ['C', 'CI', 'L', 'A', 'K', 'S', 'T', 'LLn', 'LL0']:
+            if name in self.metadata:
+                self.sr.name_to_slide(name).move(int(self.metadata[name]),
+                    self.sr.slides[0].spr.get_xy()[1])
         if 'R' in self.metadata:
-            self.sr.R.move_relative(int(self.metadata['R']), 0)
+            self.sr.R.move(int(self.metadata['R']), self.sr.R.spr.get_xy()[1])
         if 'D' in self.metadata:
-            dx = int(self.metadata['D'])
-            self.move_stators(dx, self.sr.name_to_stator('D').spr.get_xy()[1])
-        if 'slider' in self.metadata:
-            _logger.debug("restoring %s" % (self.metadata['slider']))
-            self.sr.slide_on_top = self.sr.name_to_slide(
-                self.metadata['slider'])
-            if self.sr.slide_on_top.name == 'A':
-                self.show_a()
-            elif self.sr.slide_on_top.name == 'L':
-                self.show_l()
-            elif self.sr.slide_on_top.name == 'CI':
-                self.show_ci()
-            elif self.sr.slide_on_top.name == 'K':
-                self.show_k()
-            elif self.sr.slide_on_top.name == 'S':
-                self.show_s()
-            elif self.sr.slide_on_top.name == 'T':
-                self.show_t()
-            else:
-                self.show_c()
+            self.move_stators(int(self.metadata['D']),
+                              self.sr.name_to_stator('D').spr.get_xy()[1])
+        if 'stator' in self.metadata:
+            _logger.debug("restoring %s" % (self.metadata['stator']))
+            self.sr.active_stator = self.sr.name_to_stator(
+                self.metadata['stator'])
+        if 'slide' in self.metadata:
+            _logger.debug("restoring %s" % (self.metadata['slide']))
+            self.sr.active_slide = self.sr.name_to_slide(
+                self.metadata['slide'])
+        function = self._predefined_function()
+        if function is not None:
+            function()
         else:
             self.show_c()
 
     def write_file(self, file_path):
         """ Write the slide positions to the Journal """
-        self.metadata['slider'] = self.sr.slide_on_top.name
-        self.metadata['C'] = str(self.sr.name_to_slide('C').spr.get_xy()[0])
-        self.metadata['CI'] = str(self.sr.name_to_slide('CI').spr.get_xy()[0])
-        self.metadata['D'] = str(self.sr.name_to_slide('D').spr.get_xy()[0])
-        self.metadata['R'] = str(self.sr.name_to_slide('R').spr.get_xy()[0])
-        self.metadata['L'] = str(self.sr.name_to_slide('L').spr.get_xy()[0])
-        self.metadata['A'] = str(self.sr.name_to_slide('A').spr.get_xy()[0])
-        self.metadata['K'] = str(self.sr.name_to_slide('K').spr.get_xy()[0])
-        self.metadata['S'] = str(self.sr.name_to_slide('S').spr.get_xy()[0])
-        self.metadata['T'] = str(self.sr.name_to_slide('T').spr.get_xy()[0])
-        self.metadata['LLn'] = str(self.sr.name_to_slide('LLn').spr.get_xy()[0])
-        self.metadata['LL0'] = str(self.sr.name_to_slide('LL0').spr.get_xy()[0])
+        self.metadata['slide'] = self.sr.active_slide.name
+        self.metadata['stator'] = self.sr.active_stator.name
+        for name in ['C', 'CI', 'L', 'A', 'K', 'S', 'T', 'LLn', 'LL0']:
+            self.metadata[name] = str(
+                self.sr.name_to_slide(name).spr.get_xy()[0])
+        self.metadata['D'] = str(self.sr.name_to_stator('D').spr.get_xy()[0])
+        self.metadata['R'] = str(self.sr.R.spr.get_xy()[0])
 
     def _hide_all(self):
         self._hide_top()
@@ -238,90 +216,91 @@ class SlideruleActivity(activity.Activity):
     def _set_top_slider(self):
         """ Move the top slider onto top layer """
         self._hide_top()
-        self.sr.slide_on_top.draw()
-        self.top_button.set_icon(self.sr.slide_on_top.name)
+        self.sr.active_slide.draw()
+        self.top_button.set_icon(self.sr.active_slide.name)
 
     def _set_bottom_slider(self):
         """ Move the bottom slider onto top layer """
         self._hide_bottom()
-        self.sr.stator_on_bottom.draw()
-        self.bottom_button.set_icon(self.sr.stator_on_bottom.name)
-
-    def _predefined_function(self):
-        """ Return the predefined function that matches the sliders """
-        if not hasattr(self, 'sr'):
-            return None
-        if self.sr.slide_on_top.name == 'C' and \
-           self.sr.stator_on_bottom.name == 'D':
-            return self.show_c
-        elif self.sr.slide_on_top.name == 'CI' and \
-             self.sr.stator_on_bottom.name == 'D':
-            return self.show_ci
-        elif self.sr.slide_on_top.name == 'A' and \
-             self.sr.stator_on_bottom.name == 'D':
-            return self.show_a
-        elif self.sr.slide_on_top.name == 'K' and \
-             self.sr.stator_on_bottom.name == 'D':
-            return self.show_k
-        elif self.sr.slide_on_top.name == 'S' and \
-             self.sr.stator_on_bottom.name == 'D':
-            return self.show_s
-        elif self.sr.slide_on_top.name == 'T' and \
-             self.sr.stator_on_bottom.name == 'D':
-            return self.show_t
-        elif self.sr.slide_on_top.name == 'L' and \
-             self.sr.stator_on_bottom.name == 'L2':
-            return self.show_l
-        return None
-
-    # Predefined functions
-    def show_c(self):
-        """ basic log scale """
-        self.sr.slide_on_top = self.sr.name_to_slide('C')
-        self.sr.stator_on_bottom = self.sr.name_to_stator('D')
-        self._show_slides(_C, _D, _FC)
-
-    def show_ci(self):
-        """ Inverse scale """
-        self.sr.slide_on_top = self.sr.name_to_slide('CI')
-        self.sr.stator_on_bottom = self.sr.name_to_stator('D')
-        self._show_slides(_CI, _D, _FCI)
-
-    def show_a(self):
-        """ two-decade scale """
-        self.sr.slide_on_top = self.sr.name_to_slide('A')
-        self.sr.stator_on_bottom = self.sr.name_to_stator('D')
-        self._show_slides(_A, _D, _FA)
-
-    def show_k(self):
-        """ three-decade scale """
-        self.sr.slide_on_top = self.sr.name_to_slide('K')
-        self.sr.stator_on_bottom = self.sr.name_to_stator('D')
-        self._show_slides(_K, _D, _FK)
-
-    def show_s(self):
-        """ Sine """
-        self.sr.slide_on_top = self.sr.name_to_slide('S')
-        self.sr.stator_on_bottom = self.sr.name_to_stator('D')
-        self._show_slides(_S, _D, _FS)
-
-    def show_t(self):
-        """ Tangent """
-        self.sr.slide_on_top = self.sr.name_to_slide('T')
-        self.sr.stator_on_bottom = self.sr.name_to_stator('D')
-        self._show_slides(_T, _D, _FT)
-
-    def show_l(self):
-        """ Linear scale """
-        self.sr.slide_on_top = self.sr.name_to_slide('L')
-        self.sr.stator_on_bottom = self.sr.name_to_stator('L2')
-        self._show_slides(_L, _L2, _FL)
+        self.sr.active_stator.draw()
+        self.bottom_button.set_icon(self.sr.active_stator.name)
 
     def move_stators(self, x, y):
         """ Move all the stators to the same x, y position """
         for stator in self.sr.stators:
             stator.move(x, y)
 
+    def _predefined_function(self):
+        """ Return the predefined function that matches the sliders """
+        if not hasattr(self, 'sr'):
+            return None
+        if self.sr.active_slide.name == 'C' and \
+           self.sr.active_stator.name == 'D':
+            return self.show_c
+        elif self.sr.active_slide.name == 'CI' and \
+             self.sr.active_stator.name == 'D':
+            return self.show_ci
+        elif self.sr.active_slide.name == 'A' and \
+             self.sr.active_stator.name == 'D':
+            return self.show_a
+        elif self.sr.active_slide.name == 'K' and \
+             self.sr.active_stator.name == 'D':
+            return self.show_k
+        elif self.sr.active_slide.name == 'S' and \
+             self.sr.active_stator.name == 'D':
+            return self.show_s
+        elif self.sr.active_slide.name == 'T' and \
+             self.sr.active_stator.name == 'D':
+            return self.show_t
+        elif self.sr.active_slide.name == 'L' and \
+             self.sr.active_stator.name == 'L2':
+            return self.show_l
+        return None
+
+    # Predefined functions
+    def show_c(self):
+        """ basic log scale """
+        self.sr.active_slide = self.sr.name_to_slide('C')
+        self.sr.active_stator = self.sr.name_to_stator('D')
+        self._show_slides(_C, _D, _FC)
+
+    def show_ci(self):
+        """ inverse scale """
+        self.sr.active_slide = self.sr.name_to_slide('CI')
+        self.sr.active_stator = self.sr.name_to_stator('D')
+        self._show_slides(_CI, _D, _FCI)
+
+    def show_a(self):
+        """ two-decade scale """
+        self.sr.active_slide = self.sr.name_to_slide('A')
+        self.sr.active_stator = self.sr.name_to_stator('D')
+        self._show_slides(_A, _D, _FA)
+
+    def show_k(self):
+        """ three-decade scale """
+        self.sr.active_slide = self.sr.name_to_slide('K')
+        self.sr.active_stator = self.sr.name_to_stator('D')
+        self._show_slides(_K, _D, _FK)
+
+    def show_s(self):
+        """ sine """
+        self.sr.active_slide = self.sr.name_to_slide('S')
+        self.sr.active_stator = self.sr.name_to_stator('D')
+        self._show_slides(_S, _D, _FS)
+
+    def show_t(self):
+        """ tangent """
+        self.sr.active_slide = self.sr.name_to_slide('T')
+        self.sr.active_stator = self.sr.name_to_stator('D')
+        self._show_slides(_T, _D, _FT)
+
+    def show_l(self):
+        """ linear scale """
+        self.sr.active_slide = self.sr.name_to_slide('L')
+        self.sr.active_stator = self.sr.name_to_stator('L2')
+        self._show_slides(_L, _L2, _FL)
+
+    # toolbar button callbacks
     def realign_cb(self, arg=None):
         """ Realign all sliders with the D scale. """
         dx, dy = self.sr.name_to_stator('D').spr.get_xy()
@@ -349,7 +328,7 @@ class SlideruleActivity(activity.Activity):
         """ Read value from slide combo box """
         _top_dictionary = {_C: 'C', _CI: 'CI', _A: 'A', _K: 'K', _S: 'S',
                            _T: 'T', _L: 'L', _LL0: 'LL0', _LLn: 'LLn'}
-        self.sr.slide_on_top = self.sr.name_to_slide(_top_dictionary[
+        self.sr.active_slide = self.sr.name_to_slide(_top_dictionary[
             _TOP_SCALES[self._top_combo.get_active()]])
         function = self._predefined_function()
         if function is not None:
@@ -365,7 +344,7 @@ class SlideruleActivity(activity.Activity):
         _bottom_dictionary = {_D: 'D', _DI: 'DI', _L2: 'L2', _B: 'B',
                               _K2: 'K2', _S2: 'S2', _T2: 'T2', _LL02: 'LL02',
                               _LLn2: 'LLn2'}
-        self.sr.stator_on_bottom = self.sr.name_to_stator(_bottom_dictionary[
+        self.sr.active_stator = self.sr.name_to_stator(_bottom_dictionary[
             _BOT_SCALES[self._bottom_combo.get_active()]])
         function = self._predefined_function()
         if function is not None:
