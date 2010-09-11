@@ -11,7 +11,7 @@
 # Free Software Foundation, Inc., 59 Temple Place - Suite 330,
 # Boston, MA 02111-1307, USA.
 
-from constants import SHEIGHT, SWIDTH, SCALE, OFFSET
+from constants import SHEIGHT, SWIDTH, SCALE, OFFSET, LEFT, RIGHT, TOP, BOTTOM
 
 import pygtk
 pygtk.require('2.0')
@@ -27,6 +27,9 @@ except:
 
 from sprite_factory import Slide, Stator, Reticule
 from sprites import Sprites
+
+import logging
+_logger = logging.getLogger('sliderule-activity')
 
 
 def round(x, precision=2):
@@ -170,36 +173,54 @@ class SlideRule():
         self.stators = []
         self.scale = 1
 
-        # Open the slides
+        _logger.debug("creating slides, stators, and reticule")
         y = 50
         self.results_label = Stator(self.sprites, self.path, 'label',
                                         int((self.width - 600) / 2),
                                         y + 4 * SHEIGHT,
                                         600, SHEIGHT)
 
-        self.slides.append(self._make_slide('C', y + SHEIGHT))
-        self.slides.append(self._make_slide('CI', y + SHEIGHT))
-        self.slides.append(self._make_slide('L', y + SHEIGHT))
-        self.slides.append(self._make_slide('A', y + SHEIGHT))
-        self.slides.append(self._make_slide('K', y + SHEIGHT))
-        self.slides.append(self._make_slide('S', y + SHEIGHT))
-        self.slides.append(self._make_slide('T', y + SHEIGHT))
-        self.slides.append(self._make_slide('LLn', y + SHEIGHT))
-        self.slides.append(self._make_slide('LL0', y + SHEIGHT))
+        self.slides.append(self._make_slide('C', y + SHEIGHT, self._calc_C))
+        self.slides.append(self._make_slide('CI', y + SHEIGHT, self._calc_CI))
+        self.slides.append(self._make_slide('L', y + SHEIGHT, self._calc_L))
+        self.slides.append(self._make_slide('A', y + SHEIGHT, self._calc_A))
+        self.slides.append(self._make_slide('K', y + SHEIGHT, self._calc_K))
+        self.slides.append(self._make_slide('S', y + SHEIGHT, self._calc_S))
+        self.slides.append(self._make_slide('T', y + SHEIGHT, self._calc_T))
+        self.slides.append(self._make_slide('LLn', y + SHEIGHT, self._calc_LLn))
+        self.slides.append(self._make_slide('LL0', y + SHEIGHT, self._calc_LL0))
 
-        self.stators.append(self._make_stator('D', y + 2 * SHEIGHT))
-        self.stators.append(self._make_stator('DI', y + 2 * SHEIGHT))
-        self.stators.append(self._make_stator('L2', y + 2 * SHEIGHT))
-        self.stators.append(self._make_stator('B', y + 2 * SHEIGHT))
-        self.stators.append(self._make_stator('K2', y + 2 * SHEIGHT))
-        self.stators.append(self._make_stator('S2', y + 2 * SHEIGHT))
-        self.stators.append(self._make_stator('T2', y + 2 * SHEIGHT))
-        self.stators.append(self._make_stator('LLn2', y + 2 * SHEIGHT))
-        self.stators.append(self._make_stator('LL02', y + 2 * SHEIGHT))
+        self.stators.append(self._make_stator('D', y + 2 * SHEIGHT,
+                                              self._calc_D,
+                                              self._calc_D_result))
+        self.stators.append(self._make_stator('DI', y + 2 * SHEIGHT,
+                                              self._calc_DI,
+                                              self._calc_DI_result))
+        self.stators.append(self._make_stator('L2', y + 2 * SHEIGHT,
+                                              self._calc_L2,
+                                              self._calc_L2_result))
+        self.stators.append(self._make_stator('B', y + 2 * SHEIGHT,
+                                              self._calc_B,
+                                              self._calc_B_result))
+        self.stators.append(self._make_stator('K2', y + 2 * SHEIGHT,
+                                              self._calc_K2,
+                                              self._calc_K2_result))
+        self.stators.append(self._make_stator('S2', y + 2 * SHEIGHT,
+                                              self._calc_S2,
+                                              self._calc_S2_result))
+        self.stators.append(self._make_stator('T2', y + 2 * SHEIGHT,
+                                              self._calc_T2,
+                                              self._calc_T2_result))
+        self.stators.append(self._make_stator('LLn2', y + 2 * SHEIGHT,
+                                              self._calc_LLn2,
+                                              self._calc_LLn2_result))
+        self.stators.append(self._make_stator('LL02', y + 2 * SHEIGHT,
+                                              self._calc_LL02,
+                                              self._calc_LL02_result))
 
-        self.R = Reticule(self.sprites, self.path, 'reticule',
+        self.reticule = Reticule(self.sprites, self.path, 'reticule',
                           150, y + SHEIGHT, 100, 2 * SHEIGHT)
-        self.R.draw(2000)
+        self.reticule.draw(2000)
 
         self.active_slide = self.name_to_slide('C')
         self.active_stator = self.name_to_stator('D')
@@ -246,24 +267,26 @@ class SlideRule():
             self._move_slides(self.name_to_stator('D').spr,
                               -self.name_to_stator('D').spr.get_xy()[0])
         elif k == 'r':
-            self.R.move(150, self.R.spr.get_xy()[1])
+            self.reticule.move(150, self.reticule.spr.get_xy()[1])
             self.update_slide_labels()
             self.update_results_label()
         elif k == 'Return' or k == 'BackSpace':
             self.parent.realign_cb()
-            self.R.move(150, self.R.spr.get_xy()[1])
+            self.reticule.move(150, self.reticule.spr.get_xy()[1])
             self.update_slide_labels()
             self.update_results_label()
         return True
 
-    def _make_slide(self, name, y):
-        slide = Slide(self.sprites, self.path, name, 0, y, SWIDTH, SHEIGHT)
+    def _make_slide(self, name, y, calculate=None):
+        slide = Slide(self.sprites, self.path, name, 0, y, SWIDTH, SHEIGHT,
+                      calculate)
         slide.spr.set_label('')
         slide.draw()
         return slide
 
-    def _make_stator(self, name, y):
-        stator = Stator(self.sprites, self.path, name, 0, y, SWIDTH, SHEIGHT)
+    def _make_stator(self, name, y, calculate=None, result=None):
+        stator = Stator(self.sprites, self.path, name, 0, y, SWIDTH, SHEIGHT,
+                        calculate, result)
         stator.spr.set_label('')
         stator.draw()
         return stator
@@ -317,10 +340,8 @@ class SlideRule():
         if self.press is None:
             self.dragpos = 0
             return True
-
         win.grab_focus()
         x, y = map(int, event.get_coords())
-        # redicule doesn't use offset
         dx = x - self.dragpos
         self._move_slides(self.press, dx)
         self.dragpos = x
@@ -331,9 +352,9 @@ class SlideRule():
                 slide.move_relative(dx, 0)
             for stator in self.stators:
                 stator.move_relative(dx, 0)
-            self.R.move_relative(dx, 0)
-        elif self.R.match(sprite):
-            self.R.move_relative(dx, 0)
+            self.reticule.move_relative(dx, 0)
+        elif self.reticule.match(sprite):
+            self.reticule.move_relative(dx, 0)
         elif self.sprite_in_slides(sprite):
             self.find_slide(sprite).move_relative(dx, 0)
         self.update_slide_labels()
@@ -356,57 +377,16 @@ class SlideRule():
         else:
             v_right = v_left
         for slide in self.slides:
-            slide.tabs[0].spr.set_label(str(v_left))
-            slide.tabs[1].spr.set_label(str(v_right))
+            slide.tabs[LEFT].spr.set_label(str(v_left))
+            slide.tabs[RIGHT].spr.set_label(str(v_right))
 
     def update_slide_labels(self):
         """ Based on the current alignment of the rules, calculate labels. """
-        if self.active_stator.name == 'L2':
-            self._update_top(self._calc_L2)
-            self.R.tabs[1].spr.set_label(str(self._calc_L2_results()))
-        elif self.active_stator.name == 'DI':
-            self._update_top(self._calc_DI)
-            self.R.tabs[1].spr.set_label(str(self._calc_DI_results()))
-        elif self.active_stator.name == 'B':
-            self._update_top(self._calc_B)
-            self.R.tabs[1].spr.set_label(str(self._calc_B_results()))
-        elif self.active_stator.name == 'K2':
-            self._update_top(self._calc_K2)
-            self.R.tabs[1].spr.set_label(str(self._calc_K2_results()))
-        elif self.active_stator.name == 'S2':
-            self._update_top(self._calc_S2)
-            self.R.tabs[1].spr.set_label(str(self._calc_S2_results()))
-        elif self.active_stator.name == 'T2':
-            self._update_top(self._calc_T2)
-            self.R.tabs[1].spr.set_label(str(self._calc_T2_results()))
-        elif self.active_stator.name == 'LLn2':
-            self._update_top(self._calc_LLn2)
-            self.R.tabs[1].spr.set_label(str(self._calc_LLn2_results()))
-        elif self.active_stator.name == 'LL02':
-            self._update_top(self._calc_LL02)
-            self.R.tabs[1].spr.set_label(str(self._calc_LL02_results()))
-        else:
-            self._update_top(self._calc_D)
-            self.R.tabs[1].spr.set_label(str(self._calc_D_results()))
-
-        if self.active_slide.name == 'A':
-            self.R.tabs[0].spr.set_label(str(self._calc_A()))
-        elif self.active_slide.name == 'K':
-            self.R.tabs[0].spr.set_label(str(self._calc_K()))
-        elif self.active_slide.name == 'S':
-            self.R.tabs[0].spr.set_label(str(self._calc_S()))
-        elif self.active_slide.name == 'T':
-            self.R.tabs[0].spr.set_label(str(self._calc_T()))
-        elif self.active_slide.name == 'L':
-            self.R.tabs[0].spr.set_label(str(self._calc_L()))
-        elif self.active_slide.name == 'CI':
-            self.R.tabs[0].spr.set_label(str(self._calc_CI()))
-        elif self.active_slide.name == 'LLn':
-            self.R.tabs[0].spr.set_label(str(self._calc_LLn()))
-        elif self.active_slide.name == 'LL0':
-            self.R.tabs[0].spr.set_label(str(self._calc_LL0()))
-        else:
-            self.R.tabs[0].spr.set_label(str(self._calc_C()))
+        self._update_top(self.active_stator.calculate)
+        self.reticule.tabs[BOTTOM].spr.set_label(
+                str(self.active_stator.result()))
+        self.reticule.tabs[TOP].spr.set_label(
+            str(self.active_slide.calculate()))
 
     def _button_release_cb(self, win, event):
         if self.press == None:
@@ -420,36 +400,26 @@ class SlideRule():
         s = ''
         if self.active_stator.name == 'D':
             dx = self.name_to_stator('D').spr.get_xy()[0]
+            S = self.active_slide.calculate()
+            R = self._calc_D_result()
             if self.active_slide.name == 'A':
                 if self.name_to_slide('A').spr.get_xy()[0] == dx:
-                    A = str(self._calc_A())
-                    DA = str(self._calc_D_results())
-                    s = " √ %s = %s\t\t%s² = %s" % (A, DA, DA, A)
+                    s = " √ %f = %f\t\t%f² = %f" % (S, R, R, S)
             elif self.active_slide.name == 'K':
                 if self.name_to_slide('K').spr.get_xy()[0] == dx:
-                    K = str(self._calc_K())
-                    DK = str(self._calc_D_results())
-                    s = " ∛ %s = %s\t\t%s³ = %s" % (K, DK, DK, K)
+                    s = " ∛ %f = %f\t\t%f³ = %f" % (S, R, R, S)
             elif self.active_slide.name == 'S':
                 if self.name_to_slide('S').spr.get_xy()[0] == dx:
-                    S = str(self._calc_S())
-                    DS = str(self._calc_D_results() / 10)
-                    s = " sin(%s) = %s\t\tasin(%s) = %s" % (S, DS, DS, S)
+                    s = " sin(%f) = %f\t\tasin(%f) = %f" % (S, R/10, R/10, S)
             elif self.active_slide.name == 'T':
                 if self.name_to_slide('T').spr.get_xy()[0] == dx:
-                    T = str(self._calc_T())
-                    DT = str(self._calc_D_results() / 10)
-                    s = " tan(%s) = %s\t\tatan(%s) = %s" % (T, DT, DT, T)
+                    s = " tan(%f) = %f\t\tatan(%f) = %f" % (S, R/10, R/10, S)
             elif self.active_slide.name == 'C':
                 D = str(self._calc_D())
-                C = str(self._calc_C())
-                DC = str(self._calc_D_results())
-                s = "%s × %s = %s\t\t%s / %s = %s" % (D, C, DC, DC, C, D)
+                s = "%s × %s = %s\t\t%s / %s = %s" % (D, S, R, R, S, D)
             elif self.active_slide.name == 'CI':
                 D = str(self._calc_D())
-                CI = str(self._calc_CI())
-                DCI = str(self._calc_D_results() / 10.)
-                s = "%s / %s = %s\t\t%s × %s = %s" % (D, CI, DCI, DCI, CI, D)
+                s = "%s / %s = %s\t\t%s × %s = %s" % (D, S, R/10, R/10, S, D)
         elif self.active_stator.name == 'L2':
             if self.active_slide.name == 'L':
                 # use n dash to display a minus sign
@@ -469,7 +439,7 @@ class SlideRule():
                     operator2 = "–"
                     Lstr = str(L)
 
-                LL = self._calc_L2_results()
+                LL = self._calc_L2_result()
                 if LL < 0:
                     LLstr = "–" + str(-LL)
                 else:
@@ -488,7 +458,7 @@ class SlideRule():
     # Calculate the value of individual slides and stators
 
     def _r_offset(self, slide):
-        return self.R.spr.get_xy()[0] - slide.spr.get_xy()[0]
+        return self.reticule.spr.get_xy()[0] - slide.spr.get_xy()[0]
 
     def _calc_C(self):
         return _calc_log(self._r_offset(self.name_to_slide('C')))
@@ -497,7 +467,7 @@ class SlideRule():
         return _calc_log(self._top_slide_offset(
                 self.name_to_stator('D').spr.get_xy()[0]))
 
-    def _calc_D_results(self):
+    def _calc_D_result(self):
         return _calc_log(self._r_offset(self.name_to_stator('D')))
 
     def _calc_CI(self):
@@ -507,7 +477,7 @@ class SlideRule():
         return _calc_inverse_log(
             self._top_slide_offset(self.name_to_stator('DI').spr.get_xy()[0]))
 
-    def _calc_DI_results(self):
+    def _calc_DI_result(self):
         return _calc_inverse_log(self._r_offset(self.name_to_stator('DI')))
 
     def _calc_LLn(self):
@@ -517,7 +487,7 @@ class SlideRule():
         return _calc_ln(self._top_slide_offset(
                 self.name_to_stator('LLn2').spr.get_xy()[0]))
 
-    def _calc_LLn2_results(self):
+    def _calc_LLn2_result(self):
         return _calc_ln(self._r_offset(self.name_to_stator('D')))
 
     def _calc_LL0(self):
@@ -527,7 +497,7 @@ class SlideRule():
         return _calc_log_log(self._top_slide_offset(
                 self.name_to_stator('LL02').spr.get_xy()[0]))
 
-    def _calc_LL02_results(self):
+    def _calc_LL02_result(self):
         return _calc_log_log(self._r_offset(self.name_to_stator('D')))
 
     def _calc_A(self):
@@ -537,7 +507,7 @@ class SlideRule():
          return _calc_log_squared(
              self._top_slide_offset(self.name_to_stator('B').spr.get_xy()[0]))
 
-    def _calc_B_results(self):
+    def _calc_B_result(self):
          return _calc_log_squared(self._r_offset(self.name_to_stator('B')))
 
     def _calc_S(self):
@@ -547,7 +517,7 @@ class SlideRule():
         return _calc_sine(self._top_slide_offset(
                 self.name_to_stator('S2').spr.get_xy()[0]))
 
-    def _calc_S2_results(self):
+    def _calc_S2_result(self):
         return _calc_sine(self._r_offset(self.name_to_stator('S2')))
 
     def _calc_T(self):
@@ -557,7 +527,7 @@ class SlideRule():
         return _calc_tangent(self._top_slide_offset(
                 self.name_to_stator('T2').spr.get_xy()[0]))
 
-    def _calc_T2_results(self):
+    def _calc_T2_result(self):
         return _calc_tangent(self._r_offset(self.name_to_stator('T2')))
 
     def _calc_K(self):
@@ -567,7 +537,7 @@ class SlideRule():
         return _calc_log_cubed(self._top_slide_offset(
                 self.name_to_stator('K2').spr.get_xy()[0]))
 
-    def _calc_K2_results(self):
+    def _calc_K2_result(self):
         return _calc_log_cubed(self._r_offset(self.name_to_stator('K2')))
 
     def _calc_L(self):
@@ -577,6 +547,6 @@ class SlideRule():
         return _calc_linear(self._top_slide_offset(
                 self.name_to_stator('L2').spr.get_xy()[0]))
 
-    def _calc_L2_results(self):
+    def _calc_L2_result(self):
         return _calc_linear(self._r_offset(self.name_to_stator('L2')))
 

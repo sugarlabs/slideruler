@@ -16,15 +16,18 @@ import gtk
 import gobject
 import os.path
 
-from constants import SHEIGHT, SWIDTH
+from constants import SHEIGHT, SWIDTH, LEFT, RIGHT, TOP, BOTTOM
 from sprites import Sprite
 
 
 class Stator():
     """ Create a sprite for a stator """
-    def __init__(self, sprites, path, name, x, y, w, h):
+    def __init__(self, sprites, path, name, x, y, w, h, calculate=None,
+                 result=None):
         self.spr = Sprite(sprites, x, y, file_to_pixbuf(path, name, w, h))
         self.name = name
+        self.calculate = calculate
+        self.result = result
 
     def draw(self, layer=1000):
         self.spr.set_layer(layer)
@@ -47,7 +50,7 @@ class Stator():
 
 class Slide(Stator):
     """ Create a sprite for a slide """
-    def __init__(self, sprites, path, name, x, y, w, h):
+    def __init__(self, sprites, path, name, x, y, w, h, function=None):
         self.spr = Sprite(sprites, x, y, file_to_pixbuf(path, name, w, h))
         self.tab_dx = [0, SWIDTH - 100]
         self.tab_dy = [2 * SHEIGHT, 2 * SHEIGHT]
@@ -56,6 +59,7 @@ class Slide(Stator):
                              y + self.tab_dy[0], 100, SHEIGHT))
         self.tabs.append(Tab(sprites, path, 'tab', x + self.tab_dx[1],
                              y + self.tab_dy[1], 100, SHEIGHT))
+        self.calculate = function
         self.name = name
 
     def match(self, sprite):
