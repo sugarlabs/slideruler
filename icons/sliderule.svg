@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+ "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd" [
+  <!ENTITY fill_color "#AAAAAA">
+  <!ENTITY stroke_color "#000000">
+]>
+<svg xmlns="http://www.w3.org/2000/svg" width="45" height="45">
+  <rect
+     width="10.120248"
+     height="36.075348"
+     x="-33.633625"
+     y="1.0134212"
+     transform="matrix(0,-1,1,0,0,0)"
+     id="rect4"
+     style="fill:&fill_color;;stroke:&stroke_color;;stroke-width:2" />
+  <line
+     y1="27.5"
+     y2="23.5"
+     x1="10.0"
+     x2="10.0"
+     style="fill:&fill_color;;stroke:&stroke_color;;stroke-width:2"
+     id="line6" />
+  <line
+     y1="27.5"
+     y2="23.5"
+     x1="23.0"
+     x2="23.0"
+     style="fill:&fill_color;;stroke:&stroke_color;;stroke-width:2"
+     id="line8" />
+  <line
+     y1="27.5"
+     y2="23.5"
+     x1="30.0"
+     x2="30.0"
+     style="fill:&fill_color;;stroke:&stroke_color;;stroke-width:2"
+     id="line10" />
+  <rect
+     width="10.1"
+     height="36.0"
+     x="11.3"
+     y="7.9"
+     transform="matrix(0,1,1,0,0,0)"
+     id="rect2398"
+     style="fill:&fill_color;;stroke:&stroke_color;;stroke-width:2" />
+  <line
+     y1="17.4"
+     y2="21.4"
+     x1="16.9"
+     x2="16.9"
+     style="fill:&fill_color;;stroke:&stroke_color;;stroke-width:2"
+     id="line2400" />
+  <line
+     y1="17.4"
+     y2="21.4"
+     x1="29.9"
+     x2="29.9"
+     style="fill:&fill_color;;stroke:&stroke_color;;stroke-width:2"
+     id="line2402" />
+  <line
+     y1="17.4"
+     y2="21.4"
+     x1="36.9"
+     x2="36.9"
+     style="fill:&fill_color;;stroke:&stroke_color;;stroke-width:2"
+     id="line2404" />
+  <path
+     d="M 26,8.0 L 26,37.0"
+     id="path2436"
+     style="fill:none;fill-rule:evenodd;stroke:#ffffff;stroke-width:1.02091491px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+</svg>
