@@ -55,8 +55,8 @@ _FK = _('cube/cube root')
 _FS = _('sin, asin')
 _FT = _('tan, atan')
 _FL = _('add/subtract')
-_UD = _('user defined')
-_FUNCTIONS = [_FL, _FC, _FCI, _FA, _FK, _FS, _FT, _UD]
+_UK = '-'
+_FUNCTIONS = [_FL, _FC, _FCI, _FA, _FK, _FS, _FT, _UK]
 
 _A = _('log²')
 _C = _('log')
@@ -67,18 +67,13 @@ _T = _('tan')
 _L = _('linear')
 _LL0 = _('log log')
 _LLn = _('ln')
-_SLIDES = [_L, _C, _CI, _A, _K, _S, _T, _LL0, _LLn]
+_UD = _('user defined')
+_SLIDES = [_L, _C, _CI, _A, _K, _S, _T, _LL0, _LLn, _UD]
 
 _D = _C
 _DI = _CI
-_L2 = _L
 _B = _A
-_K2 = _K
-_S2 = _S
-_T2 = _T
-_LL02 = _LL0
-_LLn2 = _LLn
-_STATORS = [_L2, _D, _DI, _B, _K2, _S2, _T2, _LL0, _LLn2]
+_STATORS = [_L, _D, _DI, _B, _K, _S, _T, _LL0, _LLn, _UD]
 
 
 def _combo_factory(combo_array, default, tooltip, callback, toolbar):
@@ -158,10 +153,10 @@ class SlideruleActivity(activity.Activity):
                                                  'images/'), self)
 
         # Read the slider positions from the Journal
-        for name in ['C', 'CI', 'L', 'A', 'K', 'S', 'T', 'LLn', 'LL0']:
-            if name in self.metadata:
-                self.sr.name_to_slide(name).move(int(self.metadata[name]),
-                    self.sr.slides[0].spr.get_xy()[1])
+        for slide in self.sr.slides:
+            if slide.name in self.metadata:
+                slide.move(int(self.metadata[slide.name]),
+                           slide.spr.get_xy()[1])
         if 'D' in self.metadata:
             self.move_stators(int(self.metadata['D']),
                               self.sr.name_to_stator('D').spr.get_xy()[1])
@@ -186,9 +181,8 @@ class SlideruleActivity(activity.Activity):
         """ Write the slide positions to the Journal """
         self.metadata['slide'] = self.sr.active_slide.name
         self.metadata['stator'] = self.sr.active_stator.name
-        for name in ['C', 'CI', 'L', 'A', 'K', 'S', 'T', 'LLn', 'LL0']:
-            self.metadata[name] = str(
-                self.sr.name_to_slide(name).spr.get_xy()[0])
+        for slide in self.sr.slides:
+            self.metadata[slide.name] = str(slide.spr.get_xy()[0])
         self.metadata['D'] = str(self.sr.name_to_stator('D').spr.get_xy()[0])
         self.metadata['R'] = str(self.sr.reticule.spr.get_xy()[0])
 
@@ -322,36 +316,37 @@ class SlideruleActivity(activity.Activity):
             _functions_dictionary[
                 _FUNCTIONS[self._function_combo.get_active()]]()
         except KeyError:
-            # 'user defined'
+            # 'unknown'
             pass
 
     def _top_combo_cb(self, arg=None):
         """ Read value from slide combo box """
         _top_dictionary = {_C: 'C', _CI: 'CI', _A: 'A', _K: 'K', _S: 'S',
-                           _T: 'T', _L: 'L', _LL0: 'LL0', _LLn: 'LLn'}
+                           _T: 'T', _L: 'L', _LL0: 'LL0', _LLn: 'LLn',
+                           _UD: 'custom'}
         self.sr.active_slide = self.sr.name_to_slide(_top_dictionary[
             _SLIDES[self._top_combo.get_active()]])
         function = self._predefined_function()
         if function is not None:
             function()
         else:
-            self._function_combo.set_active(_FUNCTIONS.index(_UD))
+            self._function_combo.set_active(_FUNCTIONS.index(_UK))
             self._set_top_slider()
             self.sr.update_slide_labels()
             self.sr.update_results_label()
 
     def _bottom_combo_cb(self, arg=None):
         """ Read value from stator combo box """
-        _bottom_dictionary = {_D: 'D', _DI: 'DI', _L2: 'L2', _B: 'B',
-                              _K2: 'K2', _S2: 'S2', _T2: 'T2', _LL02: 'LL02',
-                              _LLn2: 'LLn2'}
+        _bottom_dictionary = {_D: 'D', _DI: 'DI', _L: 'L2', _B: 'B',
+                              _K: 'K2', _S: 'S2', _T: 'T2', _LL0: 'LL02',
+                              _LLn: 'LLn2', _UD: 'custom2'}
         self.sr.active_stator = self.sr.name_to_stator(_bottom_dictionary[
             _STATORS[self._bottom_combo.get_active()]])
         function = self._predefined_function()
         if function is not None:
             function()
         else:
-            self._function_combo.set_active(_FUNCTIONS.index(_UD))
+            self._function_combo.set_active(_FUNCTIONS.index(_UK))
             self._set_bottom_slider()
             self.sr.update_slide_labels()
             self.sr.update_results_label()

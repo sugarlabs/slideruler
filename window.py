@@ -11,11 +11,6 @@
 # Free Software Foundation, Inc., 59 Temple Place - Suite 330,
 # Boston, MA 02111-1307, USA.
 
-from constants import SHEIGHT, SWIDTH, SCALE, OFFSET, LEFT, RIGHT, TOP, BOTTOM
-from genslides import C_slide, D_stator, CI_slide, DI_stator, A_slide, \
-    A_stator, K_slide, K_stator, S_slide, S_stator, T_slide, T_stator, \
-    L_slide, L_stator, LL0_slide, LL0_stator, LLn_slide, LLn_stator
-
 import pygtk
 pygtk.require('2.0')
 import gtk
@@ -28,11 +23,28 @@ try:
 except:
     GRID_CELL_SIZE = 0
 
-from sprite_factory import Slide, Stator, Reticule
+from constants import SHEIGHT, SWIDTH, SCALE, OFFSET, LEFT, RIGHT, TOP, BOTTOM
+from sprite_factory import Slide, Stator, Reticule, CustomSlide, CustomStator
 from sprites import Sprites
+from genslides import C_slide, D_stator, CI_slide, DI_stator, A_slide, \
+    A_stator, K_slide, K_stator, S_slide, S_stator, T_slide, T_stator, \
+    L_slide, L_stator, LL0_slide, LL0_stator, LLn_slide, LLn_stator, \
+    Custom_slide, Custom_stator
 
 import logging
 _logger = logging.getLogger('sliderule-activity')
+
+
+def custom_offset_function(x):
+    return math.log(x, 10)
+
+
+def custom_label_function(x):
+    return x
+
+
+def custom_calc(dx):
+    return round(math.exp(dx / SCALE))
 
 
 def round(x, precision=2):
@@ -199,9 +211,23 @@ class SlideRule():
         for slide in SLIDES:
             self.slides.append(self._make_slide(slide, y + SHEIGHT,
                 SLIDES[slide][0], SLIDES[slide][1]))
+
         for stator in STATORS:
             self.stators.append(self._make_stator(stator, y + 2 * SHEIGHT,
                 STATORS[stator][0], STATORS[stator][1], STATORS[stator][2]))
+
+        # User-definable slide
+        self.slides.append(CustomSlide(self.sprites, self.path, 'custom',
+                                       0, y + SHEIGHT, Custom_slide,
+                                       self._calc_custom,
+                                       custom_offset_function,
+                                       custom_label_function, 1, 11, 1))
+        self.stators.append(CustomStator(self.sprites, 'custom2',
+                                       0, y + SHEIGHT, Custom_stator,
+                                       self._calc_custom2,
+                                       self._calc_custom2_result,
+                                       custom_offset_function,
+                                       custom_label_function, 1, 11, 1))
 
         self.reticule = Reticule(self.sprites, self.path, 'reticule',
                           150, y + SHEIGHT, 100, 2 * SHEIGHT)
@@ -535,3 +561,12 @@ class SlideRule():
     def _calc_L2_result(self):
         return _calc_linear(self._r_offset(self.name_to_stator('L2')))
 
+    def _calc_custom(self):
+        return custom_calc(self._r_offset(self.name_to_slide('custom')))
+
+    def _calc_custom2(self):
+        return custom_calc(self._top_slide_offset(
+                self.name_to_stator('custom2').spr.get_xy()[0]))
+
+    def _calc_custom2_result(self):
+        return custom_calc(self._r_offset(self.name_to_stator('custom2')))

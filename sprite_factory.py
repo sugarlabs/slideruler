@@ -115,6 +115,34 @@ class Reticule(Slide):
         self.name = name
 
 
+class CustomSlide(Slide):
+    """ Create a sprite for a custom slide """
+    def __init__(self, sprites, path, name, x, y, svg_engine, function,
+                 offset, label, min, max, step):
+        self.spr = Sprite(sprites, x, y,
+            svg_str_to_pixbuf(svg_engine(offset, label, min, max, step).svg))
+        self.tab_dx = [0, SWIDTH - TABWIDTH]
+        self.tab_dy = [2 * SHEIGHT, 2 * SHEIGHT]
+        self.tabs = []
+        self.tabs.append(Tab(sprites, path, 'tab', x + self.tab_dx[0],
+                             y + self.tab_dy[0], TABWIDTH, SHEIGHT))
+        self.tabs.append(Tab(sprites, path, 'tab', x + self.tab_dx[1],
+                             y + self.tab_dy[1], TABWIDTH, SHEIGHT))
+        self.calculate = function
+        self.name = name
+
+
+class CustomStator(Stator):
+    """ Create a sprite for a custom slide """
+    def __init__(self, sprites, name, x, y, svg_engine, calculate, result,
+                 offset, label, min, max, step):
+        self.spr = Sprite(sprites, x, y,
+            svg_str_to_pixbuf(svg_engine(offset, label, min, max, step).svg))
+        self.calculate = calculate
+        self.result = result
+        self.name = name
+
+
 class Tab():
     """ Create tabs for the slide """
     def __init__(self, sprites, path, name, x, y, w, h):

@@ -1106,26 +1106,7 @@ class Custom_stator(Custom_slide):
 def main():
     """ Log scale for slide and stator """
 
-    """
     print C_slide().svg
-    print D_stator().svg
-    print CI_slide().svg
-    print DI_stator().svg
-    print A_slide().svg
-    print A_stator().svg
-    print K_slide().svg
-    print K_stator().svg
-    print S_slide().svg
-    print S_stator().svg
-    print T_slide().svg
-    print T_stator().sv
-    print L_slide().svg
-    print L_stator().svg
-    print LL0_slide().svg
-    print LL0_stator().svg
-    print LLn_slide().svg
-    print LLn_stator().svg
-    """
     return 0
 
 
