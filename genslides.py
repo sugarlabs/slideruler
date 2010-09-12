@@ -1046,6 +1046,63 @@ class LLn_stator(LLn_slide):
                                    x=10)
 
 
+class Custom_slide(C_slide):
+    """ User-defined scale for slide """
+    def __init__(self, offset_function, label_function, min, max, step):
+        self.name = ''
+        self.slide1 = HTOP1
+        self.slide2 = HTOP2
+        self.slide3 = HTOP3
+        self.slide_offset1 = 5
+        self.slide_offset2 = 7
+        self.slide_offset3 = -12
+
+        self.svg = self.make_slide(self.name, offset_function, label_function,
+                                   min, max, step)
+
+    def make_slide(self, label, offset_function, label_function, min, max,
+                   step):
+        """ Generate marks along a slide using passed functions """
+
+        svg = ''
+        svg += self.header(label)
+
+        # TODO: more sophisticated bounds-checking
+        if step == 0:
+            step = 1
+        if  step < 0:
+            step = -step
+        if min > max:
+            i = max
+            max = min
+            min = i
+        else:
+            i = min
+        while i < max:
+            svg += self.mark(offset_function(i), self.slide3,
+                                 self.slide2, self.slide1,
+                                 label_function(i))
+            i += step
+
+        svg += self.footer()
+        return svg
+
+
+class Custom_stator(Custom_slide):
+    """ user-defined scale for slide """
+    def __init__(self, offset_function, label_function, min, max, step):
+        self.name = ''
+        self.slide1 = SHEIGHT - HTOP1
+        self.slide2 = SHEIGHT - HTOP2
+        self.slide3 = SHEIGHT - HTOP3 + 12
+        self.slide_offset1 = - 5
+        self.slide_offset2 = - 7
+        self.slide_offset3 = 12
+
+        self.svg = self.make_slide(self.name, offset_function, label_function,
+                                   min, max, step)
+
+
 def main():
     """ Log scale for slide and stator """
 
