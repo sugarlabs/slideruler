@@ -16,15 +16,19 @@ import gtk
 import gobject
 import os.path
 
-from constants import SHEIGHT, SWIDTH, LEFT, RIGHT, TOP, BOTTOM
+from constants import SHEIGHT, SWIDTH, LEFT, RIGHT, TOP, BOTTOM, TABWIDTH
 from sprites import Sprite
 
 
 class Stator():
     """ Create a sprite for a stator """
-    def __init__(self, sprites, path, name, x, y, w, h, calculate=None,
-                 result=None):
-        self.spr = Sprite(sprites, x, y, file_to_pixbuf(path, name, w, h))
+    def __init__(self, sprites, path, name, x, y, w, h, svg_engine=None,
+                 calculate=None, result=None):
+        if svg_engine is None:
+            self.spr = Sprite(sprites, x, y, file_to_pixbuf(path, name, w, h))
+        else:
+            self.spr = Sprite(sprites, x, y,
+                              svg_str_to_pixbuf(svg_engine().svg))
         self.name = name
         self.calculate = calculate
         self.result = result
@@ -50,15 +54,20 @@ class Stator():
 
 class Slide(Stator):
     """ Create a sprite for a slide """
-    def __init__(self, sprites, path, name, x, y, w, h, function=None):
-        self.spr = Sprite(sprites, x, y, file_to_pixbuf(path, name, w, h))
-        self.tab_dx = [0, SWIDTH - 100]
+    def __init__(self, sprites, path, name, x, y, w, h, svg_engine=None,
+                 function=None):
+        if svg_engine is None:
+            self.spr = Sprite(sprites, x, y, file_to_pixbuf(path, name, w, h))
+        else:
+            self.spr = Sprite(sprites, x, y,
+                              svg_str_to_pixbuf(svg_engine().svg))
+        self.tab_dx = [0, SWIDTH - TABWIDTH]
         self.tab_dy = [2 * SHEIGHT, 2 * SHEIGHT]
         self.tabs = []
         self.tabs.append(Tab(sprites, path, 'tab', x + self.tab_dx[0],
-                             y + self.tab_dy[0], 100, SHEIGHT))
+                             y + self.tab_dy[0], TABWIDTH, SHEIGHT))
         self.tabs.append(Tab(sprites, path, 'tab', x + self.tab_dx[1],
-                             y + self.tab_dy[1], 100, SHEIGHT))
+                             y + self.tab_dy[1], TABWIDTH, SHEIGHT))
         self.calculate = function
         self.name = name
 
@@ -100,9 +109,9 @@ class Reticule(Slide):
         self.tab_dy = [-SHEIGHT, 2 * SHEIGHT]
         self.tabs = []
         self.tabs.append(Tab(sprites, path, 'tab', x + self.tab_dx[0],
-                             y + self.tab_dy[0], 100, SHEIGHT))
+                             y + self.tab_dy[0], TABWIDTH, SHEIGHT))
         self.tabs.append(Tab(sprites, path, 'tab', x + self.tab_dx[1],
-                             y + self.tab_dy[1], 100, SHEIGHT))
+                             y + self.tab_dy[1], TABWIDTH, SHEIGHT))
         self.name = name
 
 

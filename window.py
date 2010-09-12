@@ -12,6 +12,9 @@
 # Boston, MA 02111-1307, USA.
 
 from constants import SHEIGHT, SWIDTH, SCALE, OFFSET, LEFT, RIGHT, TOP, BOTTOM
+from genslides import C_slide, D_stator, CI_slide, DI_stator, A_slide, \
+    A_stator, K_slide, K_stator, S_slide, S_stator, T_slide, T_stator, \
+    L_slide, L_stator, LL0_slide, LL0_stator, LLn_slide, LLn_stator
 
 import pygtk
 pygtk.require('2.0')
@@ -180,41 +183,59 @@ class SlideRule():
                                         y + 4 * SHEIGHT,
                                         600, SHEIGHT)
 
-        self.slides.append(self._make_slide('C', y + SHEIGHT, self._calc_C))
-        self.slides.append(self._make_slide('CI', y + SHEIGHT, self._calc_CI))
-        self.slides.append(self._make_slide('L', y + SHEIGHT, self._calc_L))
-        self.slides.append(self._make_slide('A', y + SHEIGHT, self._calc_A))
-        self.slides.append(self._make_slide('K', y + SHEIGHT, self._calc_K))
-        self.slides.append(self._make_slide('S', y + SHEIGHT, self._calc_S))
-        self.slides.append(self._make_slide('T', y + SHEIGHT, self._calc_T))
-        self.slides.append(self._make_slide('LLn', y + SHEIGHT, self._calc_LLn))
-        self.slides.append(self._make_slide('LL0', y + SHEIGHT, self._calc_LL0))
+        self.slides.append(self._make_slide('C', C_slide, y + SHEIGHT,
+                                            self._calc_C))
+        self.slides.append(self._make_slide('CI', CI_slide, y + SHEIGHT,
+                                            self._calc_CI))
+        self.slides.append(self._make_slide('L', L_slide, y + SHEIGHT,
+                                            self._calc_L))
+        self.slides.append(self._make_slide('A', A_slide, y + SHEIGHT,
+                                            self._calc_A))
+        self.slides.append(self._make_slide('K', K_slide, y + SHEIGHT,
+                                            self._calc_K))
+        self.slides.append(self._make_slide('S', S_slide, y + SHEIGHT,
+                                            self._calc_S))
+        self.slides.append(self._make_slide('T', T_slide, y + SHEIGHT,
+                                            self._calc_T))
+        self.slides.append(self._make_slide('LLn', LLn_slide, y + SHEIGHT,
+                                            self._calc_LLn))
+        self.slides.append(self._make_slide('LL0', LL0_slide, y + SHEIGHT,
+                                            self._calc_LL0))
 
         self.stators.append(self._make_stator('D', y + 2 * SHEIGHT,
+                                              D_stator,
                                               self._calc_D,
                                               self._calc_D_result))
         self.stators.append(self._make_stator('DI', y + 2 * SHEIGHT,
+                                              DI_stator,
                                               self._calc_DI,
                                               self._calc_DI_result))
         self.stators.append(self._make_stator('L2', y + 2 * SHEIGHT,
+                                              L_stator,
                                               self._calc_L2,
                                               self._calc_L2_result))
         self.stators.append(self._make_stator('B', y + 2 * SHEIGHT,
+                                              A_stator,
                                               self._calc_B,
                                               self._calc_B_result))
         self.stators.append(self._make_stator('K2', y + 2 * SHEIGHT,
+                                              K_stator,
                                               self._calc_K2,
                                               self._calc_K2_result))
         self.stators.append(self._make_stator('S2', y + 2 * SHEIGHT,
+                                              S_stator,
                                               self._calc_S2,
                                               self._calc_S2_result))
         self.stators.append(self._make_stator('T2', y + 2 * SHEIGHT,
+                                              T_stator,
                                               self._calc_T2,
                                               self._calc_T2_result))
         self.stators.append(self._make_stator('LLn2', y + 2 * SHEIGHT,
+                                              LLn_stator,
                                               self._calc_LLn2,
                                               self._calc_LLn2_result))
         self.stators.append(self._make_stator('LL02', y + 2 * SHEIGHT,
+                                              LL0_stator,
                                               self._calc_LL02,
                                               self._calc_LL02_result))
 
@@ -277,16 +298,16 @@ class SlideRule():
             self.update_results_label()
         return True
 
-    def _make_slide(self, name, y, calculate=None):
+    def _make_slide(self, name, svg_engine, y, calculate=None):
         slide = Slide(self.sprites, self.path, name, 0, y, SWIDTH, SHEIGHT,
-                      calculate)
+                      svg_engine, calculate)
         slide.spr.set_label('')
         slide.draw()
         return slide
 
-    def _make_stator(self, name, y, calculate=None, result=None):
-        stator = Stator(self.sprites, self.path, name, 0, y, SWIDTH, SHEIGHT,
-                        calculate, result)
+    def _make_stator(self, name, y, svg_engine, calculate=None, result=None):
+        stator = Stator(self.sprites, None, name, 0, y, SWIDTH, SHEIGHT,
+                        svg_engine, calculate, result)
         stator.spr.set_label('')
         stator.draw()
         return stator
