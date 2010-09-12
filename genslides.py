@@ -1078,7 +1078,7 @@ class Custom_slide(C_slide):
             min = i
         else:
             i = min
-        while i < max:
+        while i < max + step:
             svg += self.mark(offset_function(i), self.slide3,
                                  self.slide2, self.slide1,
                                  label_function(i))

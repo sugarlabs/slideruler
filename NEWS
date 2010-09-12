@@ -1,6 +1,7 @@
 15
 
 * added log log scale
+* customizable slide
 * major refactoring of calculations
 * major refactoring of slide, stator generation
 

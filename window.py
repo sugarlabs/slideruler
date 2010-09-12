@@ -14,7 +14,9 @@
 import pygtk
 pygtk.require('2.0')
 import gtk
+
 from gettext import gettext as _
+
 import math
 
 try:
@@ -23,7 +25,8 @@ try:
 except:
     GRID_CELL_SIZE = 0
 
-from constants import SHEIGHT, SWIDTH, SCALE, OFFSET, LEFT, RIGHT, TOP, BOTTOM
+from constants import SHEIGHT, SWIDTH, SCALE, OFFSET, LEFT, RIGHT, TOP, \
+    BOTTOM, SCREENOFFSET
 from sprite_factory import Slide, Stator, Reticule, CustomSlide, CustomStator
 from sprites import Sprites
 from genslides import C_slide, D_stator, CI_slide, DI_stator, A_slide, \
@@ -31,20 +34,9 @@ from genslides import C_slide, D_stator, CI_slide, DI_stator, A_slide, \
     L_slide, L_stator, LL0_slide, LL0_stator, LLn_slide, LLn_stator, \
     Custom_slide, Custom_stator
 
+import traceback
 import logging
 _logger = logging.getLogger('sliderule-activity')
-
-
-def custom_offset_function(x):
-    return math.log(x, 10)
-
-
-def custom_label_function(x):
-    return x
-
-
-def custom_calc(dx):
-    return round(math.exp(dx / SCALE))
 
 
 def round(x, precision=2):
@@ -202,35 +194,24 @@ class SlideRule():
         self.scale = 1
 
         _logger.debug("creating slides, stators, and reticule")
-        y = 50
         self.results_label = Stator(self.sprites, self.path, 'label',
                                         int((self.width - 600) / 2),
-                                        y + 4 * SHEIGHT,
+                                        SCREENOFFSET + 4 * SHEIGHT,
                                         600, SHEIGHT)
 
         for slide in SLIDES:
-            self.slides.append(self._make_slide(slide, y + SHEIGHT,
+            self.slides.append(self._make_slide(slide, SCREENOFFSET + SHEIGHT,
                 SLIDES[slide][0], SLIDES[slide][1]))
 
         for stator in STATORS:
-            self.stators.append(self._make_stator(stator, y + 2 * SHEIGHT,
+            self.stators.append(self._make_stator(stator,
+                                                  SCREENOFFSET + 2 * SHEIGHT,
                 STATORS[stator][0], STATORS[stator][1], STATORS[stator][2]))
 
-        # User-definable slide
-        self.slides.append(CustomSlide(self.sprites, self.path, 'custom',
-                                       0, y + SHEIGHT, Custom_slide,
-                                       self._calc_custom,
-                                       custom_offset_function,
-                                       custom_label_function, 1, 11, 1))
-        self.stators.append(CustomStator(self.sprites, 'custom2',
-                                       0, y + SHEIGHT, Custom_stator,
-                                       self._calc_custom2,
-                                       self._calc_custom2_result,
-                                       custom_offset_function,
-                                       custom_label_function, 1, 11, 1))
+        self.make_custom_slide('math.log(x, 10)', 'x', 'math.exp(x)', 1, 10, 1)
 
         self.reticule = Reticule(self.sprites, self.path, 'reticule',
-                          150, y + SHEIGHT, 100, 2 * SHEIGHT)
+                          150, SCREENOFFSET + SHEIGHT, 100, 2 * SHEIGHT)
         self.reticule.draw(2000)
 
         self.active_slide = self.name_to_slide('C')
@@ -301,6 +282,85 @@ class SlideRule():
         stator.spr.set_label('')
         stator.draw()
         return stator
+
+    def make_custom_slide(self, offset_text, label_text, calculate_text,
+                          min_text, max_text, step_text):
+        """ Create custom slide and stator from text entered on toolbar. """
+        try:
+            min = float(min_text)
+        except ValueError:
+            self.parent._min_entry.set_text('NaN')
+            return
+        try:
+            max = float(max_text)
+        except ValueError:
+            self.parent._max_entry.set_text('NaN')
+            return
+        try:
+            step = float(step_text)
+        except ValueError:
+            self.parent._step_entry.set_text('NaN')
+            return
+
+        # TODO: some sort of function error checking
+        self.calculate_text = calculate_text
+
+        def custom_offset_function(x):
+            myf = "def f(x): return " + offset_text.replace('import','')
+            userdefined = {}
+            try:
+                exec myf in globals(), userdefined
+                return userdefined.values()[0](x)
+            except:
+                traceback.print_exc()
+                return None
+
+        def custom_label_function(x):
+            myf = "def f(x): return " + label_text.replace('import','')
+            userdefined = {}
+            try:
+                exec myf in globals(), userdefined
+                return userdefined.values()[0](x)
+            except:
+                traceback.print_exc()
+                return None
+
+        custom_slide = CustomSlide(self.sprites, self.path, 'custom',
+                                   0, SCREENOFFSET + SHEIGHT, Custom_slide,
+                                   self._calc_custom,
+                                   custom_offset_function,
+                                   custom_label_function, min, max, step)
+        custom_stator = CustomStator(self.sprites, 'custom2',
+                                     0, SCREENOFFSET + SHEIGHT, Custom_stator,
+                                     self._calc_custom2,
+                                     self._calc_custom2_result,
+                                     custom_offset_function,
+                                     custom_label_function, min, max, step)
+        
+        if self.name_to_slide('custom').name == 'custom':
+            i = self.slides.index(self.name_to_slide('custom'))
+            active = False
+            if self.active_slide == self.slides[i]:
+                active = True
+            self.slides[i].hide()
+            self.slides[i] = custom_slide
+            if active:
+                self.active_slide = self.slides[i]
+            self.parent.set_slide()
+        else:
+            self.slides.append(custom_slide)
+        if self.name_to_stator('custom2').name == 'custom2':
+            i = self.stators.index(self.name_to_stator('custom2'))
+            active = False
+            if self.active_stator == self.stators[i]:
+                active = True
+            self.stators[i].hide()
+            self.stators[i] = custom_stator
+            if active:
+                self.active_stator = self.stators[i]
+            self.parent.set_stator()
+        else:
+            self.stators.append(custom_stator)
 
     def name_to_slide(self, name):
         for slide in self.slides:
@@ -421,10 +481,12 @@ class SlideRule():
                     s = " ∛ %f = %f\t\t%f³ = %f" % (S, R, R, S)
             elif self.active_slide.name == 'S':
                 if self.name_to_slide('S').spr.get_xy()[0] == dx:
-                    s = " sin(%f) = %f\t\tasin(%f) = %f" % (S, R/10, R/10, S)
+                    s = " sin(%f) = %0.2f\t\tasin(%0.2f) = %f" % (S, R/10,
+                                                                  R/10, S)
             elif self.active_slide.name == 'T':
                 if self.name_to_slide('T').spr.get_xy()[0] == dx:
-                    s = " tan(%f) = %f\t\tatan(%f) = %f" % (S, R/10, R/10, S)
+                    s = " tan(%f) = %0.2f\t\tatan(%0.2f) = %f" % (S, R/10,
+                                                                  R/10, S)
             elif self.active_slide.name == 'C':
                 D = str(self._calc_D())
                 s = "%s × %s = %s\t\t%s / %s = %s" % (D, S, R, R, S, D)
@@ -562,11 +624,21 @@ class SlideRule():
         return _calc_linear(self._r_offset(self.name_to_stator('L2')))
 
     def _calc_custom(self):
-        return custom_calc(self._r_offset(self.name_to_slide('custom')))
+        return self.custom_calc(self._r_offset(self.name_to_slide('custom')))
 
     def _calc_custom2(self):
-        return custom_calc(self._top_slide_offset(
+        return self.custom_calc(self._top_slide_offset(
                 self.name_to_stator('custom2').spr.get_xy()[0]))
 
     def _calc_custom2_result(self):
-        return custom_calc(self._r_offset(self.name_to_stator('custom2')))
+        return self.custom_calc(self._r_offset(self.name_to_stator('custom2')))
+
+    def custom_calc(self, dx):
+        myf = "def f(x): return " + self.calculate_text.replace('import','')
+        userdefined = {}
+        try:
+            exec myf in globals(), userdefined
+            return round(userdefined.values()[0](dx / SCALE))
+        except:
+            traceback.print_exc()
+            return None

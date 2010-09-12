@@ -125,6 +125,21 @@ def _label_factory(label, toolbar):
     return my_label
 
 
+def _entry_factory(default_string, toolbar, tooltip='', max=16):
+    """ Factory for adding a text box to a toolbar """
+    my_entry = gtk.Entry()
+    my_entry.set_text(default_string)
+    if hasattr(my_entry, 'set_tooltip_text'):
+        my_entry.set_tooltip_text(tooltip)
+    my_entry.set_width_chars(max)
+    my_entry.show()
+    _toolitem = gtk.ToolItem()
+    _toolitem.add(my_entry)
+    toolbar.insert(_toolitem, -1)
+    _toolitem.show()
+    return my_entry
+
+
 def _separator_factory(toolbar, visible=True, expand=False):
     """ Factory for adding a separator to a toolbar """
     _separator = gtk.SeparatorToolItem()
@@ -135,7 +150,7 @@ def _separator_factory(toolbar, visible=True, expand=False):
 
 
 class SlideruleActivity(activity.Activity):
-    """ A sliderul activity for Sugar """
+    """ A sliderule activity for Sugar """
 
     def __init__(self, handle):
         super(SlideruleActivity,self).__init__(handle)
@@ -168,6 +183,21 @@ class SlideruleActivity(activity.Activity):
             _logger.debug("restoring %s" % (self.metadata['slide']))
             self.sr.active_slide = self.sr.name_to_slide(
                 self.metadata['slide'])
+
+        # custom slide settings
+        if 'min' in self.metadata:
+            self._min_entry.set_text(self.metadata['min'])
+        if 'max' in self.metadata:
+            self._max_entry.set_text(self.metadata['max'])
+        if 'step' in self.metadata:
+            self._step_entry.set_text(self.metadata['step'])
+        if 'label' in self.metadata:
+            self._label_function.set_text(self.metadata['label'])
+        if 'offset' in self.metadata:
+            self._offset_function.set_text(self.metadata['offset'])
+        if 'calculate' in self.metadata:
+            self._calculate_function.set_text(self.metadata['calculate'])
+
         function = self._predefined_function()
         if function is not None:
             function()
@@ -185,6 +215,13 @@ class SlideruleActivity(activity.Activity):
             self.metadata[slide.name] = str(slide.spr.get_xy()[0])
         self.metadata['D'] = str(self.sr.name_to_stator('D').spr.get_xy()[0])
         self.metadata['R'] = str(self.sr.reticule.spr.get_xy()[0])
+        self.metadata['min'] = self._min_entry.get_text()
+        self.metadata['max'] = self._max_entry.get_text()
+        self.metadata['step'] = self._step_entry.get_text()
+        self.metadata['label'] = self._label_function.get_text()
+        self.metadata['offset'] = self._offset_function.get_text()
+        self.metadata['calculate'] = self._calculate_function.get_text()
+
 
     def _hide_all(self):
         self._hide_top()
@@ -201,20 +238,20 @@ class SlideruleActivity(activity.Activity):
     def _show_slides(self, top, bottom, function):
         self._hide_all()
         self._top_combo.set_active(_SLIDES.index(top))
-        self._set_top_slider()
+        self.set_slide()
         self._bottom_combo.set_active(_STATORS.index(bottom))
-        self._set_bottom_slider()
+        self.set_stator()
         self._function_combo.set_active(_FUNCTIONS.index(function))
         self.sr.update_slide_labels()
         self.sr.update_results_label()
 
-    def _set_top_slider(self):
+    def set_slide(self):
         """ Move the top slider onto top layer """
         self._hide_top()
         self.sr.active_slide.draw()
         self.top_button.set_icon(self.sr.active_slide.name)
 
-    def _set_bottom_slider(self):
+    def set_stator(self):
         """ Move the bottom slider onto top layer """
         self._hide_bottom()
         self.sr.active_stator.draw()
@@ -331,7 +368,7 @@ class SlideruleActivity(activity.Activity):
             function()
         else:
             self._function_combo.set_active(_FUNCTIONS.index(_UK))
-            self._set_top_slider()
+            self.set_slide()
             self.sr.update_slide_labels()
             self.sr.update_results_label()
 
@@ -347,9 +384,18 @@ class SlideruleActivity(activity.Activity):
             function()
         else:
             self._function_combo.set_active(_FUNCTIONS.index(_UK))
-            self._set_bottom_slider()
+            self.set_stator()
             self.sr.update_slide_labels()
             self.sr.update_results_label()
+
+    def _custom_cb(self, arg=None):
+        """ Create custom slide and stator from parameters in entry widgets """
+        self.sr.make_custom_slide(self._offset_function.get_text(),
+                                  self._label_function.get_text(),
+                                  self._calculate_function.get_text(),
+                                  self._min_entry.get_text(),
+                                  self._max_entry.get_text(),
+                                  self._step_entry.get_text())
 
     def _dummy_cb(self, arg=None):
         return
@@ -357,6 +403,8 @@ class SlideruleActivity(activity.Activity):
     def _setup_toolbars(self, have_toolbox):
         """ Setup the toolbars.. """
 
+        project_toolbar = gtk.Toolbar()
+        custom_toolbar = gtk.Toolbar()
         if have_toolbox:
             toolbox = ToolbarBox()
 
@@ -366,40 +414,68 @@ class SlideruleActivity(activity.Activity):
             toolbox.toolbar.insert(activity_button, 0)
             activity_button.show()
 
+            project_toolbar_button = ToolbarButton(page=project_toolbar,
+                                                   icon_name='sliderule')
+            project_toolbar.show()
+            toolbox.toolbar.insert(project_toolbar_button, -1)
+            project_toolbar_button.show()
+
+            custom_toolbar_button = ToolbarButton(page=custom_toolbar,
+                                                  icon_name='view-source')
+            custom_toolbar.show()
+            toolbox.toolbar.insert(custom_toolbar_button, -1)
+            custom_toolbar_button.show()
+
             self.set_toolbar_box(toolbox)
             toolbox.show()
             toolbar = toolbox.toolbar
 
         else:
             # Use pre-0.86 toolbar design
-            project_toolbar = gtk.Toolbar()
             toolbox = activity.ActivityToolbox(self)
             self.set_toolbox(toolbox)
             toolbox.add_toolbar(_('Project'), project_toolbar)
+            toolbox.add_toolbar(_('Custom'), custom_toolbar)
             toolbox.show()
             toolbox.set_current_toolbar(1)
             toolbar = project_toolbar
 
         # Add the buttons to the toolbars
         self._function_combo = _combo_factory(_FUNCTIONS, _FC, _('functions'),
-                                              self._function_combo_cb, toolbar)
+            self._function_combo_cb, project_toolbar)
         self.top_button = _button_factory('C', _('slide'),
-                                          self._dummy_cb, toolbar)
+                                          self._dummy_cb, project_toolbar)
         self._top_combo = _combo_factory(_SLIDES, _C, _('slides'),
-                                         self._top_combo_cb, toolbar)
+                                         self._top_combo_cb,
+                                         project_toolbar)
         self.bottom_button = _button_factory('D', _('stator'),
-                                             self._dummy_cb, toolbar)
+                                             self._dummy_cb, project_toolbar)
         self._bottom_combo = _combo_factory(_STATORS, _D, _('stators'),
-                                         self._bottom_combo_cb, toolbar)
-        _separator_factory(toolbox.toolbar)
+            self._bottom_combo_cb, project_toolbar)
+        _separator_factory(project_toolbar)
         self.realign_button = _button_factory('realign', _('realign slides'),
-                                             self.realign_cb, toolbar)
+                                              self.realign_cb, project_toolbar)
 
-        if _have_toolbox:
+        self._offset_function = _entry_factory('math.log(x, 10)',
+            custom_toolbar, _('position function'))
+        self._label_function = _entry_factory('x', custom_toolbar,
+                                               _('label function'), max=6)
+        self._calculate_function = _entry_factory('math.exp(x)', custom_toolbar,
+                                               _('results function'))
+        self._min_entry = _entry_factory('1', custom_toolbar, _('minimum'),
+                                         max=6)
+        self._max_entry = _entry_factory('10', custom_toolbar, _('maximum'),
+                                         max=6)
+        self._step_entry = _entry_factory('1', custom_toolbar, _('step'),
+                                          max=6)
+        self.custom = _button_factory("new-game", _('custom'),
+                                      self._custom_cb, custom_toolbar)
+
+        if have_toolbox:
             _separator_factory(toolbox.toolbar, False, True)
 
             stop_button = StopButton(self)
             stop_button.props.accelerator = '<Ctrl>q'
             toolbox.toolbar.insert(stop_button, -1)
             stop_button.show()
-
+            project_toolbar_button.set_expanded(True)
