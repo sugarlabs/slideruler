@@ -749,7 +749,7 @@ class T_stator(T_slide):
 class L_slide(C_slide):
     """ Linear scale for slide """
     def __init__(self):
-        self.name = 'T'
+        self.name = 'L'
         self.slide1 = HTOP1
         self.slide2 = HTOP2
         self.slide3 = HTOP3
