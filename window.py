@@ -143,17 +143,30 @@ class SlideRule():
 
     def __init__(self, canvas, path, parent=None):
         """ Handle launch from both within and without of Sugar environment. """
+        SLIDES = {'C':[C_slide, self._calc_C], 'CI':[CI_slide, self._calc_CI],
+                  'A':[A_slide, self._calc_A], 'K':[K_slide, self._calc_K],
+                  'S':[S_slide, self._calc_S], 'T':[T_slide, self._calc_T],
+                  'L':[L_slide, self._calc_L],
+                  'LLn':[LLn_slide, self._calc_LLn],
+                  'LL0':[LL0_slide, self._calc_LL0]}
+
+        STATORS = {'D':[D_stator, self._calc_D, self._calc_D_result],
+                   'DI':[DI_stator, self._calc_DI, self._calc_DI_result],
+                   'B':[A_stator, self._calc_B, self._calc_B_result],
+                   'K2':[K_stator, self._calc_K2, self._calc_K2_result],
+                   'S2':[S_stator, self._calc_S2, self._calc_S2_result],
+                   'T2':[T_stator, self._calc_T2, self._calc_T2_result],
+                   'L2':[L_stator, self._calc_L2, self._calc_L2_result],
+                   'LLn':[LLn_stator, self._calc_LLn2, self._calc_LLn2_result],
+                   'LL0':[LL0_stator, self._calc_LL02, self._calc_LL02_result]}
+
         self.path = path
         self.activity = parent
 
-        # starting from command line
-        # we have to do all the work that was done in CardSortActivity.py
         if parent is None:
             self.sugar = False
             self.canvas = canvas
             self.parent = None
-
-        # starting from Sugar
         else:
             self.sugar = True
             self.canvas = canvas
@@ -183,61 +196,12 @@ class SlideRule():
                                         y + 4 * SHEIGHT,
                                         600, SHEIGHT)
 
-        self.slides.append(self._make_slide('C', C_slide, y + SHEIGHT,
-                                            self._calc_C))
-        self.slides.append(self._make_slide('CI', CI_slide, y + SHEIGHT,
-                                            self._calc_CI))
-        self.slides.append(self._make_slide('L', L_slide, y + SHEIGHT,
-                                            self._calc_L))
-        self.slides.append(self._make_slide('A', A_slide, y + SHEIGHT,
-                                            self._calc_A))
-        self.slides.append(self._make_slide('K', K_slide, y + SHEIGHT,
-                                            self._calc_K))
-        self.slides.append(self._make_slide('S', S_slide, y + SHEIGHT,
-                                            self._calc_S))
-        self.slides.append(self._make_slide('T', T_slide, y + SHEIGHT,
-                                            self._calc_T))
-        self.slides.append(self._make_slide('LLn', LLn_slide, y + SHEIGHT,
-                                            self._calc_LLn))
-        self.slides.append(self._make_slide('LL0', LL0_slide, y + SHEIGHT,
-                                            self._calc_LL0))
-
-        self.stators.append(self._make_stator('D', y + 2 * SHEIGHT,
-                                              D_stator,
-                                              self._calc_D,
-                                              self._calc_D_result))
-        self.stators.append(self._make_stator('DI', y + 2 * SHEIGHT,
-                                              DI_stator,
-                                              self._calc_DI,
-                                              self._calc_DI_result))
-        self.stators.append(self._make_stator('L2', y + 2 * SHEIGHT,
-                                              L_stator,
-                                              self._calc_L2,
-                                              self._calc_L2_result))
-        self.stators.append(self._make_stator('B', y + 2 * SHEIGHT,
-                                              A_stator,
-                                              self._calc_B,
-                                              self._calc_B_result))
-        self.stators.append(self._make_stator('K2', y + 2 * SHEIGHT,
-                                              K_stator,
-                                              self._calc_K2,
-                                              self._calc_K2_result))
-        self.stators.append(self._make_stator('S2', y + 2 * SHEIGHT,
-                                              S_stator,
-                                              self._calc_S2,
-                                              self._calc_S2_result))
-        self.stators.append(self._make_stator('T2', y + 2 * SHEIGHT,
-                                              T_stator,
-                                              self._calc_T2,
-                                              self._calc_T2_result))
-        self.stators.append(self._make_stator('LLn2', y + 2 * SHEIGHT,
-                                              LLn_stator,
-                                              self._calc_LLn2,
-                                              self._calc_LLn2_result))
-        self.stators.append(self._make_stator('LL02', y + 2 * SHEIGHT,
-                                              LL0_stator,
-                                              self._calc_LL02,
-                                              self._calc_LL02_result))
+        for slide in SLIDES:
+            self.slides.append(self._make_slide(slide, y + SHEIGHT,
+                SLIDES[slide][0], SLIDES[slide][1]))
+        for stator in STATORS:
+            self.stators.append(self._make_stator(stator, y + 2 * SHEIGHT,
+                STATORS[stator][0], STATORS[stator][1], STATORS[stator][2]))
 
         self.reticule = Reticule(self.sprites, self.path, 'reticule',
                           150, y + SHEIGHT, 100, 2 * SHEIGHT)
@@ -298,7 +262,7 @@ class SlideRule():
             self.update_results_label()
         return True
 
-    def _make_slide(self, name, svg_engine, y, calculate=None):
+    def _make_slide(self, name, y, svg_engine, calculate=None):
         slide = Slide(self.sprites, self.path, name, 0, y, SWIDTH, SHEIGHT,
                       svg_engine, calculate)
         slide.spr.set_label('')
