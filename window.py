@@ -475,18 +475,18 @@ class SlideRule():
             R = self._calc_D_result()
             if self.active_slide.name == 'A':
                 if self.name_to_slide('A').spr.get_xy()[0] == dx:
-                    s = " √ %f = %f\t\t%f² = %f" % (S, R, R, S)
+                    s = " √ %0.2f = %0.2f\t\t%0.2f² = %0.2f" % (S, R, R, S)
             elif self.active_slide.name == 'K':
                 if self.name_to_slide('K').spr.get_xy()[0] == dx:
-                    s = " ∛ %f = %f\t\t%f³ = %f" % (S, R, R, S)
+                    s = " ∛ %0.2f = %0.2f\t\t%0.2f³ = %0.2f" % (S, R, R, S)
             elif self.active_slide.name == 'S':
                 if self.name_to_slide('S').spr.get_xy()[0] == dx:
-                    s = " sin(%f) = %0.2f\t\tasin(%0.2f) = %f" % (S, R/10,
-                                                                  R/10, S)
+                    s = " sin(%0.2f) = %0.2f\t\tasin(%0.2f) = %0.2f" % \
+                        (S, R/10, R/10, S)
             elif self.active_slide.name == 'T':
                 if self.name_to_slide('T').spr.get_xy()[0] == dx:
-                    s = " tan(%f) = %0.2f\t\tatan(%0.2f) = %f" % (S, R/10,
-                                                                  R/10, S)
+                    s = " tan(%0.2f) = %0.2f\t\tatan(%0.2f) = %0.2f" % \
+                        (S, R/10, R/10, S)
             elif self.active_slide.name == 'C':
                 D = str(self._calc_D())
                 s = "%s × %s = %s\t\t%s / %s = %s" % (D, S, R, R, S, D)
