@@ -67,7 +67,7 @@ _T = _('tan')
 _L = _('linear')
 _LL0 = _('log log')
 _LLn = _('ln')
-_TOP_SCALES = [_L, _C, _CI, _A, _K, _S, _T, _LL0, _LLn]
+_SLIDES = [_L, _C, _CI, _A, _K, _S, _T, _LL0, _LLn]
 
 _D = _C
 _DI = _CI
@@ -78,7 +78,7 @@ _S2 = _S
 _T2 = _T
 _LL02 = _LL0
 _LLn2 = _LLn
-_BOT_SCALES = [_L2, _D, _DI, _B, _K2, _S2, _T2, _LL0, _LLn2]
+_STATORS = [_L2, _D, _DI, _B, _K2, _S2, _T2, _LL0, _LLn2]
 
 
 def _combo_factory(combo_array, default, tooltip, callback, toolbar):
@@ -162,8 +162,6 @@ class SlideruleActivity(activity.Activity):
             if name in self.metadata:
                 self.sr.name_to_slide(name).move(int(self.metadata[name]),
                     self.sr.slides[0].spr.get_xy()[1])
-        if 'R' in self.metadata:
-            self.sr.R.move(int(self.metadata['R']), self.sr.R.spr.get_xy()[1])
         if 'D' in self.metadata:
             self.move_stators(int(self.metadata['D']),
                               self.sr.name_to_stator('D').spr.get_xy()[1])
@@ -180,6 +178,9 @@ class SlideruleActivity(activity.Activity):
             function()
         else:
             self.show_c()
+        if 'R' in self.metadata:
+            self.sr.reticule.move(int(self.metadata['R']),
+                                  self.sr.reticule.spr.get_xy()[1])
 
     def write_file(self, file_path):
         """ Write the slide positions to the Journal """
@@ -189,7 +190,7 @@ class SlideruleActivity(activity.Activity):
             self.metadata[name] = str(
                 self.sr.name_to_slide(name).spr.get_xy()[0])
         self.metadata['D'] = str(self.sr.name_to_stator('D').spr.get_xy()[0])
-        self.metadata['R'] = str(self.sr.R.spr.get_xy()[0])
+        self.metadata['R'] = str(self.sr.reticule.spr.get_xy()[0])
 
     def _hide_all(self):
         self._hide_top()
@@ -205,9 +206,9 @@ class SlideruleActivity(activity.Activity):
 
     def _show_slides(self, top, bottom, function):
         self._hide_all()
-        self._top_combo.set_active(_TOP_SCALES.index(top))
+        self._top_combo.set_active(_SLIDES.index(top))
         self._set_top_slider()
-        self._bottom_combo.set_active(_BOT_SCALES.index(bottom))
+        self._bottom_combo.set_active(_STATORS.index(bottom))
         self._set_bottom_slider()
         self._function_combo.set_active(_FUNCTIONS.index(function))
         self.sr.update_slide_labels()
@@ -329,7 +330,7 @@ class SlideruleActivity(activity.Activity):
         _top_dictionary = {_C: 'C', _CI: 'CI', _A: 'A', _K: 'K', _S: 'S',
                            _T: 'T', _L: 'L', _LL0: 'LL0', _LLn: 'LLn'}
         self.sr.active_slide = self.sr.name_to_slide(_top_dictionary[
-            _TOP_SCALES[self._top_combo.get_active()]])
+            _SLIDES[self._top_combo.get_active()]])
         function = self._predefined_function()
         if function is not None:
             function()
@@ -345,7 +346,7 @@ class SlideruleActivity(activity.Activity):
                               _K2: 'K2', _S2: 'S2', _T2: 'T2', _LL02: 'LL02',
                               _LLn2: 'LLn2'}
         self.sr.active_stator = self.sr.name_to_stator(_bottom_dictionary[
-            _BOT_SCALES[self._bottom_combo.get_active()]])
+            _STATORS[self._bottom_combo.get_active()]])
         function = self._predefined_function()
         if function is not None:
             function()
@@ -385,15 +386,15 @@ class SlideruleActivity(activity.Activity):
             toolbar = project_toolbar
 
         # Add the buttons to the toolbars
-        self._function_combo = _combo_factory(_FUNCTIONS, _FC, _('function'),
+        self._function_combo = _combo_factory(_FUNCTIONS, _FC, _('functions'),
                                               self._function_combo_cb, toolbar)
         self.top_button = _button_factory('C', _('slide'),
                                           self._dummy_cb, toolbar)
-        self._top_combo = _combo_factory(_TOP_SCALES, _C, _('slide'),
+        self._top_combo = _combo_factory(_SLIDES, _C, _('slides'),
                                          self._top_combo_cb, toolbar)
         self.bottom_button = _button_factory('D', _('stator'),
                                              self._dummy_cb, toolbar)
-        self._bottom_combo = _combo_factory(_BOT_SCALES, _D, _('stator'),
+        self._bottom_combo = _combo_factory(_STATORS, _D, _('stators'),
                                          self._bottom_combo_cb, toolbar)
         _separator_factory(toolbox.toolbar)
         self.realign_button = _button_factory('realign', _('realign slides'),

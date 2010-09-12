@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-09-10 19:02-0400\n"
+"POT-Creation-Date: 2010-09-11 10:36-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,103 +20,106 @@ msgstr ""
 msgid "Sliderule"
 msgstr ""
 
-#: /home/walter/Desktop/sliderule/SlideruleActivity.py:52
+#: /home/walter/Desktop/sliderule/SlideruleActivity.py:51
 #: /home/walter/Desktop/sliderule/sliderule.py:24
 msgid "square/square root"
 msgstr ""
 
-#: /home/walter/Desktop/sliderule/SlideruleActivity.py:53
+#: /home/walter/Desktop/sliderule/SlideruleActivity.py:52
 #: /home/walter/Desktop/sliderule/sliderule.py:25
 msgid "multiply/divide"
 msgstr ""
 
-#: /home/walter/Desktop/sliderule/SlideruleActivity.py:54
+#: /home/walter/Desktop/sliderule/SlideruleActivity.py:53
 #: /home/walter/Desktop/sliderule/sliderule.py:26
 msgid "divide/multiply"
 msgstr ""
 
-#: /home/walter/Desktop/sliderule/SlideruleActivity.py:55
+#: /home/walter/Desktop/sliderule/SlideruleActivity.py:54
 #: /home/walter/Desktop/sliderule/sliderule.py:27
 msgid "cube/cube root"
 msgstr ""
 
-#: /home/walter/Desktop/sliderule/SlideruleActivity.py:56
+#: /home/walter/Desktop/sliderule/SlideruleActivity.py:55
 #: /home/walter/Desktop/sliderule/sliderule.py:28
 msgid "sin, asin"
 msgstr ""
 
-#: /home/walter/Desktop/sliderule/SlideruleActivity.py:57
+#: /home/walter/Desktop/sliderule/SlideruleActivity.py:56
 #: /home/walter/Desktop/sliderule/sliderule.py:29
 msgid "tan, atan"
 msgstr ""
 
-#: /home/walter/Desktop/sliderule/SlideruleActivity.py:58
+#: /home/walter/Desktop/sliderule/SlideruleActivity.py:57
 #: /home/walter/Desktop/sliderule/sliderule.py:30
 msgid "add/subtract"
 msgstr ""
 
-#: /home/walter/Desktop/sliderule/SlideruleActivity.py:59
+#: /home/walter/Desktop/sliderule/SlideruleActivity.py:58
 msgid "user defined"
 msgstr ""
 
-#: /home/walter/Desktop/sliderule/SlideruleActivity.py:62
+#: /home/walter/Desktop/sliderule/SlideruleActivity.py:61
 msgid "log²"
 msgstr ""
 
-#: /home/walter/Desktop/sliderule/SlideruleActivity.py:63
+#: /home/walter/Desktop/sliderule/SlideruleActivity.py:62
 msgid "log"
 msgstr ""
 
-#: /home/walter/Desktop/sliderule/SlideruleActivity.py:64
+#: /home/walter/Desktop/sliderule/SlideruleActivity.py:63
 msgid "1/log"
 msgstr ""
 
-#: /home/walter/Desktop/sliderule/SlideruleActivity.py:65
+#: /home/walter/Desktop/sliderule/SlideruleActivity.py:64
 msgid "log³"
 msgstr ""
 
-#: /home/walter/Desktop/sliderule/SlideruleActivity.py:66
+#: /home/walter/Desktop/sliderule/SlideruleActivity.py:65
 msgid "sin"
 msgstr ""
 
-#: /home/walter/Desktop/sliderule/SlideruleActivity.py:67
+#: /home/walter/Desktop/sliderule/SlideruleActivity.py:66
 msgid "tan"
 msgstr ""
 
-#: /home/walter/Desktop/sliderule/SlideruleActivity.py:68
+#: /home/walter/Desktop/sliderule/SlideruleActivity.py:67
 msgid "linear"
 msgstr ""
 
-#: /home/walter/Desktop/sliderule/SlideruleActivity.py:69
+#: /home/walter/Desktop/sliderule/SlideruleActivity.py:68
 msgid "log log"
 msgstr ""
 
-#: /home/walter/Desktop/sliderule/SlideruleActivity.py:70
+#: /home/walter/Desktop/sliderule/SlideruleActivity.py:69
 msgid "ln"
 msgstr ""
 
-#: /home/walter/Desktop/sliderule/SlideruleActivity.py:523
+#: /home/walter/Desktop/sliderule/SlideruleActivity.py:383
 msgid "Project"
 msgstr ""
 
-#: /home/walter/Desktop/sliderule/SlideruleActivity.py:529
-msgid "function"
+#: /home/walter/Desktop/sliderule/SlideruleActivity.py:389
+msgid "functions"
 msgstr ""
 
-#: /home/walter/Desktop/sliderule/SlideruleActivity.py:531
-#: /home/walter/Desktop/sliderule/SlideruleActivity.py:533
-msgid "top scale"
+#: /home/walter/Desktop/sliderule/SlideruleActivity.py:391
+msgid "slide"
 msgstr ""
 
-#: /home/walter/Desktop/sliderule/SlideruleActivity.py:535
-msgid "bottom scale"
+#: /home/walter/Desktop/sliderule/SlideruleActivity.py:393
+msgid "slides"
 msgstr ""
 
-#: /home/walter/Desktop/sliderule/SlideruleActivity.py:537
-msgid "bot scale"
+#: /home/walter/Desktop/sliderule/SlideruleActivity.py:395
+msgid "stator"
 msgstr ""
 
-#: /home/walter/Desktop/sliderule/SlideruleActivity.py:540
+#: /home/walter/Desktop/sliderule/SlideruleActivity.py:397
+msgid "stators"
+msgstr ""
+
+#: /home/walter/Desktop/sliderule/SlideruleActivity.py:400
 #: /home/walter/Desktop/sliderule/sliderule.py:73
 msgid "realign slides"
 msgstr ""
