@@ -235,11 +235,11 @@ class SlideruleActivity(activity.Activity):
         for stator in self.sr.stators:
             stator.hide()
 
-    def _show_slides(self, top, bottom, function):
+    def _show_slides(self, slide, stator, function):
         self._hide_all()
-        self._top_combo.set_active(_SLIDES.index(top))
+        self._slide_combo.set_active(_SLIDES.index(slide))
         self.set_slide()
-        self._bottom_combo.set_active(_STATORS.index(bottom))
+        self._stator_combo.set_active(_STATORS.index(stator))
         self.set_stator()
         self._function_combo.set_active(_FUNCTIONS.index(function))
         self.sr.update_slide_labels()
@@ -330,7 +330,7 @@ class SlideruleActivity(activity.Activity):
         """ linear scale """
         self.sr.active_slide = self.sr.name_to_slide('L')
         self.sr.active_stator = self.sr.name_to_stator('L2')
-        self._show_slides(_L, _L2, _FL)
+        self._show_slides(_L, _L, _FL)
 
     # toolbar button callbacks
     def realign_cb(self, arg=None):
@@ -356,13 +356,13 @@ class SlideruleActivity(activity.Activity):
             # 'unknown'
             pass
 
-    def _top_combo_cb(self, arg=None):
+    def _slide_combo_cb(self, arg=None):
         """ Read value from slide combo box """
         _top_dictionary = {_C: 'C', _CI: 'CI', _A: 'A', _K: 'K', _S: 'S',
                            _T: 'T', _L: 'L', _LL0: 'LL0', _LLn: 'LLn',
                            _UD: 'custom'}
         self.sr.active_slide = self.sr.name_to_slide(_top_dictionary[
-            _SLIDES[self._top_combo.get_active()]])
+            _SLIDES[self._slide_combo.get_active()]])
         function = self._predefined_function()
         if function is not None:
             function()
@@ -372,13 +372,13 @@ class SlideruleActivity(activity.Activity):
             self.sr.update_slide_labels()
             self.sr.update_results_label()
 
-    def _bottom_combo_cb(self, arg=None):
+    def _stator_combo_cb(self, arg=None):
         """ Read value from stator combo box """
         _bottom_dictionary = {_D: 'D', _DI: 'DI', _L: 'L2', _B: 'B',
                               _K: 'K2', _S: 'S2', _T: 'T2', _LL0: 'LL02',
                               _LLn: 'LLn2', _UD: 'custom2'}
         self.sr.active_stator = self.sr.name_to_stator(_bottom_dictionary[
-            _STATORS[self._bottom_combo.get_active()]])
+            _STATORS[self._stator_combo.get_active()]])
         function = self._predefined_function()
         if function is not None:
             function()
@@ -445,13 +445,13 @@ class SlideruleActivity(activity.Activity):
             self._function_combo_cb, project_toolbar)
         self.top_button = _button_factory('C', _('slide'),
                                           self._dummy_cb, project_toolbar)
-        self._top_combo = _combo_factory(_SLIDES, _C, _('slides'),
-                                         self._top_combo_cb,
+        self._slide_combo = _combo_factory(_SLIDES, _C, _('slides'),
+                                         self._slide_combo_cb,
                                          project_toolbar)
         self.bottom_button = _button_factory('D', _('stator'),
                                              self._dummy_cb, project_toolbar)
-        self._bottom_combo = _combo_factory(_STATORS, _D, _('stators'),
-            self._bottom_combo_cb, project_toolbar)
+        self._stator_combo = _combo_factory(_STATORS, _D, _('stators'),
+            self._stator_combo_cb, project_toolbar)
         _separator_factory(project_toolbar)
         self.realign_button = _button_factory('realign', _('realign slides'),
                                               self.realign_cb, project_toolbar)
