@@ -251,7 +251,7 @@ class SlideRule():
     def _keypress_cb(self, area, event):
         """ Keypress: moving the slides with the arrow keys """
         k = gtk.gdk.keyval_name(event.keyval)
-        if self.parent == None:
+        if self.parent is None:
             return
         if k in ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'period',
                  'minus', 'Return', 'BackSpace']:
@@ -641,24 +641,24 @@ class SlideRule():
             if self.active_slide.name == 'A':
                 if self.name_to_slide('A').spr.get_xy()[0] == dx:
                     s = " √ %0.2f = %0.2f\t\t%0.2f² = %0.2f" % (S, R, R, S)
-                else:
+                elif self.parent is not None:
                     self.parent.set_function_unknown()
             elif self.active_slide.name == 'K':
                 if self.name_to_slide('K').spr.get_xy()[0] == dx:
                     s = " ∛ %0.2f = %0.2f\t\t%0.2f³ = %0.2f" % (S, R, R, S)
-                else:
+                elif self.parent is not None:
                     self.parent.set_function_unknown()
             elif self.active_slide.name == 'S':
                 if self.name_to_slide('S').spr.get_xy()[0] == dx:
                     s = " sin(%0.2f) = %0.2f\t\tasin(%0.2f) = %0.2f" % \
                         (S, R/10, R/10, S)
-                else:
+                elif self.parent is not None:
                     self.parent.set_function_unknown()
             elif self.active_slide.name == 'T':
                 if self.name_to_slide('T').spr.get_xy()[0] == dx:
                     s = " tan(%0.2f) = %0.2f\t\tatan(%0.2f) = %0.2f" % \
                         (S, R/10, R/10, S)
-                else:
+                elif self.parent is not None:
                     self.parent.set_function_unknown()
             elif self.active_slide.name == 'C':
                 D = str(self._calc_D())
@@ -701,7 +701,7 @@ class SlideRule():
             R = self._calc_LLn2_result()
             if self.name_to_slide('C').spr.get_xy()[0] == dx:
                 s = " ln(%0.2f) = %0.2f\t\texp(%0.2f) = %0.2f" % (S, R, R, S)
-            else:
+            elif self.parent is not None:
                 self.parent.set_function_unknown()
 
         self.results_label.spr.set_label(s)
