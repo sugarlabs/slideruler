@@ -456,11 +456,11 @@ class SlideruleActivity(activity.Activity):
         self.realign_button = _button_factory('realign', _('realign slides'),
                                               self.realign_cb, project_toolbar)
 
-        self._offset_function = _entry_factory('math.log(x, 10)',
+        self._offset_function = _entry_factory('log(x, 10)',
             custom_toolbar, _('position function'))
         self._label_function = _entry_factory('x', custom_toolbar,
                                                _('label function'), max=6)
-        self._calculate_function = _entry_factory('math.exp(x)', custom_toolbar,
+        self._calculate_function = _entry_factory('exp(x)', custom_toolbar,
                                                _('results function'))
         self._min_entry = _entry_factory('1', custom_toolbar, _('minimum'),
                                          max=6)
