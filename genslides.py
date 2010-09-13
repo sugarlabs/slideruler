@@ -40,19 +40,18 @@ class C_slide():
              scale=1.0):
         """ Plot marks in a range from 1 to 10 along the length of the slide """
         svg = ''
-        scale *= float(SWIDTH - 2 * OFFSET) / SCALE
         if flip:
-            ln = (log10 - offset) * SCALE * scale + OFFSET
+            log = (log10 - offset) * SCALE * scale + OFFSET
         else:
-            ln = offset * SCALE * scale + OFFSET
+            log = offset * SCALE * scale + OFFSET
         if string is not None:
             svg += '  <text style="font-size:12px;fill:#000000;">\n'
             svg += '      <tspan\n'
-            svg += '       x="%0.2f"\n' % (ln)
+            svg += '       x="%0.2f"\n' % (log)
             svg += '       y="%d"\n' % (height3)
             svg += '       style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">%0.1f</tspan></text>\n' % (string)
         svg += '  <path\n'
-        svg += '       d="M %0.2f,%d,%0.2f,%d"\n' % (ln, height1, ln, height2)
+        svg += '       d="M %0.2f,%d,%0.2f,%d"\n' % (log, height1, log, height2)
         svg += '       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />\n'
         return svg
 
@@ -60,18 +59,17 @@ class C_slide():
                      flip=False, scale=1.0):
         """ Plot special marks, e.g., e and pi """
         svg = ''
-        scale *= float(SWIDTH - 2 * OFFSET) / SCALE
         if flip:
-            ln = (log10 - offset) * SCALE * scale + OFFSET
+            log = (log10 - offset) * SCALE * scale + OFFSET
         else:
-            ln = offset * SCALE * scale + OFFSET
+            log = offset * SCALE * scale + OFFSET
         svg += '  <text style="font-size:12px;fill:#0000ff;">\n'
         svg += '      <tspan\n'
-        svg += '       x="%0.2f"\n' % (ln)
+        svg += '       x="%0.2f"\n' % (log)
         svg += '       y="%d"\n' % (height3)
         svg += '       style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">%s</tspan></text>\n' % (string)
         svg += '  <path\n'
-        svg += '       d="M %0.2f,%d,%0.2f,%d"\n' % (ln, height1, ln, height2)
+        svg += '       d="M %0.2f,%d,%0.2f,%d"\n' % (log, height1, log, height2)
         svg += '       style="fill:none;stroke:#0000ff;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />\n'
         return svg
 
@@ -528,7 +526,6 @@ class S_slide(C_slide):
              scale=1.0):
         """ Plot marks in a range from 1 to 10 along the length of the slide """
         svg = ''
-        scale *= float(SWIDTH - 2 * OFFSET) / SCALE
         if flip:
             ln = (log10 - offset) * SCALE * scale + OFFSET
         else:
@@ -846,7 +843,6 @@ class LL0_slide(C_slide):
              scale=1.0):
         """ Plot marks in a range from 1 to 10 along the length of the slide """
         svg = ''
-        scale *= float(SWIDTH - 2 * OFFSET) / SCALE
         if flip:
             ln = (log10 - offset) * SCALE * scale + OFFSET
         else:
@@ -940,7 +936,7 @@ class LL0_stator(LL0_slide):
             return math.log(x, 10)
 
         def label_function(x):
-            return math.exp(x / 1000.)
+            return math.pow(10, x / 1000.)
 
         self.svg = self.make_slide(self.name, offset_function, label_function,
                                    x=10)
