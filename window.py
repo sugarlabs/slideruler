@@ -56,8 +56,8 @@ def _calc_log(dx):
     rescale = 1
     if dx < 0:
         rescale = 0.1
-        dx += SWIDTH - (2.0 * OFFSET)
-    return round(exp(dx / SCALE) * rescale)
+        dx += SCALE
+    return round(pow(10, float(dx) / SCALE) * rescale)
 
 
 def _calc_inverse_log(dx):
@@ -65,17 +65,17 @@ def _calc_inverse_log(dx):
     rescale = 1
     if dx < 0:
         rescale = 0.1
-        dx += SWIDTH - (2.0 * OFFSET)
-    return round(10.0 / exp(dx / SCALE) * rescale)
+        dx += SCALE
+    return round(10.0 / pow(10, float(dx) / SCALE) * rescale)
 
 
 def _calc_log_squared(dx):
     """ A and B scales """
     rescale = 1
     if dx < 0:
-        dx += SWIDTH - (2.0 * OFFSET)
+        dx += SCALE
         rescale = 0.01
-    A = exp(2 * dx / SCALE) * rescale
+    A = pow(10, 2 * float(dx) / SCALE) * rescale
     if A > 50:
         return round(A, 1)
     else:
@@ -87,8 +87,8 @@ def _calc_log_cubed(dx):
     rescale = 1
     if dx < 0:
         rescale = 0.001
-        dx += SWIDTH - (2.0 * OFFSET)
-    K = exp(3 * dx / SCALE) * rescale
+        dx += SCALE
+    K = pow(10, 3 * float(dx) / SCALE) * rescale
     if K > 500:
         return round(K, 0)
     elif K > 50:
@@ -99,9 +99,11 @@ def _calc_log_cubed(dx):
 
 def _calc_log_log(dx):
     """ LL0 scale """
+    rescale = 1.0
     if dx < 0:
-        dx += SWIDTH - (2.0 * OFFSET)
-    LL0 = exp(exp(dx / SCALE) / 1000)
+        rescale = 0.1
+        dx += SCALE
+    LL0 = pow(10, pow(10, (float(dx) / SCALE) * rescale) / 1000)
     if LL0 > 1.002:
         return round(LL0, 5)
     else:
@@ -111,16 +113,15 @@ def _calc_log_log(dx):
 def _calc_linear(dx):
     """ L scale """
     if dx < 0:
-        dx += SWIDTH - (2.0 * OFFSET)
-        return round(10 * ((dx / SCALE) / log(10) - 1.0))
+        dx += SCALE
+        return round(10 * (float(dx) / SCALE) - 10.0)
     else:
-        return round(10 * (dx / SCALE) / log(10))
+        return round(10 * (float(dx) / SCALE))
 
 
 def _calc_sine(dx):
     """ S scale """
-    dx /= SCALE
-    s = exp(dx)/10
+    s = pow(10, float(dx) / SCALE) / 10
     if s > 1.0:
         s = 1.0
     S = 180.0 * asin(s) / pi
@@ -132,15 +133,18 @@ def _calc_sine(dx):
 
 def _calc_tangent(dx):
     """ T scale """
-    dx /= SCALE
-    t = exp(dx)/10
+    t = pow(10, float(dx) / SCALE) / 10
     if t > 1.0:
         t = 1.0
     return round(180.0 * atan(t) / pi)
 
 
 def _calc_ln(dx):
-    return round(dx / SCALE)
+    rescale = 1
+    if dx < 0:
+        rescale = 0.1
+        dx += SCALE
+    return round(log((pow(10, float(dx) / SCALE) * rescale)))
 
 
 class SlideRule():
@@ -239,37 +243,38 @@ class SlideRule():
             return
         if k in ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'period',
                  'minus', 'Return', 'BackSpace']:
-            if self.reticule.match(self.last):
-                if self.last == self.reticule.tabs[TOP].spr:
-                    self._process_numeric_input(self.last, k)
+            if self.last == self.reticule.tabs[TOP].spr or \
+               self.last == self.reticule.tabs[BOTTOM].spr or \
+               self.last == self.active_slide.tabs[LEFT].spr:
+                self._process_numeric_input(self.last, k)
         elif k == 'a':
             self.parent.show_a()
         elif k == 'k':
             self.parent.show_k()
-        elif k == 'c' or k == 'asterisk' or k == 'x':
+        elif k in ['c', 'asterisk', 'x']:
             self.parent.show_c()
-        elif k == 'i':
+        elif k in ['i', '/']:
             self.parent.show_ci()
         elif k == 's':
             self.parent.show_s()
         elif k == 't':
             self.parent.show_t()
-        elif k == 'l' or k == 'plus':
+        elif k in ['l', 'plus']:
             self.parent.show_l()
-        elif k == 'Left' or k == 'less':
+        elif k in ['Left', 'less']:
             if self.last is not None:
                 self._move_slides(self.last, -1)
-        elif k == 'Right' or k == 'greater':
+        elif k in ['Right', 'greater']:
             if self.last is not None:
                 self._move_slides(self.last, 1)
-        elif k == 'Home' or k == 'Pause' or k == 'Up':
+        elif k in ['Home', 'Pause', 'Up', '^']:
             self._move_slides(self.name_to_stator('D').spr,
                               -self.name_to_stator('D').spr.get_xy()[0])
         elif k == 'r':
             self.reticule.move(150, self.reticule.spr.get_xy()[1])
             self.update_slide_labels()
             self.update_results_label()
-        elif k == 'Down':
+        elif k in ['Down', 'v']:
             self.parent.realign_cb()
             self.reticule.move(150, self.reticule.spr.get_xy()[1])
             self.update_slide_labels()
@@ -305,7 +310,15 @@ class SlideRule():
                 newnum = oldnum + keyname
         elif keyname == 'Return':
             sprite.set_label(newnum)
-            self._move_reticule_to_value(float(newnum))
+            try:
+                if sprite == self.reticule.tabs[TOP].spr:
+                    self._move_reticule_to_slide_value(float(newnum))
+                elif sprite == self.reticule.tabs[BOTTOM].spr:
+                    self._move_reticule_to_stator_value(float(newnum))
+                else:
+                    self._move_slide_to_stator_value(float(newnum))
+            except TypeError:
+                sprite.set_label('NaN')
             return
         else:
             newnum = oldnum
@@ -371,6 +384,10 @@ class SlideRule():
                 self.results_label.spr.set_label(_('Zero-division Error'))
                 traceback.print_exc()
                 return None
+            except TypeError:
+                self.results_label.spr.set_label(_('Type Error'))
+                traceback.print_exc()
+                return None
             except:
                 traceback.print_exc()
                 return None
@@ -391,6 +408,10 @@ class SlideRule():
                 return None
             except ZeroDivisionError:
                 self.results_label.spr.set_label(_('Zero-division Error'))
+                traceback.print_exc()
+                return None
+            except TypeError:
+                self.results_label.spr.set_label(_('Type Error'))
                 traceback.print_exc()
                 return None
             except:
@@ -437,7 +458,7 @@ class SlideRule():
 
         self.active_slide = self.name_to_slide('custom')
         if hasattr(self.parent, 'sr'):
-            self.parent.set_slide()
+            self.parent.show_u()
 
     def name_to_slide(self, name):
         for slide in self.slides:
@@ -494,14 +515,49 @@ class SlideRule():
         self._move_slides(self.press, dx)
         self.dragpos = x
 
-    def _move_reticule_to_value(self, value):
-        if self.active_slide.name == 'C':
-            dx = log(value) * SCALE
-        elif self.active_slide.name == 'CI':
-            dx = (10 - log(10-value)) * SCALE
-        self.reticule.move(dx, self.reticule.spr.get_xy()[1])
+    def _move_reticule_to_slide_value(self, value):
+        rx = self.reticule.spr.get_xy()[0] - self.active_slide.spr.get_xy()[0]
+        self.reticule.move_relative(
+            self._calc_dx_from_value(value, self.active_slide.name, rx), 0)
         self.update_slide_labels()
         self.update_results_label()
+
+    def _move_reticule_to_stator_value(self, value):
+        rx = self.reticule.spr.get_xy()[0] - self.active_stator.spr.get_xy()[0]
+        self.reticule.move_relative(
+            self._calc_dx_from_value(value, self.active_stator.name, rx), 0)
+        self.update_slide_labels()
+        self.update_results_label()
+
+    def _move_slide_to_stator_value(self, value):
+        rx = self.active_slide.spr.get_xy()[0] - \
+            self.active_stator.spr.get_xy()[0]
+        self.active_slide.move_relative(
+            self._calc_dx_from_value(value, self.active_stator.name, rx), 0)
+        self.update_slide_labels()
+        self.update_results_label()
+
+    def _calc_dx_from_value(self, value, name, rx):
+        if name in ['C', 'D']:
+            if value <= 0:
+                return 0
+            return log(value, 10) * SCALE - rx
+        elif name in ['CI', 'DI']:
+            if value == 0:
+                return 0
+            return log(10/value, 10) * SCALE - rx
+        elif name in ['A', 'B']:
+            if value <= 0:
+                return 0
+            return log(pow(value, 1/2.), 10) * SCALE - rx
+        elif name in ['K', 'K2']:
+            if value <= 0:
+                return 0
+            return log(pow(value, 1/3.), 10) * SCALE - rx
+        elif name in ['L', 'L2']:
+            return (value / 10.) * SCALE - rx
+        else:
+            return 0
 
     def _move_slides(self, sprite, dx):
         if self.sprite_in_stators(sprite):
@@ -724,7 +780,7 @@ class SlideRule():
         userdefined = {}
         try:
             exec myf in globals(), userdefined
-            return round(userdefined.values()[0](dx / SCALE))
+            return round(userdefined.values()[0](float(dx) / SCALE))
         except OverflowError:
             self.results_label.spr.set_label(_('Overflow Error'))
             traceback.print_exc()
@@ -735,6 +791,10 @@ class SlideRule():
             return None
         except ZeroDivisionError:
             self.results_label.spr.set_label(_('Zero-division Error'))
+            traceback.print_exc()
+            return None
+        except TypeError:
+            self.results_label.spr.set_label(_('Type Error'))
             traceback.print_exc()
             return None
         except:
