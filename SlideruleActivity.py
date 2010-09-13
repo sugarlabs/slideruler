@@ -332,6 +332,15 @@ class SlideruleActivity(activity.Activity):
         self.sr.active_stator = self.sr.name_to_stator('L2')
         self._show_slides(_L, _L, _FL)
 
+    def show_u(self):
+        """ user-defined scale """
+        _stator_dictionary = {'D': _D, 'DI': _DI, 'L2': _L, 'B': _B,
+                              'K2': _K, 'S2': _S, 'T2': _T, 'LL02': _LL0,
+                              'LLn2': _LLn, 'custom2': _UD}
+        self.sr.active_slide = self.sr.name_to_slide('custom')
+        self._show_slides(_UD, _stator_dictionary[self.sr.active_stator.name],
+                          _UK)
+
     # toolbar button callbacks
     def realign_cb(self, arg=None):
         """ Realign all sliders with the D scale. """
@@ -358,10 +367,10 @@ class SlideruleActivity(activity.Activity):
 
     def _slide_combo_cb(self, arg=None):
         """ Read value from slide combo box """
-        _top_dictionary = {_C: 'C', _CI: 'CI', _A: 'A', _K: 'K', _S: 'S',
+        _slide_dictionary = {_C: 'C', _CI: 'CI', _A: 'A', _K: 'K', _S: 'S',
                            _T: 'T', _L: 'L', _LL0: 'LL0', _LLn: 'LLn',
                            _UD: 'custom'}
-        self.sr.active_slide = self.sr.name_to_slide(_top_dictionary[
+        self.sr.active_slide = self.sr.name_to_slide(_slide_dictionary[
             _SLIDES[self._slide_combo.get_active()]])
         function = self._predefined_function()
         if function is not None:
@@ -374,10 +383,10 @@ class SlideruleActivity(activity.Activity):
 
     def _stator_combo_cb(self, arg=None):
         """ Read value from stator combo box """
-        _bottom_dictionary = {_D: 'D', _DI: 'DI', _L: 'L2', _B: 'B',
+        _stator_dictionary = {_D: 'D', _DI: 'DI', _L: 'L2', _B: 'B',
                               _K: 'K2', _S: 'S2', _T: 'T2', _LL0: 'LL02',
                               _LLn: 'LLn2', _UD: 'custom2'}
-        self.sr.active_stator = self.sr.name_to_stator(_bottom_dictionary[
+        self.sr.active_stator = self.sr.name_to_stator(_stator_dictionary[
             _STATORS[self._stator_combo.get_active()]])
         function = self._predefined_function()
         if function is not None:
@@ -460,7 +469,7 @@ class SlideruleActivity(activity.Activity):
             custom_toolbar, _('position function'))
         self._label_function = _entry_factory('x', custom_toolbar,
                                                _('label function'), max=6)
-        self._calculate_function = _entry_factory('exp(x)', custom_toolbar,
+        self._calculate_function = _entry_factory('pow(10, x)', custom_toolbar,
                                                _('results function'))
         self._min_entry = _entry_factory('1', custom_toolbar, _('minimum'),
                                          max=6)
@@ -468,7 +477,7 @@ class SlideruleActivity(activity.Activity):
                                          max=6)
         self._step_entry = _entry_factory('1', custom_toolbar, _('step'),
                                           max=6)
-        self.custom = _button_factory("new-game", _('custom'),
+        self.custom = _button_factory("view-source", _('custom'),
                                       self._custom_cb, custom_toolbar)
 
         if have_toolbox:
