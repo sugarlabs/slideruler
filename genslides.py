@@ -1115,6 +1115,29 @@ class Custom_slide(C_slide):
         self.svg = self.make_slide(self.name, offset_function, label_function,
                                    min, max, step)
 
+    def mark(self, offset, height3, height2, height1, string=None, flip=False,
+             scale=1.0):
+        """ Plot marks in a range from 1 to 10 along the length of the slide """
+        svg = ''
+        scale *= float(SWIDTH - 2 * OFFSET) / SCALE
+        if flip:
+            ln = (log10 - offset) * SCALE * scale + OFFSET
+        else:
+            ln = offset * SCALE * scale + OFFSET
+        if string is not None:
+            svg += '  <text style="font-size:12px;fill:#000000;">\n'
+            svg += '      <tspan\n'
+            svg += '       x="%0.2f"\n' % (ln)
+            svg += '       y="%d"\n' % (height3)
+            if type(string) == float:
+                svg += '       style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">%0.2f</tspan></text>\n' % (string)
+            else:
+                svg += '       style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">%s</tspan></text>\n' % (str(string))
+        svg += '  <path\n'
+        svg += '       d="M %0.2f,%d,%0.2f,%d"\n' % (ln, height1, ln, height2)
+        svg += '       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />\n'
+        return svg
+
     def make_slide(self, label, offset_function, label_function, min, max,
                    step):
         """ Generate marks along a slide using passed functions """
