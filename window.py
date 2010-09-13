@@ -32,7 +32,7 @@ from sprites import Sprites
 from genslides import C_slide, D_stator, CI_slide, DI_stator, A_slide, \
     A_stator, K_slide, K_stator, S_slide, S_stator, T_slide, T_stator, \
     L_slide, L_stator, LL0_slide, LL0_stator, LLn_slide, LLn_stator, \
-    Custom_slide, Custom_stator
+    Custom_slide, Custom_stator, Log_slide, Log_stator
 
 import traceback
 import logging
@@ -103,7 +103,17 @@ def _calc_log_log(dx):
     if dx < 0:
         rescale = 0.1
         dx += SCALE
-    LL0 = pow(10, pow(10, (float(dx) / SCALE) * rescale) / 1000)
+    Log = log(pow(10, (float(dx) / SCALE) * rescale), 10)
+    return round(Log)
+
+
+def _calc_ln_log(dx):
+    """ LL0 scale """
+    rescale = 1.0
+    if dx < 0:
+        rescale = 0.1
+        dx += SCALE
+    LL0 = exp(pow(10, (float(dx) / SCALE) * rescale) / 1000)
     if LL0 > 1.002:
         return round(LL0, 5)
     else:
@@ -156,7 +166,8 @@ class SlideRule():
                   'S':[S_slide, self._calc_S], 'T':[T_slide, self._calc_T],
                   'L':[L_slide, self._calc_L],
                   'LLn':[LLn_slide, self._calc_LLn],
-                  'LL0':[LL0_slide, self._calc_LL0]}
+                  # 'LL0':[LL0_slide, self._calc_LL0],
+                  'Log':[Log_slide, self._calc_Log]}
 
         STATORS = {'D':[D_stator, self._calc_D, self._calc_D_result],
                    'DI':[DI_stator, self._calc_DI, self._calc_DI_result],
@@ -165,8 +176,9 @@ class SlideRule():
                    'S2':[S_stator, self._calc_S2, self._calc_S2_result],
                    'T2':[T_stator, self._calc_T2, self._calc_T2_result],
                    'L2':[L_stator, self._calc_L2, self._calc_L2_result],
-                   'LLn':[LLn_stator, self._calc_LLn2, self._calc_LLn2_result],
-                   'LL0':[LL0_stator, self._calc_LL02, self._calc_LL02_result]}
+                   'LLn2':[LLn_stator, self._calc_LLn2, self._calc_LLn2_result],
+                   # 'LL02':[LL0_stator, self._calc_LL02, self._calc_LL02_result],
+                   'Log2':[Log_stator, self._calc_Log2, self._calc_Log2_result]}
 
         self.path = path
         self.activity = parent
@@ -556,8 +568,19 @@ class SlideRule():
             return log(pow(value, 1/3.), 10) * SCALE - rx
         elif name in ['L', 'L2']:
             return (value / 10.) * SCALE - rx
+        elif name in ['LLn', 'LLn2']:
+            return log(exp(value), 10) * SCALE - rx
+        elif name in ['Log', 'Log2']:
+            return pow(10, log(value, 10)) * SCALE - rx
         else:
             return 0
+
+    def align_slides(self):
+        """ Move slide to align with stator """
+        slidex = self.active_slide.spr.get_xy()[0]
+        statorx = self.active_stator.spr.get_xy()[0]
+        dx = statorx - slidex
+        self.active_slide.move_relative(dx, 0)
 
     def _move_slides(self, sprite, dx):
         if self.sprite_in_stators(sprite):
@@ -618,17 +641,25 @@ class SlideRule():
             if self.active_slide.name == 'A':
                 if self.name_to_slide('A').spr.get_xy()[0] == dx:
                     s = " √ %0.2f = %0.2f\t\t%0.2f² = %0.2f" % (S, R, R, S)
+                else:
+                    self.parent.set_function_unknown()
             elif self.active_slide.name == 'K':
                 if self.name_to_slide('K').spr.get_xy()[0] == dx:
                     s = " ∛ %0.2f = %0.2f\t\t%0.2f³ = %0.2f" % (S, R, R, S)
+                else:
+                    self.parent.set_function_unknown()
             elif self.active_slide.name == 'S':
                 if self.name_to_slide('S').spr.get_xy()[0] == dx:
                     s = " sin(%0.2f) = %0.2f\t\tasin(%0.2f) = %0.2f" % \
                         (S, R/10, R/10, S)
+                else:
+                    self.parent.set_function_unknown()
             elif self.active_slide.name == 'T':
                 if self.name_to_slide('T').spr.get_xy()[0] == dx:
                     s = " tan(%0.2f) = %0.2f\t\tatan(%0.2f) = %0.2f" % \
                         (S, R/10, R/10, S)
+                else:
+                    self.parent.set_function_unknown()
             elif self.active_slide.name == 'C':
                 D = str(self._calc_D())
                 s = "%s × %s = %s\t\t%s / %s = %s" % (D, S, R, R, S, D)
@@ -663,6 +694,16 @@ class SlideRule():
                 s = "%s %s %s = %s\t\t%s %s %s = %s" % (L2str, operator1, Lstr,
                                                         LLstr, LLstr,
                                                         operator2, Lstr, L2str)
+        elif self.active_stator.name == 'LLn2' and \
+             self.active_slide.name == 'C':
+            dx = self.name_to_stator('LLn2').spr.get_xy()[0]
+            S = self.active_slide.calculate()
+            R = self._calc_LLn2_result()
+            if self.name_to_slide('C').spr.get_xy()[0] == dx:
+                s = " ln(%0.2f) = %0.2f\t\texp(%0.2f) = %0.2f" % (S, R, R, S)
+            else:
+                self.parent.set_function_unknown()
+
         self.results_label.spr.set_label(s)
 
     def _top_slide_offset(self, x):
@@ -705,15 +746,25 @@ class SlideRule():
     def _calc_LLn2_result(self):
         return _calc_ln(self._r_offset(self.name_to_stator('D')))
 
+    def _calc_Log(self):
+        return _calc_log_log(self._r_offset(self.name_to_slide('Log')))
+
+    def _calc_Log2(self):
+        return _calc_log_log(self._top_slide_offset(
+                self.name_to_stator('Log2').spr.get_xy()[0]))
+
+    def _calc_Log2_result(self):
+        return _calc_log_log(self._r_offset(self.name_to_stator('D')))
+
     def _calc_LL0(self):
-        return _calc_log_log(self._r_offset(self.name_to_slide('LL0')))
+        return _calc_ln_log(self._r_offset(self.name_to_slide('LL0')))
 
     def _calc_LL02(self):
-        return _calc_log_log(self._top_slide_offset(
+        return _calc_ln_log(self._top_slide_offset(
                 self.name_to_stator('LL02').spr.get_xy()[0]))
 
     def _calc_LL02_result(self):
-        return _calc_log_log(self._r_offset(self.name_to_stator('D')))
+        return _calc_ln_log(self._r_offset(self.name_to_stator('D')))
 
     def _calc_A(self):
         return _calc_log_squared(self._r_offset(self.name_to_slide('A')))

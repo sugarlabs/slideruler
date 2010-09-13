@@ -55,8 +55,9 @@ _FK = _('cube/cube root')
 _FS = _('sin, asin')
 _FT = _('tan, atan')
 _FL = _('add/subtract')
+_FE = _('natural log')
 _UK = '-'
-_FUNCTIONS = [_FL, _FC, _FCI, _FA, _FK, _FS, _FT, _UK]
+_FUNCTIONS = [_FL, _FC, _FCI, _FA, _FK, _FS, _FT, _FE, _UK]
 
 _A = _('log²')
 _C = _('log')
@@ -65,15 +66,16 @@ _K = _('log³')
 _S = _('sin')
 _T = _('tan')
 _L = _('linear')
-_LL0 = _('log log')
+# _LL0 = _('log log')
+_Log = _('log log')
 _LLn = _('ln')
 _UD = _('user defined')
-_SLIDES = [_L, _C, _CI, _A, _K, _S, _T, _LL0, _LLn, _UD]
+_SLIDES = [_L, _C, _CI, _A, _K, _S, _T, _Log, _LLn, _UD]
 
 _D = _C
 _DI = _CI
 _B = _A
-_STATORS = [_L, _D, _DI, _B, _K, _S, _T, _LL0, _LLn, _UD]
+_STATORS = [_L, _D, _DI, _B, _K, _S, _T, _Log, _LLn, _UD]
 
 
 def _combo_factory(combo_array, default, tooltip, callback, toolbar):
@@ -206,6 +208,8 @@ class SlideruleActivity(activity.Activity):
         if 'R' in self.metadata:
             self.sr.reticule.move(int(self.metadata['R']),
                                   self.sr.reticule.spr.get_xy()[1])
+        self.sr.update_slide_labels()
+        self.sr.update_results_label()
 
     def write_file(self, file_path):
         """ Write the slide positions to the Journal """
@@ -221,7 +225,6 @@ class SlideruleActivity(activity.Activity):
         self.metadata['label'] = self._label_function.get_text()
         self.metadata['offset'] = self._offset_function.get_text()
         self.metadata['calculate'] = self._calculate_function.get_text()
-
 
     def _hide_all(self):
         self._hide_top()
@@ -244,6 +247,9 @@ class SlideruleActivity(activity.Activity):
         self._function_combo.set_active(_FUNCTIONS.index(function))
         self.sr.update_slide_labels()
         self.sr.update_results_label()
+
+    def set_function_unknown(self):
+        self._function_combo.set_active(_FUNCTIONS.index(_UK))
 
     def set_slide(self):
         """ Move the top slider onto top layer """
@@ -287,6 +293,9 @@ class SlideruleActivity(activity.Activity):
         elif self.sr.active_slide.name == 'L' and \
              self.sr.active_stator.name == 'L2':
             return self.show_l
+        elif self.sr.active_slide.name == 'C' and \
+             self.sr.active_stator.name == 'LLn2':
+            return self.show_e
         return None
 
     # Predefined functions
@@ -306,24 +315,28 @@ class SlideruleActivity(activity.Activity):
         """ two-decade scale """
         self.sr.active_slide = self.sr.name_to_slide('A')
         self.sr.active_stator = self.sr.name_to_stator('D')
+        self.sr.align_slides()
         self._show_slides(_A, _D, _FA)
 
     def show_k(self):
         """ three-decade scale """
         self.sr.active_slide = self.sr.name_to_slide('K')
         self.sr.active_stator = self.sr.name_to_stator('D')
+        self.sr.align_slides()
         self._show_slides(_K, _D, _FK)
 
     def show_s(self):
         """ sine """
         self.sr.active_slide = self.sr.name_to_slide('S')
         self.sr.active_stator = self.sr.name_to_stator('D')
+        self.sr.align_slides()
         self._show_slides(_S, _D, _FS)
 
     def show_t(self):
         """ tangent """
         self.sr.active_slide = self.sr.name_to_slide('T')
         self.sr.active_stator = self.sr.name_to_stator('D')
+        self.sr.align_slides()
         self._show_slides(_T, _D, _FT)
 
     def show_l(self):
@@ -332,10 +345,17 @@ class SlideruleActivity(activity.Activity):
         self.sr.active_stator = self.sr.name_to_stator('L2')
         self._show_slides(_L, _L, _FL)
 
+    def show_e(self):
+        """ natural log scale """
+        self.sr.active_slide = self.sr.name_to_slide('C')
+        self.sr.active_stator = self.sr.name_to_stator('LLn2')
+        self.sr.align_slides()
+        self._show_slides(_C, _LLn, _FE)
+
     def show_u(self):
         """ user-defined scale """
         _stator_dictionary = {'D': _D, 'DI': _DI, 'L2': _L, 'B': _B,
-                              'K2': _K, 'S2': _S, 'T2': _T, 'LL02': _LL0,
+                              'K2': _K, 'S2': _S, 'T2': _T, 'Log2': _Log,
                               'LLn2': _LLn, 'custom2': _UD}
         self.sr.active_slide = self.sr.name_to_slide('custom')
         self._show_slides(_UD, _stator_dictionary[self.sr.active_stator.name],
@@ -349,6 +369,10 @@ class SlideruleActivity(activity.Activity):
         for slide in self.sr.slides:
             slide.move(dx, cy)
         self.move_stators(dx, dy)
+        # After realignment, some predefined functions may be reactivated
+        function = self._predefined_function()
+        if function is not None:
+            function()
         self.sr.update_slide_labels()
         self.sr.update_results_label()
 
@@ -357,7 +381,7 @@ class SlideruleActivity(activity.Activity):
         _functions_dictionary = {_FA: self.show_a, _FC: self.show_c,
                                  _FK: self.show_k, _FS: self.show_s,
                                  _FT: self.show_t, _FL: self.show_l,
-                                 _FCI: self.show_ci}
+                                 _FCI: self.show_ci, _FE: self.show_e}
         try:
             _functions_dictionary[
                 _FUNCTIONS[self._function_combo.get_active()]]()
@@ -368,7 +392,7 @@ class SlideruleActivity(activity.Activity):
     def _slide_combo_cb(self, arg=None):
         """ Read value from slide combo box """
         _slide_dictionary = {_C: 'C', _CI: 'CI', _A: 'A', _K: 'K', _S: 'S',
-                           _T: 'T', _L: 'L', _LL0: 'LL0', _LLn: 'LLn',
+                           _T: 'T', _L: 'L', _Log: 'Log', _LLn: 'LLn',
                            _UD: 'custom'}
         self.sr.active_slide = self.sr.name_to_slide(_slide_dictionary[
             _SLIDES[self._slide_combo.get_active()]])
@@ -384,7 +408,7 @@ class SlideruleActivity(activity.Activity):
     def _stator_combo_cb(self, arg=None):
         """ Read value from stator combo box """
         _stator_dictionary = {_D: 'D', _DI: 'DI', _L: 'L2', _B: 'B',
-                              _K: 'K2', _S: 'S2', _T: 'T2', _LL0: 'LL02',
+                              _K: 'K2', _S: 'S2', _T: 'T2', _Log: 'Log2',
                               _LLn: 'LLn2', _UD: 'custom2'}
         self.sr.active_stator = self.sr.name_to_stator(_stator_dictionary[
             _STATORS[self._stator_combo.get_active()]])
@@ -414,6 +438,10 @@ class SlideruleActivity(activity.Activity):
 
         project_toolbar = gtk.Toolbar()
         custom_toolbar = gtk.Toolbar()
+
+        # no sharing
+        self.max_participants = 1
+
         if have_toolbox:
             toolbox = ToolbarBox()
 
@@ -448,6 +476,12 @@ class SlideruleActivity(activity.Activity):
             toolbox.show()
             toolbox.set_current_toolbar(1)
             toolbar = project_toolbar
+
+            # no sharing
+            if hasattr(toolbox, 'share'):
+               toolbox.share.hide()
+            elif hasattr(toolbox, 'props'):
+               toolbox.props.visible = False
 
         # Add the buttons to the toolbars
         self._function_combo = _combo_factory(_FUNCTIONS, _FC, _('functions'),
