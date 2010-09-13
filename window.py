@@ -17,7 +17,7 @@ import gtk
 
 from gettext import gettext as _
 
-import math
+from math import *
 
 try:
     from sugar.graphics import style
@@ -47,7 +47,7 @@ def round(x, precision=2):
     elif precision == 0:
         return(int(x + 0.5))
     else:
-        y = math.pow(10, precision)
+        y = pow(10, precision)
         return(float(int(x * y + 0.5) / y))
 
 
@@ -57,7 +57,7 @@ def _calc_log(dx):
     if dx < 0:
         rescale = 0.1
         dx += SWIDTH - (2.0 * OFFSET)
-    return round(math.exp(dx / SCALE) * rescale)
+    return round(exp(dx / SCALE) * rescale)
 
 
 def _calc_inverse_log(dx):
@@ -66,7 +66,7 @@ def _calc_inverse_log(dx):
     if dx < 0:
         rescale = 0.1
         dx += SWIDTH - (2.0 * OFFSET)
-    return round(10.0/ math.exp(dx / SCALE) * rescale)
+    return round(10.0 / exp(dx / SCALE) * rescale)
 
 
 def _calc_log_squared(dx):
@@ -75,7 +75,7 @@ def _calc_log_squared(dx):
     if dx < 0:
         dx += SWIDTH - (2.0 * OFFSET)
         rescale = 0.01
-    A = math.exp(2 * dx / SCALE) * rescale
+    A = exp(2 * dx / SCALE) * rescale
     if A > 50:
         return round(A, 1)
     else:
@@ -88,7 +88,7 @@ def _calc_log_cubed(dx):
     if dx < 0:
         rescale = 0.001
         dx += SWIDTH - (2.0 * OFFSET)
-    K = math.exp(3 * dx / SCALE) * rescale
+    K = exp(3 * dx / SCALE) * rescale
     if K > 500:
         return round(K, 0)
     elif K > 50:
@@ -101,7 +101,7 @@ def _calc_log_log(dx):
     """ LL0 scale """
     if dx < 0:
         dx += SWIDTH - (2.0 * OFFSET)
-    LL0 = math.exp(math.exp(dx / SCALE) / 1000)
+    LL0 = exp(exp(dx / SCALE) / 1000)
     if LL0 > 1.002:
         return round(LL0, 5)
     else:
@@ -112,18 +112,18 @@ def _calc_linear(dx):
     """ L scale """
     if dx < 0:
         dx += SWIDTH - (2.0 * OFFSET)
-        return round(10 * ((dx / SCALE) / math.log(10) - 1.0))
+        return round(10 * ((dx / SCALE) / log(10) - 1.0))
     else:
-        return round(10 * (dx / SCALE) / math.log(10))
+        return round(10 * (dx / SCALE) / log(10))
 
 
 def _calc_sine(dx):
     """ S scale """
     dx /= SCALE
-    s = math.exp(dx)/10
+    s = exp(dx)/10
     if s > 1.0:
         s = 1.0
-    S = 180.0 * math.asin(s) / math.pi
+    S = 180.0 * asin(s) / pi
     if S > 60:
         return round(S, 1)
     else:
@@ -133,10 +133,10 @@ def _calc_sine(dx):
 def _calc_tangent(dx):
     """ T scale """
     dx /= SCALE
-    t = math.exp(dx)/10
+    t = exp(dx)/10
     if t > 1.0:
         t = 1.0
-    return round(180.0 * math.atan(t) / math.pi)
+    return round(180.0 * atan(t) / pi)
 
 
 def _calc_ln(dx):
@@ -197,7 +197,7 @@ class SlideRule():
         self.results_label = Stator(self.sprites, self.path, 'label',
                                         int((self.width - 600) / 2),
                                         SCREENOFFSET + 4 * SHEIGHT,
-                                        600, SHEIGHT)
+                                        800, SHEIGHT)
 
         for slide in SLIDES:
             self.slides.append(self._make_slide(slide, SCREENOFFSET + SHEIGHT,
@@ -208,7 +208,7 @@ class SlideRule():
                                                   SCREENOFFSET + 2 * SHEIGHT,
                 STATORS[stator][0], STATORS[stator][1], STATORS[stator][2]))
 
-        self.make_custom_slide('math.log(x, 10)', 'x', 'math.exp(x)', 1, 10, 1)
+        self.make_custom_slide('log(x, 10)', 'x', 'exp(x)', 1, 10, 1)
 
         self.reticule = Reticule(self.sprites, self.path, 'reticule',
                           150, SCREENOFFSET + SHEIGHT, 100, 2 * SHEIGHT)
@@ -237,7 +237,12 @@ class SlideRule():
         k = gtk.gdk.keyval_name(event.keyval)
         if self.parent == None:
             return
-        if k == 'a':
+        if k in ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'period',
+                 'minus', 'Return', 'BackSpace']:
+            if self.reticule.match(self.last):
+                if self.last == self.reticule.tabs[TOP].spr:
+                    self._process_numeric_input(self.last, k)
+        elif k == 'a':
             self.parent.show_a()
         elif k == 'k':
             self.parent.show_k()
@@ -251,23 +256,67 @@ class SlideRule():
             self.parent.show_t()
         elif k == 'l' or k == 'plus':
             self.parent.show_l()
-        elif k == 'Left' or k == 'comma':
-            self._move_slides(self.last, -1)
-        elif k == 'Right' or k == 'period':
-            self._move_slides(self.last, 1)
-        elif k == 'Home' or k == 'Pause':
+        elif k == 'Left' or k == 'less':
+            if self.last is not None:
+                self._move_slides(self.last, -1)
+        elif k == 'Right' or k == 'greater':
+            if self.last is not None:
+                self._move_slides(self.last, 1)
+        elif k == 'Home' or k == 'Pause' or k == 'Up':
             self._move_slides(self.name_to_stator('D').spr,
                               -self.name_to_stator('D').spr.get_xy()[0])
         elif k == 'r':
             self.reticule.move(150, self.reticule.spr.get_xy()[1])
             self.update_slide_labels()
             self.update_results_label()
-        elif k == 'Return' or k == 'BackSpace':
+        elif k == 'Down':
             self.parent.realign_cb()
             self.reticule.move(150, self.reticule.spr.get_xy()[1])
             self.update_slide_labels()
             self.update_results_label()
         return True
+
+    def _process_numeric_input(self, sprite, keyname):
+        ''' Make sure numeric input is valid. '''
+        CURSOR = '█'
+
+        oldnum = sprite.labels[0].replace(CURSOR, '')
+        newnum = oldnum
+        if len(oldnum) == 0:
+            oldnum = '0'
+        if keyname == 'minus':
+            if oldnum == '0':
+                newnum = '-'
+            elif oldnum[0] != '-':
+                newnum = '-' + oldnum
+            else:
+                newnum = oldnum
+        elif keyname == 'period' and '.' not in oldnum:
+            newnum = oldnum + '.'
+        elif keyname == 'BackSpace':
+            if len(oldnum) > 0:
+                newnum = oldnum[:len(oldnum)-1]
+            else:
+                newnum = ''
+        elif keyname in ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']:
+            if oldnum == '0':
+                newnum = keyname
+            else:
+                newnum = oldnum + keyname
+        elif keyname == 'Return':
+            sprite.set_label(newnum)
+            self._move_reticule_to_value(float(newnum))
+            return
+        else:
+            newnum = oldnum
+        if newnum == '.':
+            newnum = '0.'
+        if len(newnum) > 0 and newnum != '-':
+            try:
+                float(newnum)
+            except ValueError, e:
+                newnum = oldnum
+        sprite.set_label(newnum + CURSOR)
 
     def _make_slide(self, name, y, svg_engine, calculate=None):
         slide = Slide(self.sprites, self.path, name, 0, y, SWIDTH, SHEIGHT,
@@ -287,22 +336,21 @@ class SlideRule():
                           min_text, max_text, step_text):
         """ Create custom slide and stator from text entered on toolbar. """
         try:
-            min = float(min_text)
+            min_value = float(min_text)
         except ValueError:
             self.parent._min_entry.set_text('NaN')
             return
         try:
-            max = float(max_text)
+            max_value = float(max_text)
         except ValueError:
             self.parent._max_entry.set_text('NaN')
             return
         try:
-            step = float(step_text)
+            step_value = float(step_text)
         except ValueError:
             self.parent._step_entry.set_text('NaN')
             return
 
-        # TODO: some sort of function error checking
         self.calculate_text = calculate_text
 
         def custom_offset_function(x):
@@ -311,6 +359,18 @@ class SlideRule():
             try:
                 exec myf in globals(), userdefined
                 return userdefined.values()[0](x)
+            except OverflowError:
+                self.results_label.spr.set_label(_('Overflow Error'))
+                traceback.print_exc()
+                return None
+            except NameError:
+                self.results_label.spr.set_label(_('Name Error'))
+                traceback.print_exc()
+                return None
+            except ZeroDivisionError:
+                self.results_label.spr.set_label(_('Zero-division Error'))
+                traceback.print_exc()
+                return None
             except:
                 traceback.print_exc()
                 return None
@@ -321,21 +381,34 @@ class SlideRule():
             try:
                 exec myf in globals(), userdefined
                 return userdefined.values()[0](x)
+            except OverflowError:
+                self.results_label.spr.set_label(_('Overflow Error'))
+                traceback.print_exc()
+                return None
+            except NameError:
+                self.results_label.spr.set_label(_('Name Error'))
+                traceback.print_exc()
+                return None
+            except ZeroDivisionError:
+                self.results_label.spr.set_label(_('Zero-division Error'))
+                traceback.print_exc()
+                return None
             except:
                 traceback.print_exc()
                 return None
 
         custom_slide = CustomSlide(self.sprites, self.path, 'custom',
                                    0, SCREENOFFSET + SHEIGHT, Custom_slide,
-                                   self._calc_custom,
-                                   custom_offset_function,
-                                   custom_label_function, min, max, step)
+                                   self._calc_custom, custom_offset_function,
+                                   custom_label_function, min_value, max_value,
+                                   step_value)
         custom_stator = CustomStator(self.sprites, 'custom2',
                                      0, SCREENOFFSET + SHEIGHT, Custom_stator,
                                      self._calc_custom2,
                                      self._calc_custom2_result,
                                      custom_offset_function,
-                                     custom_label_function, min, max, step)
+                                     custom_label_function, min_value,
+                                     max_value, step_value)
         
         if self.name_to_slide('custom').name == 'custom':
             i = self.slides.index(self.name_to_slide('custom'))
@@ -361,6 +434,10 @@ class SlideRule():
             self.parent.set_stator()
         else:
             self.stators.append(custom_stator)
+
+        self.active_slide = self.name_to_slide('custom')
+        if hasattr(self.parent, 'sr'):
+            self.parent.set_slide()
 
     def name_to_slide(self, name):
         for slide in self.slides:
@@ -417,6 +494,15 @@ class SlideRule():
         self._move_slides(self.press, dx)
         self.dragpos = x
 
+    def _move_reticule_to_value(self, value):
+        if self.active_slide.name == 'C':
+            dx = log(value) * SCALE
+        elif self.active_slide.name == 'CI':
+            dx = (10 - log(10-value)) * SCALE
+        self.reticule.move(dx, self.reticule.spr.get_xy()[1])
+        self.update_slide_labels()
+        self.update_results_label()
+
     def _move_slides(self, sprite, dx):
         if self.sprite_in_stators(sprite):
             for slide in self.slides:
@@ -444,7 +530,7 @@ class SlideRule():
         elif self.active_stator.name == 'DI':
             v_right = v_left / 10.
         elif self.active_stator.name == 'LLn2':
-            v_right = round(math.log(10)) + v_left
+            v_right = round(log(10)) + v_left
         else:
             v_right = v_left
         for slide in self.slides:
@@ -639,6 +725,18 @@ class SlideRule():
         try:
             exec myf in globals(), userdefined
             return round(userdefined.values()[0](dx / SCALE))
+        except OverflowError:
+            self.results_label.spr.set_label(_('Overflow Error'))
+            traceback.print_exc()
+            return None
+        except NameError:
+            self.results_label.spr.set_label(_('Name Error'))
+            traceback.print_exc()
+            return None
+        except ZeroDivisionError:
+            self.results_label.spr.set_label(_('Zero-division Error'))
+            traceback.print_exc()
+            return None
         except:
             traceback.print_exc()
             return None
