@@ -2,6 +2,7 @@
 
 * added log log scale
 * customizable slide
+* enable typing into tabs to move slides
 * major refactoring of calculations
 * major refactoring of slide, stator generation
 

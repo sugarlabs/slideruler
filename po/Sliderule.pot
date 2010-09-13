@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-09-11 10:36-0400\n"
+"POT-Creation-Date: 2010-09-13 10:50-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -56,72 +56,108 @@ msgid "add/subtract"
 msgstr ""
 
 #: /home/walter/Desktop/sliderule/SlideruleActivity.py:58
-msgid "user defined"
-msgstr ""
-
-#: /home/walter/Desktop/sliderule/SlideruleActivity.py:61
-msgid "log²"
+msgid "natural log"
 msgstr ""
 
 #: /home/walter/Desktop/sliderule/SlideruleActivity.py:62
-msgid "log"
+msgid "log²"
 msgstr ""
 
 #: /home/walter/Desktop/sliderule/SlideruleActivity.py:63
-msgid "1/log"
+msgid "log"
 msgstr ""
 
 #: /home/walter/Desktop/sliderule/SlideruleActivity.py:64
-msgid "log³"
+msgid "1/log"
 msgstr ""
 
 #: /home/walter/Desktop/sliderule/SlideruleActivity.py:65
-msgid "sin"
+msgid "log³"
 msgstr ""
 
 #: /home/walter/Desktop/sliderule/SlideruleActivity.py:66
-msgid "tan"
+msgid "sin"
 msgstr ""
 
 #: /home/walter/Desktop/sliderule/SlideruleActivity.py:67
-msgid "linear"
+msgid "tan"
 msgstr ""
 
 #: /home/walter/Desktop/sliderule/SlideruleActivity.py:68
-msgid "log log"
+msgid "linear"
 msgstr ""
 
 #: /home/walter/Desktop/sliderule/SlideruleActivity.py:69
+msgid "log log"
+msgstr ""
+
+#: /home/walter/Desktop/sliderule/SlideruleActivity.py:70
 msgid "ln"
 msgstr ""
 
-#: /home/walter/Desktop/sliderule/SlideruleActivity.py:383
+#: /home/walter/Desktop/sliderule/SlideruleActivity.py:71
+msgid "user defined"
+msgstr ""
+
+#: /home/walter/Desktop/sliderule/SlideruleActivity.py:473
 msgid "Project"
 msgstr ""
 
-#: /home/walter/Desktop/sliderule/SlideruleActivity.py:389
+#: /home/walter/Desktop/sliderule/SlideruleActivity.py:474
+msgid "Custom"
+msgstr ""
+
+#: /home/walter/Desktop/sliderule/SlideruleActivity.py:486
 msgid "functions"
 msgstr ""
 
-#: /home/walter/Desktop/sliderule/SlideruleActivity.py:391
+#: /home/walter/Desktop/sliderule/SlideruleActivity.py:488
 msgid "slide"
 msgstr ""
 
-#: /home/walter/Desktop/sliderule/SlideruleActivity.py:393
+#: /home/walter/Desktop/sliderule/SlideruleActivity.py:490
 msgid "slides"
 msgstr ""
 
-#: /home/walter/Desktop/sliderule/SlideruleActivity.py:395
+#: /home/walter/Desktop/sliderule/SlideruleActivity.py:493
 msgid "stator"
 msgstr ""
 
-#: /home/walter/Desktop/sliderule/SlideruleActivity.py:397
+#: /home/walter/Desktop/sliderule/SlideruleActivity.py:495
 msgid "stators"
 msgstr ""
 
-#: /home/walter/Desktop/sliderule/SlideruleActivity.py:400
+#: /home/walter/Desktop/sliderule/SlideruleActivity.py:498
 #: /home/walter/Desktop/sliderule/sliderule.py:73
 msgid "realign slides"
+msgstr ""
+
+#: /home/walter/Desktop/sliderule/SlideruleActivity.py:502
+msgid "position function"
+msgstr ""
+
+#: /home/walter/Desktop/sliderule/SlideruleActivity.py:504
+msgid "label function"
+msgstr ""
+
+#: /home/walter/Desktop/sliderule/SlideruleActivity.py:506
+msgid "results function"
+msgstr ""
+
+#: /home/walter/Desktop/sliderule/SlideruleActivity.py:507
+msgid "minimum"
+msgstr ""
+
+#: /home/walter/Desktop/sliderule/SlideruleActivity.py:509
+msgid "maximum"
+msgstr ""
+
+#: /home/walter/Desktop/sliderule/SlideruleActivity.py:511
+msgid "step"
+msgstr ""
+
+#: /home/walter/Desktop/sliderule/SlideruleActivity.py:513
+msgid "custom"
 msgstr ""
 
 #: /home/walter/Desktop/sliderule/sliderule.py:41
@@ -154,4 +190,28 @@ msgstr ""
 
 #: /home/walter/Desktop/sliderule/sliderule.py:69
 msgid "T"
+msgstr ""
+
+#: /home/walter/Desktop/sliderule/window.py:376
+#: /home/walter/Desktop/sliderule/window.py:402
+#: /home/walter/Desktop/sliderule/window.py:810
+msgid "Overflow Error"
+msgstr ""
+
+#: /home/walter/Desktop/sliderule/window.py:380
+#: /home/walter/Desktop/sliderule/window.py:406
+#: /home/walter/Desktop/sliderule/window.py:814
+msgid "Name Error"
+msgstr ""
+
+#: /home/walter/Desktop/sliderule/window.py:384
+#: /home/walter/Desktop/sliderule/window.py:410
+#: /home/walter/Desktop/sliderule/window.py:818
+msgid "Zero-division Error"
+msgstr ""
+
+#: /home/walter/Desktop/sliderule/window.py:388
+#: /home/walter/Desktop/sliderule/window.py:414
+#: /home/walter/Desktop/sliderule/window.py:822
+msgid "Type Error"
 msgstr ""
