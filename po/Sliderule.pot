@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-09-13 10:50-0400\n"
+"POT-Creation-Date: 2010-09-14 16:35-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -87,77 +87,91 @@ msgstr ""
 msgid "linear"
 msgstr ""
 
-#: /home/walter/Desktop/sliderule/SlideruleActivity.py:69
+#: /home/walter/Desktop/sliderule/SlideruleActivity.py:70
 msgid "log log"
 msgstr ""
 
-#: /home/walter/Desktop/sliderule/SlideruleActivity.py:70
+#: /home/walter/Desktop/sliderule/SlideruleActivity.py:71
 msgid "ln"
 msgstr ""
 
-#: /home/walter/Desktop/sliderule/SlideruleActivity.py:71
+#: /home/walter/Desktop/sliderule/SlideruleActivity.py:72
 msgid "user defined"
 msgstr ""
 
-#: /home/walter/Desktop/sliderule/SlideruleActivity.py:473
+#: /home/walter/Desktop/sliderule/SlideruleActivity.py:498
 msgid "Project"
 msgstr ""
 
-#: /home/walter/Desktop/sliderule/SlideruleActivity.py:474
-msgid "Custom"
+#: /home/walter/Desktop/sliderule/SlideruleActivity.py:499
+msgid "Custom slide"
 msgstr ""
 
-#: /home/walter/Desktop/sliderule/SlideruleActivity.py:486
-msgid "functions"
+#: /home/walter/Desktop/sliderule/SlideruleActivity.py:500
+msgid "Custom stator"
 msgstr ""
 
-#: /home/walter/Desktop/sliderule/SlideruleActivity.py:488
-msgid "slide"
+#: /home/walter/Desktop/sliderule/SlideruleActivity.py:513
+msgid "select function"
 msgstr ""
 
-#: /home/walter/Desktop/sliderule/SlideruleActivity.py:490
-msgid "slides"
+#: /home/walter/Desktop/sliderule/SlideruleActivity.py:514
+msgid "active slide"
 msgstr ""
 
-#: /home/walter/Desktop/sliderule/SlideruleActivity.py:493
-msgid "stator"
+#: /home/walter/Desktop/sliderule/SlideruleActivity.py:516
+msgid "select slide"
 msgstr ""
 
-#: /home/walter/Desktop/sliderule/SlideruleActivity.py:495
-msgid "stators"
+#: /home/walter/Desktop/sliderule/SlideruleActivity.py:519
+msgid "active stator"
 msgstr ""
 
-#: /home/walter/Desktop/sliderule/SlideruleActivity.py:498
+#: /home/walter/Desktop/sliderule/SlideruleActivity.py:521
+msgid "select stator"
+msgstr ""
+
+#: /home/walter/Desktop/sliderule/SlideruleActivity.py:524
 #: /home/walter/Desktop/sliderule/sliderule.py:73
 msgid "realign slides"
 msgstr ""
 
-#: /home/walter/Desktop/sliderule/SlideruleActivity.py:502
+#: /home/walter/Desktop/sliderule/SlideruleActivity.py:537
+#: /home/walter/Desktop/sliderule/SlideruleActivity.py:555
 msgid "position function"
 msgstr ""
 
-#: /home/walter/Desktop/sliderule/SlideruleActivity.py:504
+#: /home/walter/Desktop/sliderule/SlideruleActivity.py:539
+#: /home/walter/Desktop/sliderule/SlideruleActivity.py:557
 msgid "label function"
 msgstr ""
 
-#: /home/walter/Desktop/sliderule/SlideruleActivity.py:506
+#: /home/walter/Desktop/sliderule/SlideruleActivity.py:542
+#: /home/walter/Desktop/sliderule/SlideruleActivity.py:560
 msgid "results function"
 msgstr ""
 
-#: /home/walter/Desktop/sliderule/SlideruleActivity.py:507
-msgid "minimum"
+#: /home/walter/Desktop/sliderule/SlideruleActivity.py:544
+#: /home/walter/Desktop/sliderule/SlideruleActivity.py:562
+msgid "domain minimum"
 msgstr ""
 
-#: /home/walter/Desktop/sliderule/SlideruleActivity.py:509
-msgid "maximum"
+#: /home/walter/Desktop/sliderule/SlideruleActivity.py:546
+#: /home/walter/Desktop/sliderule/SlideruleActivity.py:564
+msgid "domain maximum"
 msgstr ""
 
-#: /home/walter/Desktop/sliderule/SlideruleActivity.py:511
-msgid "step"
+#: /home/walter/Desktop/sliderule/SlideruleActivity.py:548
+#: /home/walter/Desktop/sliderule/SlideruleActivity.py:566
+msgid "step size"
 msgstr ""
 
-#: /home/walter/Desktop/sliderule/SlideruleActivity.py:513
-msgid "custom"
+#: /home/walter/Desktop/sliderule/SlideruleActivity.py:550
+msgid "create custom slide"
+msgstr ""
+
+#: /home/walter/Desktop/sliderule/SlideruleActivity.py:568
+msgid "create custom stator"
 msgstr ""
 
 #: /home/walter/Desktop/sliderule/sliderule.py:41
@@ -192,26 +206,26 @@ msgstr ""
 msgid "T"
 msgstr ""
 
-#: /home/walter/Desktop/sliderule/window.py:376
-#: /home/walter/Desktop/sliderule/window.py:402
-#: /home/walter/Desktop/sliderule/window.py:810
+#: /home/walter/Desktop/sliderule/window.py:389
+#: /home/walter/Desktop/sliderule/window.py:415
+#: /home/walter/Desktop/sliderule/window.py:845
 msgid "Overflow Error"
 msgstr ""
 
-#: /home/walter/Desktop/sliderule/window.py:380
-#: /home/walter/Desktop/sliderule/window.py:406
-#: /home/walter/Desktop/sliderule/window.py:814
+#: /home/walter/Desktop/sliderule/window.py:393
+#: /home/walter/Desktop/sliderule/window.py:419
+#: /home/walter/Desktop/sliderule/window.py:849
 msgid "Name Error"
 msgstr ""
 
-#: /home/walter/Desktop/sliderule/window.py:384
-#: /home/walter/Desktop/sliderule/window.py:410
-#: /home/walter/Desktop/sliderule/window.py:818
+#: /home/walter/Desktop/sliderule/window.py:397
+#: /home/walter/Desktop/sliderule/window.py:423
+#: /home/walter/Desktop/sliderule/window.py:853
 msgid "Zero-division Error"
 msgstr ""
 
-#: /home/walter/Desktop/sliderule/window.py:388
-#: /home/walter/Desktop/sliderule/window.py:414
-#: /home/walter/Desktop/sliderule/window.py:822
+#: /home/walter/Desktop/sliderule/window.py:401
+#: /home/walter/Desktop/sliderule/window.py:427
+#: /home/walter/Desktop/sliderule/window.py:857
 msgid "Type Error"
 msgstr ""
