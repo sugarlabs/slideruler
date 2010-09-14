@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-09-14 16:35-0400\n"
+"POT-Creation-Date: 2010-09-14 19:27-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -206,26 +206,30 @@ msgstr ""
 msgid "T"
 msgstr ""
 
-#: /home/walter/Desktop/sliderule/window.py:389
-#: /home/walter/Desktop/sliderule/window.py:415
-#: /home/walter/Desktop/sliderule/window.py:845
+#: /home/walter/Desktop/sliderule/window.py:826
+#: /home/walter/Desktop/sliderule/genslides.py:1171
 msgid "Overflow Error"
 msgstr ""
 
-#: /home/walter/Desktop/sliderule/window.py:393
-#: /home/walter/Desktop/sliderule/window.py:419
-#: /home/walter/Desktop/sliderule/window.py:849
+#: /home/walter/Desktop/sliderule/window.py:828
+#: /home/walter/Desktop/sliderule/genslides.py:1173
 msgid "Name Error"
 msgstr ""
 
-#: /home/walter/Desktop/sliderule/window.py:397
-#: /home/walter/Desktop/sliderule/window.py:423
-#: /home/walter/Desktop/sliderule/window.py:853
+#: /home/walter/Desktop/sliderule/window.py:830
 msgid "Zero-division Error"
 msgstr ""
 
-#: /home/walter/Desktop/sliderule/window.py:401
-#: /home/walter/Desktop/sliderule/window.py:427
-#: /home/walter/Desktop/sliderule/window.py:857
+#: /home/walter/Desktop/sliderule/window.py:832
+#: /home/walter/Desktop/sliderule/window.py:834
+#: /home/walter/Desktop/sliderule/genslides.py:1177
 msgid "Type Error"
+msgstr ""
+
+#: /home/walter/Desktop/sliderule/genslides.py:1175
+msgid "Zero Division Error"
+msgstr ""
+
+#: /home/walter/Desktop/sliderule/genslides.py:1179
+msgid "Value Error"
 msgstr ""
