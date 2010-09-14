@@ -46,7 +46,7 @@ import logging
 _logger = logging.getLogger('sliderule-activity')
 
 from window import SlideRule
-from constants import SWIDTH
+from constants import SWIDTH, SLIDE, STATOR
 
 _FA = _('square/square root')
 _FC = _('multiply/divide')
@@ -187,18 +187,22 @@ class SlideruleActivity(activity.Activity):
                 self.metadata['slide'])
 
         # custom slide settings
-        if 'min' in self.metadata:
-            self._min_entry.set_text(self.metadata['min'])
-        if 'max' in self.metadata:
-            self._max_entry.set_text(self.metadata['max'])
-        if 'step' in self.metadata:
-            self._step_entry.set_text(self.metadata['step'])
-        if 'label' in self.metadata:
-            self._label_function.set_text(self.metadata['label'])
-        if 'offset' in self.metadata:
-            self._offset_function.set_text(self.metadata['offset'])
-        if 'calculate' in self.metadata:
-            self._calculate_function.set_text(self.metadata['calculate'])
+        for i in range(2):
+            if 'min' + str(i) in self.metadata:
+                self._domain_min[i].set_text(self.metadata['min' + str(i)])
+            if 'max' + str(i) in self.metadata:
+                self._domain_max[i].set_text(self.metadata['max' + str(i)])
+            if 'step' + str(i) in self.metadata:
+                self._step_size[i].set_text(self.metadata['step' + str(i)])
+            if 'label' + str(i) in self.metadata:
+                self._label_function[i].set_text(
+                    self.metadata['label' + str(i)])
+            if 'offset' + str(i) in self.metadata:
+                self._offset_function[i].set_text(
+                    self.metadata['offset' + str(i)])
+            if 'calculate' + str(i) in self.metadata:
+                self._calculate_function[i].set_text(
+                    self.metadata['calculate' + str(i)])
 
         function = self._predefined_function()
         if function is not None:
@@ -219,12 +223,16 @@ class SlideruleActivity(activity.Activity):
             self.metadata[slide.name] = str(slide.spr.get_xy()[0])
         self.metadata['D'] = str(self.sr.name_to_stator('D').spr.get_xy()[0])
         self.metadata['R'] = str(self.sr.reticule.spr.get_xy()[0])
-        self.metadata['min'] = self._min_entry.get_text()
-        self.metadata['max'] = self._max_entry.get_text()
-        self.metadata['step'] = self._step_entry.get_text()
-        self.metadata['label'] = self._label_function.get_text()
-        self.metadata['offset'] = self._offset_function.get_text()
-        self.metadata['calculate'] = self._calculate_function.get_text()
+        for i in range(2):
+            self.metadata['min' + str(i)] = self._domain_min[i].get_text()
+            self.metadata['max' + str(i)] = self._domain_max[i].get_text()
+            self.metadata['step' + str(i)] = self._step_size[i].get_text()
+            self.metadata['label' + str(i)] = \
+                self._label_function[i].get_text()
+            self.metadata['offset' + str(i)] = \
+                self._offset_function[i].get_text()
+            self.metadata['calculate' + str(i)] = \
+                self._calculate_function[i].get_text()
 
     def _hide_all(self):
         self._hide_top()
@@ -421,14 +429,21 @@ class SlideruleActivity(activity.Activity):
             self.sr.update_slide_labels()
             self.sr.update_results_label()
 
-    def _custom_cb(self, arg=None):
-        """ Create custom slide and stator from parameters in entry widgets """
-        self.sr.make_custom_slide(self._offset_function.get_text(),
-                                  self._label_function.get_text(),
-                                  self._calculate_function.get_text(),
-                                  self._min_entry.get_text(),
-                                  self._max_entry.get_text(),
-                                  self._step_entry.get_text())
+    def _custom_slide_cb(self, arg=None):
+        """ Create custom slide from parameters in entry widgets """
+        self._customize(SLIDE)
+
+    def _custom_stator_cb(self, arg=None):
+        """ Create custom stator from parameters in entry widgets """
+        self._customize(STATOR)
+
+    def _customize(self, slide):
+        self.sr.make_custom_slide(self._offset_function[slide].get_text(),
+                                  self._label_function[slide].get_text(),
+                                  self._calculate_function[slide].get_text(),
+                                  self._domain_min[slide].get_text(),
+                                  self._domain_max[slide].get_text(),
+                                  self._step_size[slide].get_text(), slide)
 
     def _dummy_cb(self, arg=None):
         return
@@ -437,7 +452,8 @@ class SlideruleActivity(activity.Activity):
         """ Setup the toolbars.. """
 
         project_toolbar = gtk.Toolbar()
-        custom_toolbar = gtk.Toolbar()
+        custom_slide_toolbar = gtk.Toolbar()
+        custom_stator_toolbar = gtk.Toolbar()
 
         # no sharing
         self.max_participants = 1
@@ -457,11 +473,19 @@ class SlideruleActivity(activity.Activity):
             toolbox.toolbar.insert(project_toolbar_button, -1)
             project_toolbar_button.show()
 
-            custom_toolbar_button = ToolbarButton(page=custom_toolbar,
-                                                  icon_name='view-source')
-            custom_toolbar.show()
-            toolbox.toolbar.insert(custom_toolbar_button, -1)
-            custom_toolbar_button.show()
+            custom_slide_toolbar_button = ToolbarButton(
+                page=custom_slide_toolbar,
+                icon_name='custom-slide')
+            custom_slide_toolbar.show()
+            toolbox.toolbar.insert(custom_slide_toolbar_button, -1)
+            custom_slide_toolbar_button.show()
+
+            custom_stator_toolbar_button = ToolbarButton(
+                page=custom_stator_toolbar,
+                icon_name='custom-stator')
+            custom_stator_toolbar.show()
+            toolbox.toolbar.insert(custom_stator_toolbar_button, -1)
+            custom_stator_toolbar_button.show()
 
             self.set_toolbar_box(toolbox)
             toolbox.show()
@@ -472,7 +496,8 @@ class SlideruleActivity(activity.Activity):
             toolbox = activity.ActivityToolbox(self)
             self.set_toolbox(toolbox)
             toolbox.add_toolbar(_('Project'), project_toolbar)
-            toolbox.add_toolbar(_('Custom'), custom_toolbar)
+            toolbox.add_toolbar(_('Custom slide'), custom_slide_toolbar)
+            toolbox.add_toolbar(_('Custom stator'), custom_stator_toolbar)
             toolbox.show()
             toolbox.set_current_toolbar(1)
             toolbar = project_toolbar
@@ -499,20 +524,50 @@ class SlideruleActivity(activity.Activity):
         self.realign_button = _button_factory('realign', _('realign slides'),
                                               self.realign_cb, project_toolbar)
 
-        self._offset_function = _entry_factory('log(x, 10)',
-            custom_toolbar, _('position function'))
-        self._label_function = _entry_factory('x', custom_toolbar,
-                                               _('label function'), max=6)
-        self._calculate_function = _entry_factory('pow(10, x)', custom_toolbar,
-                                               _('results function'))
-        self._min_entry = _entry_factory('1', custom_toolbar, _('minimum'),
-                                         max=6)
-        self._max_entry = _entry_factory('10', custom_toolbar, _('maximum'),
-                                         max=6)
-        self._step_entry = _entry_factory('1', custom_toolbar, _('step'),
-                                          max=6)
-        self.custom = _button_factory("view-source", _('custom'),
-                                      self._custom_cb, custom_toolbar)
+        self._offset_function = []
+        self._label_function = []
+        self._calculate_function = []
+        self._domain_min = []
+        self._domain_max = []
+        self._step_size = []
+        self.custom = []
+
+        self._offset_function.append(_entry_factory('log(x, 10)',
+                                                    custom_slide_toolbar,
+                                                    _('position function')))
+        self._label_function.append(_entry_factory('x', custom_slide_toolbar,
+                                                   _('label function'), max=6))
+        self._calculate_function.append(_entry_factory('pow(10, x)',
+                                                       custom_slide_toolbar,
+                                                       _('results function')))
+        self._domain_min.append(_entry_factory('1', custom_slide_toolbar,
+                                               _('domain minimum'), max=6))
+        self._domain_max.append(_entry_factory('10', custom_slide_toolbar,
+                                               _('domain maximum'), max=6))
+        self._step_size.append(_entry_factory('1', custom_slide_toolbar,
+                                              _('step size'), max=6))
+        self.custom.append(_button_factory("custom-slide",
+                                           _('create custom slide'),
+                                           self._custom_slide_cb,
+                                           custom_slide_toolbar))
+        self._offset_function.append(_entry_factory('log(x, 10)',
+                                                    custom_stator_toolbar,
+                                                    _('position function')))
+        self._label_function.append(_entry_factory('x', custom_stator_toolbar,
+                                                   _('label function'), max=6))
+        self._calculate_function.append(_entry_factory('pow(10, x)',
+                                                       custom_stator_toolbar,
+                                                       _('results function')))
+        self._domain_min.append(_entry_factory('1', custom_stator_toolbar,
+                                               _('domain minimum'), max=6))
+        self._domain_max.append(_entry_factory('10', custom_stator_toolbar,
+                                               _('domain maximum'), max=6))
+        self._step_size.append(_entry_factory('1', custom_stator_toolbar,
+                                              _('step size'), max=6))
+        self.custom.append(_button_factory("custom-stator",
+                                           _('create custom stator'),
+                                           self._custom_stator_cb,
+                                           custom_stator_toolbar))
 
         if have_toolbox:
             _separator_factory(toolbox.toolbar, False, True)

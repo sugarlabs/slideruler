@@ -26,3 +26,6 @@ LEFT = 0
 RIGHT = 1
 TOP = 0
 BOTTOM = 1
+
+SLIDE = 0
+STATOR = 1

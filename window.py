@@ -26,7 +26,7 @@ except:
     GRID_CELL_SIZE = 0
 
 from constants import SHEIGHT, SWIDTH, SCALE, OFFSET, LEFT, RIGHT, TOP, \
-    BOTTOM, SCREENOFFSET
+    BOTTOM, SCREENOFFSET, SLIDE, STATOR
 from sprite_factory import Slide, Stator, Reticule, CustomSlide, CustomStator
 from sprites import Sprites
 from genslides import C_slide, D_stator, CI_slide, DI_stator, A_slide, \
@@ -166,8 +166,8 @@ class SlideRule():
                   'S':[S_slide, self._calc_S], 'T':[T_slide, self._calc_T],
                   'L':[L_slide, self._calc_L],
                   'LLn':[LLn_slide, self._calc_LLn],
-                  # 'LL0':[LL0_slide, self._calc_LL0],
                   'Log':[Log_slide, self._calc_Log]}
+        # 'LL0':[LL0_slide, self._calc_LL0],
 
         STATORS = {'D':[D_stator, self._calc_D, self._calc_D_result],
                    'DI':[DI_stator, self._calc_DI, self._calc_DI_result],
@@ -177,8 +177,8 @@ class SlideRule():
                    'T2':[T_stator, self._calc_T2, self._calc_T2_result],
                    'L2':[L_stator, self._calc_L2, self._calc_L2_result],
                    'LLn2':[LLn_stator, self._calc_LLn2, self._calc_LLn2_result],
-                   # 'LL02':[LL0_stator, self._calc_LL02, self._calc_LL02_result],
                    'Log2':[Log_stator, self._calc_Log2, self._calc_Log2_result]}
+        # 'LL02':[LL0_stator, self._calc_LL02, self._calc_LL02_result],
 
         self.path = path
         self.activity = parent
@@ -224,7 +224,8 @@ class SlideRule():
                                                   SCREENOFFSET + 2 * SHEIGHT,
                 STATORS[stator][0], STATORS[stator][1], STATORS[stator][2]))
 
-        self.make_custom_slide('log(x, 10)', 'x', 'exp(x)', 1, 10, 1)
+        self.make_custom_slide('log(x, 10)', 'x', 'exp(x)', 1, 10, 1, SLIDE)
+        self.make_custom_slide('log(x, 10)', 'x', 'exp(x)', 1, 10, 1, STATOR)
 
         self.reticule = Reticule(self.sprites, self.path, 'reticule',
                           150, SCREENOFFSET + SHEIGHT, 100, 2 * SHEIGHT)
@@ -358,7 +359,7 @@ class SlideRule():
         return stator
 
     def make_custom_slide(self, offset_text, label_text, calculate_text,
-                          min_text, max_text, step_text):
+                          min_text, max_text, step_text, slide):
         """ Create custom slide and stator from text entered on toolbar. """
         try:
             min_value = float(min_text)
@@ -430,45 +431,53 @@ class SlideRule():
                 traceback.print_exc()
                 return None
 
-        custom_slide = CustomSlide(self.sprites, self.path, 'custom',
-                                   0, SCREENOFFSET + SHEIGHT, Custom_slide,
-                                   self._calc_custom, custom_offset_function,
-                                   custom_label_function, min_value, max_value,
-                                   step_value)
-        custom_stator = CustomStator(self.sprites, 'custom2',
-                                     0, SCREENOFFSET + SHEIGHT, Custom_stator,
-                                     self._calc_custom2,
-                                     self._calc_custom2_result,
-                                     custom_offset_function,
-                                     custom_label_function, min_value,
-                                     max_value, step_value)
-        
-        if self.name_to_slide('custom').name == 'custom':
-            i = self.slides.index(self.name_to_slide('custom'))
-            active = False
-            if self.active_slide == self.slides[i]:
-                active = True
-            self.slides[i].hide()
-            self.slides[i] = custom_slide
-            if active:
-                self.active_slide = self.slides[i]
-            self.parent.set_slide()
-        else:
-            self.slides.append(custom_slide)
-        if self.name_to_stator('custom2').name == 'custom2':
-            i = self.stators.index(self.name_to_stator('custom2'))
-            active = False
-            if self.active_stator == self.stators[i]:
-                active = True
-            self.stators[i].hide()
-            self.stators[i] = custom_stator
-            if active:
-                self.active_stator = self.stators[i]
-            self.parent.set_stator()
-        else:
-            self.stators.append(custom_stator)
+        if slide == SLIDE:
+            custom_slide = CustomSlide(self.sprites, self.path, 'custom',
+                                       0, SCREENOFFSET + SHEIGHT, Custom_slide,
+                                       self._calc_custom,
+                                       custom_offset_function,
+                                       custom_label_function,
+                                       min_value, max_value, step_value)
+            if self.name_to_slide('custom').name == 'custom':
+                i = self.slides.index(self.name_to_slide('custom'))
+                active = False
+                if self.active_slide == self.slides[i]:
+                    active = True
+                self.slides[i].hide()
+                self.slides[i] = custom_slide
+                if active:
+                    self.active_slide = self.slides[i]
+                self.parent.set_slide()
+            else:
+                self.slides.append(custom_slide)
 
-        self.active_slide = self.name_to_slide('custom')
+            self.active_slide = self.name_to_slide('custom')
+
+        else:
+            custom_stator = CustomStator(self.sprites, 'custom2',
+                                         0, SCREENOFFSET + 2* SHEIGHT,
+                                         Custom_stator,
+                                         self._calc_custom2,
+                                         self._calc_custom2_result,
+                                         custom_offset_function,
+                                         custom_label_function,
+                                         min_value, max_value, step_value)
+        
+            if self.name_to_stator('custom2').name == 'custom2':
+                i = self.stators.index(self.name_to_stator('custom2'))
+                active = False
+                if self.active_stator == self.stators[i]:
+                    active = True
+                self.stators[i].hide()
+                self.stators[i] = custom_stator
+                if active:
+                    self.active_stator = self.stators[i]
+                self.parent.set_stator()
+            else:
+                self.stators.append(custom_stator)
+
+            self.active_stator = self.name_to_stator('custom2')
+
         if hasattr(self.parent, 'sr'):
             self.parent.show_u()
 
