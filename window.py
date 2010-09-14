@@ -208,6 +208,7 @@ class SlideRule():
         self.slides = []
         self.stators = []
         self.scale = 1
+        self.error_msg = None
 
         _logger.debug("creating slides, stators, and reticule")
         self.results_label = Stator(self.sprites, self.path, 'label',
@@ -382,54 +383,14 @@ class SlideRule():
         def custom_offset_function(x):
             myf = "def f(x): return " + offset_text.replace('import','')
             userdefined = {}
-            try:
-                exec myf in globals(), userdefined
-                return userdefined.values()[0](x)
-            except OverflowError:
-                self.results_label.spr.set_label(_('Overflow Error'))
-                traceback.print_exc()
-                return None
-            except NameError:
-                self.results_label.spr.set_label(_('Name Error'))
-                traceback.print_exc()
-                return None
-            except ZeroDivisionError:
-                self.results_label.spr.set_label(_('Zero-division Error'))
-                traceback.print_exc()
-                return None
-            except TypeError:
-                self.results_label.spr.set_label(_('Type Error'))
-                traceback.print_exc()
-                return None
-            except:
-                traceback.print_exc()
-                return None
+            exec myf in globals(), userdefined
+            return userdefined.values()[0](x)
 
         def custom_label_function(x):
             myf = "def f(x): return " + label_text.replace('import','')
             userdefined = {}
-            try:
-                exec myf in globals(), userdefined
-                return userdefined.values()[0](x)
-            except OverflowError:
-                self.results_label.spr.set_label(_('Overflow Error'))
-                traceback.print_exc()
-                return None
-            except NameError:
-                self.results_label.spr.set_label(_('Name Error'))
-                traceback.print_exc()
-                return None
-            except ZeroDivisionError:
-                self.results_label.spr.set_label(_('Zero-division Error'))
-                traceback.print_exc()
-                return None
-            except TypeError:
-                self.results_label.spr.set_label(_('Type Error'))
-                traceback.print_exc()
-                return None
-            except:
-                traceback.print_exc()
-                return None
+            exec myf in globals(), userdefined
+            return userdefined.values()[0](x)
 
         if slide == SLIDE:
             custom_slide = CustomSlide(self.sprites, self.path, 'custom',
@@ -438,6 +399,10 @@ class SlideRule():
                                        custom_offset_function,
                                        custom_label_function,
                                        min_value, max_value, step_value)
+            if custom_slide.error_msg is not None:
+                self.results_label.spr.set_label(custom_slide.error_msg)
+                self.results_label.draw(1000)
+
             if self.name_to_slide('custom').name == 'custom':
                 i = self.slides.index(self.name_to_slide('custom'))
                 active = False
@@ -462,7 +427,6 @@ class SlideRule():
                                          custom_offset_function,
                                          custom_label_function,
                                          min_value, max_value, step_value)
-        
             if self.name_to_stator('custom2').name == 'custom2':
                 i = self.stators.index(self.name_to_stator('custom2'))
                 active = False
@@ -481,6 +445,14 @@ class SlideRule():
         if hasattr(self.parent, 'sr'):
             self.parent.show_u()
 
+        if slide == SLIDE and custom_slide.error_msg is not None:
+            self.results_label.spr.set_label(custom_slide.error_msg)
+            self.results_label.draw(1000)
+
+        if slide == STATOR and custom_stator.error_msg is not None:
+            self.results_label.spr.set_label(custom_stator.error_msg)
+            self.results_label.draw(1000)
+        
     def name_to_slide(self, name):
         for slide in self.slides:
             if name == slide.name:
@@ -713,6 +685,14 @@ class SlideRule():
             elif self.parent is not None:
                 self.parent.set_function_unknown()
 
+        if self.active_slide.name == 'custom' or \
+           self.active_stator.name == 'custom2':
+            if self.error_msg is not None:
+                s = self.error_msg
+            else:
+                s = ''
+            self.results_label.draw(1000)
+
         self.results_label.spr.set_label(s)
 
     def _top_slide_offset(self, x):
@@ -836,27 +816,26 @@ class SlideRule():
         return self.custom_calc(self._r_offset(self.name_to_stator('custom2')))
 
     def custom_calc(self, dx):
+        self.error_msg = None
         myf = "def f(x): return " + self.calculate_text.replace('import','')
         userdefined = {}
         try:
             exec myf in globals(), userdefined
             return round(userdefined.values()[0](float(dx) / SCALE))
-        except OverflowError:
-            self.results_label.spr.set_label(_('Overflow Error'))
-            traceback.print_exc()
-            return None
-        except NameError:
-            self.results_label.spr.set_label(_('Name Error'))
-            traceback.print_exc()
-            return None
-        except ZeroDivisionError:
-            self.results_label.spr.set_label(_('Zero-division Error'))
-            traceback.print_exc()
-            return None
-        except TypeError:
-            self.results_label.spr.set_label(_('Type Error'))
-            traceback.print_exc()
-            return None
+        except OverflowError, e:
+            self.error_msg = _('Overflow Error') + ': ' + str(e)
+        except NameError, e:
+            self.error_msg = _('Name Error') + ': ' + str(e)
+        except ZeroDivisionError, e:
+            self.error_msg = _('Zero-division Error') + ': ' + str(e)
+        except TypeError, e:
+            self.error_msg = _('Type Error') + ': ' + str(e)
+        except ValueError, e:
+            self.error_msg = _('Type Error') + ': ' + str(e)
         except:
             traceback.print_exc()
             return None
+
+        return 1 # a benign return value
+
+

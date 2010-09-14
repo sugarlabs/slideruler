@@ -11,9 +11,13 @@
 # Free Software Foundation, Inc., 59 Temple Place - Suite 330,
 # Boston, MA 02111-1307, USA.
 
-from constants import SWIDTH, SHEIGHT, OFFSET, SCALE, HTOP1, HTOP2, HTOP3
 import math
 
+import traceback
+
+from gettext import gettext as _
+
+from constants import SWIDTH, SHEIGHT, OFFSET, SCALE, HTOP1, HTOP2, HTOP3
 log10 = 1 # math.log(10, 10)
 
 
@@ -1112,6 +1116,8 @@ class Custom_slide(C_slide):
         self.slide_offset2 = 7
         self.slide_offset3 = -12
 
+        self.error_msg = None
+
         self.svg = self.make_slide(self.name, offset_function, label_function,
                                    min, max, step)
 
@@ -1157,9 +1163,22 @@ class Custom_slide(C_slide):
         else:
             i = min
         while i < max + step:
-            svg += self.mark(offset_function(i), self.slide3,
+            try:
+                svg += self.mark(offset_function(i), self.slide3,
                                  self.slide2, self.slide1,
                                  label_function(i))
+            except OverflowError, e:
+                self.error_msg = _('Overflow Error') + ': ' + str(e)
+            except NameError, e:
+                self.error_msg = _('Name Error') + ': ' + str(e)
+            except ZeroDivisionError, e:
+                self.error_msg = _('Zero Division Error') + ' ' + str(e)
+            except TypeError, e:
+                self.error_msg = _('Type Error') + ': ' + str(e)
+            except ValueError, e:
+                self.error_msg = _('Value Error') + ': ' + str(e)
+            except:
+                traceback.print_exc()
             i += step
 
         svg += self.footer()
@@ -1176,6 +1195,8 @@ class Custom_stator(Custom_slide):
         self.slide_offset1 = - 5
         self.slide_offset2 = - 7
         self.slide_offset3 = 12
+
+        self.error_msg = None
 
         self.svg = self.make_slide(self.name, offset_function, label_function,
                                    min, max, step)

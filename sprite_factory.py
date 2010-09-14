@@ -119,8 +119,9 @@ class CustomSlide(Slide):
     """ Create a sprite for a custom slide """
     def __init__(self, sprites, path, name, x, y, svg_engine, function,
                  offset, label, min, max, step):
-        self.spr = Sprite(sprites, x, y,
-            svg_str_to_pixbuf(svg_engine(offset, label, min, max, step).svg))
+        svg = svg_engine(offset, label, min, max, step)
+        self.error_msg = svg.error_msg
+        self.spr = Sprite(sprites, x, y, svg_str_to_pixbuf(svg.svg))
         self.tab_dx = [0, SWIDTH - TABWIDTH]
         self.tab_dy = [2 * SHEIGHT, 2 * SHEIGHT]
         self.tabs = []
@@ -136,8 +137,9 @@ class CustomStator(Stator):
     """ Create a sprite for a custom slide """
     def __init__(self, sprites, name, x, y, svg_engine, calculate, result,
                  offset, label, min, max, step):
-        self.spr = Sprite(sprites, x, y,
-            svg_str_to_pixbuf(svg_engine(offset, label, min, max, step).svg))
+        svg = svg_engine(offset, label, min, max, step)
+        self.error_msg = svg.error_msg
+        self.spr = Sprite(sprites, x, y, svg_str_to_pixbuf(svg.svg))
         self.calculate = calculate
         self.result = result
         self.name = name

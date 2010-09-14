@@ -509,16 +509,16 @@ class SlideruleActivity(activity.Activity):
                toolbox.props.visible = False
 
         # Add the buttons to the toolbars
-        self._function_combo = _combo_factory(_FUNCTIONS, _FC, _('functions'),
-            self._function_combo_cb, project_toolbar)
-        self.top_button = _button_factory('C', _('slide'),
+        self._function_combo = _combo_factory(_FUNCTIONS, _FC,
+            _('select function'), self._function_combo_cb, project_toolbar)
+        self.top_button = _button_factory('C', _('active slide'),
                                           self._dummy_cb, project_toolbar)
-        self._slide_combo = _combo_factory(_SLIDES, _C, _('slides'),
-                                         self._slide_combo_cb,
-                                         project_toolbar)
-        self.bottom_button = _button_factory('D', _('stator'),
+        self._slide_combo = _combo_factory(_SLIDES, _C, _('select slide'),
+                                           self._slide_combo_cb,
+                                           project_toolbar)
+        self.bottom_button = _button_factory('D', _('active stator'),
                                              self._dummy_cb, project_toolbar)
-        self._stator_combo = _combo_factory(_STATORS, _D, _('stators'),
+        self._stator_combo = _combo_factory(_STATORS, _D, _('select stator'),
             self._stator_combo_cb, project_toolbar)
         _separator_factory(project_toolbar)
         self.realign_button = _button_factory('realign', _('realign slides'),
