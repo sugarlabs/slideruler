@@ -46,7 +46,7 @@ import logging
 _logger = logging.getLogger('sliderule-activity')
 
 from window import SlideRule
-from constants import SWIDTH, SLIDE, STATOR
+from constants import SWIDTH, SLIDE, STATOR, CUSTOM
 
 _FA = _('square/square root')
 _FC = _('multiply/divide')
@@ -166,6 +166,8 @@ class SlideruleActivity(activity.Activity):
         canvas.show()
         self.show_all()
 
+        self.custom_slides = [False, False]
+
         self.sr = SlideRule(canvas, os.path.join(activity.get_bundle_path(),
                                                  'images/'), self)
 
@@ -190,19 +192,25 @@ class SlideruleActivity(activity.Activity):
         for i in range(2):
             if 'min' + str(i) in self.metadata:
                 self._domain_min[i].set_text(self.metadata['min' + str(i)])
+                self.custom_slides[i] = True
             if 'max' + str(i) in self.metadata:
                 self._domain_max[i].set_text(self.metadata['max' + str(i)])
+                self.custom_slides[i] = True
             if 'step' + str(i) in self.metadata:
                 self._step_size[i].set_text(self.metadata['step' + str(i)])
+                self.custom_slides[i] = True
             if 'label' + str(i) in self.metadata:
                 self._label_function[i].set_text(
                     self.metadata['label' + str(i)])
+                self.custom_slides[i] = True
             if 'offset' + str(i) in self.metadata:
                 self._offset_function[i].set_text(
                     self.metadata['offset' + str(i)])
+                self.custom_slides[i] = True
             if 'calculate' + str(i) in self.metadata:
                 self._calculate_function[i].set_text(
                     self.metadata['calculate' + str(i)])
+                self.custom_slides[i] = True
 
         function = self._predefined_function()
         if function is not None:
@@ -224,15 +232,16 @@ class SlideruleActivity(activity.Activity):
         self.metadata['D'] = str(self.sr.name_to_stator('D').spr.get_xy()[0])
         self.metadata['R'] = str(self.sr.reticule.spr.get_xy()[0])
         for i in range(2):
-            self.metadata['min' + str(i)] = self._domain_min[i].get_text()
-            self.metadata['max' + str(i)] = self._domain_max[i].get_text()
-            self.metadata['step' + str(i)] = self._step_size[i].get_text()
-            self.metadata['label' + str(i)] = \
-                self._label_function[i].get_text()
-            self.metadata['offset' + str(i)] = \
-                self._offset_function[i].get_text()
-            self.metadata['calculate' + str(i)] = \
-                self._calculate_function[i].get_text()
+            if self.custom_slides[i]:
+                self.metadata['min' + str(i)] = self._domain_min[i].get_text()
+                self.metadata['max' + str(i)] = self._domain_max[i].get_text()
+                self.metadata['step' + str(i)] = self._step_size[i].get_text()
+                self.metadata['label' + str(i)] = \
+                    self._label_function[i].get_text()
+                self.metadata['offset' + str(i)] = \
+                    self._offset_function[i].get_text()
+                self.metadata['calculate' + str(i)] = \
+                    self._calculate_function[i].get_text()
 
     def _hide_all(self):
         self._hide_top()
@@ -264,12 +273,14 @@ class SlideruleActivity(activity.Activity):
         self._hide_top()
         self.sr.active_slide.draw()
         self.top_button.set_icon(self.sr.active_slide.name)
+        self._set_custom_entries(SLIDE, self.sr.active_slide.name)
 
     def set_stator(self):
         """ Move the bottom slider onto top layer """
         self._hide_bottom()
         self.sr.active_stator.draw()
         self.bottom_button.set_icon(self.sr.active_stator.name)
+        self._set_custom_entries(STATOR, self.sr.active_stator.name)
 
     def move_stators(self, x, y):
         """ Move all the stators to the same x, y position """
@@ -360,14 +371,33 @@ class SlideruleActivity(activity.Activity):
         self.sr.align_slides()
         self._show_slides(_C, _LLn, _FE)
 
-    def show_u(self):
+    def show_u(self, slide):
         """ user-defined scale """
+        _slide_dictionary = {'C': _C, 'CI': _CI, 'L': _L, 'A': _A,
+                             'K': _K, 'S': _S, 'T': _T, 'Log': _Log,
+                             'LLn': _LLn, 'custom': _UD}
         _stator_dictionary = {'D': _D, 'DI': _DI, 'L2': _L, 'B': _B,
                               'K2': _K, 'S2': _S, 'T2': _T, 'Log2': _Log,
                               'LLn2': _LLn, 'custom2': _UD}
-        self.sr.active_slide = self.sr.name_to_slide('custom')
-        self._show_slides(_UD, _stator_dictionary[self.sr.active_stator.name],
-                          _UK)
+        if slide == SLIDE:
+            self.sr.active_slide = self.sr.name_to_slide('custom')
+            self._show_slides(_UD,
+                              _stator_dictionary[self.sr.active_stator.name],
+                              _UK)
+        else:
+            self.sr.active_stator = self.sr.name_to_stator('custom2')
+            self._show_slides(_slide_dictionary[self.sr.active_slide.name],
+                              _UD,
+                              _UK)
+
+    def _set_custom_entries(self, slide, name):
+        if not self.custom_slides[slide] and name in CUSTOM:
+            self._offset_function[slide].set_text(CUSTOM[name][0])
+            self._label_function[slide].set_text(CUSTOM[name][1])
+            self._calculate_function[slide].set_text(CUSTOM[name][2])
+            self._domain_min[slide].set_text(CUSTOM[name][3])
+            self._domain_max[slide].set_text(CUSTOM[name][4])
+            self._step_size[slide].set_text(CUSTOM[name][5])
 
     # toolbar button callbacks
     def realign_cb(self, arg=None):
@@ -431,13 +461,16 @@ class SlideruleActivity(activity.Activity):
 
     def _custom_slide_cb(self, arg=None):
         """ Create custom slide from parameters in entry widgets """
+        self.custom_slides[SLIDE] = True
         self._customize(SLIDE)
 
     def _custom_stator_cb(self, arg=None):
         """ Create custom stator from parameters in entry widgets """
+        self.custom_slides[STATOR] = True
         self._customize(STATOR)
 
     def _customize(self, slide):
+        self.custom_slides[slide] = True
         self.sr.make_custom_slide(self._offset_function[slide].get_text(),
                                   self._label_function[slide].get_text(),
                                   self._calculate_function[slide].get_text(),
@@ -450,7 +483,6 @@ class SlideruleActivity(activity.Activity):
 
     def _setup_toolbars(self, have_toolbox):
         """ Setup the toolbars.. """
-
         project_toolbar = gtk.Toolbar()
         custom_slide_toolbar = gtk.Toolbar()
         custom_stator_toolbar = gtk.Toolbar()

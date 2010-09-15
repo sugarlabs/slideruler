@@ -26,7 +26,7 @@ except:
     GRID_CELL_SIZE = 0
 
 from constants import SHEIGHT, SWIDTH, SCALE, OFFSET, LEFT, RIGHT, TOP, \
-    BOTTOM, SCREENOFFSET, SLIDE, STATOR
+    BOTTOM, SCREENOFFSET, SLIDE, STATOR, CUSTOM
 from sprite_factory import Slide, Stator, Reticule, CustomSlide, CustomStator
 from sprites import Sprites
 from genslides import C_slide, D_stator, CI_slide, DI_stator, A_slide, \
@@ -225,8 +225,12 @@ class SlideRule():
                                                   SCREENOFFSET + 2 * SHEIGHT,
                 STATORS[stator][0], STATORS[stator][1], STATORS[stator][2]))
 
-        self.make_custom_slide('log(x, 10)', 'x', 'exp(x)', 1, 10, 1, SLIDE)
-        self.make_custom_slide('log(x, 10)', 'x', 'exp(x)', 1, 10, 1, STATOR)
+        self.make_custom_slide(CUSTOM['C'][0], CUSTOM['C'][1], CUSTOM['C'][2],
+                               CUSTOM['C'][3], CUSTOM['C'][4], CUSTOM['C'][5],
+                               SLIDE)
+        self.make_custom_slide(CUSTOM['D'][0], CUSTOM['D'][1], CUSTOM['D'][2],
+                               CUSTOM['D'][3], CUSTOM['D'][4], CUSTOM['D'][5],
+                               STATOR)
 
         self.reticule = Reticule(self.sprites, self.path, 'reticule',
                           150, SCREENOFFSET + SHEIGHT, 100, 2 * SHEIGHT)
@@ -443,7 +447,7 @@ class SlideRule():
             self.active_stator = self.name_to_stator('custom2')
 
         if hasattr(self.parent, 'sr'):
-            self.parent.show_u()
+            self.parent.show_u(slide)
 
         if slide == SLIDE and custom_slide.error_msg is not None:
             self.results_label.spr.set_label(custom_slide.error_msg)
