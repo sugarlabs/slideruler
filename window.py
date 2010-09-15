@@ -369,17 +369,17 @@ class SlideRule():
         try:
             min_value = float(min_text)
         except ValueError:
-            self.parent._min_entry.set_text('NaN')
+            self.parent._domain_min[slide].set_text('NaN')
             return
         try:
             max_value = float(max_text)
         except ValueError:
-            self.parent._max_entry.set_text('NaN')
+            self.parent._domain_max[slide].set_text('NaN')
             return
         try:
             step_value = float(step_text)
         except ValueError:
-            self.parent._step_entry.set_text('NaN')
+            self.parent._step_size[slide].set_text('NaN')
             return
 
         self.calculate_text = calculate_text
