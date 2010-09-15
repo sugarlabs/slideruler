@@ -401,9 +401,10 @@ class SlideruleActivity(activity.Activity):
             self._offset_function[slide].set_text(CUSTOM[name][0])
             self._label_function[slide].set_text(CUSTOM[name][1])
             self._calculate_function[slide].set_text(CUSTOM[name][2])
-            self._domain_min[slide].set_text(CUSTOM[name][3])
-            self._domain_max[slide].set_text(CUSTOM[name][4])
-            self._step_size[slide].set_text(CUSTOM[name][5])
+            self._results_label[slide].set_text(CUSTOM[name][3])
+            self._domain_min[slide].set_text(CUSTOM[name][4])
+            self._domain_max[slide].set_text(CUSTOM[name][5])
+            self._step_size[slide].set_text(CUSTOM[name][6])
 
     # toolbar button callbacks
     def realign_cb(self, arg=None):
@@ -572,38 +573,38 @@ class SlideruleActivity(activity.Activity):
         self._step_size = []
         self.custom = []
 
-        self._offset_function.append(_entry_factory('log(x, 10)',
-                                                    custom_slide_toolbar,
-                                                    _('position function')))
-        self._label_function.append(_entry_factory('x', custom_slide_toolbar,
-                                                   _('label function'), max=6))
-        self._calculate_function.append(_entry_factory('pow(10, x)',
+        self._offset_function.append(_entry_factory(CUSTOM['C'][0],
+            custom_slide_toolbar, _('position function')))
+        self._label_function.append(_entry_factory(CUSTOM['C'][1],
+            custom_slide_toolbar, _('label function'), max=6))
+        self._calculate_function.append(_entry_factory(CUSTOM['C'][2],
             custom_slide_toolbar, _('results function')))
-        self._results_label.append(_entry_factory('x', custom_slide_toolbar,
-            _('results label function'), max=6))
-        self._domain_min.append(_entry_factory('1', custom_slide_toolbar,
-                                               _('domain minimum'), max=6))
-        self._domain_max.append(_entry_factory('10', custom_slide_toolbar,
-                                               _('domain maximum'), max=6))
-        self._step_size.append(_entry_factory('1', custom_slide_toolbar,
-                                              _('step size'), max=6))
+        self._results_label.append(_entry_factory(CUSTOM['C'][3],
+            custom_slide_toolbar, _('results label function'), max=6))
+        self._domain_min.append(_entry_factory(CUSTOM['C'][4],
+            custom_slide_toolbar, _('domain minimum'), max=6))
+        self._domain_max.append(_entry_factory(CUSTOM['C'][5],
+            custom_slide_toolbar, _('domain maximum'), max=6))
+        self._step_size.append(_entry_factory(CUSTOM['C'][6],
+            custom_slide_toolbar, _('step size'), max=6))
         self.custom.append(_button_factory("custom-slide",
             _('create custom slide'), self._custom_slide_cb,
                                            custom_slide_toolbar))
-        self._offset_function.append(_entry_factory('log(x, 10)',
+
+        self._offset_function.append(_entry_factory(CUSTOM['D'][0],
             custom_stator_toolbar, _('position function')))
-        self._label_function.append(_entry_factory('x', custom_stator_toolbar,
-                                                   _('label function'), max=6))
-        self._calculate_function.append(_entry_factory('pow(10, x)',
+        self._label_function.append(_entry_factory(CUSTOM['D'][1],
+            custom_stator_toolbar, _('label function'), max=6))
+        self._calculate_function.append(_entry_factory(CUSTOM['D'][2],
             custom_stator_toolbar, _('results function')))
-        self._results_label.append(_entry_factory('x', custom_stator_toolbar,
-            _('results label function'), max=6))
-        self._domain_min.append(_entry_factory('1', custom_stator_toolbar,
-                                               _('domain minimum'), max=6))
-        self._domain_max.append(_entry_factory('10', custom_stator_toolbar,
-                                               _('domain maximum'), max=6))
-        self._step_size.append(_entry_factory('1', custom_stator_toolbar,
-                                              _('step size'), max=6))
+        self._results_label.append(_entry_factory(CUSTOM['D'][3],
+            custom_stator_toolbar, _('results label function'), max=6))
+        self._domain_min.append(_entry_factory(CUSTOM['D'][4],
+            custom_stator_toolbar, _('domain minimum'), max=6))
+        self._domain_max.append(_entry_factory(CUSTOM['D'][5],
+            custom_stator_toolbar, _('domain maximum'), max=6))
+        self._step_size.append(_entry_factory(CUSTOM['D'][6],
+            custom_stator_toolbar, _('step size'), max=6))
         self.custom.append(_button_factory("custom-stator",
             _('create custom stator'), self._custom_stator_cb,
                                            custom_stator_toolbar))
