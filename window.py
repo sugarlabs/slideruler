@@ -366,39 +366,81 @@ class SlideRule():
         stator.draw()
         return stator
 
+    def _process_text_field(self, text_field):
+        """ Process input from numeric text fields: could be a function. """
+        try:
+            my_min = "def f(): return " + text_field.replace('import','')
+            userdefined = {}
+            exec my_min in globals(), userdefined
+            return userdefined.values()[0]()
+        except OverflowError, e:
+            self.results_label.spr.labels[0] = _('Overflow Error') + \
+                ': ' + str(e)
+            self.results_label.draw(1000)
+        except NameError, e:
+            self.results_label.spr.labels[0] = _('Name Error') + ': ' + str(e)
+            self.results_label.draw(1000)
+        except ZeroDivisionError, e:
+            self.results_label.spr.labels[0] = _('Zero-division Error') + \
+                ': ' + str(e)
+            self.results_label.draw(1000)
+        except TypeError, e:
+            self.results_label.spr.labels[0] = _('Type Error') + ': ' + str(e)
+            self.results_label.draw(1000)
+        except ValueError, e:
+            self.results_label.spr.labels[0] = _('Type Error') + ': ' + str(e)
+            self.results_label.draw(1000)
+        except SyntaxError, e:
+            self.results_label.spr.labels[0] = _('Syntax Error') + ': ' + str(e)
+            self.results_label.draw(1000)
+        except:
+            traceback.print_exc()
+        return None
+
     def make_custom_slide(self, offset_text, label_text, results_function,
                           results_label, min_text, max_text, step_text, slide):
         """ Create custom slide and stator from text entered on toolbar. """
-        try:
-            min_value = float(min_text)
-        except ValueError:
-            self.parent._domain_min[slide].set_text('NaN')
+
+        results = self._process_text_field(min_text)
+        if results is None:
             return
         try:
-            max_value = float(max_text)
-        except ValueError:
-            self.parent._domain_max[slide].set_text('NaN')
+            min_value = float(results)
+        except ValueError, e:
+            self.results_label.spr.labels[0] = _('Value Error') + ': ' + str(e)
+            self.results_label.draw(1000)
+            return
+
+        results = self._process_text_field(max_text)
+        if results is None:
             return
         try:
-            if step_text.find('/') > 0: # special case fractions
-                denominator, numerator = step_text.split('/')
-                step_value = float(denominator) / float(numerator)
-            else:
-                step_value = float(step_text)
+            max_value = float(results)
         except ValueError:
-            self.parent._step_size[slide].set_text('NaN')
+            self.results_label.spr.labels[0] = _('Value Error') + ': ' + str(e)
+            self.results_label.draw(1000)
+            return
+
+        results = self._process_text_field(step_text)
+        if results is None:
+            return
+        try:
+            step_value = float(results)
+        except ValueError:
+            self.results_label.spr.labels[0] = _('Value Error') + ': ' + str(e)
+            self.results_label.draw(1000)
             return
 
         def custom_offset_function(x):
-            myf = "def f(x): return " + offset_text.replace('import','')
+            my_offset = "def f(x): return " + offset_text.replace('import','')
             userdefined = {}
-            exec myf in globals(), userdefined
+            exec my_offset in globals(), userdefined
             return userdefined.values()[0](x)
 
         def custom_label_function(x):
-            myf = "def f(x): return " + label_text.replace('import','')
+            my_label = "def f(x): return " + label_text.replace('import','')
             userdefined = {}
-            exec myf in globals(), userdefined
+            exec my_label in globals(), userdefined
             return userdefined.values()[0](x)
 
         self.results_function[slide] = results_function
