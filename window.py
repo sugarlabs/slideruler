@@ -832,6 +832,8 @@ class SlideRule():
             self.error_msg = _('Type Error') + ': ' + str(e)
         except ValueError, e:
             self.error_msg = _('Type Error') + ': ' + str(e)
+        except SyntaxError, e:
+            self.error_msg = _('Syntax Error') + ': ' + str(e)
         except:
             traceback.print_exc()
             return None
