@@ -208,7 +208,10 @@ class SlideRule():
         self.slides = []
         self.stators = []
         self.scale = 1
+
         self.error_msg = None
+        self.results_function = [None, None]
+        self.results_label_function = [None, None]
 
         _logger.debug("creating slides, stators, and reticule")
         self.results_label = Stator(self.sprites, self.path, 'label',
@@ -227,10 +230,10 @@ class SlideRule():
 
         self.make_custom_slide(CUSTOM['C'][0], CUSTOM['C'][1], CUSTOM['C'][2],
                                CUSTOM['C'][3], CUSTOM['C'][4], CUSTOM['C'][5],
-                               SLIDE)
+                               CUSTOM['C'][6], SLIDE)
         self.make_custom_slide(CUSTOM['D'][0], CUSTOM['D'][1], CUSTOM['D'][2],
                                CUSTOM['D'][3], CUSTOM['D'][4], CUSTOM['D'][5],
-                               STATOR)
+                               CUSTOM['D'][6], STATOR)
 
         self.reticule = Reticule(self.sprites, self.path, 'reticule',
                           150, SCREENOFFSET + SHEIGHT, 100, 2 * SHEIGHT)
@@ -363,8 +366,8 @@ class SlideRule():
         stator.draw()
         return stator
 
-    def make_custom_slide(self, offset_text, label_text, calculate_text,
-                          min_text, max_text, step_text, slide):
+    def make_custom_slide(self, offset_text, label_text, results_function,
+                          results_label, min_text, max_text, step_text, slide):
         """ Create custom slide and stator from text entered on toolbar. """
         try:
             min_value = float(min_text)
@@ -386,8 +389,6 @@ class SlideRule():
             self.parent._step_size[slide].set_text('NaN')
             return
 
-        self.calculate_text = calculate_text
-
         def custom_offset_function(x):
             myf = "def f(x): return " + offset_text.replace('import','')
             userdefined = {}
@@ -399,6 +400,9 @@ class SlideRule():
             userdefined = {}
             exec myf in globals(), userdefined
             return userdefined.values()[0](x)
+
+        self.results_function[slide] = results_function
+        self.results_label_function[slide] = results_label
 
         if slide == SLIDE:
             custom_slide = CustomSlide(self.sprites, self.path, 'custom',
@@ -814,22 +818,54 @@ class SlideRule():
         return _calc_linear(self._r_offset(self.name_to_stator('L2')))
 
     def _calc_custom(self):
-        return self.custom_calc(self._r_offset(self.name_to_slide('custom')))
+        return self.custom_calc(self._r_offset(self.name_to_slide('custom')),
+                                SLIDE)
 
     def _calc_custom2(self):
         return self.custom_calc(self._top_slide_offset(
-                self.name_to_stator('custom2').spr.get_xy()[0]))
+                self.name_to_stator('custom2').spr.get_xy()[0]), STATOR)
 
     def _calc_custom2_result(self):
-        return self.custom_calc(self._r_offset(self.name_to_stator('custom2')))
+        return self.custom_calc(self._r_offset(self.name_to_stator('custom2')),
+                                STATOR)
 
-    def custom_calc(self, dx):
+    def custom_calc(self, dx, slide):
         self.error_msg = None
-        myf = "def f(x): return " + self.calculate_text.replace('import','')
+        my_results = "def f(x): return " + \
+            self.results_function[slide].replace('import','')
+        my_label = "def f(x): return " + \
+            self.results_label_function[slide].replace('import','')
+
         userdefined = {}
         try:
-            exec myf in globals(), userdefined
-            return round(userdefined.values()[0](float(dx) / SCALE))
+            exec my_results in globals(), userdefined
+            results = round(userdefined.values()[0](float(dx) / SCALE))
+        except OverflowError, e:
+            self.error_msg = _('Overflow Error') + ': ' + str(e)
+            return '?'
+        except NameError, e:
+            self.error_msg = _('Name Error') + ': ' + str(e)
+            return '?'
+        except ZeroDivisionError, e:
+            self.error_msg = _('Zero-division Error') + ': ' + str(e)
+            return '?'
+        except TypeError, e:
+            self.error_msg = _('Type Error') + ': ' + str(e)
+            return '?'
+        except ValueError, e:
+            self.error_msg = _('Type Error') + ': ' + str(e)
+            return '?'
+        except SyntaxError, e:
+            self.error_msg = _('Syntax Error') + ': ' + str(e)
+            return '?'
+        except:
+            traceback.print_exc()
+            return None
+
+        userdefined = {}
+        try:
+            exec my_label in globals(), userdefined
+            return userdefined.values()[0](results)
         except OverflowError, e:
             self.error_msg = _('Overflow Error') + ': ' + str(e)
         except NameError, e:
@@ -846,6 +882,4 @@ class SlideRule():
             traceback.print_exc()
             return None
 
-        return 1 # a benign return value
-
-
+        return '??'

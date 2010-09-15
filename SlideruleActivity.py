@@ -211,6 +211,10 @@ class SlideruleActivity(activity.Activity):
                 self._calculate_function[i].set_text(
                     self.metadata['calculate' + str(i)])
                 self.custom_slides[i] = True
+            if 'results label' + str(i) in self.metadata:
+                self._results_label[i].set_text(
+                    self.metadata['results label' + str(i)])
+                self.custom_slides[i] = True
 
         function = self._predefined_function()
         if function is not None:
@@ -242,6 +246,8 @@ class SlideruleActivity(activity.Activity):
                     self._offset_function[i].get_text()
                 self.metadata['calculate' + str(i)] = \
                     self._calculate_function[i].get_text()
+                self.metadata['results label' + str(i)] = \
+                    self._results_label[i].get_text()
 
     def _hide_all(self):
         self._hide_top()
@@ -474,6 +480,7 @@ class SlideruleActivity(activity.Activity):
         self.sr.make_custom_slide(self._offset_function[slide].get_text(),
                                   self._label_function[slide].get_text(),
                                   self._calculate_function[slide].get_text(),
+                                  self._results_label[slide].get_text(),
                                   self._domain_min[slide].get_text(),
                                   self._domain_max[slide].get_text(),
                                   self._step_size[slide].get_text(), slide)
@@ -559,6 +566,7 @@ class SlideruleActivity(activity.Activity):
         self._offset_function = []
         self._label_function = []
         self._calculate_function = []
+        self._results_label = []
         self._domain_min = []
         self._domain_max = []
         self._step_size = []
@@ -570,8 +578,9 @@ class SlideruleActivity(activity.Activity):
         self._label_function.append(_entry_factory('x', custom_slide_toolbar,
                                                    _('label function'), max=6))
         self._calculate_function.append(_entry_factory('pow(10, x)',
-                                                       custom_slide_toolbar,
-                                                       _('results function')))
+            custom_slide_toolbar, _('results function')))
+        self._results_label.append(_entry_factory('x', custom_slide_toolbar,
+            _('results label function'), max=6))
         self._domain_min.append(_entry_factory('1', custom_slide_toolbar,
                                                _('domain minimum'), max=6))
         self._domain_max.append(_entry_factory('10', custom_slide_toolbar,
@@ -579,17 +588,16 @@ class SlideruleActivity(activity.Activity):
         self._step_size.append(_entry_factory('1', custom_slide_toolbar,
                                               _('step size'), max=6))
         self.custom.append(_button_factory("custom-slide",
-                                           _('create custom slide'),
-                                           self._custom_slide_cb,
+            _('create custom slide'), self._custom_slide_cb,
                                            custom_slide_toolbar))
         self._offset_function.append(_entry_factory('log(x, 10)',
-                                                    custom_stator_toolbar,
-                                                    _('position function')))
+            custom_stator_toolbar, _('position function')))
         self._label_function.append(_entry_factory('x', custom_stator_toolbar,
                                                    _('label function'), max=6))
         self._calculate_function.append(_entry_factory('pow(10, x)',
-                                                       custom_stator_toolbar,
-                                                       _('results function')))
+            custom_stator_toolbar, _('results function')))
+        self._results_label.append(_entry_factory('x', custom_stator_toolbar,
+            _('results label function'), max=6))
         self._domain_min.append(_entry_factory('1', custom_stator_toolbar,
                                                _('domain minimum'), max=6))
         self._domain_max.append(_entry_factory('10', custom_stator_toolbar,
@@ -597,8 +605,7 @@ class SlideruleActivity(activity.Activity):
         self._step_size.append(_entry_factory('1', custom_stator_toolbar,
                                               _('step size'), max=6))
         self.custom.append(_button_factory("custom-stator",
-                                           _('create custom stator'),
-                                           self._custom_stator_cb,
+            _('create custom stator'), self._custom_stator_cb,
                                            custom_stator_toolbar))
 
         if have_toolbox:
