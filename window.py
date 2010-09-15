@@ -377,7 +377,11 @@ class SlideRule():
             self.parent._domain_max[slide].set_text('NaN')
             return
         try:
-            step_value = float(step_text)
+            if step_text.find('/') > 0: # special case fractions
+                denominator, numerator = step_text.split('/')
+                step_value = float(denominator) / float(numerator)
+            else:
+                step_value = float(step_text)
         except ValueError:
             self.parent._step_size[slide].set_text('NaN')
             return
