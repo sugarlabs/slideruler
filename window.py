@@ -11,6 +11,32 @@
 # Free Software Foundation, Inc., 59 Temple Place - Suite 330,
 # Boston, MA 02111-1307, USA.
 
+"""
+Modifying slide rule:
+
+The customization feature is intended to handle most cases where you require
+a specialized slide or stator. But if you would like to add a new slide to
+the toolbar, you need to make changes in three places:
+
+1. In SlideruleActivity.py, you need to add new entries to the arrays that
+define the toolbars.
+
+2. In genslides.py, you need to add new class objects to generate the
+graphics associated with your slide and stator.
+
+3. In window.py (this file), you need to add methods to calculate
+values for your slide and stator and import your slide generation
+classes:
+
+   (a) add the classes you added in Step 2 above to the list of
+       methods imported from genslides.
+   (b) add a _calc_ function for your slider to calculate value from offset;
+   (c) add methods that call your _calc_ function for the offset of the
+       reticule along the slide, the offset of the slide along the stator,
+       and the offset of the reticule along the stator;
+   (d) add your new slide and stator to the SLIDES and STATORS arrays.
+"""
+
 import pygtk
 pygtk.require('2.0')
 import gtk
@@ -37,6 +63,8 @@ from genslides import C_slide, D_stator, CI_slide, DI_stator, A_slide, \
 import traceback
 import logging
 _logger = logging.getLogger('sliderule-activity')
+
+# These functions are used to calculate value from horizontal offset
 
 
 def _calc_log(dx):
@@ -742,7 +770,10 @@ class SlideRule():
         x2, y2 = self.active_slide.spr.get_xy()
         return x2 - x
 
-    # Calculate the value of individual slides and stators
+    # Calculate the value of individual slides and stators:
+    # (a) the offset of the reticule along the slide
+    # (b) the offset of the slide along the stator
+    # (c) the offset of the reticule along the reticule
 
     def _r_offset(self, slide):
         return self.reticule.spr.get_xy()[0] - slide.spr.get_xy()[0]

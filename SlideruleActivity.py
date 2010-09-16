@@ -11,6 +11,25 @@
 # Free Software Foundation, Inc., 59 Temple Place - Suite 330,
 # Boston, MA 02111-1307, USA.
 
+"""
+Modifying slide rule:
+
+The customization feature is intended to handle most cases where you require
+a specialized slide or stator. But if you would like to add a new slide to
+the toolbar, you need to make changes in three places:
+
+1. In SlideruleActivity.py (this file), you need to add new entries to
+the _SLIDES, and _STATORS arrays and the _SLIDE_DICTIONARY and
+_STATOR_DICTIONARY dictionaries so that the slides appear in the toolbars.
+
+2. In genslides.py, you need to add new class objects to generate the
+graphics associated with your slide and stator.
+
+3. In window.py, you need to add methods to calculate values for your
+slide and stator.
+
+"""
+
 import pygtk
 pygtk.require('2.0')
 import gtk

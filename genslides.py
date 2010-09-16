@@ -11,6 +11,29 @@
 # Free Software Foundation, Inc., 59 Temple Place - Suite 330,
 # Boston, MA 02111-1307, USA.
 
+"""
+Modifying slide rule:
+
+The customization feature is intended to handle most cases where you require
+a specialized slide or stator. But if you would like to add a new slide to
+the toolbar, you need to make changes in three places:
+
+1. In SlideruleActivity.py, you need to add new entries to the arrays that
+define the toolbars.
+
+2. In genslides.py (this file), you need to add new class objects to
+generate the graphics associated with your slide and stator. In most
+cases, you can simply inherit from the C_slide and C_stator classes
+and simply override offset_function() and label_function(). The mark()
+and special_mark() methods are used to generate the marks along the
+rule as well as the text labels. The make_slide() method iterates
+across the domain of the offset_function().
+
+3. In window.py, you need to add methods to calculate values for your
+slide and stator.
+
+"""
+
 import math
 
 import traceback
@@ -18,6 +41,7 @@ import traceback
 from gettext import gettext as _
 
 from constants import SWIDTH, SHEIGHT, OFFSET, SCALE, HTOP1, HTOP2, HTOP3
+
 log10 = 1 # math.log(10, 10)
 
 
