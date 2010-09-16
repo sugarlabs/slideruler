@@ -2,6 +2,7 @@
 
 * resized text field (#2329)
 * combined two label functions into one (#2329)
+* using build-in round instead of my own version
 
 17
 

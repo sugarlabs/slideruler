@@ -39,25 +39,13 @@ import logging
 _logger = logging.getLogger('sliderule-activity')
 
 
-def round(x, precision=2):
-    if precision == 2:
-        return(float(int(x * 100 + 0.5) / 100.))
-    elif precision == 1:
-        return(float(int(x * 10 + 0.5) / 10.))
-    elif precision == 0:
-        return(int(x + 0.5))
-    else:
-        y = pow(10, precision)
-        return(float(int(x * y + 0.5) / y))
-
-
 def _calc_log(dx):
     """ C and D scales """
     rescale = 1
     if dx < 0:
         rescale = 0.1
         dx += SCALE
-    return round(pow(10, float(dx) / SCALE) * rescale)
+    return round(pow(10, float(dx) / SCALE) * rescale, 2)
 
 
 def _calc_inverse_log(dx):
@@ -66,7 +54,7 @@ def _calc_inverse_log(dx):
     if dx < 0:
         rescale = 0.1
         dx += SCALE
-    return round(10.0 / pow(10, float(dx) / SCALE) * rescale)
+    return round(10.0 / pow(10, float(dx) / SCALE) * rescale, 2)
 
 
 def _calc_log_squared(dx):
@@ -79,7 +67,7 @@ def _calc_log_squared(dx):
     if A > 50:
         return round(A, 1)
     else:
-        return round(A)
+        return round(A, 2)
 
 
 def _calc_log_cubed(dx):
@@ -94,7 +82,7 @@ def _calc_log_cubed(dx):
     elif K > 50:
         return round(K, 1)
     else:
-        return round(K)
+        return round(K, 2)
 
 
 def _calc_log_log(dx):
@@ -104,7 +92,7 @@ def _calc_log_log(dx):
         rescale = 0.1
         dx += SCALE
     Log = log(pow(10, (float(dx) / SCALE) * rescale), 10)
-    return round(Log)
+    return round(Log, 2)
 
 
 def _calc_ln_log(dx):
@@ -124,9 +112,9 @@ def _calc_linear(dx):
     """ L scale """
     if dx < 0:
         dx += SCALE
-        return round(10 * (float(dx) / SCALE) - 10.0)
+        return round(10 * (float(dx) / SCALE) - 10.0, 2)
     else:
-        return round(10 * (float(dx) / SCALE))
+        return round(10 * (float(dx) / SCALE), 2)
 
 
 def _calc_sine(dx):
@@ -138,7 +126,7 @@ def _calc_sine(dx):
     if S > 60:
         return round(S, 1)
     else:
-        return round(S)
+        return round(S, 2)
 
 
 def _calc_tangent(dx):
@@ -146,7 +134,7 @@ def _calc_tangent(dx):
     t = pow(10, float(dx) / SCALE) / 10
     if t > 1.0:
         t = 1.0
-    return round(180.0 * atan(t) / pi)
+    return round(180.0 * atan(t) / pi, 2)
 
 
 def _calc_ln(dx):
@@ -154,7 +142,7 @@ def _calc_ln(dx):
     if dx < 0:
         rescale = 0.1
         dx += SCALE
-    return round(log((pow(10, float(dx) / SCALE) * rescale)))
+    return round(log((pow(10, float(dx) / SCALE) * rescale)), 2)
 
 
 class SlideRule():
@@ -644,7 +632,7 @@ class SlideRule():
         elif self.active_stator.name == 'DI':
             v_right = v_left / 10.
         elif self.active_stator.name == 'LLn2':
-            v_right = round(log(10)) + v_left
+            v_right = round(log(10), 2) + v_left
         else:
             v_right = v_left
         for slide in self.slides:
@@ -881,7 +869,7 @@ class SlideRule():
         userdefined = {}
         try:
             exec my_results in globals(), userdefined
-            results = round(userdefined.values()[0](float(dx) / SCALE))
+            results = round(userdefined.values()[0](float(dx) / SCALE), 2)
         except OverflowError, e:
             self.error_msg = _('Overflow Error') + ': ' + str(e)
             return '?'
