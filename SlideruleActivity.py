@@ -127,7 +127,7 @@ def _label_factory(label, toolbar):
     return my_label
 
 
-def _entry_factory(default_string, toolbar, tooltip='', max=16):
+def _entry_factory(default_string, toolbar, tooltip='', max=15):
     """ Factory for adding a text box to a toolbar """
     my_entry = gtk.Entry()
     my_entry.set_text(default_string)
@@ -582,11 +582,11 @@ class SlideruleActivity(activity.Activity):
         self._results_label.append(_entry_factory(CUSTOM['C'][3],
             custom_slide_toolbar, _('results label function'), max=6))
         self._domain_min.append(_entry_factory(CUSTOM['C'][4],
-            custom_slide_toolbar, _('domain minimum'), max=6))
+            custom_slide_toolbar, _('domain minimum'), max=5))
         self._domain_max.append(_entry_factory(CUSTOM['C'][5],
-            custom_slide_toolbar, _('domain maximum'), max=6))
+            custom_slide_toolbar, _('domain maximum'), max=5))
         self._step_size.append(_entry_factory(CUSTOM['C'][6],
-            custom_slide_toolbar, _('step size'), max=6))
+            custom_slide_toolbar, _('step size'), max=5))
         self.custom.append(_button_factory("custom-slide",
             _('create custom slide'), self._custom_slide_cb,
                                            custom_slide_toolbar))
@@ -600,11 +600,11 @@ class SlideruleActivity(activity.Activity):
         self._results_label.append(_entry_factory(CUSTOM['D'][3],
             custom_stator_toolbar, _('results label function'), max=6))
         self._domain_min.append(_entry_factory(CUSTOM['D'][4],
-            custom_stator_toolbar, _('domain minimum'), max=6))
+            custom_stator_toolbar, _('domain minimum'), max=5))
         self._domain_max.append(_entry_factory(CUSTOM['D'][5],
-            custom_stator_toolbar, _('domain maximum'), max=6))
+            custom_stator_toolbar, _('domain maximum'), max=5))
         self._step_size.append(_entry_factory(CUSTOM['D'][6],
-            custom_stator_toolbar, _('step size'), max=6))
+            custom_stator_toolbar, _('step size'), max=5))
         self.custom.append(_button_factory("custom-stator",
             _('create custom stator'), self._custom_stator_cb,
                                            custom_stator_toolbar))
