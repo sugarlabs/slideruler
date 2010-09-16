@@ -1,3 +1,8 @@
+18
+
+* resized text field (#2329)
+* combined two label functions into one (#2329)
+
 17
 
 * better error-message handling for custom sliders (#2325)

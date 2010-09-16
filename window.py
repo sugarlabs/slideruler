@@ -211,7 +211,7 @@ class SlideRule():
 
         self.error_msg = None
         self.results_function = [None, None]
-        self.results_label_function = [None, None]
+        self.label_function = [None, None]
 
         _logger.debug("creating slides, stators, and reticule")
         self.results_label = Stator(self.sprites, self.path, 'label',
@@ -230,10 +230,10 @@ class SlideRule():
 
         self.make_custom_slide(CUSTOM['C'][0], CUSTOM['C'][1], CUSTOM['C'][2],
                                CUSTOM['C'][3], CUSTOM['C'][4], CUSTOM['C'][5],
-                               CUSTOM['C'][6], SLIDE)
+                               SLIDE)
         self.make_custom_slide(CUSTOM['D'][0], CUSTOM['D'][1], CUSTOM['D'][2],
                                CUSTOM['D'][3], CUSTOM['D'][4], CUSTOM['D'][5],
-                               CUSTOM['D'][6], STATOR)
+                               STATOR)
 
         self.reticule = Reticule(self.sprites, self.path, 'reticule',
                           150, SCREENOFFSET + SHEIGHT, 100, 2 * SHEIGHT)
@@ -397,8 +397,8 @@ class SlideRule():
             traceback.print_exc()
         return None
 
-    def make_custom_slide(self, offset_text, label_text, results_function,
-                          results_label, min_text, max_text, step_text, slide):
+    def make_custom_slide(self, offset_text, results_function, label_text,
+                          min_text, max_text, step_text, slide):
         """ Create custom slide and stator from text entered on toolbar. """
 
         results = self._process_text_field(min_text)
@@ -444,7 +444,7 @@ class SlideRule():
             return userdefined.values()[0](x)
 
         self.results_function[slide] = results_function
-        self.results_label_function[slide] = results_label
+        self.label_function[slide] = label_text
 
         if slide == SLIDE:
             custom_slide = CustomSlide(self.sprites, self.path, 'custom',
@@ -876,7 +876,7 @@ class SlideRule():
         my_results = "def f(x): return " + \
             self.results_function[slide].replace('import','')
         my_label = "def f(x): return " + \
-            self.results_label_function[slide].replace('import','')
+            self.label_function[slide].replace('import','')
 
         userdefined = {}
         try:
