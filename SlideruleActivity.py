@@ -77,6 +77,12 @@ _DI = _CI
 _B = _A
 _STATORS = [_L, _D, _DI, _B, _K, _S, _T, _Log, _LLn, _UD]
 
+_SLIDE_DICTIONARY = {_C: 'C', _CI: 'CI', _A: 'A', _K: 'K', _S: 'S', _T: 'T',
+                     _L: 'L', _Log: 'Log', _LLn: 'LLn', _UD: 'custom'}
+
+_STATOR_DICTIONARY = {_D: 'D', _DI: 'DI', _L: 'L2', _B: 'B', _K: 'K2',
+                      _S: 'S2', _T: 'T2', _Log: 'Log2', _LLn: 'LLn2',
+                      _UD: 'custom2'}
 
 def _combo_factory(combo_array, default, tooltip, callback, toolbar):
     """Factory for making a toolbar combo box"""
@@ -373,22 +379,16 @@ class SlideruleActivity(activity.Activity):
 
     def show_u(self, slide):
         """ user-defined scale """
-        _slide_dictionary = {'C': _C, 'CI': _CI, 'L': _L, 'A': _A,
-                             'K': _K, 'S': _S, 'T': _T, 'Log': _Log,
-                             'LLn': _LLn, 'custom': _UD}
-        _stator_dictionary = {'D': _D, 'DI': _DI, 'L2': _L, 'B': _B,
-                              'K2': _K, 'S2': _S, 'T2': _T, 'Log2': _Log,
-                              'LLn2': _LLn, 'custom2': _UD}
         if slide == SLIDE:
             self.sr.active_slide = self.sr.name_to_slide('custom')
-            self._show_slides(_UD,
-                              _stator_dictionary[self.sr.active_stator.name],
-                              _UK)
+            for k in _STATOR_DICTIONARY:
+                if _STATOR_DICTIONARY[k] == self.sr.active_stator.name:
+                    self._show_slides(_UD, k, _UK)
         else:
             self.sr.active_stator = self.sr.name_to_stator('custom2')
-            self._show_slides(_slide_dictionary[self.sr.active_slide.name],
-                              _UD,
-                              _UK)
+            for k in _SLIDE_DICTIONARY:
+                if _SLIDE_DICTIONARY[k] == self.sr.active_slide.name:
+                    self._show_slides(k, _UD, _UK)
 
     def _set_custom_entries(self, slide, name):
         if not self.custom_slides[slide] and name in CUSTOM:
@@ -429,10 +429,7 @@ class SlideruleActivity(activity.Activity):
 
     def _slide_combo_cb(self, arg=None):
         """ Read value from slide combo box """
-        _slide_dictionary = {_C: 'C', _CI: 'CI', _A: 'A', _K: 'K', _S: 'S',
-                           _T: 'T', _L: 'L', _Log: 'Log', _LLn: 'LLn',
-                           _UD: 'custom'}
-        self.sr.active_slide = self.sr.name_to_slide(_slide_dictionary[
+        self.sr.active_slide = self.sr.name_to_slide(_SLIDE_DICTIONARY[
             _SLIDES[self._slide_combo.get_active()]])
         function = self._predefined_function()
         if function is not None:
@@ -445,10 +442,7 @@ class SlideruleActivity(activity.Activity):
 
     def _stator_combo_cb(self, arg=None):
         """ Read value from stator combo box """
-        _stator_dictionary = {_D: 'D', _DI: 'DI', _L: 'L2', _B: 'B',
-                              _K: 'K2', _S: 'S2', _T: 'T2', _Log: 'Log2',
-                              _LLn: 'LLn2', _UD: 'custom2'}
-        self.sr.active_stator = self.sr.name_to_stator(_stator_dictionary[
+        self.sr.active_stator = self.sr.name_to_stator(_STATOR_DICTIONARY[
             _STATORS[self._stator_combo.get_active()]])
         function = self._predefined_function()
         if function is not None:
