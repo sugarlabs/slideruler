@@ -408,6 +408,7 @@ class SlideruleActivity(activity.Activity):
             for k in _SLIDE_DICTIONARY:
                 if _SLIDE_DICTIONARY[k] == self.sr.active_slide.name:
                     self._show_slides(k, _UD, _UK)
+        self.sr.align_slides()
 
     def _set_custom_entries(self, slide, name):
         if not self.custom_slides[slide] and name in CUSTOM:
