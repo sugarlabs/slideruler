@@ -16,19 +16,16 @@ Modifying slide rule:
 
 The customization feature is intended to handle most cases where you require
 a specialized slide or stator. But if you would like to add a new slide to
-the toolbar, you need to make changes in four places:
+the toolbar, you need to make changes in three places:
 
-1. In constants.py, you need to add new entries to the _SLIDES, and
-_STATORS arrays and the _SLIDE_DICTIONARY and _STATOR_DICTIONARY
-dictionaries so that the slides appear in the toolbars.
+1. In constants.py, you need to add new entries to SLIDE_TABLE,
+STATOR_TABLE, SLIDE_DICTIONARY and STATOR_DICTIONARY so that the
+slides appear in the toolbars.
 
-2. In SlideruleActivity.py (this file), you need to import your new
-constants.
-
-3. In genslides.py, you need to add new class objects to generate the
+2. In genslides.py, you need to add new class objects to generate the
 graphics associated with your slide and stator.
 
-4. In window.py, you need to add methods to calculate values for your
+3. In window.py, you need to add methods to calculate values for your
 slide and stator.
 
 """

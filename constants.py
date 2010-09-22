@@ -16,19 +16,16 @@ Modifying slide rule:
 
 The customization feature is intended to handle most cases where you require
 a specialized slide or stator. But if you would like to add a new slide to
-the toolbar, you need to make changes in four places:
+the toolbar, you need to make changes in three places:
 
-1. In constants.py (this file), you need to add new entries to the
-SLIDE_TABLE, and STATOR_TABLE arrays and the SLIDE_DICTIONARY and
-STATOR_DICTIONARY dictionaries so that the slides appear in the
-toolbars defined in SlideruleActivity.py.
+1. In constants.py (this file) you need to add new entries to SLIDE_TABLE,
+STATOR_TABLE, SLIDE_DICTIONARY and STATOR_DICTIONARY so that the
+slides appear in the toolbars.
 
-2. In SlideruleActivity.py , you need to import these new constants.
-
-3. In genslides.py, you need to add new class objects to generate the
+2. In genslides.py, you need to add new class objects to generate the
 graphics associated with your slide and stator.
 
-4. In window.py, you need to add methods to calculate values for your
+3. In window.py, you need to add methods to calculate values for your
 slide and stator.
 
 """
@@ -55,8 +52,11 @@ SLIDE = 0
 STATOR = 1
 
 A_slide = _('log²')
+B_slide = A_slide
 C_slide = _('log')
+D_slide = C_slide
 CI_slide = _('1/log')
+DI_slide = CI_slide
 K_slide = _('log³')
 S_slide = _('sin')
 T_slide = _('tan')
@@ -64,12 +64,10 @@ L_slide = _('linear')
 Log_slide = _('log log')
 LLn_slide = _('ln')
 UD_slide = _('user defined')
+
 SLIDE_TABLE = [L_slide, C_slide, CI_slide, A_slide, K_slide, S_slide, T_slide,
                Log_slide, LLn_slide, UD_slide]
 
-D_slide = C_slide
-DI_slide = CI_slide
-B_slide = A_slide
 STATOR_TABLE = [L_slide, D_slide, DI_slide, B_slide, K_slide, S_slide, T_slide,
                 Log_slide, LLn_slide, UD_slide]
 
