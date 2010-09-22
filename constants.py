@@ -11,6 +11,30 @@
 # Free Software Foundation, Inc., 59 Temple Place - Suite 330,
 # Boston, MA 02111-1307, USA.
 
+"""
+Modifying slide rule:
+
+The customization feature is intended to handle most cases where you require
+a specialized slide or stator. But if you would like to add a new slide to
+the toolbar, you need to make changes in four places:
+
+1. In constants.py (this file), you need to add new entries to the
+SLIDE_TABLE, and STATOR_TABLE arrays and the SLIDE_DICTIONARY and
+STATOR_DICTIONARY dictionaries so that the slides appear in the
+toolbars defined in SlideruleActivity.py.
+
+2. In SlideruleActivity.py , you need to import these new constants.
+
+3. In genslides.py, you need to add new class objects to generate the
+graphics associated with your slide and stator.
+
+4. In window.py, you need to add methods to calculate values for your
+slide and stator.
+
+"""
+
+from gettext import gettext as _
+
 OFFSET = 50
 SWIDTH = 2400
 SHEIGHT = 60
@@ -30,6 +54,34 @@ BOTTOM = 1
 SLIDE = 0
 STATOR = 1
 
+A_slide = _('log²')
+C_slide = _('log')
+CI_slide = _('1/log')
+K_slide = _('log³')
+S_slide = _('sin')
+T_slide = _('tan')
+L_slide = _('linear')
+Log_slide = _('log log')
+LLn_slide = _('ln')
+UD_slide = _('user defined')
+SLIDE_TABLE = [L_slide, C_slide, CI_slide, A_slide, K_slide, S_slide, T_slide,
+               Log_slide, LLn_slide, UD_slide]
+
+D_slide = C_slide
+DI_slide = CI_slide
+B_slide = A_slide
+STATOR_TABLE = [L_slide, D_slide, DI_slide, B_slide, K_slide, S_slide, T_slide,
+                Log_slide, LLn_slide, UD_slide]
+
+SLIDE_DICTIONARY = {C_slide: 'C', CI_slide: 'CI', A_slide: 'A', K_slide: 'K',
+                    S_slide: 'S', T_slide: 'T', L_slide: 'L', Log_slide: 'Log',
+                    LLn_slide: 'LLn', UD_slide: 'custom'}
+
+STATOR_DICTIONARY = {D_slide: 'D', DI_slide: 'DI', L_slide: 'L2', B_slide: 'B',
+                     K_slide: 'K2', S_slide: 'S2', T_slide: 'T2',
+                     Log_slide: 'Log2', LLn_slide: 'LLn2', UD_slide: 'custom2'}
+
+# [offset_function, result_function, display_function, min, max, step]
 CUSTOM = {'C': ['log(x,10)', 'pow(10,x)', 'x', '1', '10', '1'],
           'D': ['log(x,10)', 'pow(10,x)', 'x', '1', '10', '1'],
           'CI': ['log(10/x,10)', '10/pow(10,x)', 'x', '1', '10', '1'],
@@ -54,3 +106,4 @@ CUSTOM = {'C': ['log(x,10)', 'pow(10,x)', 'x', '1', '10', '1'],
                    '1', '10', '1'],
           'Ln': ['log(x,10)', 'pow(10,x)', 'round(log(x),2)', '1', '10', '1'],
           'Ln2': ['log(x,10)','pow(10,x)', 'round(log(x),2)', '1', '10', '1']}
+
