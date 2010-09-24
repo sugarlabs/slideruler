@@ -54,9 +54,8 @@ from genslides import C_slide_generator, D_stator_generator, \
     B_stator_generator, K_slide_generator, K_stator_generator, \
     S_slide_generator, S_stator_generator, T_slide_generator, \
     T_stator_generator, L_slide_generator, L_stator_generator, \
-    LL0_slide_generator, LL0_stator_generator, LLn_slide_generator, \
-    LLn_stator_generator, Custom_slide_generator, Custom_stator_generator, \
-    Log_slide_generator, Log_stator_generator
+    LLn_slide_generator, LLn_stator_generator, Custom_slide_generator, \
+    Custom_stator_generator, Log_slide_generator, Log_stator_generator
 
 import traceback
 import logging
