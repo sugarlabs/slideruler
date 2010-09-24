@@ -19,15 +19,13 @@ a specialized slide or stator. But if you would like to add a new slide to
 the toolbar, you need to make changes in three places:
 
 1. In constants.py (this file) you need to add new entries to SLIDE_TABLE,
-STATOR_TABLE, SLIDE_DICTIONARY and STATOR_DICTIONARY so that the
+STATOR_TABLE, SLIDE_DICTIONARY, STATOR_DICTIONARY, and DEFINITIONS so that the
 slides appear in the toolbars.
 
 2. In genslides.py, you need to add new class objects to generate the
 graphics associated with your slide and stator.
 
-3. In window.py, you need to add methods to calculate values for your
-slide and stator.
-
+3. In window.py, you need to import the new class objects from #2.
 """
 
 from gettext import gettext as _
@@ -79,29 +77,38 @@ STATOR_DICTIONARY = {D_slide: 'D', DI_slide: 'DI', L_slide: 'L2', B_slide: 'B',
                      K_slide: 'K2', S_slide: 'S2', T_slide: 'T2',
                      Log_slide: 'Log2', LLn_slide: 'LLn2', UD_slide: 'custom2'}
 
-# [offset_function, result_function, display_function, min, max, step]
-CUSTOM = {'C': ['log(x,10)', 'pow(10,x)', 'x', '1', '10', '1'],
-          'D': ['log(x,10)', 'pow(10,x)', 'x', '1', '10', '1'],
-          'CI': ['log(10/x,10)', '10/pow(10,x)', 'x', '1', '10', '1'],
-          'DI': ['log(10/x,10)', '10/pow(10,x)', 'x', '1', '10', '1'],
-          'L': ['x', 'x', 'x', '0', '1', '0.05'],
-          'L2': ['x', 'x', 'x', '0', '1', '0.05'],
-          'A': ['log(x,10)/2', 'pow(10,x*2)', 'x', '1', '100', '9'],
-          'A2': ['log(x,10)/2', 'pow(10,x*2)', 'x', '1', '100', '9'],
-          'K': ['log(x,10)/3', 'pow(10,x*3)', 'x', '1', '1000', '99'],
-          'K2': ['log(x,10)/3', 'pow(10,x*3)', 'x', '1', '1000', '99'],
-          'S': ['log(sin(x*pi/180)*10,10)', 'asin(pow(10,x)/10)*180/pi',
-                'x', '5', '90', '5'],
-          'S2': ['log(sin(x*pi/180)*10,10)', 'asin(pow(10,x)/10)*180/pi',
-                 'x', '5', '90', '5'],
-          'T': ['log(tan(x*pi/180)*10,10)', 'atan(pow(10,x)/10)*180/pi',
-                'x', '5', '45', '2.5'],
-          'T2': ['log(tan(x*pi/180)*10,10)', 'atan(pow(10,x)/10)*180/pi',
-                 'x', '5', '45', '2.5'],
-          'Log': ['log(x,10)', 'pow(10,x)', 'round(log(x,10),2)',
-                  '1', '10', '1'],
-          'Log2': ['log(x,10)','pow(10,x)', 'round(log(x,10),2)',
-                   '1', '10', '1'],
-          'Ln': ['log(x,10)', 'pow(10,x)', 'round(log(x),2)', '1', '10', '1'],
-          'Ln2': ['log(x,10)','pow(10,x)', 'round(log(x),2)', '1', '10', '1']}
+FOFFSET = 0
+FRESULT = 1
+FDISPLAY = 2
+FMIN = 3
+FMAX = 4
+FSTEP = 5
+DEFINITIONS = {'C': ['log(x,10)', 'pow(10,x)', 'x', '1', '10', '1'],
+               'D': ['log(x,10)', 'pow(10,x)', 'x', '1', '10', '1'],
+               'CI': ['log(10/x,10)', '10/pow(10,x)', 'x', '1', '10', '1'],
+               'DI': ['log(10/x,10)', '10/pow(10,x)', 'x', '1', '10', '1'],
+               'L': ['x', 'x', 'x', '0', '1', '0.05'],
+               'L2': ['x', 'x', 'x', '0', '1', '0.05'],
+               'A': ['log(x,10)/2', 'pow(10,x*2)', 'x', '1', '100', '9'],
+               'B': ['log(x,10)/2', 'pow(10,x*2)', 'x', '1', '100', '9'],
+               'K': ['log(x,10)/3', 'pow(10,x*3)', 'x', '1', '1000', '99'],
+               'K2': ['log(x,10)/3', 'pow(10,x*3)', 'x', '1', '1000', '99'],
+               'S': ['log(sin(x*pi/180)*10,10)', 'asin(pow(10,x)/10)*180/pi',
+                     'x', '5', '90', '5'],
+               'S2': ['log(sin(x*pi/180)*10,10)', 'asin(pow(10,x)/10)*180/pi',
+                      'x', '5', '90', '5'],
+               'T': ['log(tan(x*pi/180)*10,10)', 'atan(pow(10,x)/10)*180/pi',
+                     'x', '5', '45', '2.5'],
+               'T2': ['log(tan(x*pi/180)*10,10)', 'atan(pow(10,x)/10)*180/pi',
+                      'x', '5', '45', '2.5'],
+               'Log': ['log(x,10)', 'pow(10,x)', 'round(log(x,10),2)',
+                       '1', '10', '1'],
+               'Log2': ['log(x,10)','pow(10,x)', 'round(log(x,10),2)',
+                        '1', '10', '1'],
+               'LLn': ['log(x,10)', 'pow(10,x)', 'round(log(x),2)', '1', '10',
+                       '1'],
+               'LLn2': ['log(x,10)','pow(10,x)', 'round(log(x),2)', '1', '10',
+                        '1'],
+               'custom': ['log(x,10)', 'pow(10,x)', 'x', '1', '10', '1'],
+               'custom2': ['log(x,10)', 'pow(10,x)', 'x', '1', '10', '1']}
 

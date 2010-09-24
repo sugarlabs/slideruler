@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-#Copyright (c) 2009,2010 Walter Bender
+#Copyright (c) 2009, 2010 Walter Bender
 
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -23,18 +23,17 @@ define the toolbars.
 
 2. In genslides.py (this file), you need to add new class objects to
 generate the graphics associated with your slide and stator. In most
-cases, you can simply inherit from the C_slide and C_stator classes
-and simply override offset_function() and label_function(). The mark()
-and special_mark() methods are used to generate the marks along the
-rule as well as the text labels. The make_slide() method iterates
-across the domain of the offset_function().
+cases, you can simply inherit from the C_slide and C_stator classes.
+The make_slide() method iterates across the domain of the offset_function().
+
+NOTE that most of the make_slide() methods ignore min, max, and step.
 
 3. In window.py, you need to add methods to calculate values for your
 slide and stator.
 
 """
 
-import math
+from math import *
 
 import traceback
 
@@ -42,13 +41,40 @@ from gettext import gettext as _
 
 from constants import SWIDTH, SHEIGHT, OFFSET, SCALE, HTOP1, HTOP2, HTOP3
 
-log10 = 1 # math.log(10, 10)
 
-
-class C_slide():
+class C_slide_generator():
     """ Log scale for slide """
-    def __init__(self):
-        self.name = 'C'
+    def __init__(self, name, offset_text, label_text, min, max, step):
+        self.name = name
+        self.offset_text = offset_text.replace('import','')
+        self.label_text = label_text.replace('import','')
+        self.min = min
+        self.max = max
+        self.step = step
+        self.error_msg = None
+        self.precision = 1
+
+        self.setup_svg()
+
+        def offset_function(x):
+            my_offset = "def f(x): return " + self.offset_text
+            userdefined = {}
+            exec my_offset in globals(), userdefined
+            return userdefined.values()[0](x)
+
+        def label_function(x):
+            my_label = "def f(x): return " + self.label_text
+            userdefined = {}
+            exec my_label in globals(), userdefined
+            return userdefined.values()[0](x)
+
+        self.svg = self.make_slide(self.name, offset_function, label_function,
+                                   self.min, self.max, self.step)
+
+    def setup_svg(self):
+        self.setup_slide()
+
+    def setup_slide(self):
         self.slide1 = HTOP1
         self.slide2 = HTOP2
         self.slide3 = HTOP3
@@ -56,41 +82,43 @@ class C_slide():
         self.slide_offset2 = 7
         self.slide_offset3 = -12
 
-        def offset_function(x):
-            return math.log(x, 10)
+    def setup_stator(self):
+        self.slide1 = SHEIGHT - HTOP1
+        self.slide2 = SHEIGHT - HTOP2
+        self.slide3 = SHEIGHT - HTOP3 + 12
+        self.slide_offset1 = - 5
+        self.slide_offset2 = - 7
+        self.slide_offset3 = 12
 
-        def label_function(x):
-            return x
-
-        self.svg = self.make_slide(self.name, offset_function, label_function)
-
-    def mark(self, offset, height3, height2, height1, string=None, flip=False,
-             scale=1.0):
+    def mark(self, offset, height3, height2, height1, value=None):
         """ Plot marks in a range from 1 to 10 along the length of the slide """
         svg = ''
-        if flip:
-            log = (log10 - offset) * SCALE * scale + OFFSET
-        else:
-            log = offset * SCALE * scale + OFFSET
-        if string is not None:
+        log = offset * SCALE + OFFSET
+        if value is not None:
+            if type(value) == str:
+                string = value
+            else:
+                format = '%0.' + str(self.precision) + 'f'
+                string = format % (value)
             svg += '  <text style="font-size:12px;fill:#000000;">\n'
             svg += '      <tspan\n'
             svg += '       x="%0.2f"\n' % (log)
             svg += '       y="%d"\n' % (height3)
-            svg += '       style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">%0.1f</tspan></text>\n' % (string)
+            svg += '       style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">%s</tspan></text>\n' % (string)
         svg += '  <path\n'
         svg += '       d="M %0.2f,%d,%0.2f,%d"\n' % (log, height1, log, height2)
         svg += '       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />\n'
         return svg
 
-    def special_mark(self, offset, height3, height2, height1, string,
-                     flip=False, scale=1.0):
+    def special_mark(self, offset, height3, height2, height1, value):
         """ Plot special marks, e.g., e and pi """
-        svg = ''
-        if flip:
-            log = (log10 - offset) * SCALE * scale + OFFSET
+        if type(value) == str:
+            string = value
         else:
-            log = offset * SCALE * scale + OFFSET
+            format = '%0.' + str(self.precision) + 'f'
+            string = format % (value)
+        svg = ''
+        log = offset * SCALE + OFFSET
         svg += '  <text style="font-size:12px;fill:#0000ff;">\n'
         svg += '      <tspan\n'
         svg += '       x="%0.2f"\n' % (log)
@@ -101,8 +129,12 @@ class C_slide():
         svg += '       style="fill:none;stroke:#0000ff;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />\n'
         return svg
 
-    def header(self, name, x=5):
+    def header(self, name):
         """ The SVG header """
+        if name == 'custom' or name == 'custom2':
+            name = 'XO'
+        x = len(name)*5
+
         svg = ''
         svg += '<?xml version="1.0" encoding="UTF-8" standalone="no"?>\n'
         svg += '<!-- Created with Emacs -->\n'
@@ -130,1043 +162,536 @@ class C_slide():
         svg += '</svg>\n'
         return svg
 
-    def make_slide(self, label, offset_function, label_function, x=None,
-                   flip_flag=False):
+    def make_slide(self, label, offset_function, label_function, min, max,
+                   step):
         """ Generate marks along a slide using passed functions """
 
         svg = ''
-        if x is None:
-            svg += self.header(label)
-        else:
-            svg += self.header(label, x)
+        svg += self.header(label)
 
         for i in range(100, 200):
             if int((i / 10) * 10) == i:
                 svg += self.mark(offset_function(i / 100.), self.slide3,
                                  self.slide2, self.slide1,
-                                 label_function(i / 100.), flip=flip_flag)
+                                 label_function(i / 100.))
             elif int((i / 5) * 5) == i:
                 svg += self.mark(offset_function(i / 100.), self.slide3,
                                  self.slide2,
-                                 self.slide1 + self.slide_offset1,
-                                 flip=flip_flag)
+                                 self.slide1 + self.slide_offset1)
             else:
                 svg += self.mark(offset_function(i / 100.), self.slide3,
                                  self.slide2,
-                                 self.slide1 + self.slide_offset2,
-                                 flip=flip_flag)
+                                 self.slide1 + self.slide_offset2)
 
         for i in range(200, 400, 2):
             if int((i / 10) * 10) == i:
                 svg += self.mark(offset_function(i / 100.), self.slide3,
                                  self.slide2, self.slide1,
-                                 label_function(i / 100.), flip=flip_flag)
+                                 label_function(i / 100.))
             else:
                 svg += self.mark(offset_function(i / 100.), self.slide3,
                                  self.slide2,
-                                 self.slide1 + self.slide_offset1,
-                                 flip=flip_flag)
+                                 self.slide1 + self.slide_offset1)
 
         for i in range(400, 1005, 5):
             if int((i / 10)* 10) == i:
                 if int((i / 50) * 50) == i:
                     svg += self.mark(offset_function(i / 100.), self.slide3,
                                      self.slide2, self.slide1,
-                                     label_function(i / 100.), flip=flip_flag)
+                                     label_function(i / 100.))
                 else:
                     svg += self.mark(offset_function(i / 100.), self.slide3,
-                                     self.slide2, self.slide1, flip=flip_flag)
+                                     self.slide2, self.slide1)
             else:
                 svg += self.mark(offset_function(i / 100.), self.slide3,
                                  self.slide2,
-                                 self.slide1 + self.slide_offset1,
-                                 flip=flip_flag)
+                                 self.slide1 + self.slide_offset1)
 
-        svg += self.special_mark(offset_function(math.pi),
+        svg += self.special_mark(offset_function(pi),
                                  self.slide3 + self.slide_offset3, self.slide2,
-                                 self.slide1, 'π', flip=flip_flag)
-        svg += self.special_mark(offset_function(math.e),
+                                 self.slide1, 'π')
+        svg += self.special_mark(offset_function(e),
                                  self.slide3 + self.slide_offset3, self.slide2,
-                                 self.slide1, 'e', flip=flip_flag)
+                                 self.slide1, 'e')
 
         svg += self.footer()
         return svg
 
 
-class D_stator(C_slide):
+class D_stator_generator(C_slide_generator):
     """ Log scale for stator """
-    def __init__(self):
-        self.name = 'D'
-        self.slide1 = SHEIGHT - HTOP1
-        self.slide2 = SHEIGHT - HTOP2
-        self.slide3 = SHEIGHT - HTOP3 + 12
-        self.slide_offset1 = - 5
-        self.slide_offset2 = - 7
-        self.slide_offset3 = 12
-
-        def offset_function(x):
-            return math.log(x, 10)
-
-        def label_function(x):
-            return x
-
-        self.svg = self.make_slide(self.name, offset_function, label_function)
+    def setup_svg(self):
+        self.setup_stator()
 
 
-class CI_slide(C_slide):
+class CI_slide_generator(C_slide_generator):
     """ Inverse Log scale for slide """
-    def __init__(self):
-        self.name = 'CI'
-        self.slide1 = HTOP1
-        self.slide2 = HTOP2
-        self.slide3 = HTOP3
-        self.slide_offset1 = 5
-        self.slide_offset2 = 7
-        self.slide_offset3 = -12
-
-        def offset_function(x):
-            return math.log(x, 10)
-
-        def label_function(x):
-            return x
-
-        self.svg = self.make_slide(self.name, offset_function, label_function,
-                                   flip_flag=True)
 
 
-class DI_stator(D_stator):
+class DI_stator_generator(D_stator_generator):
     """ Inverse Log scale for stator """
-    def __init__(self):
-        self.name = 'DI'
-        self.slide1 = SHEIGHT - HTOP1
-        self.slide2 = SHEIGHT - HTOP2
-        self.slide3 = SHEIGHT - HTOP3 + 12
-        self.slide_offset1 = - 5
-        self.slide_offset2 = - 7
-        self.slide_offset3 = 12
-
-        def offset_function(x):
-            return math.log(x, 10)
-
-        def label_function(x):
-            return x
-
-        self.svg = self.make_slide(self.name, offset_function, label_function,
-                                   flip_flag=True)
 
 
-class A_slide(C_slide):
+class A_slide_generator(C_slide_generator):
     """ Log^2 scale for slide """
-    def __init__(self):
-        self.name = 'A'
-        self.slide1 = HTOP1
-        self.slide2 = HTOP2
-        self.slide3 = HTOP3
-        self.slide_offset1 = 5
-        self.slide_offset2 = 7
-        self.slide_offset3 = -12
-
-        def offset_function(x):
-            return math.log(x, 10) / 2.
-
-        def label_function(x):
-            return x
-
-        self.svg = self.make_slide(self.name, offset_function, label_function)
-
-
-    def make_slide(self, label, offset_function, label_function, x=None,
-                   flip_flag=False):
+    def make_slide(self, label, offset_function, label_function, min, max,
+                   step):
         """ Generate marks along a slide using passed functions """
 
         svg = ''
-        if x is None:
-            svg += self.header(label)
-        else:
-            svg += self.header(label, x)
+        svg += self.header(label)
 
         for i in range(100, 200):
             if int((i / 10) * 10) == i:
                 svg += self.mark(offset_function(i / 100.), self.slide3,
                                  self.slide2, self.slide1,
-                                 label_function(i / 100.), flip=flip_flag)
+                                 label_function(i / 100.))
             elif int((i / 5) * 5) == i:
                 svg += self.mark(offset_function(i / 100.), self.slide3,
                                  self.slide2,
-                                 self.slide1 + self.slide_offset1,
-                                 flip=flip_flag)
+                                 self.slide1 + self.slide_offset1)
             else:
                 svg += self.mark(offset_function(i / 100.), self.slide3,
                                  self.slide2,
-                                 self.slide1 + self.slide_offset2,
-                                 flip=flip_flag)
+                                 self.slide1 + self.slide_offset2)
 
         for i in range(200, 400, 2):
             if int((i / 20) * 20) == i:
                 svg += self.mark(offset_function(i / 100.), self.slide3,
                                  self.slide2, self.slide1,
-                                 label_function(i / 100.), flip=flip_flag)
+                                 label_function(i / 100.))
             else:
                 svg += self.mark(offset_function(i / 100.), self.slide3,
                                  self.slide2,
-                                 self.slide1 + self.slide_offset1,
-                                 flip=flip_flag)
+                                 self.slide1 + self.slide_offset1)
 
         for i in range(400, 1000, 5):
             if int((i / 10)* 10) == i:
                 if int((i / 100) * 100) == i:
                     svg += self.mark(offset_function(i / 100.), self.slide3,
                                      self.slide2, self.slide1,
-                                     label_function(i / 100.), flip=flip_flag)
+                                     label_function(i / 100.))
                 else:
                     svg += self.mark(offset_function(i / 100.), self.slide3,
-                                     self.slide2, self.slide1, flip=flip_flag)
+                                     self.slide2, self.slide1)
             else:
                 svg += self.mark(offset_function(i / 100.), self.slide3,
                                  self.slide2,
-                                 self.slide1 + self.slide_offset1,
-                                 flip=flip_flag)
+                                 self.slide1 + self.slide_offset1)
 
         for i in range(1000, 2000, 10):
             if int((i / 200)* 200) == i:
                 svg += self.mark(offset_function(i / 100.), self.slide3,
                                  self.slide2, self.slide1,
-                                 label_function(i / 100.), flip=flip_flag)
+                                 label_function(i / 100.))
             else:
                 svg += self.mark(offset_function(i / 100.), self.slide3,
                                  self.slide2,
-                                 self.slide1 + self.slide_offset1,
-                                 flip=flip_flag)
+                                 self.slide1 + self.slide_offset1)
 
         for i in range(2000, 10050, 50):
             if int((i / 1000)* 1000) == i:
                 if int((i / 100)* 100) == i:
                     svg += self.mark(offset_function(i / 100.), self.slide3,
                                      self.slide2, self.slide1,
-                                     label_function(i / 100.), flip=flip_flag)
+                                     label_function(i / 100.))
                 else:
                     svg += self.mark(offset_function(i / 100.), self.slide3,
-                                     self.slide2, self.slide1,
-                                     flip=flip_flag)
+                                     self.slide2, self.slide1)
             else:
                 svg += self.mark(offset_function(i / 100.), self.slide3,
                                  self.slide2,
-                                 self.slide1 + self.slide_offset1,
-                                 flip=flip_flag)
+                                 self.slide1 + self.slide_offset1)
 
-        svg += self.special_mark(offset_function(math.pi),
+        svg += self.special_mark(offset_function(pi),
                                  self.slide3 + self.slide_offset3, self.slide2,
-                                 self.slide1, 'π', flip=flip_flag)
-        svg += self.special_mark(offset_function(math.e),
+                                 self.slide1, 'π')
+        svg += self.special_mark(offset_function(e),
                                  self.slide3 + self.slide_offset3, self.slide2,
-                                 self.slide1, 'e', flip=flip_flag)
+                                 self.slide1, 'e')
 
         svg += self.footer()
         return svg
 
 
-class A_stator(A_slide):
+class B_stator_generator(A_slide_generator):
     """ Log^2 scale for slide """
-    def __init__(self):
-        self.name = 'A'
-        self.slide1 = SHEIGHT - HTOP1
-        self.slide2 = SHEIGHT - HTOP2
-        self.slide3 = SHEIGHT - HTOP3 + 12
-        self.slide_offset1 = - 5
-        self.slide_offset2 = - 7
-        self.slide_offset3 = 12
-
-        def offset_function(x):
-            return math.log(x, 10) / 2.
-
-        def label_function(x):
-            return x
-
-        self.svg = self.make_slide(self.name, offset_function, label_function)
+    def setup_svg(self):
+        self.setup_stator()
 
 
-class K_slide(C_slide):
+class K_slide_generator(C_slide_generator):
     """ Log^3 scale for slide """
-    def __init__(self):
-        self.name = 'K'
-        self.slide1 = HTOP1
-        self.slide2 = HTOP2
-        self.slide3 = HTOP3
-        self.slide_offset1 = 5
-        self.slide_offset2 = 7
-        self.slide_offset3 = -12
-
-        def offset_function(x):
-            return math.log(x, 10) / 3.
-
-        def label_function(x):
-            return x
-
-        self.svg = self.make_slide(self.name, offset_function, label_function)
-
-
-    def make_slide(self, label, offset_function, label_function, x=None,
-                   flip_flag=False):
+    def make_slide(self, label, offset_function, label_function, min, max,
+                   step):
         """ Generate marks along a slide using passed functions """
 
         svg = ''
-        if x is None:
-            svg += self.header(label)
-        else:
-            svg += self.header(label, x)
+        svg += self.header(label)
 
         for i in range(100, 200, 2):
             if int((i / 20) * 20) == i:
                 svg += self.mark(offset_function(i / 100.), self.slide3,
                                  self.slide2, self.slide1,
-                                 label_function(i / 100.), flip=flip_flag)
+                                 label_function(i / 100.))
             elif int((i / 5) * 5) == i:
                 svg += self.mark(offset_function(i / 100.), self.slide3,
                                  self.slide2,
-                                 self.slide1 + self.slide_offset1,
-                                 flip=flip_flag)
+                                 self.slide1 + self.slide_offset1)
             else:
                 svg += self.mark(offset_function(i / 100.), self.slide3,
                                  self.slide2,
-                                 self.slide1 + self.slide_offset2,
-                                 flip=flip_flag)
+                                 self.slide1 + self.slide_offset2)
 
         for i in range(200, 400, 4):
             if int((i / 50) * 50) == i:
                 svg += self.mark(offset_function(i / 100.), self.slide3,
                                  self.slide2, self.slide1,
-                                 label_function(i / 100.), flip=flip_flag)
+                                 label_function(i / 100.))
             else:
                 svg += self.mark(offset_function(i / 100.), self.slide3,
                                  self.slide2,
-                                 self.slide1 + self.slide_offset1,
-                                 flip=flip_flag)
+                                 self.slide1 + self.slide_offset1)
 
         for i in range(400, 1000, 10):
             if int((i / 20)* 20) == i:
                 if int((i / 100)* 100) == i:
                     svg += self.mark(offset_function(i / 100.), self.slide3,
                                      self.slide2, self.slide1,
-                                     label_function(i / 100.), flip=flip_flag)
+                                     label_function(i / 100.))
                 else:
                     svg += self.mark(offset_function(i / 100.), self.slide3,
-                                     self.slide2, self.slide1, flip=flip_flag)
+                                     self.slide2, self.slide1)
             else:
                 svg += self.mark(offset_function(i / 100.), self.slide3,
                                  self.slide2,
-                                 self.slide1 + self.slide_offset1,
-                                 flip=flip_flag)
+                                 self.slide1 + self.slide_offset1)
 
         for i in range(1000, 2000, 20):
             if int((i / 200)* 200) == i:
                 svg += self.mark(offset_function(i / 100.), self.slide3,
                                  self.slide2, self.slide1,
-                                 label_function(i / 100.), flip=flip_flag)
+                                 label_function(i / 100.))
             else:
                 svg += self.mark(offset_function(i / 100.), self.slide3,
                                  self.slide2,
-                                 self.slide1 + self.slide_offset1,
-                                 flip=flip_flag)
+                                 self.slide1 + self.slide_offset1)
 
         for i in range(2000, 10050, 100):
             if int((i / 1000)* 1000) == i:
                 if int((i / 100)* 100) == i:
                     svg += self.mark(offset_function(i / 100.), self.slide3,
                                      self.slide2, self.slide1,
-                                     label_function(i / 100.), flip=flip_flag)
+                                     label_function(i / 100.))
                 else:
                     svg += self.mark(offset_function(i / 100.), self.slide3,
-                                     self.slide2, self.slide1,
-                                     flip=flip_flag)
+                                     self.slide2, self.slide1)
             else:
                 svg += self.mark(offset_function(i / 100.), self.slide3,
                                  self.slide2,
-                                 self.slide1 + self.slide_offset1,
-                                 flip=flip_flag)
+                                 self.slide1 + self.slide_offset1)
 
         for i in range(11000, 101000, 1000):
             if int((i / 2000)* 2000) == i:
                 if int((i / 20000)* 20000) == i:
                     svg += self.mark(offset_function(i / 100.), self.slide3,
                                      self.slide2, self.slide1,
-                                     label_function(i / 100.), flip=flip_flag)
+                                     label_function(i / 100.))
                 else:
                     svg += self.mark(offset_function(i / 100.), self.slide3,
-                                     self.slide2, self.slide1,
-                                     flip=flip_flag)
+                                     self.slide2, self.slide1)
             else:
                 svg += self.mark(offset_function(i / 100.), self.slide3,
                                  self.slide2,
-                                 self.slide1 + self.slide_offset1,
-                                 flip=flip_flag)
+                                 self.slide1 + self.slide_offset1)
 
-        svg += self.special_mark(offset_function(math.pi),
+        svg += self.special_mark(offset_function(pi),
                                  self.slide3 + self.slide_offset3, self.slide2,
-                                 self.slide1, 'π', flip=flip_flag)
-        svg += self.special_mark(offset_function(math.e),
+                                 self.slide1, 'π')
+        svg += self.special_mark(offset_function(e),
                                  self.slide3 + self.slide_offset3, self.slide2,
-                                 self.slide1, 'e', flip=flip_flag)
+                                 self.slide1, 'e')
 
         svg += self.footer()
         return svg
 
 
-class K_stator(K_slide):
+class K_stator_generator(K_slide_generator):
     """ Log^3 scale for slide """
-    def __init__(self):
-        self.name = 'K'
-        self.slide1 = SHEIGHT - HTOP1
-        self.slide2 = SHEIGHT - HTOP2
-        self.slide3 = SHEIGHT - HTOP3 + 12
-        self.slide_offset1 = - 5
-        self.slide_offset2 = - 7
-        self.slide_offset3 = 12
-
-        def offset_function(x):
-            return math.log(x, 10) / 3.
-
-        def label_function(x):
-            return x
-
-        self.svg = self.make_slide(self.name, offset_function, label_function)
+    def setup_svg(self):
+        self.setup_stator()
 
 
-class S_slide(C_slide):
+class S_slide_generator(C_slide_generator):
     """ Sine scale for slide """
-    def __init__(self):
-        self.name = 'S'
-        self.slide1 = HTOP1
-        self.slide2 = HTOP2
-        self.slide3 = HTOP3
-        self.slide_offset1 = 5
-        self.slide_offset2 = 7
-        self.slide_offset3 = -12
+    def setup_svg(self):
+        self.precision = 0
+        self.setup_slide()
 
-        def offset_function(x):
-            return math.log(10 * math.sin(float(x) * math.pi / 180.), 10)
-
-        def label_function(x):
-            return x
-
-        self.svg = self.make_slide(self.name, offset_function, label_function)
-
-    def mark(self, offset, height3, height2, height1, string=None, flip=False,
-             scale=1.0):
-        """ Plot marks in a range from 1 to 10 along the length of the slide """
-        svg = ''
-        if flip:
-            ln = (log10 - offset) * SCALE * scale + OFFSET
-        else:
-            ln = offset * SCALE * scale + OFFSET
-        if string is not None:
-            svg += '  <text style="font-size:12px;fill:#000000;">\n'
-            svg += '      <tspan\n'
-            svg += '       x="%0.2f"\n' % (ln)
-            svg += '       y="%d"\n' % (height3)
-            svg += '       style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">%d</tspan></text>\n' % (int(string))
-        svg += '  <path\n'
-        svg += '       d="M %0.2f,%d,%0.2f,%d"\n' % (ln, height1, ln, height2)
-        svg += '       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />\n'
-        return svg
-
-    def special_mark(self, offset, height3, height2, height1, string,
-                     flip=False, scale=1.0):
-        """ Plot special marks, e.g., e and pi """
-        svg = ''
-        scale *= float(SWIDTH - 2 * OFFSET) / SCALE
-        if flip:
-            ln = (log10 - offset) * SCALE * scale + OFFSET
-        else:
-            ln = offset * SCALE * scale + OFFSET
-        svg += '  <text style="font-size:12px;fill:#0000ff;">\n'
-        svg += '      <tspan\n'
-        svg += '       x="%0.2f"\n' % (ln)
-        svg += '       y="%d"\n' % (height3)
-        svg += '       style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">%d</tspan></text>\n' % (int(string))
-        svg += '  <path\n'
-        svg += '       d="M %0.2f,%d,%0.2f,%d"\n' % (ln, height1, ln, height2)
-        svg += '       style="fill:none;stroke:#0000ff;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />\n'
-        return svg
-
-    def make_slide(self, label, offset_function, label_function, x=None,
-                   flip_flag=False):
+    def make_slide(self, label, offset_function, label_function, min, max,
+                   step):
         """ Generate marks along a slide using passed functions """
 
         svg = ''
-        if x is None:
-            svg += self.header(label)
-        else:
-            svg += self.header(label, x)
+        svg += self.header(label)
 
-        svg += self.mark(0, self.slide3, self.slide2, self.slide1,
-                         flip=flip_flag)
+        svg += self.mark(0, self.slide3, self.slide2, self.slide1)
 
         for i in range(24, 64):
             if int((i / 4) * 4) == i:
                 svg += self.mark(offset_function(i / 4.), self.slide3,
                                  self.slide2, self.slide1,
-                                 label_function(i / 4.), flip=flip_flag)
+                                 label_function(i / 4.))
                 if int((i / 8) * 8) == i:
                     svg += self.special_mark(offset_function(i / 4.),
                                              self.slide3 + self.slide_offset3,
                                              self.slide2, self.slide1,
-                                             label_function(180 - i / 4.),
-                                             flip=flip_flag)
+                                             str(int(label_function(180 - i / 4.))))
             else:
                 svg += self.mark(offset_function(i / 4.), self.slide3,
                                  self.slide2,
-                                 self.slide1 + self.slide_offset2,
-                                 flip=flip_flag)
+                                 self.slide1 + self.slide_offset2)
 
         for i in range(32, 64):
             if int((i / 4) * 4) == i:
                 svg += self.mark(offset_function(i / 2.), self.slide3,
                                  self.slide2, self.slide1,
-                                 label_function(i / 2.), flip=flip_flag)
+                                 label_function(i / 2.))
                 if int((i / 8) * 8) == i:
                     svg += self.special_mark(offset_function(i / 2.),
                                              self.slide3 + self.slide_offset3,
                                              self.slide2, self.slide1,
-                                             label_function(180 - i / 2.),
-                                             flip=flip_flag)
+                                             str(int(label_function(180 - i / 2.))))
             else:
                 svg += self.mark(offset_function(i / 2.), self.slide3,
                                  self.slide2,
-                                 self.slide1 + self.slide_offset2,
-                                 flip=flip_flag)
+                                 self.slide1 + self.slide_offset2)
 
         for i in range(64, 120, 2):
             if int((i / 4) * 4) == i:
                 svg += self.mark(offset_function(i / 2.), self.slide3,
                                  self.slide2, self.slide1,
-                                 label_function(i / 2.), flip=flip_flag)
+                                 label_function(i / 2.))
                 if int((i / 8) * 8) == i:
                     svg += self.special_mark(offset_function(i / 2.),
                                              self.slide3 + self.slide_offset3,
                                              self.slide2, self.slide1,
-                                             label_function(180 - i / 2.),
-                                             flip=flip_flag)
+                                             str(int(label_function(180 - i / 2.))))
             else:
                 svg += self.mark(offset_function(i / 2.), self.slide3,
                                  self.slide2,
-                                 self.slide1 + self.slide_offset2,
-                                 flip=flip_flag)
+                                 self.slide1 + self.slide_offset2)
 
         for i in range(120, 160, 5):
             if int((i / 10) * 10) == i:
                 svg += self.mark(offset_function(i / 2.), self.slide3,
                                  self.slide2, self.slide1,
-                                 label_function(i / 2.), flip=flip_flag)
+                                 label_function(i / 2.))
                 if int((i / 20) * 20) == i:
                     svg += self.special_mark(offset_function(i / 2.),
                                              self.slide3 + self.slide_offset3,
                                              self.slide2, self.slide1,
-                                             label_function(180 - i / 2.),
-                                             flip=flip_flag)
+                                             str(int(label_function(180 - i / 2.))))
             else:
                 svg += self.mark(offset_function(i / 2.), self.slide3,
                                  self.slide2,
-                                 self.slide1 + self.slide_offset2,
-                                 flip=flip_flag)
+                                 self.slide1 + self.slide_offset2)
 
         for i in range(160, 190, 10):
             if int((i / 20) * 20) == i:
                 svg += self.mark(offset_function(i / 2.), self.slide3,
                                  self.slide2, self.slide1,
-                                 label_function(i / 2.), flip=flip_flag)
+                                 label_function(i / 2.))
             else:
                 svg += self.mark(offset_function(i / 2.), self.slide3,
                                  self.slide2,
-                                 self.slide1 + self.slide_offset2,
-                                 flip=flip_flag)
+                                 self.slide1 + self.slide_offset2)
 
         svg += self.footer()
         return svg
 
 
-class S_stator(S_slide):
+class S_stator_generator(S_slide_generator):
     """ Sine scale for slide """
-    def __init__(self):
-        self.name = 'S'
-        self.slide1 = SHEIGHT - HTOP1
-        self.slide2 = SHEIGHT - HTOP2
-        self.slide3 = SHEIGHT - HTOP3 + 12
-        self.slide_offset1 = - 5
-        self.slide_offset2 = - 7
-        self.slide_offset3 = 12
-
-        def offset_function(x):
-            return math.log(10 * math.sin(float(x) * math.pi / 180.), 10)
-
-        def label_function(x):
-            return x
-
-        self.svg = self.make_slide(self.name, offset_function, label_function)
+    def setup_svg(self):
+        self.precision = 0
+        self.setup_stator()
 
 
-class T_slide(S_slide):
+class T_slide_generator(S_slide_generator):
     """ Tangent scale for slide """
-    def __init__(self):
-        self.name = 'T'
-        self.slide1 = HTOP1
-        self.slide2 = HTOP2
-        self.slide3 = HTOP3
-        self.slide_offset1 = 5
-        self.slide_offset2 = 7
-        self.slide_offset3 = -12
-
-        def offset_function(x):
-            return math.log(10 * math.tan(float(x) * math.pi / 180.), 10)
-
-        def label_function(x):
-            return x
-
-        self.svg = self.make_slide(self.name, offset_function, label_function)
-
-    def make_slide(self, label, offset_function, label_function, x=None,
-                   flip_flag=False):
+    def make_slide(self, label, offset_function, label_function, min, max,
+                   step):
         """ Generate marks along a slide using passed functions """
 
         svg = ''
-        if x is None:
-            svg += self.header(label)
-        else:
-            svg += self.header(label, x)
+        svg += self.header(label)
 
-        svg += self.mark(0, self.slide3, self.slide2, self.slide1,
-                         flip=flip_flag)
+        svg += self.mark(0, self.slide3, self.slide2, self.slide1)
 
         for i in range(23, 181):
             if int((i / 4) * 4) == i:
                 svg += self.mark(offset_function(i / 4.), self.slide3,
                                  self.slide2, self.slide1,
-                                 label_function(i / 4.), flip=flip_flag)
+                                 label_function(i / 4.))
             else:
                 svg += self.mark(offset_function(i / 4.), self.slide3,
                                  self.slide2,
-                                 self.slide1 + self.slide_offset2,
-                                 flip=flip_flag)
+                                 self.slide1 + self.slide_offset2)
 
         svg += self.footer()
         return svg
 
 
-class T_stator(T_slide):
+class T_stator_generator(T_slide_generator):
     """ Tangent scale for slide """
-    def __init__(self):
-        self.name = 'T'
-        self.slide1 = SHEIGHT - HTOP1
-        self.slide2 = SHEIGHT - HTOP2
-        self.slide3 = SHEIGHT - HTOP3 + 12
-        self.slide_offset1 = - 5
-        self.slide_offset2 = - 7
-        self.slide_offset3 = 12
-
-        def offset_function(x):
-            return math.log(10 * math.tan(float(x) * math.pi / 180.), 10)
-
-        def label_function(x):
-            return x
-
-        self.svg = self.make_slide(self.name, offset_function, label_function)
+    def setup_svg(self):
+        self.setup_stator()
 
 
-class L_slide(C_slide):
+class L_slide_generator(C_slide_generator):
     """ Linear scale for slide """
-    def __init__(self):
-        self.name = 'L'
-        self.slide1 = HTOP1
-        self.slide2 = HTOP2
-        self.slide3 = HTOP3
-        self.slide_offset1 = 5
-        self.slide_offset2 = 7
-        self.slide_offset3 = -12
-
-        def offset_function(x):
-            return x
-
-        def label_function(x):
-            return x
-
-        self.svg = self.make_slide(self.name, offset_function, label_function)
-
-    def make_slide(self, label, offset_function, label_function, x=None,
-                   flip_flag=False):
+    def make_slide(self, label, offset_function, label_function, min, max, 
+                   step):
         """ Generate marks along a slide using passed functions """
 
         svg = ''
-        if x is None:
-            svg += self.header(label)
-        else:
-            svg += self.header(label, x)
+        svg += self.header(label)
 
         for i in range(0, 101):
             if int((i / 10) * 10) == i:
                 svg += self.mark(offset_function(i / 100.), self.slide3,
                                  self.slide2, self.slide1,
-                                 label_function(i / 10.), flip=flip_flag)
+                                 label_function(i / 10.))
             elif int((i / 5) * 5) == i:
                 svg += self.mark(offset_function(i / 100.), self.slide3,
                                  self.slide2,
-                                 self.slide1 + self.slide_offset1,
-                                 flip=flip_flag)
+                                 self.slide1 + self.slide_offset1)
             else:
                 svg += self.mark(offset_function(i / 100.), self.slide3,
                                  self.slide2,
-                                 self.slide1 + self.slide_offset2,
-                                 flip=flip_flag)
+                                 self.slide1 + self.slide_offset2)
 
-        svg += self.special_mark(offset_function(math.pi / 10.),
+        svg += self.special_mark(offset_function(pi / 10.),
                                  self.slide3 + self.slide_offset3, self.slide2,
-                                 self.slide1, 'π', flip=flip_flag)
-        svg += self.special_mark(offset_function(math.e / 10.),
+                                 self.slide1, 'π')
+        svg += self.special_mark(offset_function(e / 10.),
                                  self.slide3 + self.slide_offset3, self.slide2,
-                                 self.slide1, 'e', flip=flip_flag)
+                                 self.slide1, 'e')
 
         svg += self.footer()
         return svg
 
 
-class L_stator(L_slide):
+class L_stator_generator(L_slide_generator):
     """ Linear scale for slide """
-    def __init__(self):
-        self.name = 'L'
-        self.slide1 = SHEIGHT - HTOP1
-        self.slide2 = SHEIGHT - HTOP2
-        self.slide3 = SHEIGHT - HTOP3 + 12
-        self.slide_offset1 = - 5
-        self.slide_offset2 = - 7
-        self.slide_offset3 = 12
+    def setup_svg(self):
+        self.setup_stator()
+
+
+# TODO: use definition from CUSTOM array
+class LLn_slide_generator(C_slide_generator):
+    """ Ln scale for slide """
+    def __init__(self, name, offset_text, label_text, min, max, step):
+        self.name = name
+        self.offset_text = offset_text.replace('import','')
+        self.label_text = label_text.replace('import','')
+        self.error_msg = None
+        self.precision = 2
+
+        self.setup_slide()
 
         def offset_function(x):
             return x
 
         def label_function(x):
+            return x * log(10) / 100
+
+        self.svg = self.make_slide(self.name, offset_function, label_function)
+
+    def make_slide(self, label, offset_function, label_function):
+        """ Generate marks along a slide using passed functions """
+
+        svg = ''
+        svg += self.header(label)
+
+        for i in range(0, int(100 * log(10)) + 1):
+            if int((i / 5) * 5) == i:
+                svg += self.mark(offset_function(i / (100. * log(10))),
+                                 self.slide3, self.slide2, self.slide1,
+                                 label_function(i / log(10)))
+            else:
+                svg += self.mark(offset_function(i / (100. * log(10))),
+                                 self.slide3, self.slide2,
+                                 self.slide1 + self.slide_offset2)
+
+        svg += self.mark(offset_function(1),
+                         self.slide3, self.slide2,
+                         self.slide1 + self.slide_offset2)
+
+        svg += self.footer()
+        return svg
+
+
+class LLn_stator_generator(LLn_slide_generator):
+    """ Ln scale for slide """
+    def __init__(self, name, offset_text, label_text, min, max, step):
+        self.name = name
+        self.offset_text = offset_text.replace('import','')
+        self.label_text = label_text.replace('import','')
+        self.error_msg = None
+        self.precision = 2
+
+        self.setup_stator()
+
+        def offset_function(x):
             return x
+
+        def label_function(x):
+            return x * log(10) / 100
 
         self.svg = self.make_slide(self.name, offset_function, label_function)
 
 
-class LL0_slide(C_slide):
-    """ Log Log scale for slide """
-    def __init__(self):
-        self.name = 'LL0'
-        self.slide1 = HTOP1
-        self.slide2 = HTOP2
-        self.slide3 = HTOP3
-        self.slide_offset1 = 5
-        self.slide_offset2 = 7
-        self.slide_offset3 = -12
+class Log_slide_generator(C_slide_generator):
+    """ Ln scale for slide """
+    def setup_svg(self):
+        self.precision = 2
+        self.setup_slide()
 
-        def offset_function(x):
-            return math.log(x, 10)
-
-        def label_function(x):
-            return math.exp(x / 1000.)
-
-        self.svg = self.make_slide(self.name, offset_function, label_function,
-                                   x=10)
-
-    def mark(self, offset, height3, height2, height1, string=None, flip=False,
-             scale=1.0):
-        """ Plot marks in a range from 1 to 10 along the length of the slide """
-        svg = ''
-        if flip:
-            ln = (log10 - offset) * SCALE * scale + OFFSET
-        else:
-            ln = offset * SCALE * scale + OFFSET
-        if string is not None:
-            svg += '  <text style="font-size:12px;fill:#000000;">\n'
-            svg += '      <tspan\n'
-            svg += '       x="%0.2f"\n' % (ln)
-            svg += '       y="%d"\n' % (height3)
-            svg += '       style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">%0.4f</tspan></text>\n' % (string)
-        svg += '  <path\n'
-        svg += '       d="M %0.2f,%d,%0.2f,%d"\n' % (ln, height1, ln, height2)
-        svg += '       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />\n'
-        return svg
-
-    def make_slide(self, label, offset_function, label_function, x=None,
-                   flip_flag=False):
+    def make_slide(self, label, offset_function, label_function, min, max,
+                   step):
         """ Generate marks along a slide using passed functions """
 
         svg = ''
-        if x is None:
-            svg += self.header(label)
-        else:
-            svg += self.header(label, x)
-
-        for i in range(100, 200):
-            if int((i / 10) * 10) == i:
-                svg += self.mark(offset_function(i / 100.), self.slide3,
-                                 self.slide2, self.slide1,
-                                 label_function(i / 100.), flip=flip_flag)
-            elif int((i / 5) * 5) == i:
-                svg += self.mark(offset_function(i / 100.), self.slide3,
-                                 self.slide2,
-                                 self.slide1 + self.slide_offset1,
-                                 flip=flip_flag)
-            else:
-                svg += self.mark(offset_function(i / 100.), self.slide3,
-                                 self.slide2,
-                                 self.slide1 + self.slide_offset2,
-                                 flip=flip_flag)
-
-        for i in range(200, 400, 2):
-            if int((i / 20) * 20) == i:
-                svg += self.mark(offset_function(i / 100.), self.slide3,
-                                 self.slide2, self.slide1,
-                                 label_function(i / 100.), flip=flip_flag)
-            elif int((i / 10) * 10) == i:
-                svg += self.mark(offset_function(i / 100.), self.slide3,
-                                 self.slide2,
-                                 self.slide1 + self.slide_offset1,
-                                 flip=flip_flag)
-            else:
-                svg += self.mark(offset_function(i / 100.), self.slide3,
-                                 self.slide2,
-                                 self.slide1 + self.slide_offset2,
-                                 flip=flip_flag)
-
-        for i in range(400, 1005, 5):
-            if int((i / 50) * 50) == i:
-                svg += self.mark(offset_function(i / 100.), self.slide3,
-                                 self.slide2, self.slide1,
-                                 label_function(i / 100.), flip=flip_flag)
-            elif int((i / 10) * 10) == i:
-                svg += self.mark(offset_function(i / 100.), self.slide3,
-                                 self.slide2,
-                                 self.slide1 + self.slide_offset1,
-                                 flip=flip_flag)
-            else:
-                svg += self.mark(offset_function(i / 100.), self.slide3,
-                                 self.slide2,
-                                 self.slide1 + self.slide_offset2,
-                                 flip=flip_flag)
-
-
-        svg += self.footer()
-        return svg
-
-
-class LL0_stator(LL0_slide):
-    """ Log Log scale for slide """
-    def __init__(self):
-        self.name = 'LL0'
-        self.slide1 = SHEIGHT - HTOP1
-        self.slide2 = SHEIGHT - HTOP2
-        self.slide3 = SHEIGHT - HTOP3 + 12
-        self.slide_offset1 = - 5
-        self.slide_offset2 = - 7
-        self.slide_offset3 = 12
-
-        def offset_function(x):
-            return math.log(x, 10)
-
-        def label_function(x):
-            return math.pow(10, x / 1000.)
-
-        self.svg = self.make_slide(self.name, offset_function, label_function,
-                                   x=10)
-
-
-class LLn_slide(C_slide):
-    """ Ln scale for slide """
-    def __init__(self):
-        self.name = 'LLn'
-        self.slide1 = HTOP1
-        self.slide2 = HTOP2
-        self.slide3 = HTOP3
-        self.slide_offset1 = 5
-        self.slide_offset2 = 7
-        self.slide_offset3 = -12
-
-        def offset_function(x):
-            return x
-
-        def label_function(x):
-            return x * math.log(10) / 100
-
-        self.svg = self.make_slide(self.name, offset_function, label_function,
-                                   x=10)
-
-    def mark(self, offset, height3, height2, height1, string=None, flip=False,
-             scale=1.0):
-        """ Plot marks in a range from 1 to 10 along the length of the slide """
-        svg = ''
-        scale *= float(SWIDTH - 2 * OFFSET) / SCALE
-        if flip:
-            ln = (log10 - offset) * SCALE * scale + OFFSET
-        else:
-            ln = offset * SCALE * scale + OFFSET
-        if string is not None:
-            svg += '  <text style="font-size:12px;fill:#000000;">\n'
-            svg += '      <tspan\n'
-            svg += '       x="%0.2f"\n' % (ln)
-            svg += '       y="%d"\n' % (height3)
-            svg += '       style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">%0.2f</tspan></text>\n' % (string)
-        svg += '  <path\n'
-        svg += '       d="M %0.2f,%d,%0.2f,%d"\n' % (ln, height1, ln, height2)
-        svg += '       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />\n'
-        return svg
-
-    def make_slide(self, label, offset_function, label_function, x=None,
-                   flip_flag=False):
-        """ Generate marks along a slide using passed functions """
-
-        svg = ''
-        if x is None:
-            svg += self.header(label)
-        else:
-            svg += self.header(label, x)
-
-        for i in range(0, int(100 * math.log(10)) + 1):
-            if int((i / 5) * 5) == i:
-                svg += self.mark(offset_function(i / (100. * math.log(10))),
-                                 self.slide3, self.slide2, self.slide1,
-                                 label_function(i / math.log(10)),
-                                 flip=flip_flag)
-            else:
-                svg += self.mark(offset_function(i / (100. * math.log(10))),
-                                 self.slide3, self.slide2,
-                                 self.slide1 + self.slide_offset2,
-                                 flip=flip_flag)
-
-        svg += self.mark(offset_function(1),
-                         self.slide3, self.slide2,
-                         self.slide1 + self.slide_offset2,
-                         flip=flip_flag)
-
-        svg += self.footer()
-        return svg
-
-
-class LLn_stator(LLn_slide):
-    """ Ln scale for slide """
-    def __init__(self):
-        self.name = 'LLn'
-        self.slide1 = SHEIGHT - HTOP1
-        self.slide2 = SHEIGHT - HTOP2
-        self.slide3 = SHEIGHT - HTOP3 + 12
-        self.slide_offset1 = - 5
-        self.slide_offset2 = - 7
-        self.slide_offset3 = 12
-
-        def offset_function(x):
-            return x
-
-        def label_function(x):
-            return x * math.log(10) / 100
-
-        self.svg = self.make_slide(self.name, offset_function, label_function,
-                                   x=10)
-
-
-class Log_slide(LLn_slide):
-    """ Ln scale for slide """
-    def __init__(self):
-        self.name = 'Log'
-        self.slide1 = HTOP1
-        self.slide2 = HTOP2
-        self.slide3 = HTOP3
-        self.slide_offset1 = 5
-        self.slide_offset2 = 7
-        self.slide_offset3 = -12
-
-        def offset_function(x):
-            return math.log(x, 10)
-
-        def label_function(x):
-            return math.log(x, 10)
-
-        self.svg = self.make_slide(self.name, offset_function, label_function,
-                                   x=10)
-
-    def make_slide(self, label, offset_function, label_function, x=None,
-                   flip_flag=False):
-        """ Generate marks along a slide using passed functions """
-
-        svg = ''
-        if x is None:
-            svg += self.header(label)
-        else:
-            svg += self.header(label, x)
+        svg += self.header(label)
 
         for i in range(100, 1010, 10):
             if int((i / 50) * 50) == i:
                 svg += self.mark(offset_function(i / 100.),
                                  self.slide3, self.slide2, self.slide1,
-                                 label_function(i / 100.),
-                                 flip=flip_flag)
+                                 label_function(i / 100.))
             else:
                 svg += self.mark(offset_function(i / 100.),
                                  self.slide3, self.slide2,
-                                 self.slide1 + self.slide_offset2,
-                                 flip=flip_flag)
+                                 self.slide1 + self.slide_offset2)
 
         svg += self.footer()
         return svg
 
 
-class Log_stator(Log_slide):
+class Log_stator_generator(Log_slide_generator):
     """ Log log scale for slide """
-    def __init__(self):
-        self.name = 'Log'
-        self.slide1 = SHEIGHT - HTOP1
-        self.slide2 = SHEIGHT - HTOP2
-        self.slide3 = SHEIGHT - HTOP3 + 12
-        self.slide_offset1 = - 5
-        self.slide_offset2 = - 7
-        self.slide_offset3 = 12
-
-        def offset_function(x):
-            return math.log(x, 10)
-
-        def label_function(x):
-            return math.log(x, 10)
-
-        self.svg = self.make_slide(self.name, offset_function, label_function,
-                                   x=10)
+    def setup_svg(self):
+        self.precision = 2
+        self.setup_stator()
 
 
-class Custom_slide(C_slide):
+class Custom_slide_generator(C_slide_generator):
     """ User-defined scale for slide """
-    def __init__(self, offset_function, label_function, min, max, step):
-        self.name = ''
-        self.slide1 = HTOP1
-        self.slide2 = HTOP2
-        self.slide3 = HTOP3
-        self.slide_offset1 = 5
-        self.slide_offset2 = 7
-        self.slide_offset3 = -12
-
-        self.error_msg = None
-
-        self.svg = self.make_slide(self.name, offset_function, label_function,
-                                   min, max, step)
-
-    def mark(self, offset, height3, height2, height1, string=None, flip=False,
-             scale=1.0):
-        """ Plot marks in a range from 1 to 10 along the length of the slide """
-        svg = ''
-        scale *= float(SWIDTH - 2 * OFFSET) / SCALE
-        if flip:
-            ln = (log10 - offset) * SCALE * scale + OFFSET
-        else:
-            ln = offset * SCALE * scale + OFFSET
-        if string is not None:
-            svg += '  <text style="font-size:12px;fill:#000000;">\n'
-            svg += '      <tspan\n'
-            svg += '       x="%0.2f"\n' % (ln)
-            svg += '       y="%d"\n' % (height3)
-            if type(string) == float:
-                svg += '       style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">%0.2f</tspan></text>\n' % (string)
-            else:
-                svg += '       style="font-size:12px;text-align:center;text-anchor:middle;font-family:Bitstream Vera Sans;">%s</tspan></text>\n' % (str(string))
-        svg += '  <path\n'
-        svg += '       d="M %0.2f,%d,%0.2f,%d"\n' % (ln, height1, ln, height2)
-        svg += '       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1" />\n'
-        return svg
+    def setup_svg(self):
+        self.precision = 2
+        self.setup_slide()
 
     def make_slide(self, label, offset_function, label_function, min, max,
                    step):
@@ -1211,21 +736,11 @@ class Custom_slide(C_slide):
         return svg
 
 
-class Custom_stator(Custom_slide):
+class Custom_stator_generator(Custom_slide_generator):
     """ user-defined scale for slide """
-    def __init__(self, offset_function, label_function, min, max, step):
-        self.name = ''
-        self.slide1 = SHEIGHT - HTOP1
-        self.slide2 = SHEIGHT - HTOP2
-        self.slide3 = SHEIGHT - HTOP3 + 12
-        self.slide_offset1 = - 5
-        self.slide_offset2 = - 7
-        self.slide_offset3 = 12
-
-        self.error_msg = None
-
-        self.svg = self.make_slide(self.name, offset_function, label_function,
-                                   min, max, step)
+    def setup_svg(self):
+        self.precision = 2
+        self.setup_stator()
 
 
 def main():

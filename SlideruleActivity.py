@@ -19,15 +19,13 @@ a specialized slide or stator. But if you would like to add a new slide to
 the toolbar, you need to make changes in three places:
 
 1. In constants.py, you need to add new entries to SLIDE_TABLE,
-STATOR_TABLE, SLIDE_DICTIONARY and STATOR_DICTIONARY so that the
-slides appear in the toolbars.
+STATOR_TABLE, SLIDE_DICTIONARY, STATOR_DICTIONARY and DEFINITIONS so
+that the slides appear in the toolbars.
 
 2. In genslides.py, you need to add new class objects to generate the
 graphics associated with your slide and stator.
 
-3. In window.py, you need to add methods to calculate values for your
-slide and stator.
-
+3. In window.py, you need to import the new class objects from #2.
 """
 
 import pygtk
@@ -68,7 +66,7 @@ from window import SlideRule
 from constants import A_slide, C_slide, CI_slide, K_slide, S_slide, T_slide, \
     L_slide, Log_slide, LLn_slide, UD_slide, D_slide, DI_slide, B_slide, \
     SLIDE_TABLE, STATOR_TABLE, SLIDE_DICTIONARY, STATOR_DICTIONARY, \
-    SWIDTH, SLIDE, STATOR, CUSTOM
+    SWIDTH, SLIDE, STATOR, DEFINITIONS
 
 FA_square = _('square/square root')
 FC_multiply = _('multiply/divide')
@@ -269,7 +267,7 @@ class SlideruleActivity(activity.Activity):
         self.sr.update_results_label()
 
     def set_function_unknown(self):
-        self._function_combo.set_active(FUNCTIONS.index(_UK))
+        self._function_combo.set_active(FUNCTIONS.index(UK_unknown))
 
     def set_slide(self):
         """ Move the top slider onto top layer """
@@ -378,24 +376,24 @@ class SlideruleActivity(activity.Activity):
         """ user-defined scale """
         if slide == SLIDE:
             self.sr.active_slide = self.sr.name_to_slide('custom')
-            for k in _STATOR_DICTIONARY:
-                if _STATOR_DICTIONARY[k] == self.sr.active_stator.name:
+            for k in STATOR_DICTIONARY:
+                if STATOR_DICTIONARY[k] == self.sr.active_stator.name:
                     self._show_slides(UD_slide, k, UK_unknown)
         else:
             self.sr.active_stator = self.sr.name_to_stator('custom2')
-            for k in _SLIDE_DICTIONARY:
-                if _SLIDE_DICTIONARY[k] == self.sr.active_slide.name:
+            for k in SLIDE_DICTIONARY:
+                if SLIDE_DICTIONARY[k] == self.sr.active_slide.name:
                     self._show_slides(k, UD_slide, UK_unknown)
         self.sr.align_slides()
 
     def _set_custom_entries(self, slide, name):
-        if not self.custom_slides[slide] and name in CUSTOM:
-            self._offset_function[slide].set_text(CUSTOM[name][0])
-            self._calculate_function[slide].set_text(CUSTOM[name][1])
-            self._label_function[slide].set_text(CUSTOM[name][2])
-            self._domain_min[slide].set_text(CUSTOM[name][3])
-            self._domain_max[slide].set_text(CUSTOM[name][4])
-            self._step_size[slide].set_text(CUSTOM[name][5])
+        if not self.custom_slides[slide] and name in DEFINITIONS:
+            self._offset_function[slide].set_text(DEFINITIONS[name][0])
+            self._calculate_function[slide].set_text(DEFINITIONS[name][1])
+            self._label_function[slide].set_text(DEFINITIONS[name][2])
+            self._domain_min[slide].set_text(DEFINITIONS[name][3])
+            self._domain_max[slide].set_text(DEFINITIONS[name][4])
+            self._step_size[slide].set_text(DEFINITIONS[name][5])
 
     # toolbar button callbacks
     def realign_cb(self, arg=None):
@@ -455,21 +453,22 @@ class SlideruleActivity(activity.Activity):
     def _custom_slide_cb(self, arg=None):
         """ Create custom slide from parameters in entry widgets """
         self.custom_slides[SLIDE] = True
-        self._customize(SLIDE)
+        self._customize('custom', SLIDE)
 
     def _custom_stator_cb(self, arg=None):
         """ Create custom stator from parameters in entry widgets """
         self.custom_slides[STATOR] = True
-        self._customize(STATOR)
+        self._customize('custom2', STATOR)
 
-    def _customize(self, slide):
+    def _customize(self, name, slide):
         self.custom_slides[slide] = True
-        self.sr.make_custom_slide(self._offset_function[slide].get_text(),
-                                  self._calculate_function[slide].get_text(),
-                                  self._label_function[slide].get_text(),
-                                  self._domain_min[slide].get_text(),
-                                  self._domain_max[slide].get_text(),
-                                  self._step_size[slide].get_text(), slide)
+        self.sr.make_slide(name, slide, custom_strings=\
+                               [self._offset_function[slide].get_text(),
+                                self._calculate_function[slide].get_text(),
+                                self._label_function[slide].get_text(),
+                                self._domain_min[slide].get_text(),
+                                self._domain_max[slide].get_text(),
+                                self._step_size[slide].get_text()])
 
     def _dummy_cb(self, arg=None):
         return
@@ -563,17 +562,20 @@ class SlideruleActivity(activity.Activity):
         ENTRY_TOOLTIP = [_('create custom slide'), _('create custom stator')]
         ENTRY_CALLBACK = [self._custom_slide_cb, self._custom_stator_cb]
         for i in range(2):
-            self._offset_function.append(_entry_factory(CUSTOM[ENTRY[i]][0],
-                ENTRY_TOOLBAR[i], _('position function')))
-            self._calculate_function.append(_entry_factory(CUSTOM[ENTRY[i]][1],
-                ENTRY_TOOLBAR[i], _('results function')))
-            self._label_function.append(_entry_factory(CUSTOM[ENTRY[i]][2],
-                ENTRY_TOOLBAR[i], _('label function')))
-            self._domain_min.append(_entry_factory(CUSTOM[ENTRY[i]][3],
+            self._offset_function.append(_entry_factory(
+                    DEFINITIONS[ENTRY[i]][0],
+                    ENTRY_TOOLBAR[i], _('position function')))
+            self._calculate_function.append(_entry_factory(
+                    DEFINITIONS[ENTRY[i]][1],
+                    ENTRY_TOOLBAR[i], _('results function')))
+            self._label_function.append(_entry_factory(
+                    DEFINITIONS[ENTRY[i]][2],
+                    ENTRY_TOOLBAR[i], _('label function')))
+            self._domain_min.append(_entry_factory(DEFINITIONS[ENTRY[i]][3],
                 ENTRY_TOOLBAR[i], _('domain minimum'), max=4))
-            self._domain_max.append(_entry_factory(CUSTOM[ENTRY[i]][4],
+            self._domain_max.append(_entry_factory(DEFINITIONS[ENTRY[i]][4],
                 ENTRY_TOOLBAR[i], _('domain maximum'), max=4))
-            self._step_size.append(_entry_factory(CUSTOM[ENTRY[i]][5],
+            self._step_size.append(_entry_factory(DEFINITIONS[ENTRY[i]][5],
                 ENTRY_TOOLBAR[i], _('step size'), max=4))
             self.custom.append(_button_factory(ENTRY_BUTTON[i],
                 ENTRY_TOOLTIP[i], ENTRY_CALLBACK[i], ENTRY_TOOLBAR[i]))

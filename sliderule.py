@@ -169,7 +169,7 @@ class SlideruleMain:
     def _l_cb(self, widget):
         self.hide_all()
         self.sr.active_slide = self.sr.name_to_slide('L')
-        self.sr.active_stator = self.sr.name_to_stator('D')
+        self.sr.active_stator = self.sr.name_to_stator('L2')
         self._show()
         return True
 
