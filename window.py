@@ -111,11 +111,11 @@ class SlideRule():
         self.scale = 1
 
         self.error_msg = None
-        self.results_function = [None, None]
+        self.result_function = [None, None]
         self.label_function = [None, None]
 
         _logger.debug("creating slides, stators, and reticule")
-        self.results_label = Stator(self.sprites, self.path, 'label',
+        self.result_label = Stator(self.sprites, self.path, 'label',
                                         int((self.width - 600) / 2),
                                         SCREENOFFSET + 4 * SHEIGHT,
                                         800, SHEIGHT)
@@ -134,7 +134,7 @@ class SlideRule():
         self.active_stator = self.name_to_stator('D')
 
         self.update_slide_labels()
-        self.update_results_label()
+        self.update_result_label()
 
         self.press = None
         self.last = None
@@ -185,12 +185,12 @@ class SlideRule():
         elif k == 'r':
             self.reticule.move(150, self.reticule.spr.get_xy()[1])
             self.update_slide_labels()
-            self.update_results_label()
+            self.update_result_label()
         elif k in ['Down', 'v']:
             self.parent.realign_cb()
             self.reticule.move(150, self.reticule.spr.get_xy()[1])
             self.update_slide_labels()
-            self.update_results_label()
+            self.update_result_label()
         return True
 
     def _process_numeric_input(self, sprite, keyname):
@@ -251,25 +251,25 @@ class SlideRule():
             exec my_min in globals(), userdefined
             return userdefined.values()[0]()
         except OverflowError, e:
-            self.results_label.spr.labels[0] = _('Overflow Error') + \
+            self.result_label.spr.labels[0] = _('Overflow Error') + \
                 ': ' + str(e)
-            self.results_label.draw(1000)
+            self.result_label.draw(1000)
         except NameError, e:
-            self.results_label.spr.labels[0] = _('Name Error') + ': ' + str(e)
-            self.results_label.draw(1000)
+            self.result_label.spr.labels[0] = _('Name Error') + ': ' + str(e)
+            self.result_label.draw(1000)
         except ZeroDivisionError, e:
-            self.results_label.spr.labels[0] = _('Zero-division Error') + \
+            self.result_label.spr.labels[0] = _('Zero-division Error') + \
                 ': ' + str(e)
-            self.results_label.draw(1000)
+            self.result_label.draw(1000)
         except TypeError, e:
-            self.results_label.spr.labels[0] = _('Type Error') + ': ' + str(e)
-            self.results_label.draw(1000)
+            self.result_label.spr.labels[0] = _('Type Error') + ': ' + str(e)
+            self.result_label.draw(1000)
         except ValueError, e:
-            self.results_label.spr.labels[0] = _('Type Error') + ': ' + str(e)
-            self.results_label.draw(1000)
+            self.result_label.spr.labels[0] = _('Type Error') + ': ' + str(e)
+            self.result_label.draw(1000)
         except SyntaxError, e:
-            self.results_label.spr.labels[0] = _('Syntax Error') + ': ' + str(e)
-            self.results_label.draw(1000)
+            self.result_label.spr.labels[0] = _('Syntax Error') + ': ' + str(e)
+            self.result_label.draw(1000)
         except:
             traceback.print_exc()
         return None
@@ -277,42 +277,42 @@ class SlideRule():
     def make_slide(self, name, slide, custom_strings=None):
         """ Create custom slide and stator from text entered on toolbar. """
         if custom_strings is not None:
-            results = self._process_text_field(custom_strings[FMIN])
+            result = self._process_text_field(custom_strings[FMIN])
         else:
-            results = self._process_text_field(DEFINITIONS[name][FMIN])
-        if results is None:
+            result = self._process_text_field(DEFINITIONS[name][FMIN])
+        if result is None:
             return
         try:
-            min_value = float(results)
+            min_value = float(result)
         except ValueError, e:
-            self.results_label.spr.labels[0] = _('Value Error') + ': ' + str(e)
-            self.results_label.draw(1000)
+            self.result_label.spr.labels[0] = _('Value Error') + ': ' + str(e)
+            self.result_label.draw(1000)
             return
 
         if custom_strings is not None:
-            results = self._process_text_field(custom_strings[FMAX])
+            result = self._process_text_field(custom_strings[FMAX])
         else:
-            results = self._process_text_field(DEFINITIONS[name][FMAX])
-        if results is None:
+            result = self._process_text_field(DEFINITIONS[name][FMAX])
+        if result is None:
             return
         try:
-            max_value = float(results)
+            max_value = float(result)
         except ValueError:
-            self.results_label.spr.labels[0] = _('Value Error') + ': ' + str(e)
-            self.results_label.draw(1000)
+            self.result_label.spr.labels[0] = _('Value Error') + ': ' + str(e)
+            self.result_label.draw(1000)
             return
 
         if custom_strings is not None:
-            results = self._process_text_field(custom_strings[FSTEP])
+            result = self._process_text_field(custom_strings[FSTEP])
         else:
-            results = self._process_text_field(DEFINITIONS[name][FSTEP])
-        if results is None:
+            result = self._process_text_field(DEFINITIONS[name][FSTEP])
+        if result is None:
             return
         try:
-            step_value = float(results)
+            step_value = float(result)
         except ValueError:
-            self.results_label.spr.labels[0] = _('Value Error') + ': ' + str(e)
-            self.results_label.draw(1000)
+            self.result_label.spr.labels[0] = _('Value Error') + ': ' + str(e)
+            self.result_label.draw(1000)
             return
 
         if custom_strings is not None:
@@ -327,10 +327,10 @@ class SlideRule():
 
         if name == 'custom' or name == 'custom2':
             if custom_strings is not None:
-                self.results_function[slide] = custom_strings[FRESULT]
+                self.result_function[slide] = custom_strings[FRESULT]
                 self.label_function[slide] = custom_strings[FDISPLAY]
             else:
-                self.results_function[slide] = DEFINITIONS[name][FRESULT]
+                self.result_function[slide] = DEFINITIONS[name][FRESULT]
                 self.label_function[slide] = DEFINITIONS[name][FDISPLAY]
 
         if slide == SLIDE:
@@ -341,8 +341,8 @@ class SlideRule():
                             label_string, min_value, max_value,
                             step_value)
             if custom_slide.error_msg is not None:
-                self.results_label.spr.set_label(custom_slide.error_msg)
-                self.results_label.draw(1000)
+                self.result_label.spr.set_label(custom_slide.error_msg)
+                self.result_label.draw(1000)
 
             if self.name_to_slide(name) is not None and \
                self.name_to_slide(name).name == name:
@@ -387,12 +387,12 @@ class SlideRule():
             self.parent.show_u(slide)
 
         if slide == SLIDE and custom_slide.error_msg is not None:
-            self.results_label.spr.set_label(custom_slide.error_msg)
-            self.results_label.draw(1000)
+            self.result_label.spr.set_label(custom_slide.error_msg)
+            self.result_label.draw(1000)
 
         if slide == STATOR and custom_stator.error_msg is not None:
-            self.results_label.spr.set_label(custom_stator.error_msg)
-            self.results_label.draw(1000)
+            self.result_label.spr.set_label(custom_stator.error_msg)
+            self.result_label.draw(1000)
         
     def name_to_slide(self, name):
         for slide in self.slides:
@@ -454,14 +454,14 @@ class SlideRule():
         self.reticule.move_relative(
             self._calc_dx_from_value(value, self.active_slide.name, rx), 0)
         self.update_slide_labels()
-        self.update_results_label()
+        self.update_result_label()
 
     def _move_reticule_to_stator_value(self, value):
         rx = self.reticule.spr.get_xy()[0] - self.active_stator.spr.get_xy()[0]
         self.reticule.move_relative(
             self._calc_dx_from_value(value, self.active_stator.name, rx), 0)
         self.update_slide_labels()
-        self.update_results_label()
+        self.update_result_label()
 
     def _move_slide_to_stator_value(self, value):
         rx = self.active_slide.spr.get_xy()[0] - \
@@ -469,7 +469,7 @@ class SlideRule():
         self.active_slide.move_relative(
             self._calc_dx_from_value(value, self.active_stator.name, rx), 0)
         self.update_slide_labels()
-        self.update_results_label()
+        self.update_result_label()
 
     def _calc_dx_from_value(self, value, name, rx):
         if name in ['C', 'D']:
@@ -516,7 +516,7 @@ class SlideRule():
         elif self.sprite_in_slides(sprite):
             self.find_slide(sprite).move_relative(dx, 0)
         self.update_slide_labels()
-        self.update_results_label()
+        self.update_result_label()
 
     def _update_top(self, function):
         v_left = function()
@@ -551,10 +551,10 @@ class SlideRule():
             return True
         self.last = self.press
         self.press = None
-        self.update_results_label()
+        self.update_result_label()
 
-    def update_results_label(self):
-        """ Update toolbar label with results of calculation. """
+    def update_result_label(self):
+        """ Update toolbar label with result of calculation. """
         s = ''
         if self.active_stator.name == 'D':
             dx = self.name_to_stator('D').spr.get_xy()[0]
@@ -632,9 +632,9 @@ class SlideRule():
                 s = self.error_msg
             else:
                 s = ''
-            self.results_label.draw(1000)
+            self.result_label.draw(1000)
 
-        self.results_label.spr.set_label(s)
+        self.result_label.spr.set_label(s)
 
     def _top_slide_offset(self, x):
         """ Calcualate the offset between the top and bottom slides """
@@ -671,12 +671,12 @@ class SlideRule():
         self.error_msg = None
         
         if name in ['custom', 'custom2']:
-            my_results = "def f(x): return " + \
-                self.results_function[slide].replace('import','')
+            my_result = "def f(x): return " + \
+                self.result_function[slide].replace('import','')
             my_label = "def f(x): return " + \
                 self.label_function[slide].replace('import','')
         else:
-            my_results = "def f(x): return " + DEFINITIONS[name][FRESULT]
+            my_result = "def f(x): return " + DEFINITIONS[name][FRESULT]
             my_label = "def f(x): return " + DEFINITIONS[name][FDISPLAY]
 
         # Some slides handle wrap-around
@@ -702,8 +702,8 @@ class SlideRule():
 
         userdefined = {}
         try:
-            exec my_results in globals(), userdefined
-            results = userdefined.values()[0]((float(dx) / SCALE) * rescale) +\
+            exec my_result in globals(), userdefined
+            result = userdefined.values()[0](float(dx) / SCALE) * rescale +\
                 offset
         except OverflowError, e:
             self.error_msg = _('Overflow Error') + ': ' + str(e)
@@ -730,19 +730,19 @@ class SlideRule():
         # Some special cases to fine-tune the label display precision
         precision = 2
         if name in ['A', 'B', 'K', 'K2']:
-            if results > 50:
+            if result > 50:
                 precision = 1
         elif name in ['S', 'S2']:
-            if results > 60:
+            if result > 60:
                 precision = 1
         if name in ['K', 'K2']:
-            if results > 500:
+            if result > 500:
                 precision = 0
 
         userdefined = {}
         try:
             exec my_label in globals(), userdefined
-            return round(userdefined.values()[0](results), precision)
+            return round(userdefined.values()[0](result), precision)
         except OverflowError, e:
             self.error_msg = _('Overflow Error') + ': ' + str(e)
         except NameError, e:

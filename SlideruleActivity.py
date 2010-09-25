@@ -222,7 +222,7 @@ class SlideruleActivity(activity.Activity):
             self.sr.reticule.move(int(self.metadata['R']),
                                   self.sr.reticule.spr.get_xy()[1])
         self.sr.update_slide_labels()
-        self.sr.update_results_label()
+        self.sr.update_result_label()
 
     def write_file(self, file_path):
         """ Write the slide positions to the Journal """
@@ -264,7 +264,7 @@ class SlideruleActivity(activity.Activity):
         self.set_stator()
         self._function_combo.set_active(FUNCTIONS.index(function))
         self.sr.update_slide_labels()
-        self.sr.update_results_label()
+        self.sr.update_result_label()
 
     def set_function_unknown(self):
         self._function_combo.set_active(FUNCTIONS.index(UK_unknown))
@@ -408,7 +408,7 @@ class SlideruleActivity(activity.Activity):
         if function is not None:
             function()
         self.sr.update_slide_labels()
-        self.sr.update_results_label()
+        self.sr.update_result_label()
 
     def _function_combo_cb(self, arg=None):
         """ Read value from predefined-functions combo box """
@@ -435,7 +435,7 @@ class SlideruleActivity(activity.Activity):
             self._function_combo.set_active(FUNCTIONS.index(UK_unknown))
             self.set_slide()
             self.sr.update_slide_labels()
-            self.sr.update_results_label()
+            self.sr.update_result_label()
 
     def _stator_combo_cb(self, arg=None):
         """ Read value from stator combo box """
@@ -448,7 +448,7 @@ class SlideruleActivity(activity.Activity):
             self._function_combo.set_active(FUNCTIONS.index(UK_unknown))
             self.set_stator()
             self.sr.update_slide_labels()
-            self.sr.update_results_label()
+            self.sr.update_result_label()
 
     def _custom_slide_cb(self, arg=None):
         """ Create custom slide from parameters in entry widgets """
@@ -567,7 +567,7 @@ class SlideruleActivity(activity.Activity):
                     ENTRY_TOOLBAR[i], _('position function')))
             self._calculate_function.append(_entry_factory(
                     DEFINITIONS[ENTRY[i]][1],
-                    ENTRY_TOOLBAR[i], _('results function')))
+                    ENTRY_TOOLBAR[i], _('result function')))
             self._label_function.append(_entry_factory(
                     DEFINITIONS[ENTRY[i]][2],
                     ENTRY_TOOLBAR[i], _('label function')))
