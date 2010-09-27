@@ -221,16 +221,7 @@ class SlideRule():
             else:
                 newnum = oldnum + keyname
         elif keyname == 'Return':
-            sprite.set_label(newnum)
-            try:
-                if sprite == self.reticule.tabs[TOP].spr:
-                    self._move_reticule_to_slide_value(float(newnum))
-                elif sprite == self.reticule.tabs[BOTTOM].spr:
-                    self._move_reticule_to_stator_value(float(newnum))
-                else:
-                    self._move_slide_to_stator_value(float(newnum))
-            except TypeError:
-                sprite.set_label('NaN')
+            self.enter_value(sprite, newnum)
             return
         else:
             newnum = oldnum
@@ -242,6 +233,22 @@ class SlideRule():
             except ValueError, e:
                 newnum = oldnum
         sprite.set_label(newnum + CURSOR)
+
+    def enter_value(self, sprite, value):
+        if sprite is None:
+            return
+        sprite.set_label(value)
+        try:
+            if sprite == self.reticule.tabs[TOP].spr:
+                self._move_reticule_to_slide_value(float(value))
+            elif sprite == self.reticule.tabs[BOTTOM].spr:
+                self._move_reticule_to_stator_value(float(value))
+            else:
+                self._move_slide_to_stator_value(float(value))
+        except TypeError:
+            sprite.set_label('NaN')
+        return
+
 
     def _process_text_field(self, text_field):
         """ Process input from numeric text fields: could be a function. """

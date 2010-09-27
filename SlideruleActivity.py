@@ -44,8 +44,8 @@ except ImportError:
 
 if _have_toolbox:
     from sugar.bundle.activitybundle import ActivityBundle
-    from sugar.activity.widgets import ActivityToolbarButton
-    from sugar.activity.widgets import StopButton
+    from sugar.activity.widgets import ActivityToolbarButton, StopButton, \
+        EditToolbar
     from sugar.graphics.toolbarbox import ToolbarButton
 
 from sugar.graphics.combobox import ComboBox
@@ -473,11 +473,29 @@ class SlideruleActivity(activity.Activity):
     def _dummy_cb(self, arg=None):
         return
 
+    def _copy_cb(self, arg=None):
+        """ Copy a number to the clipboard from the active slide. """
+        clipBoard = gtk.Clipboard()
+        if self.sr.last is not None:
+            data = self.sr.last.labels[0]
+        if data is not None:
+            clipBoard.set_text(str(data))
+        return
+
+    def _paste_cb(self, arg=None):
+        """ Paste a number from the clipboard to the active slide. """
+        clipBoard = gtk.Clipboard()
+        text = clipBoard.wait_for_text()
+        if text is not None:
+            self.sr.enter_value(self.sr.last, text)
+        return
+
     def _setup_toolbars(self, have_toolbox):
         """ Setup the toolbars.. """
         project_toolbar = gtk.Toolbar()
         custom_slide_toolbar = gtk.Toolbar()
         custom_stator_toolbar = gtk.Toolbar()
+        edit_toolbar = gtk.Toolbar()
 
         # no sharing
         self.max_participants = 1
@@ -511,6 +529,13 @@ class SlideruleActivity(activity.Activity):
             toolbox.toolbar.insert(custom_stator_toolbar_button, -1)
             custom_stator_toolbar_button.show()
 
+            edit_toolbar_button = ToolbarButton(label=_('Edit'),
+                                                page=edit_toolbar,
+                                                icon_name='toolbar-edit')
+            edit_toolbar_button.show()
+            toolbox.toolbar.insert(edit_toolbar_button, -1)
+            edit_toolbar_button.show()
+
             self.set_toolbar_box(toolbox)
             toolbox.show()
             toolbar = toolbox.toolbar
@@ -522,6 +547,7 @@ class SlideruleActivity(activity.Activity):
             toolbox.add_toolbar(_('Project'), project_toolbar)
             toolbox.add_toolbar(_('Custom slide'), custom_slide_toolbar)
             toolbox.add_toolbar(_('Custom stator'), custom_stator_toolbar)
+            toolbox.add_toolbar(_('Edit'), edit_toolbar)
             toolbox.show()
             toolbox.set_current_toolbar(1)
             toolbar = project_toolbar
@@ -580,6 +606,11 @@ class SlideruleActivity(activity.Activity):
             self.custom.append(_button_factory(ENTRY_BUTTON[i],
                 ENTRY_TOOLTIP[i], ENTRY_CALLBACK[i], ENTRY_TOOLBAR[i]))
 
+        copy = _button_factory('edit-copy', _('Copy'), self._copy_cb,
+                           edit_toolbar_button, accelerator='<Ctrl>c')
+        paste = _button_factory('edit-paste', _('Paste'), self._paste_cb,
+                            edit_toolbar_button, accelerator='<Ctrl>v')
+
         if have_toolbox:
             _separator_factory(toolbox.toolbar, False, True)
 
@@ -587,4 +618,7 @@ class SlideruleActivity(activity.Activity):
             stop_button.props.accelerator = '<Ctrl>q'
             toolbox.toolbar.insert(stop_button, -1)
             stop_button.show()
+            # workaround to #2050
+            edit_toolbar_button.set_expanded(True)
+            # start with project toolbar enabled
             project_toolbar_button.set_expanded(True)
