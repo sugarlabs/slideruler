@@ -476,7 +476,9 @@ class SlideruleActivity(activity.Activity):
     def _copy_cb(self, arg=None):
         """ Copy a number to the clipboard from the active slide. """
         clipBoard = gtk.Clipboard()
-        if self.sr.last is not None and self.sr.last.labels[0] is not None:
+        if self.sr.last is not None and \
+           self.sr.last.labels is not None and \
+           self.sr.last.labels[0] is not None:
             clipBoard.set_text(self.sr.last.labels[0])
         return
 

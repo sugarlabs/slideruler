@@ -556,7 +556,12 @@ class SlideRule():
     def _button_release_cb(self, win, event):
         if self.press == None:
             return True
-        self.last = self.press
+        if self.press == self.active_slide.spr:
+            self.last = self.active_slide.tabs[LEFT].spr
+        elif self.press == self.active_stator.spr:
+            self.last = None
+        else:
+            self.last = self.press
         self.press = None
         self.update_result_label()
 

@@ -150,7 +150,7 @@ class Tab():
     def __init__(self, sprites, path, name, x, y, w, h):
         self.spr = Sprite(sprites, x, y, file_to_pixbuf(path, name, w, h))
         self.spr.label = "1.0"
-
+        self.name = name
 
 def file_to_pixbuf(path, name, w, h):
     """ Load pixbuf from a file. """
