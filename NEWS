@@ -1,6 +1,7 @@
 19
 
 * simpler definition of linear slide
+* copy/paste values to/from clipboard
 * major refactoring to make modifcation of the code easier
 
 18
