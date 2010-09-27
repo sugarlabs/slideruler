@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-09-24 21:37-0400\n"
+"POT-Creation-Date: 2010-09-27 10:23-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -99,73 +99,86 @@ msgstr ""
 msgid "natural log"
 msgstr ""
 
-#: /home/walter/Desktop/sliderule/SlideruleActivity.py:522
-msgid "Project"
-msgstr ""
-
-#: /home/walter/Desktop/sliderule/SlideruleActivity.py:523
-msgid "Custom slide"
-msgstr ""
-
-#: /home/walter/Desktop/sliderule/SlideruleActivity.py:524
-msgid "Custom stator"
-msgstr ""
-
-#: /home/walter/Desktop/sliderule/SlideruleActivity.py:537
-msgid "select function"
-msgstr ""
-
-#: /home/walter/Desktop/sliderule/SlideruleActivity.py:538
-msgid "active slide"
-msgstr ""
-
-#: /home/walter/Desktop/sliderule/SlideruleActivity.py:541
-msgid "select slide"
-msgstr ""
-
-#: /home/walter/Desktop/sliderule/SlideruleActivity.py:542
-msgid "active stator"
-msgstr ""
-
-#: /home/walter/Desktop/sliderule/SlideruleActivity.py:545
-msgid "select stator"
+#: /home/walter/Desktop/sliderule/SlideruleActivity.py:532
+#: /home/walter/Desktop/sliderule/SlideruleActivity.py:550
+msgid "Edit"
 msgstr ""
 
 #: /home/walter/Desktop/sliderule/SlideruleActivity.py:547
+msgid "Project"
+msgstr ""
+
+#: /home/walter/Desktop/sliderule/SlideruleActivity.py:548
+msgid "Custom slide"
+msgstr ""
+
+#: /home/walter/Desktop/sliderule/SlideruleActivity.py:549
+msgid "Custom stator"
+msgstr ""
+
+#: /home/walter/Desktop/sliderule/SlideruleActivity.py:563
+msgid "select function"
+msgstr ""
+
+#: /home/walter/Desktop/sliderule/SlideruleActivity.py:564
+msgid "active slide"
+msgstr ""
+
+#: /home/walter/Desktop/sliderule/SlideruleActivity.py:567
+msgid "select slide"
+msgstr ""
+
+#: /home/walter/Desktop/sliderule/SlideruleActivity.py:568
+msgid "active stator"
+msgstr ""
+
+#: /home/walter/Desktop/sliderule/SlideruleActivity.py:571
+msgid "select stator"
+msgstr ""
+
+#: /home/walter/Desktop/sliderule/SlideruleActivity.py:573
 #: /home/walter/Desktop/sliderule/sliderule.py:73
 msgid "realign slides"
 msgstr ""
 
-#: /home/walter/Desktop/sliderule/SlideruleActivity.py:562
+#: /home/walter/Desktop/sliderule/SlideruleActivity.py:588
 msgid "create custom slide"
 msgstr ""
 
-#: /home/walter/Desktop/sliderule/SlideruleActivity.py:562
+#: /home/walter/Desktop/sliderule/SlideruleActivity.py:588
 msgid "create custom stator"
 msgstr ""
 
-#: /home/walter/Desktop/sliderule/SlideruleActivity.py:567
+#: /home/walter/Desktop/sliderule/SlideruleActivity.py:593
 msgid "position function"
 msgstr ""
 
-#: /home/walter/Desktop/sliderule/SlideruleActivity.py:570
+#: /home/walter/Desktop/sliderule/SlideruleActivity.py:596
 msgid "result function"
 msgstr ""
 
-#: /home/walter/Desktop/sliderule/SlideruleActivity.py:573
+#: /home/walter/Desktop/sliderule/SlideruleActivity.py:599
 msgid "label function"
 msgstr ""
 
-#: /home/walter/Desktop/sliderule/SlideruleActivity.py:575
+#: /home/walter/Desktop/sliderule/SlideruleActivity.py:601
 msgid "domain minimum"
 msgstr ""
 
-#: /home/walter/Desktop/sliderule/SlideruleActivity.py:577
+#: /home/walter/Desktop/sliderule/SlideruleActivity.py:603
 msgid "domain maximum"
 msgstr ""
 
-#: /home/walter/Desktop/sliderule/SlideruleActivity.py:579
+#: /home/walter/Desktop/sliderule/SlideruleActivity.py:605
 msgid "step size"
+msgstr ""
+
+#: /home/walter/Desktop/sliderule/SlideruleActivity.py:609
+msgid "Copy"
+msgstr ""
+
+#: /home/walter/Desktop/sliderule/SlideruleActivity.py:611
+msgid "Paste"
 msgstr ""
 
 #: /home/walter/Desktop/sliderule/sliderule.py:41
@@ -200,46 +213,46 @@ msgstr ""
 msgid "T"
 msgstr ""
 
-#: /home/walter/Desktop/sliderule/window.py:254
-#: /home/walter/Desktop/sliderule/window.py:709
-#: /home/walter/Desktop/sliderule/window.py:747
+#: /home/walter/Desktop/sliderule/window.py:261
+#: /home/walter/Desktop/sliderule/window.py:716
+#: /home/walter/Desktop/sliderule/window.py:754
 #: /home/walter/Desktop/sliderule/genslides.py:720
 msgid "Overflow Error"
 msgstr ""
 
-#: /home/walter/Desktop/sliderule/window.py:258
-#: /home/walter/Desktop/sliderule/window.py:712
-#: /home/walter/Desktop/sliderule/window.py:749
+#: /home/walter/Desktop/sliderule/window.py:265
+#: /home/walter/Desktop/sliderule/window.py:719
+#: /home/walter/Desktop/sliderule/window.py:756
 #: /home/walter/Desktop/sliderule/genslides.py:722
 msgid "Name Error"
 msgstr ""
 
-#: /home/walter/Desktop/sliderule/window.py:261
-#: /home/walter/Desktop/sliderule/window.py:715
-#: /home/walter/Desktop/sliderule/window.py:751
+#: /home/walter/Desktop/sliderule/window.py:268
+#: /home/walter/Desktop/sliderule/window.py:722
+#: /home/walter/Desktop/sliderule/window.py:758
 msgid "Zero-division Error"
 msgstr ""
 
-#: /home/walter/Desktop/sliderule/window.py:265
-#: /home/walter/Desktop/sliderule/window.py:268
-#: /home/walter/Desktop/sliderule/window.py:718
-#: /home/walter/Desktop/sliderule/window.py:721
-#: /home/walter/Desktop/sliderule/window.py:753
-#: /home/walter/Desktop/sliderule/window.py:755
+#: /home/walter/Desktop/sliderule/window.py:272
+#: /home/walter/Desktop/sliderule/window.py:275
+#: /home/walter/Desktop/sliderule/window.py:725
+#: /home/walter/Desktop/sliderule/window.py:728
+#: /home/walter/Desktop/sliderule/window.py:760
+#: /home/walter/Desktop/sliderule/window.py:762
 #: /home/walter/Desktop/sliderule/genslides.py:726
 msgid "Type Error"
 msgstr ""
 
-#: /home/walter/Desktop/sliderule/window.py:271
-#: /home/walter/Desktop/sliderule/window.py:724
-#: /home/walter/Desktop/sliderule/window.py:757
+#: /home/walter/Desktop/sliderule/window.py:278
+#: /home/walter/Desktop/sliderule/window.py:731
+#: /home/walter/Desktop/sliderule/window.py:764
 #: /home/walter/Desktop/sliderule/genslides.py:730
 msgid "Syntax Error"
 msgstr ""
 
-#: /home/walter/Desktop/sliderule/window.py:288
-#: /home/walter/Desktop/sliderule/window.py:301
-#: /home/walter/Desktop/sliderule/window.py:314
+#: /home/walter/Desktop/sliderule/window.py:295
+#: /home/walter/Desktop/sliderule/window.py:308
+#: /home/walter/Desktop/sliderule/window.py:321
 #: /home/walter/Desktop/sliderule/genslides.py:728
 msgid "Value Error"
 msgstr ""
