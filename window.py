@@ -34,6 +34,8 @@ import pygtk
 pygtk.require('2.0')
 import gtk
 
+import os
+import locale
 from gettext import gettext as _
 
 from math import *
@@ -109,6 +111,13 @@ class SlideRule():
         self.slides = []
         self.stators = []
         self.scale = 1
+
+        lang = os.environ['LANG']
+        if lang != '' and lang is not None:
+            locale.setlocale(locale.LC_NUMERIC, lang)
+        self.decimal_point = locale.localeconv()['decimal_point']
+        if self.decimal_point == '' or self.decimal_point is None:
+            self.decimal_point = '.'
 
         self.error_msg = None
         self.result_function = [None, None]
@@ -208,7 +217,11 @@ class SlideRule():
                 newnum = '-' + oldnum
             else:
                 newnum = oldnum
-        elif keyname == 'period' and '.' not in oldnum:
+        elif keyname == 'comma' and self.decimal_point == ',' and \
+                ',' not in oldnum:
+            newnum = oldnum + ','
+        elif keyname == 'period' and self.decimal_point == '.' and \
+                '.' not in oldnum:
             newnum = oldnum + '.'
         elif keyname == 'BackSpace':
             if len(oldnum) > 0:
@@ -221,7 +234,7 @@ class SlideRule():
             else:
                 newnum = oldnum + keyname
         elif keyname == 'Return':
-            self.enter_value(sprite, newnum)
+            self.enter_value(sprite, newnum.replace(self.decimal_point, '.'))
             return
         else:
             newnum = oldnum
@@ -229,7 +242,7 @@ class SlideRule():
             newnum = '0.'
         if len(newnum) > 0 and newnum != '-':
             try:
-                float(newnum)
+                float(newnum.replace(self.decimal_point, '.'))
             except ValueError, e:
                 newnum = oldnum
         sprite.set_label(newnum + CURSOR)
@@ -237,18 +250,20 @@ class SlideRule():
     def enter_value(self, sprite, value):
         if sprite is None:
             return
-        sprite.set_label(value)
+        sprite.set_label(value.replace('.', self.decimal_point))
         try:
             if sprite == self.reticule.tabs[TOP].spr:
-                self._move_reticule_to_slide_value(float(value))
+                self._move_reticule_to_slide_value(
+                    float(value.replace(self.decimal_point, '.')))
             elif sprite == self.reticule.tabs[BOTTOM].spr:
-                self._move_reticule_to_stator_value(float(value))
+                self._move_reticule_to_stator_value(
+                    float(value.replace(self.decimal_point, '.')))
             else:
-                self._move_slide_to_stator_value(float(value))
+                self._move_slide_to_stator_value(
+                    float(value.replace(self.decimal_point, '.')))
         except TypeError:
             sprite.set_label('NaN')
         return
-
 
     def _process_text_field(self, text_field):
         """ Process input from numeric text fields: could be a function. """
@@ -542,16 +557,18 @@ class SlideRule():
         else:
             v_right = v_left
         for slide in self.slides:
-            slide.tabs[LEFT].spr.set_label(str(v_left))
-            slide.tabs[RIGHT].spr.set_label(str(v_right))
+            slide.tabs[LEFT].spr.set_label(str(v_left).replace('.',
+                self.decimal_point))
+            slide.tabs[RIGHT].spr.set_label(str(v_right).replace('.',
+                self.decimal_point))
 
     def update_slide_labels(self):
         """ Based on the current alignment of the rules, calculate labels. """
         self._update_top(self.active_stator.calculate)
         self.reticule.tabs[BOTTOM].spr.set_label(
-                str(self.active_stator.result()))
+            str(self.active_stator.result()).replace('.', self.decimal_point))
         self.reticule.tabs[TOP].spr.set_label(
-            str(self.active_slide.calculate()))
+            str(self.active_slide.calculate()).replace('.', self.decimal_point))
 
     def _button_release_cb(self, win, event):
         if self.press == None:
@@ -646,7 +663,7 @@ class SlideRule():
                 s = ''
             self.result_label.draw(1000)
 
-        self.result_label.spr.set_label(s)
+        self.result_label.spr.set_label(s.replace('.', self.decimal_point))
 
     def _top_slide_offset(self, x):
         """ Calcualate the offset between the top and bottom slides """
@@ -754,7 +771,11 @@ class SlideRule():
         userdefined = {}
         try:
             exec my_label in globals(), userdefined
-            return round(userdefined.values()[0](result), precision)
+            label = userdefined.values()[0](result)
+            if type(label) == float:
+                return round(label, precision)
+            else:
+                return label
         except OverflowError, e:
             self.error_msg = _('Overflow Error') + ': ' + str(e)
         except NameError, e:
