@@ -163,7 +163,7 @@ class SlideRule():
         if self.parent is None:
             return
         if k in ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'period',
-                 'minus', 'Return', 'BackSpace']:
+                 'minus', 'Return', 'BackSpace', 'comma']:
             if self.last == self.reticule.tabs[TOP].spr or \
                self.last == self.reticule.tabs[BOTTOM].spr or \
                self.last == self.active_slide.tabs[LEFT].spr:
