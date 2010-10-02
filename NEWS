@@ -1,3 +1,7 @@
+21
+
+* added test for locale-specific decimal-point rendering
+
 20
 
 * fixed logic error in copy/paste code
