@@ -1,3 +1,7 @@
+22
+
+* fixed edit toolbar problem on old-style Sugar toolbar
+
 21
 
 * added test for locale-specific decimal-point rendering
