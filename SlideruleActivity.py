@@ -607,9 +607,9 @@ class SlideruleActivity(activity.Activity):
                 ENTRY_TOOLTIP[i], ENTRY_CALLBACK[i], ENTRY_TOOLBAR[i]))
 
         copy = _button_factory('edit-copy', _('Copy'), self._copy_cb,
-                           edit_toolbar_button, accelerator='<Ctrl>c')
+                           edit_toolbar, accelerator='<Ctrl>c')
         paste = _button_factory('edit-paste', _('Paste'), self._paste_cb,
-                            edit_toolbar_button, accelerator='<Ctrl>v')
+                            edit_toolbar, accelerator='<Ctrl>v')
 
         if have_toolbox:
             _separator_factory(toolbox.toolbar, False, True)
