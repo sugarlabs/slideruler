@@ -277,7 +277,7 @@ class SlideRule():
             self.result_label.spr.labels[0] = _('Name Error') + ': ' + str(e)
             self.result_label.draw(1000)
         except ZeroDivisionError, e:
-            self.result_label.spr.labels[0] = _('Zero-division Error') + \
+            self.result_label.spr.labels[0] = _('Can not divide by zero') + \
                 ': ' + str(e)
             self.result_label.draw(1000)
         except TypeError, e:
@@ -738,7 +738,7 @@ class SlideRule():
             self.error_msg = _('Name Error') + ': ' + str(e)
             return '?'
         except ZeroDivisionError, e:
-            self.error_msg = _('Zero-division Error') + ': ' + str(e)
+            self.error_msg = _('Can not divide by zero') + ': ' + str(e)
             return '?'
         except TypeError, e:
             self.error_msg = _('Type Error') + ': ' + str(e)
@@ -778,7 +778,7 @@ class SlideRule():
         except NameError, e:
             self.error_msg = _('Name Error') + ': ' + str(e)
         except ZeroDivisionError, e:
-            self.error_msg = _('Zero-division Error') + ': ' + str(e)
+            self.error_msg = _('Can not divide by zero') + ': ' + str(e)
         except TypeError, e:
             self.error_msg = _('Type Error') + ': ' + str(e)
         except ValueError, e:

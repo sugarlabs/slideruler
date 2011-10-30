@@ -721,7 +721,7 @@ class Custom_slide_generator(C_slide_generator):
             except NameError, e:
                 self.error_msg = _('Name Error') + ': ' + str(e)
             except ZeroDivisionError, e:
-                self.error_msg = _('Zero Division Error') + ' ' + str(e)
+                self.error_msg = _('Can not divide by zero') + ' ' + str(e)
             except TypeError, e:
                 self.error_msg = _('Type Error') + ': ' + str(e)
             except ValueError, e:
