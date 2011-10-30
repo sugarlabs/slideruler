@@ -38,7 +38,7 @@ class SlideruleMain:
 
         self.win = gtk.Window(gtk.WINDOW_TOPLEVEL)
         self.win.maximize()
-        self.win.set_title(_('Slide Rule'))
+        self.win.set_title(_('Sliderule'))
         self.win.connect('delete_event', lambda w,e: gtk.main_quit())
 
         menu = gtk.Menu()
