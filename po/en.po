@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-09-27 10:23-0400\n"
-"PO-Revision-Date: 2011-10-30 01:44+0200\n"
+"POT-Creation-Date: 2011-10-30 00:33-0400\n"
+"PO-Revision-Date: 2011-11-08 22:43+0200\n"
 "Last-Translator: Chris <cjl@laptop.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: en\n"
@@ -17,247 +17,220 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Pootle 2.0.5\n"
 
-#: activity/activity.info:2
+#: activity/activity.info:2 sliderule.py:41
 msgid "Sliderule"
 msgstr "Sliderule"
 
-#: /home/walter/Desktop/sliderule/constants.py:52
-msgid "log²"
-msgstr "log²"
-
-#: /home/walter/Desktop/sliderule/constants.py:54
-msgid "log"
-msgstr "log"
-
-#: /home/walter/Desktop/sliderule/constants.py:56
-msgid "1/log"
-msgstr "1/log"
-
-#: /home/walter/Desktop/sliderule/constants.py:58
-msgid "log³"
-msgstr "log³"
-
-#: /home/walter/Desktop/sliderule/constants.py:59
-msgid "sin"
-msgstr "sin"
-
-#: /home/walter/Desktop/sliderule/constants.py:60
-msgid "tan"
-msgstr "tan"
-
-#: /home/walter/Desktop/sliderule/constants.py:61
-msgid "linear"
-msgstr "linear"
-
-#: /home/walter/Desktop/sliderule/constants.py:62
-msgid "log log"
-msgstr "log log"
-
-#: /home/walter/Desktop/sliderule/constants.py:63
-msgid "ln"
-msgstr "ln"
-
-#: /home/walter/Desktop/sliderule/constants.py:64
-msgid "user defined"
-msgstr "user defined"
-
-#: /home/walter/Desktop/sliderule/SlideruleActivity.py:71
-#: /home/walter/Desktop/sliderule/sliderule.py:24
+#: SlideruleActivity.py:71 sliderule.py:24
 msgid "square/square root"
 msgstr "square/square root"
 
-#: /home/walter/Desktop/sliderule/SlideruleActivity.py:72
-#: /home/walter/Desktop/sliderule/sliderule.py:25
+#: SlideruleActivity.py:72 sliderule.py:25
 msgid "multiply/divide"
 msgstr "multiply/divide"
 
-#: /home/walter/Desktop/sliderule/SlideruleActivity.py:73
-#: /home/walter/Desktop/sliderule/sliderule.py:26
+#: SlideruleActivity.py:73 sliderule.py:26
 msgid "divide/multiply"
 msgstr "divide/multiply"
 
-#: /home/walter/Desktop/sliderule/SlideruleActivity.py:74
-#: /home/walter/Desktop/sliderule/sliderule.py:27
+#: SlideruleActivity.py:74 sliderule.py:27
 msgid "cube/cube root"
 msgstr "cube/cube root"
 
-#: /home/walter/Desktop/sliderule/SlideruleActivity.py:75
-#: /home/walter/Desktop/sliderule/sliderule.py:28
+#: SlideruleActivity.py:75 sliderule.py:28
 msgid "sin, asin"
 msgstr "sin, asin"
 
-#: /home/walter/Desktop/sliderule/SlideruleActivity.py:76
-#: /home/walter/Desktop/sliderule/sliderule.py:29
+#: SlideruleActivity.py:76 sliderule.py:29
 msgid "tan, atan"
 msgstr "tan, atan"
 
-#: /home/walter/Desktop/sliderule/SlideruleActivity.py:77
-#: /home/walter/Desktop/sliderule/sliderule.py:30
+#: SlideruleActivity.py:77 sliderule.py:30
 msgid "add/subtract"
 msgstr "add/subtract"
 
-#: /home/walter/Desktop/sliderule/SlideruleActivity.py:78
+#: SlideruleActivity.py:78
 msgid "natural log"
 msgstr "natural log"
 
-#: /home/walter/Desktop/sliderule/SlideruleActivity.py:532
-#: /home/walter/Desktop/sliderule/SlideruleActivity.py:550
+#: SlideruleActivity.py:532 SlideruleActivity.py:550
 msgid "Edit"
 msgstr "Edit"
 
-#: /home/walter/Desktop/sliderule/SlideruleActivity.py:547
+#: SlideruleActivity.py:547
 msgid "Project"
 msgstr "Project"
 
-#: /home/walter/Desktop/sliderule/SlideruleActivity.py:548
+#: SlideruleActivity.py:548
 msgid "Custom slide"
 msgstr "Custom slide"
 
-#: /home/walter/Desktop/sliderule/SlideruleActivity.py:549
+#: SlideruleActivity.py:549
 msgid "Custom stator"
 msgstr "Custom stator"
 
-#: /home/walter/Desktop/sliderule/SlideruleActivity.py:563
+#: SlideruleActivity.py:563
 msgid "select function"
 msgstr "select function"
 
-#: /home/walter/Desktop/sliderule/SlideruleActivity.py:564
+#: SlideruleActivity.py:564
 msgid "active slide"
 msgstr "active slide"
 
-#: /home/walter/Desktop/sliderule/SlideruleActivity.py:567
+#: SlideruleActivity.py:567
 msgid "select slide"
 msgstr "select slide"
 
-#: /home/walter/Desktop/sliderule/SlideruleActivity.py:568
+#: SlideruleActivity.py:568
 msgid "active stator"
 msgstr "active stator"
 
-#: /home/walter/Desktop/sliderule/SlideruleActivity.py:571
+#: SlideruleActivity.py:571
 msgid "select stator"
 msgstr "select stator"
 
-#: /home/walter/Desktop/sliderule/SlideruleActivity.py:573
-#: /home/walter/Desktop/sliderule/sliderule.py:73
+#: SlideruleActivity.py:573 sliderule.py:73
 msgid "realign slides"
 msgstr "realign slides"
 
-#: /home/walter/Desktop/sliderule/SlideruleActivity.py:588
+#: SlideruleActivity.py:588
 msgid "create custom slide"
 msgstr "create custom slide"
 
-#: /home/walter/Desktop/sliderule/SlideruleActivity.py:588
+#: SlideruleActivity.py:588
 msgid "create custom stator"
 msgstr "create custom stator"
 
-#: /home/walter/Desktop/sliderule/SlideruleActivity.py:593
+#: SlideruleActivity.py:593
 msgid "position function"
 msgstr "position function"
 
-#: /home/walter/Desktop/sliderule/SlideruleActivity.py:596
+#: SlideruleActivity.py:596
 msgid "result function"
 msgstr "result function"
 
-#: /home/walter/Desktop/sliderule/SlideruleActivity.py:599
+#: SlideruleActivity.py:599
 msgid "label function"
 msgstr "label function"
 
-#: /home/walter/Desktop/sliderule/SlideruleActivity.py:601
+#: SlideruleActivity.py:601
 msgid "domain minimum"
 msgstr "domain minimum"
 
-#: /home/walter/Desktop/sliderule/SlideruleActivity.py:603
+#: SlideruleActivity.py:603
 msgid "domain maximum"
 msgstr "domain maximum"
 
-#: /home/walter/Desktop/sliderule/SlideruleActivity.py:605
+#: SlideruleActivity.py:605
 msgid "step size"
 msgstr "step size"
 
-#: /home/walter/Desktop/sliderule/SlideruleActivity.py:609
+#: SlideruleActivity.py:609
 msgid "Copy"
 msgstr "Copy"
 
-#: /home/walter/Desktop/sliderule/SlideruleActivity.py:611
+#: SlideruleActivity.py:611
 msgid "Paste"
 msgstr "Paste"
 
-#: /home/walter/Desktop/sliderule/sliderule.py:41
-msgid "Slide Rule"
-msgstr "Slide Rule"
+#: constants.py:52
+msgid "log²"
+msgstr "log²"
 
-#: /home/walter/Desktop/sliderule/sliderule.py:45
-msgid "L"
-msgstr "L"
+#: constants.py:54
+msgid "log"
+msgstr "log"
 
-#: /home/walter/Desktop/sliderule/sliderule.py:49
-msgid "C"
-msgstr "C"
+#: constants.py:56
+msgid "1/log"
+msgstr "1/log"
 
-#: /home/walter/Desktop/sliderule/sliderule.py:53
-msgid "CI"
-msgstr "CI"
+#: constants.py:58
+msgid "log³"
+msgstr "log³"
 
-#: /home/walter/Desktop/sliderule/sliderule.py:57
-msgid "A"
-msgstr "A"
+#: constants.py:59
+msgid "sin"
+msgstr "sin"
 
-#: /home/walter/Desktop/sliderule/sliderule.py:61
-msgid "K"
-msgstr "K"
+#: constants.py:60
+msgid "tan"
+msgstr "tan"
 
-#: /home/walter/Desktop/sliderule/sliderule.py:65
-msgid "S"
-msgstr "S"
+#: constants.py:61
+msgid "linear"
+msgstr "linear"
 
-#: /home/walter/Desktop/sliderule/sliderule.py:69
-msgid "T"
-msgstr "T"
+#: constants.py:62
+msgid "log log"
+msgstr "log log"
 
-#: /home/walter/Desktop/sliderule/window.py:261
-#: /home/walter/Desktop/sliderule/window.py:716
-#: /home/walter/Desktop/sliderule/window.py:754
-#: /home/walter/Desktop/sliderule/genslides.py:720
+#: constants.py:63
+msgid "ln"
+msgstr "ln"
+
+#: constants.py:64
+msgid "user defined"
+msgstr "user defined"
+
+#: genslides.py:720 window.py:273 window.py:735 window.py:777
 msgid "Overflow Error"
 msgstr "Overflow Error"
 
-#: /home/walter/Desktop/sliderule/window.py:265
-#: /home/walter/Desktop/sliderule/window.py:719
-#: /home/walter/Desktop/sliderule/window.py:756
-#: /home/walter/Desktop/sliderule/genslides.py:722
+#: genslides.py:722 window.py:277 window.py:738 window.py:779
 msgid "Name Error"
 msgstr "Name Error"
 
-#: /home/walter/Desktop/sliderule/window.py:268
-#: /home/walter/Desktop/sliderule/window.py:722
-#: /home/walter/Desktop/sliderule/window.py:758
-msgid "Zero-division Error"
-msgstr "Zero-division Error"
+#: genslides.py:724 window.py:280 window.py:741 window.py:781
+msgid "Can not divide by zero"
+msgstr "Can not divide by zero"
 
-#: /home/walter/Desktop/sliderule/window.py:272
-#: /home/walter/Desktop/sliderule/window.py:275
-#: /home/walter/Desktop/sliderule/window.py:725
-#: /home/walter/Desktop/sliderule/window.py:728
-#: /home/walter/Desktop/sliderule/window.py:760
-#: /home/walter/Desktop/sliderule/window.py:762
-#: /home/walter/Desktop/sliderule/genslides.py:726
+#: genslides.py:726 window.py:284 window.py:287 window.py:744 window.py:747
+#: window.py:783 window.py:785
 msgid "Type Error"
 msgstr "Type Error"
 
-#: /home/walter/Desktop/sliderule/window.py:278
-#: /home/walter/Desktop/sliderule/window.py:731
-#: /home/walter/Desktop/sliderule/window.py:764
-#: /home/walter/Desktop/sliderule/genslides.py:730
-msgid "Syntax Error"
-msgstr "Syntax Error"
-
-#: /home/walter/Desktop/sliderule/window.py:295
-#: /home/walter/Desktop/sliderule/window.py:308
-#: /home/walter/Desktop/sliderule/window.py:321
-#: /home/walter/Desktop/sliderule/genslides.py:728
+#: genslides.py:728 window.py:307 window.py:320 window.py:333
 msgid "Value Error"
 msgstr "Value Error"
 
-#: /home/walter/Desktop/sliderule/genslides.py:724
-msgid "Zero Division Error"
-msgstr "Zero Division Error"
+#: genslides.py:730 window.py:290 window.py:750 window.py:787
+msgid "Syntax Error"
+msgstr "Syntax Error"
+
+#: sliderule.py:45
+msgid "L"
+msgstr "L"
+
+#: sliderule.py:49
+msgid "C"
+msgstr "C"
+
+#: sliderule.py:53
+msgid "CI"
+msgstr "CI"
+
+#: sliderule.py:57
+msgid "A"
+msgstr "A"
+
+#: sliderule.py:61
+msgid "K"
+msgstr "K"
+
+#: sliderule.py:65
+msgid "S"
+msgstr "S"
+
+#: sliderule.py:69
+msgid "T"
+msgstr "T"
+
+#~ msgid "Slide Rule"
+#~ msgstr "Slide Rule"
+
+#~ msgid "Zero-division Error"
+#~ msgstr "Zero-division Error"
+
+#~ msgid "Zero Division Error"
+#~ msgstr "Zero Division Error"
