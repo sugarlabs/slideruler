@@ -1,0 +1,236 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-10-30 00:33-0400\n"
+"PO-Revision-Date: 2011-11-09 03:15+0200\n"
+"Last-Translator: Aputsiaq Niels <aj@isit.gl>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: da\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Pootle 2.0.5\n"
+
+#: activity/activity.info:2 sliderule.py:41
+msgid "Sliderule"
+msgstr "Regnestok"
+
+#: SlideruleActivity.py:71 sliderule.py:24
+msgid "square/square root"
+msgstr "kvadrat/kvadratrod"
+
+#: SlideruleActivity.py:72 sliderule.py:25
+msgid "multiply/divide"
+msgstr "multiplicér/dividér"
+
+#: SlideruleActivity.py:73 sliderule.py:26
+msgid "divide/multiply"
+msgstr "dividér/multiplicér"
+
+#: SlideruleActivity.py:74 sliderule.py:27
+msgid "cube/cube root"
+msgstr "kubik/kubikrod"
+
+#: SlideruleActivity.py:75 sliderule.py:28
+msgid "sin, asin"
+msgstr "sin, asin"
+
+#: SlideruleActivity.py:76 sliderule.py:29
+msgid "tan, atan"
+msgstr "tan, atan"
+
+#: SlideruleActivity.py:77 sliderule.py:30
+msgid "add/subtract"
+msgstr "addér/subtrahér"
+
+#: SlideruleActivity.py:78
+msgid "natural log"
+msgstr "naturlig logaritme"
+
+#: SlideruleActivity.py:532 SlideruleActivity.py:550
+msgid "Edit"
+msgstr "Redigér"
+
+#: SlideruleActivity.py:547
+msgid "Project"
+msgstr "Projekt"
+
+#: SlideruleActivity.py:548
+msgid "Custom slide"
+msgstr "Tilpasset skyder"
+
+#: SlideruleActivity.py:549
+msgid "Custom stator"
+msgstr "Tilpasset stator"
+
+#: SlideruleActivity.py:563
+msgid "select function"
+msgstr "vælg funktion"
+
+#: SlideruleActivity.py:564
+msgid "active slide"
+msgstr "aktiv skyder"
+
+#: SlideruleActivity.py:567
+msgid "select slide"
+msgstr "vælg skyder"
+
+#: SlideruleActivity.py:568
+msgid "active stator"
+msgstr "aktiv stator"
+
+#: SlideruleActivity.py:571
+msgid "select stator"
+msgstr "vælg stator"
+
+#: SlideruleActivity.py:573 sliderule.py:73
+msgid "realign slides"
+msgstr "nulstil skydere"
+
+#: SlideruleActivity.py:588
+msgid "create custom slide"
+msgstr "opret tilpasset skyder"
+
+#: SlideruleActivity.py:588
+msgid "create custom stator"
+msgstr "opret tilpasset stator"
+
+#: SlideruleActivity.py:593
+msgid "position function"
+msgstr "positionsfunktion"
+
+#: SlideruleActivity.py:596
+msgid "result function"
+msgstr "resultatfunktion"
+
+#: SlideruleActivity.py:599
+msgid "label function"
+msgstr "etikettefunktion"
+
+#: SlideruleActivity.py:601
+msgid "domain minimum"
+msgstr "minimum på domæne"
+
+#: SlideruleActivity.py:603
+msgid "domain maximum"
+msgstr "maksimum på domæne"
+
+#: SlideruleActivity.py:605
+msgid "step size"
+msgstr "størrelse på trin"
+
+#: SlideruleActivity.py:609
+msgid "Copy"
+msgstr "Kopiér"
+
+#: SlideruleActivity.py:611
+msgid "Paste"
+msgstr "Indsæt"
+
+#: constants.py:52
+msgid "log²"
+msgstr "log²"
+
+#: constants.py:54
+msgid "log"
+msgstr "log"
+
+#: constants.py:56
+msgid "1/log"
+msgstr "1/log"
+
+#: constants.py:58
+msgid "log³"
+msgstr "log³"
+
+#: constants.py:59
+msgid "sin"
+msgstr "sin"
+
+#: constants.py:60
+msgid "tan"
+msgstr "tan"
+
+#: constants.py:61
+msgid "linear"
+msgstr "lineær"
+
+#: constants.py:62
+msgid "log log"
+msgstr "log log"
+
+#: constants.py:63
+msgid "ln"
+msgstr "ln"
+
+#: constants.py:64
+msgid "user defined"
+msgstr "brugerdefineret"
+
+#: genslides.py:720 window.py:273 window.py:735 window.py:777
+msgid "Overflow Error"
+msgstr "Overløbsfejl"
+
+#: genslides.py:722 window.py:277 window.py:738 window.py:779
+msgid "Name Error"
+msgstr "Navnefejl"
+
+#: genslides.py:724 window.py:280 window.py:741 window.py:781
+msgid "Can not divide by zero"
+msgstr "Kan ikke dividere med nul"
+
+#: genslides.py:726 window.py:284 window.py:287 window.py:744 window.py:747
+#: window.py:783 window.py:785
+msgid "Type Error"
+msgstr "Typefejl"
+
+#: genslides.py:728 window.py:307 window.py:320 window.py:333
+msgid "Value Error"
+msgstr "Værdifejl"
+
+#: genslides.py:730 window.py:290 window.py:750 window.py:787
+msgid "Syntax Error"
+msgstr "Syntaksfejl"
+
+#: sliderule.py:45
+msgid "L"
+msgstr "L"
+
+#: sliderule.py:49
+msgid "C"
+msgstr "C"
+
+#: sliderule.py:53
+msgid "CI"
+msgstr "CI"
+
+#: sliderule.py:57
+msgid "A"
+msgstr "A"
+
+#: sliderule.py:61
+msgid "K"
+msgstr "K"
+
+#: sliderule.py:65
+msgid "S"
+msgstr "S"
+
+#: sliderule.py:69
+msgid "T"
+msgstr "T"
+
+#~ msgid "Slide Rule"
+#~ msgstr "Regnestok"
+
+#~ msgid "Zero-division Error"
+#~ msgstr "Fejl i form af nuldivision"
+
+#~ msgid "Zero Division Error"
+#~ msgstr "Fejl i form af nuldivision"
