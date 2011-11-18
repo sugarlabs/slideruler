@@ -1,107 +1,148 @@
+23
+
+ENHANCEMENTS:
+* Conversion to Cairo graphics
+* New translations
+
+BUG FIXES:
+* Wrong address for FSF in license
+
+23
+
+ENHANCEMENT:
+* Harmonize strings: Can not divide by zero
+
 22
 
-* fixed edit toolbar problem on old-style Sugar toolbar (#2429)
+BUG FIXES:
+* Fixed edit toolbar problem on old-style Sugar toolbar (#2429)
 
 21
 
-* added test for locale-specific decimal-point rendering
+ENHANCEMENT:
+* Added test for locale-specific decimal-point rendering
 
 20
 
-* fixed logic error in copy/paste code
+BUG FIXES:
+* Fixed logic error in copy/paste code
 
 19
 
-* simpler definition of linear slide
-* copy/paste values to/from clipboard
-* major refactoring to make modifcation of the code easier
+ENHANCEMENTS:
+* Simpler definition of linear slide
+* Copy/paste values to/from clipboard
+* Major refactoring to make modifcation of the code easier
 
 18
 
-* resized text field (#2329)
-* combined two label functions into one (#2329)
-* using build-in round instead of my own version
-* added in-line documentation for modifying the code
+ENHANCEMENTS:
+* Resized text field (#2329)
+* Combined two label functions into one (#2329)
+* Using build-in round instead of my own version
+* Added in-line documentation for modifying the code
 
 17
 
-* better error-message handling for custom sliders (#2325)
-* custom slide *and* custom stator (#2326)
-* added results label entry for custom slides (#2326)
+ENHANCEMENTS:
+* Better error-message handling for custom sliders (#2325)
+* Custom slide *and* custom stator (#2326)
+* Added results label entry for custom slides (#2326)
 
 16
 
-* customizable slide
-* enable typing into tabs to move slides
-* major refactoring of calculations
-* major refactoring of slide, stator generation
+ENHANCEMENTS:
+* Customizable slide
+* Enable typing into tabs to move slides
+* Major refactoring of calculations
+* Major refactoring of slide, stator generation
 
 15
 
-* added log log scale
+ENHANCEMENTS:
+* Added log log scale
 
 14
 
-* switched to combo boxes in order to enable user-definable combinations (#2225)
-* added button to realign slides
-* added keyboard shortcuts (e.g., arrow keys to move slides)
-* code reorder in order to accomodate user-definable combinations
+ENHANCEMENTS:
+* Switched to combo boxes in order to enable user-definable combinations (#2225)
+* Added button to realign slides
+* Added keyboard shortcuts (e.g., arrow keys to move slides)
+* Code reorder in order to accomodate user-definable combinations
 
 13
 
-* added K (cube), S (sine), and T (tangent) scales
-* cleaned up results display
-* moved display results off of toolbar
+ENHANCEMENTS:
+* Added K (cube), S (sine), and T (tangent) scales
+* Cleaned up results display
+* Moved display results off of toolbar
 
 12
 
-* update labels when switching scales
-* display different operand options when displaying results
+ENHANCEMENTS:
+* Display different operand options when displaying results
+
+BUG FIXES:
+* Update labels when switching scales
 
 11
 
-* more verbose tooltips
+ENHANCEMENTS:
+* More verbose tooltips
 * CI (inverse) scale
-* general code cleanup
+* General code cleanup
 
 10
 
-* added linear rules for addition and subtraction
+ENHANCEMENTS:
+* Added linear rules for addition and subtraction
 
 9
 
-* new licensing file
+ENHANCEMENTS:
+* New licensing file
 
 8
 
-* sprite library clean-up
-* added command-line launch capability
-* fixed sprite library bug
+ENHANCEMENTS:
+* Sprite library clean-up
+* Added command-line launch capability
+
+BUG FIXES:
+* Fixed sprite library bug
 
 7
 
-* added pi and e indicators
+ENHANCEMENTS:
+* Added pi and e indicators
 
 6
 
-* fixed menu bug in pre-0.86 toolbars
+BUG FIXES:
+* Fixed menu bug in pre-0.86 toolbars
 
 5
 
-* toggle toolbar button states
+ENHANCEMENTS:
+* Toggle toolbar button states
 
 4
 
-* fixed typos in pre-0.86 code
+BUG FIXES:
+* Fixed typos in pre-0.86 code
 
 3
 
+ENHANCEMENTS:
 * Update results label during moves
+* Added A (two-decade) scale for calculating square roots
+
+BUG FIXES:
 * Handle condition when C is to the left of D
-* added A (two-decade) scale for calculating square roots
 
 2
 
+ENHANCEMENTS:
 * Save position in Journal
 * Restore position from Journal
 * Larger handles on reticule
