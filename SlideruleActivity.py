@@ -6,10 +6,9 @@
 # the Free Software Foundation; either version 3 of the License, or
 # (at your option) any later version.
 #
-# You should have received a copy of the GNU Lesser General Public
-# License along with this library; if not, write to the
-# Free Software Foundation, Inc., 59 Temple Place - Suite 330,
-# Boston, MA 02111-1307, USA.
+# You should have received a copy of the GNU General Public License
+# along with this library; if not, write to the Free Software
+# Foundation, 51 Franklin Street, Suite 500 Boston, MA 02110-1335 USA
 
 """
 Modifying slide rule:
@@ -48,12 +47,10 @@ if _have_toolbox:
         EditToolbar
     from sugar.graphics.toolbarbox import ToolbarButton
 
-from sugar.graphics.combobox import ComboBox
-from sugar.graphics.toolcombobox import ToolComboBox
-from sugar.graphics.toolbutton import ToolButton
-from sugar.graphics.menuitem import MenuItem
-from sugar.graphics.icon import Icon
 from sugar.datastore import datastore
+
+from toolbar_utils import combo_factory, button_factory, entry_factory, \
+    separator_factory, label_factory
 
 from gettext import gettext as _
 import locale
@@ -79,77 +76,6 @@ FE_natural_log = _('natural log')
 UK_unknown = '-'
 FUNCTIONS = [FL_add, FC_multiply, FCI_divide, FA_square, FK_cube, FS_sin,
              FT_tan, FE_natural_log, UK_unknown]
-
-
-def _combo_factory(combo_array, default, tooltip, callback, toolbar):
-    """Factory for making a toolbar combo box"""
-    my_combo = ComboBox()
-    if hasattr(my_combo, 'set_tooltip_text'):
-        my_combo.set_tooltip_text(tooltip)
-
-    my_combo.connect('changed', callback)
-
-    for i, s in enumerate(combo_array):
-        my_combo.append_item(i, s, None)
-
-    toolbar.insert(ToolComboBox(my_combo), -1)
-    return my_combo
-
-
-def _button_factory(icon_name, tooltip, callback, toolbar, cb_arg=None,
-                    accelerator=None):
-    """Factory for making toolbar buttons"""
-    my_button = ToolButton(icon_name)
-    my_button.set_tooltip(tooltip)
-    my_button.props.sensitive = True
-    if accelerator is not None:
-        my_button.props.accelerator = accelerator
-    if cb_arg is not None:
-        my_button.connect('clicked', callback, cb_arg)
-    else:
-        my_button.connect('clicked', callback)
-    if hasattr(toolbar, 'insert'):  # the main toolbar
-        toolbar.insert(my_button, -1)
-    else:  # or a secondary toolbar
-        toolbar.props.page.insert(my_button, -1)
-    my_button.show()
-    return my_button
-
-
-def _label_factory(label, toolbar):
-    """ Factory for adding a label to a toolbar """
-    my_label = gtk.Label(label)
-    my_label.set_line_wrap(True)
-    my_label.show()
-    _toolitem = gtk.ToolItem()
-    _toolitem.add(my_label)
-    toolbar.insert(_toolitem, -1)
-    _toolitem.show()
-    return my_label
-
-
-def _entry_factory(default_string, toolbar, tooltip='', max=14):
-    """ Factory for adding a text box to a toolbar """
-    my_entry = gtk.Entry()
-    my_entry.set_text(default_string)
-    if hasattr(my_entry, 'set_tooltip_text'):
-        my_entry.set_tooltip_text(tooltip)
-    my_entry.set_width_chars(max)
-    my_entry.show()
-    _toolitem = gtk.ToolItem()
-    _toolitem.add(my_entry)
-    toolbar.insert(_toolitem, -1)
-    _toolitem.show()
-    return my_entry
-
-
-def _separator_factory(toolbar, visible=True, expand=False):
-    """ Factory for adding a separator to a toolbar """
-    _separator = gtk.SeparatorToolItem()
-    _separator.props.draw = visible
-    _separator.set_expand(expand)
-    toolbar.insert(_separator, -1)
-    _separator.show()
 
 
 class SlideruleActivity(activity.Activity):
@@ -412,6 +338,8 @@ class SlideruleActivity(activity.Activity):
 
     def _function_combo_cb(self, arg=None):
         """ Read value from predefined-functions combo box """
+        if not hasattr(self, '_function_combo'):
+            return  # Not yet initialized
         FUNCTIONS_DICTIONARY = {FA_square: self.show_a,
                                 FC_multiply: self.show_c,
                                 FK_cube: self.show_k, FS_sin: self.show_s,
@@ -419,13 +347,15 @@ class SlideruleActivity(activity.Activity):
                                 FCI_divide: self.show_ci,
                                 FE_natural_log: self.show_e}
         try:
-            FUNCTIONS_DICTIONARY[FUNCTIONS[self._function_combo.get_active()]]()
+            FUNCTIONS_DICTIONARY[FUNCTIONS[
+                    self._function_combo.get_active()]]()
         except KeyError:
-            # 'unknown'
-            pass
+            pass  # unknown
 
     def _slide_combo_cb(self, arg=None):
         """ Read value from slide combo box """
+        if not hasattr(self, 'sr'):
+            return  # Not yet initialized
         self.sr.active_slide = self.sr.name_to_slide(SLIDE_DICTIONARY[
             SLIDE_TABLE[self._slide_combo.get_active()]])
         function = self._predefined_function()
@@ -439,6 +369,8 @@ class SlideruleActivity(activity.Activity):
 
     def _stator_combo_cb(self, arg=None):
         """ Read value from stator combo box """
+        if not hasattr(self, 'sr'):
+            return  # Not yet initialized
         self.sr.active_stator = self.sr.name_to_stator(STATOR_DICTIONARY[
             STATOR_TABLE[self._stator_combo.get_active()]])
         function = self._predefined_function()
@@ -559,19 +491,23 @@ class SlideruleActivity(activity.Activity):
                toolbox.props.visible = False
 
         # Add the buttons to the toolbars
-        self._function_combo = _combo_factory(FUNCTIONS, FC_multiply,
-            _('select function'), self._function_combo_cb, project_toolbar)
-        self.top_button = _button_factory('C', _('active slide'),
-                                          self._dummy_cb, project_toolbar)
-        self._slide_combo = _combo_factory(SLIDE_TABLE, C_slide,
-            _('select slide'), self._slide_combo_cb, project_toolbar)
-        self.bottom_button = _button_factory('D', _('active stator'),
-                                             self._dummy_cb, project_toolbar)
-        self._stator_combo = _combo_factory(STATOR_TABLE, D_slide,
-            _('select stator'), self._stator_combo_cb, project_toolbar)
-        _separator_factory(project_toolbar)
-        self.realign_button = _button_factory('realign', _('realign slides'),
-                                              self.realign_cb, project_toolbar)
+        self._function_combo = combo_factory(
+            FUNCTIONS, project_toolbar, self._function_combo_cb,
+            default=FC_multiply, tooltip=_('select function'))
+        self.top_button = button_factory(
+            'C', project_toolbar, self._dummy_cb, tooltip=_('active slide'))
+        self._slide_combo = combo_factory(
+            SLIDE_TABLE, project_toolbar, self._slide_combo_cb,
+            default=C_slide, tooltip=_('select slide'))
+        self.bottom_button = button_factory(
+            'D', project_toolbar, self._dummy_cb, tooltip=_('active stator'))
+        self._stator_combo = combo_factory(
+            STATOR_TABLE, project_toolbar,  self._stator_combo_cb,
+            default=D_slide, tooltip=_('select stator'))
+        separator_factory(project_toolbar)
+        self.realign_button = button_factory(
+            'realign', project_toolbar, self.realign_cb,
+            tooltip=_('realign slides'))
 
         self._offset_function = []
         self._calculate_function = []
@@ -581,38 +517,38 @@ class SlideruleActivity(activity.Activity):
         self._step_size = []
         self.custom = []
 
-
         ENTRY = ['C', 'D']
         ENTRY_TOOLBAR = [custom_slide_toolbar, custom_stator_toolbar]
         ENTRY_BUTTON = ['custom-slide', 'custom-stator']
         ENTRY_TOOLTIP = [_('create custom slide'), _('create custom stator')]
         ENTRY_CALLBACK = [self._custom_slide_cb, self._custom_stator_cb]
         for i in range(2):
-            self._offset_function.append(_entry_factory(
+            self._offset_function.append(entry_factory(
                     DEFINITIONS[ENTRY[i]][0],
-                    ENTRY_TOOLBAR[i], _('position function')))
-            self._calculate_function.append(_entry_factory(
+                    ENTRY_TOOLBAR[i], tooltip=_('position function')))
+            self._calculate_function.append(entry_factory(
                     DEFINITIONS[ENTRY[i]][1],
-                    ENTRY_TOOLBAR[i], _('result function')))
-            self._label_function.append(_entry_factory(
+                    ENTRY_TOOLBAR[i], tooltip=_('result function')))
+            self._label_function.append(entry_factory(
                     DEFINITIONS[ENTRY[i]][2],
-                    ENTRY_TOOLBAR[i], _('label function')))
-            self._domain_min.append(_entry_factory(DEFINITIONS[ENTRY[i]][3],
-                ENTRY_TOOLBAR[i], _('domain minimum'), max=4))
-            self._domain_max.append(_entry_factory(DEFINITIONS[ENTRY[i]][4],
-                ENTRY_TOOLBAR[i], _('domain maximum'), max=4))
-            self._step_size.append(_entry_factory(DEFINITIONS[ENTRY[i]][5],
-                ENTRY_TOOLBAR[i], _('step size'), max=4))
-            self.custom.append(_button_factory(ENTRY_BUTTON[i],
-                ENTRY_TOOLTIP[i], ENTRY_CALLBACK[i], ENTRY_TOOLBAR[i]))
+                    ENTRY_TOOLBAR[i], tooltip=_('label function')))
+            self._domain_min.append(entry_factory(DEFINITIONS[ENTRY[i]][3],
+                ENTRY_TOOLBAR[i], tooltip=_('domain minimum'), max=4))
+            self._domain_max.append(entry_factory(DEFINITIONS[ENTRY[i]][4],
+                ENTRY_TOOLBAR[i], tooltip=_('domain maximum'), max=4))
+            self._step_size.append(entry_factory(DEFINITIONS[ENTRY[i]][5],
+                ENTRY_TOOLBAR[i], tooltip=_('step size'), max=4))
+            self.custom.append(button_factory(
+                    ENTRY_BUTTON[i], ENTRY_TOOLBAR[i], ENTRY_CALLBACK[i],
+                    tooltip=ENTRY_TOOLTIP[i]))
 
-        copy = _button_factory('edit-copy', _('Copy'), self._copy_cb,
-                           edit_toolbar, accelerator='<Ctrl>c')
-        paste = _button_factory('edit-paste', _('Paste'), self._paste_cb,
-                            edit_toolbar, accelerator='<Ctrl>v')
+        copy = button_factory('edit-copy', edit_toolbar, self._copy_cb,
+                              tooltip=_('Copy'), accelerator='<Ctrl>c')
+        paste = button_factory('edit-paste', edit_toolbar, self._paste_cb,
+                                tooltip=_('Paste'), accelerator='<Ctrl>v')
 
         if have_toolbox:
-            _separator_factory(toolbox.toolbar, False, True)
+            separator_factory(toolbox.toolbar, True, False)
 
             stop_button = StopButton(self)
             stop_button.props.accelerator = '<Ctrl>q'
