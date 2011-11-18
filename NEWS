@@ -1,4 +1,4 @@
-23
+24
 
 ENHANCEMENTS:
 * Conversion to Cairo graphics
@@ -6,6 +6,10 @@ ENHANCEMENTS:
 
 BUG FIXES:
 * Wrong address for FSF in license
+
+23
+
+BUG FIXES:
 * Harmonize strings: Can not divide by zero
 
 22
