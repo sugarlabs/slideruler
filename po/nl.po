@@ -7,10 +7,10 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-10-30 00:33-0400\n"
-"PO-Revision-Date: 2011-11-08 22:46+0200\n"
+"PO-Revision-Date: 2011-11-10 08:29+0200\n"
 "Last-Translator: Chris <cjl@laptop.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: en_GB\n"
+"Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -19,23 +19,23 @@ msgstr ""
 
 #: activity/activity.info:2 sliderule.py:41
 msgid "Sliderule"
-msgstr "Sliderule"
+msgstr "Schuifliniaal"
 
 #: SlideruleActivity.py:71 sliderule.py:24
 msgid "square/square root"
-msgstr "square/square root"
+msgstr "kwadraat/vierkantswortel"
 
 #: SlideruleActivity.py:72 sliderule.py:25
 msgid "multiply/divide"
-msgstr "multiply/divide"
+msgstr "vermenigvuldig/deel"
 
 #: SlideruleActivity.py:73 sliderule.py:26
 msgid "divide/multiply"
-msgstr "divide/multiply"
+msgstr "deel/vermenigvuldig"
 
 #: SlideruleActivity.py:74 sliderule.py:27
 msgid "cube/cube root"
-msgstr "cube/cube root"
+msgstr "derde macht/derdemachtswortel"
 
 #: SlideruleActivity.py:75 sliderule.py:28
 msgid "sin, asin"
@@ -47,15 +47,15 @@ msgstr "tan, atan"
 
 #: SlideruleActivity.py:77 sliderule.py:30
 msgid "add/subtract"
-msgstr "add/subtract"
+msgstr "optellen/aftrekken"
 
 #: SlideruleActivity.py:78
 msgid "natural log"
-msgstr "natural log"
+msgstr "natuurlijke log"
 
 #: SlideruleActivity.py:532 SlideruleActivity.py:550
 msgid "Edit"
-msgstr "Edit"
+msgstr "Wijzig"
 
 #: SlideruleActivity.py:547
 msgid "Project"
@@ -63,75 +63,75 @@ msgstr "Project"
 
 #: SlideruleActivity.py:548
 msgid "Custom slide"
-msgstr "Custom slide"
+msgstr "Aangepaste dia"
 
 #: SlideruleActivity.py:549
 msgid "Custom stator"
-msgstr "Custom stator"
+msgstr "Aangepaste stator"
 
 #: SlideruleActivity.py:563
 msgid "select function"
-msgstr "select function"
+msgstr "selecteer functie"
 
 #: SlideruleActivity.py:564
 msgid "active slide"
-msgstr "active slide"
+msgstr "actieve dia"
 
 #: SlideruleActivity.py:567
 msgid "select slide"
-msgstr "select slide"
+msgstr "selecteer dia"
 
 #: SlideruleActivity.py:568
 msgid "active stator"
-msgstr "active stator"
+msgstr "actieve stator"
 
 #: SlideruleActivity.py:571
 msgid "select stator"
-msgstr "select stator"
+msgstr "selecteer stator"
 
 #: SlideruleActivity.py:573 sliderule.py:73
 msgid "realign slides"
-msgstr "realign slides"
+msgstr "dia´s uitlijnen"
 
 #: SlideruleActivity.py:588
 msgid "create custom slide"
-msgstr "create custom slide"
+msgstr "maak aangepaste dia"
 
 #: SlideruleActivity.py:588
 msgid "create custom stator"
-msgstr "create custom stator"
+msgstr "maak aangepaste stator"
 
 #: SlideruleActivity.py:593
 msgid "position function"
-msgstr "position function"
+msgstr "positie functie"
 
 #: SlideruleActivity.py:596
 msgid "result function"
-msgstr "result function"
+msgstr "resultaat functie"
 
 #: SlideruleActivity.py:599
 msgid "label function"
-msgstr "label function"
+msgstr "label functie"
 
 #: SlideruleActivity.py:601
 msgid "domain minimum"
-msgstr "domain minimum"
+msgstr "domein minimum"
 
 #: SlideruleActivity.py:603
 msgid "domain maximum"
-msgstr "domain maximum"
+msgstr "domein maximum"
 
 #: SlideruleActivity.py:605
 msgid "step size"
-msgstr "step size"
+msgstr "stapgrootte"
 
 #: SlideruleActivity.py:609
 msgid "Copy"
-msgstr "Copy"
+msgstr "Kopieer"
 
 #: SlideruleActivity.py:611
 msgid "Paste"
-msgstr "Paste"
+msgstr "Plak"
 
 #: constants.py:52
 msgid "log²"
@@ -159,7 +159,7 @@ msgstr "tan"
 
 #: constants.py:61
 msgid "linear"
-msgstr "linear"
+msgstr "lineair"
 
 #: constants.py:62
 msgid "log log"
@@ -171,32 +171,32 @@ msgstr "ln"
 
 #: constants.py:64
 msgid "user defined"
-msgstr "user defined"
+msgstr "gebruiker gedefinieerd"
 
 #: genslides.py:720 window.py:273 window.py:735 window.py:777
 msgid "Overflow Error"
-msgstr "Overflow Error"
+msgstr "Overloop Fout"
 
 #: genslides.py:722 window.py:277 window.py:738 window.py:779
 msgid "Name Error"
-msgstr "Name Error"
+msgstr "Naam Fout"
 
 #: genslides.py:724 window.py:280 window.py:741 window.py:781
 msgid "Can not divide by zero"
-msgstr "Can not divide by zero"
+msgstr "Kan niet delen door nul"
 
 #: genslides.py:726 window.py:284 window.py:287 window.py:744 window.py:747
 #: window.py:783 window.py:785
 msgid "Type Error"
-msgstr "Type Error"
+msgstr "Type Fout"
 
 #: genslides.py:728 window.py:307 window.py:320 window.py:333
 msgid "Value Error"
-msgstr "Value Error"
+msgstr "Waarde Fout"
 
 #: genslides.py:730 window.py:290 window.py:750 window.py:787
 msgid "Syntax Error"
-msgstr "Syntax Error"
+msgstr "Syntax Fout"
 
 #: sliderule.py:45
 msgid "L"
@@ -227,10 +227,10 @@ msgid "T"
 msgstr "T"
 
 #~ msgid "Slide Rule"
-#~ msgstr "Slide Rule"
+#~ msgstr "Schuifliniaal"
 
 #~ msgid "Zero-division Error"
-#~ msgstr "Zero-division Error"
+#~ msgstr "Nul-deling Fout"
 
 #~ msgid "Zero Division Error"
-#~ msgstr "Zero Division Error"
+#~ msgstr "Nul Deling Fout"
