@@ -1,15 +1,14 @@
 # -*- coding: utf-8 -*-
-#Copyright (c) 2009,2010 Walter Bender
+#Copyright (c) 2009-11 Walter Bender
 
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation; either version 3 of the License, or
 # (at your option) any later version.
 #
-# You should have received a copy of the GNU Lesser General Public
-# License along with this library; if not, write to the
-# Free Software Foundation, Inc., 59 Temple Place - Suite 330,
-# Boston, MA 02111-1307, USA.
+# You should have received a copy of the GNU General Public License
+# along with this library; if not, write to the Free Software
+# Foundation, 51 Franklin Street, Suite 500 Boston, MA 02110-1335 USA
 
 """
 Modifying slide rule:
@@ -147,9 +146,23 @@ class SlideRule():
         self.dragpos = 0
 
     def _expose_cb(self, win, event):
-        # self.sprite_list.refresh(event)
-        self.sprites.redraw_sprites()
+        ''' Callback to handle window expose events '''
+        self.do_expose_event(event)
         return True
+
+    # Handle the expose-event by drawing
+    def do_expose_event(self, event):
+
+        # Create the cairo context
+        cr = self.canvas.window.cairo_create()
+
+        # Restrict Cairo to the exposed area; avoid extra work
+        cr.rectangle(event.area.x, event.area.y,
+                event.area.width, event.area.height)
+        cr.clip()
+
+        # Refresh sprite list
+        self.sprites.redraw_sprites(cr=cr)
 
     def _destroy_cb(self, win, event):
         gtk.main_quit()
