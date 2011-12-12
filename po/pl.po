@@ -1,0 +1,264 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-09-27 10:23-0400\n"
+"PO-Revision-Date: 2011-12-09 22:33+0200\n"
+"Last-Translator: FRKS <frks@frks.pl>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: pl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
+"|| n%100>=20) ? 1 : 2);\n"
+"X-Generator: Pootle 2.0.5\n"
+
+#: activity/activity.info:2
+msgid "Sliderule"
+msgstr "Obliczenia"
+
+#: /home/walter/Desktop/sliderule/constants.py:52
+msgid "log²"
+msgstr "log²"
+
+#: /home/walter/Desktop/sliderule/constants.py:54
+msgid "log"
+msgstr "log"
+
+#: /home/walter/Desktop/sliderule/constants.py:56
+msgid "1/log"
+msgstr "1/log"
+
+#: /home/walter/Desktop/sliderule/constants.py:58
+msgid "log³"
+msgstr "log³"
+
+#: /home/walter/Desktop/sliderule/constants.py:59
+msgid "sin"
+msgstr "sin"
+
+#: /home/walter/Desktop/sliderule/constants.py:60
+msgid "tan"
+msgstr "tan"
+
+#: /home/walter/Desktop/sliderule/constants.py:61
+msgid "linear"
+msgstr "liniowy"
+
+#: /home/walter/Desktop/sliderule/constants.py:62
+msgid "log log"
+msgstr "log log"
+
+#: /home/walter/Desktop/sliderule/constants.py:63
+msgid "ln"
+msgstr "In"
+
+#: /home/walter/Desktop/sliderule/constants.py:64
+msgid "user defined"
+msgstr "zdefiniowany przez użytkownika"
+
+#: /home/walter/Desktop/sliderule/SlideruleActivity.py:71
+#: /home/walter/Desktop/sliderule/sliderule.py:24
+msgid "square/square root"
+msgstr "kwadrat/pierwiastek kwadratowy"
+
+#: /home/walter/Desktop/sliderule/SlideruleActivity.py:72
+#: /home/walter/Desktop/sliderule/sliderule.py:25
+msgid "multiply/divide"
+msgstr "mnożenie/dzielenie"
+
+#: /home/walter/Desktop/sliderule/SlideruleActivity.py:73
+#: /home/walter/Desktop/sliderule/sliderule.py:26
+msgid "divide/multiply"
+msgstr "dzielenie/mnożenie"
+
+#: /home/walter/Desktop/sliderule/SlideruleActivity.py:74
+#: /home/walter/Desktop/sliderule/sliderule.py:27
+msgid "cube/cube root"
+msgstr "sześcian/pierwiastek sześcienny"
+
+#: /home/walter/Desktop/sliderule/SlideruleActivity.py:75
+#: /home/walter/Desktop/sliderule/sliderule.py:28
+msgid "sin, asin"
+msgstr "sin, asin"
+
+#: /home/walter/Desktop/sliderule/SlideruleActivity.py:76
+#: /home/walter/Desktop/sliderule/sliderule.py:29
+msgid "tan, atan"
+msgstr "tan, atan"
+
+#: /home/walter/Desktop/sliderule/SlideruleActivity.py:77
+#: /home/walter/Desktop/sliderule/sliderule.py:30
+msgid "add/subtract"
+msgstr "dodaj/odejmij"
+
+#: /home/walter/Desktop/sliderule/SlideruleActivity.py:78
+msgid "natural log"
+msgstr "logarytm naturalny"
+
+#: /home/walter/Desktop/sliderule/SlideruleActivity.py:532
+#: /home/walter/Desktop/sliderule/SlideruleActivity.py:550
+msgid "Edit"
+msgstr "Edytuj"
+
+#: /home/walter/Desktop/sliderule/SlideruleActivity.py:547
+msgid "Project"
+msgstr "Projekt"
+
+#: /home/walter/Desktop/sliderule/SlideruleActivity.py:548
+msgid "Custom slide"
+msgstr "Dowolny suwak"
+
+#: /home/walter/Desktop/sliderule/SlideruleActivity.py:549
+msgid "Custom stator"
+msgstr "Dowolny stojan"
+
+#: /home/walter/Desktop/sliderule/SlideruleActivity.py:563
+msgid "select function"
+msgstr "Wybierz funkcję"
+
+#: /home/walter/Desktop/sliderule/SlideruleActivity.py:564
+msgid "active slide"
+msgstr "aktywny suwak"
+
+#: /home/walter/Desktop/sliderule/SlideruleActivity.py:567
+msgid "select slide"
+msgstr "wybierz suwak"
+
+#: /home/walter/Desktop/sliderule/SlideruleActivity.py:568
+msgid "active stator"
+msgstr "aktywny stojan"
+
+#: /home/walter/Desktop/sliderule/SlideruleActivity.py:571
+msgid "select stator"
+msgstr "wybierz stojan"
+
+#: /home/walter/Desktop/sliderule/SlideruleActivity.py:573
+#: /home/walter/Desktop/sliderule/sliderule.py:73
+msgid "realign slides"
+msgstr "wyrównaj suwaki"
+
+#: /home/walter/Desktop/sliderule/SlideruleActivity.py:588
+msgid "create custom slide"
+msgstr "stwórz dowolny suwak"
+
+#: /home/walter/Desktop/sliderule/SlideruleActivity.py:588
+msgid "create custom stator"
+msgstr "stwórz dowolny stojan"
+
+#: /home/walter/Desktop/sliderule/SlideruleActivity.py:593
+msgid "position function"
+msgstr "funkcja pozycja"
+
+#: /home/walter/Desktop/sliderule/SlideruleActivity.py:596
+msgid "result function"
+msgstr "funkcja wynik"
+
+#: /home/walter/Desktop/sliderule/SlideruleActivity.py:599
+msgid "label function"
+msgstr "funkcja etykieta"
+
+#: /home/walter/Desktop/sliderule/SlideruleActivity.py:601
+msgid "domain minimum"
+msgstr "minimum domeny"
+
+#: /home/walter/Desktop/sliderule/SlideruleActivity.py:603
+msgid "domain maximum"
+msgstr "maximum domeny"
+
+#: /home/walter/Desktop/sliderule/SlideruleActivity.py:605
+msgid "step size"
+msgstr "rozmiar kroku"
+
+#: /home/walter/Desktop/sliderule/SlideruleActivity.py:609
+msgid "Copy"
+msgstr "Kopiuj"
+
+#: /home/walter/Desktop/sliderule/SlideruleActivity.py:611
+msgid "Paste"
+msgstr "Wklej"
+
+#: /home/walter/Desktop/sliderule/sliderule.py:41
+msgid "Slide Rule"
+msgstr "Suwmiarka"
+
+#: /home/walter/Desktop/sliderule/sliderule.py:45
+msgid "L"
+msgstr "L"
+
+#: /home/walter/Desktop/sliderule/sliderule.py:49
+msgid "C"
+msgstr "C"
+
+#: /home/walter/Desktop/sliderule/sliderule.py:53
+msgid "CI"
+msgstr "CI"
+
+#: /home/walter/Desktop/sliderule/sliderule.py:57
+msgid "A"
+msgstr "A"
+
+#: /home/walter/Desktop/sliderule/sliderule.py:61
+msgid "K"
+msgstr "K"
+
+#: /home/walter/Desktop/sliderule/sliderule.py:65
+msgid "S"
+msgstr "S"
+
+#: /home/walter/Desktop/sliderule/sliderule.py:69
+msgid "T"
+msgstr "T"
+
+#: /home/walter/Desktop/sliderule/window.py:261
+#: /home/walter/Desktop/sliderule/window.py:716
+#: /home/walter/Desktop/sliderule/window.py:754
+#: /home/walter/Desktop/sliderule/genslides.py:720
+msgid "Overflow Error"
+msgstr "Błąd przepełnienia"
+
+#: /home/walter/Desktop/sliderule/window.py:265
+#: /home/walter/Desktop/sliderule/window.py:719
+#: /home/walter/Desktop/sliderule/window.py:756
+#: /home/walter/Desktop/sliderule/genslides.py:722
+msgid "Name Error"
+msgstr "Błąd nazwy"
+
+#: /home/walter/Desktop/sliderule/window.py:268
+#: /home/walter/Desktop/sliderule/window.py:722
+#: /home/walter/Desktop/sliderule/window.py:758
+msgid "Zero-division Error"
+msgstr "Błąd dzielenia przez zero"
+
+#: /home/walter/Desktop/sliderule/window.py:272
+#: /home/walter/Desktop/sliderule/window.py:275
+#: /home/walter/Desktop/sliderule/window.py:725
+#: /home/walter/Desktop/sliderule/window.py:728
+#: /home/walter/Desktop/sliderule/window.py:760
+#: /home/walter/Desktop/sliderule/window.py:762
+#: /home/walter/Desktop/sliderule/genslides.py:726
+msgid "Type Error"
+msgstr "Błąd typu"
+
+#: /home/walter/Desktop/sliderule/window.py:278
+#: /home/walter/Desktop/sliderule/window.py:731
+#: /home/walter/Desktop/sliderule/window.py:764
+#: /home/walter/Desktop/sliderule/genslides.py:730
+msgid "Syntax Error"
+msgstr "Błąd składni"
+
+#: /home/walter/Desktop/sliderule/window.py:295
+#: /home/walter/Desktop/sliderule/window.py:308
+#: /home/walter/Desktop/sliderule/window.py:321
+#: /home/walter/Desktop/sliderule/genslides.py:728
+msgid "Value Error"
+msgstr "Błąd wartości"
+
+#: /home/walter/Desktop/sliderule/genslides.py:724
+msgid "Zero Division Error"
+msgstr "Błąd dzielenia przez zero"
