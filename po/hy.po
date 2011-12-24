@@ -7,8 +7,8 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-09-27 10:23-0400\n"
-"PO-Revision-Date: 2011-12-21 21:56+0200\n"
-"Last-Translator: anush.mkrtchyan <anush.mkrtchyan@ca1492.com>\n"
+"PO-Revision-Date: 2011-12-23 05:55+0200\n"
+"Last-Translator: Jasmine <udea_jasmine@yahoo.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: hy\n"
 "MIME-Version: 1.0\n"
@@ -108,7 +108,7 @@ msgstr "խմբագրել"
 
 #: /home/walter/Desktop/sliderule/SlideruleActivity.py:547
 msgid "Project"
-msgstr "Ծրագիր"
+msgstr "Նախագիծ"
 
 #: /home/walter/Desktop/sliderule/SlideruleActivity.py:548
 msgid "Custom slide"
@@ -125,11 +125,11 @@ msgstr "ընտրել գործողությունը"
 
 #: /home/walter/Desktop/sliderule/SlideruleActivity.py:564
 msgid "active slide"
-msgstr "ակտիվ սլայդ"
+msgstr "ակտիվ ժապավեն"
 
 #: /home/walter/Desktop/sliderule/SlideruleActivity.py:567
 msgid "select slide"
-msgstr "ընտրել սլայդը"
+msgstr "ընտրել ժապավեն"
 
 #: /home/walter/Desktop/sliderule/SlideruleActivity.py:568
 msgid "active stator"
@@ -142,7 +142,7 @@ msgstr "ընտրել ստատորը"
 #: /home/walter/Desktop/sliderule/SlideruleActivity.py:573
 #: /home/walter/Desktop/sliderule/sliderule.py:73
 msgid "realign slides"
-msgstr "կարգավորել սլայդերը"
+msgstr "կարգավորել ժապավենները"
 
 #: /home/walter/Desktop/sliderule/SlideruleActivity.py:588
 msgid "create custom slide"
@@ -179,11 +179,11 @@ msgstr "քայլի չափսը"
 
 #: /home/walter/Desktop/sliderule/SlideruleActivity.py:609
 msgid "Copy"
-msgstr "կրկնօրինակել"
+msgstr "պատճենել"
 
 #: /home/walter/Desktop/sliderule/SlideruleActivity.py:611
 msgid "Paste"
-msgstr "Տեղադրել"
+msgstr "փակցնել"
 
 #: /home/walter/Desktop/sliderule/sliderule.py:41
 msgid "Slide Rule"
@@ -197,6 +197,7 @@ msgstr "L"
 msgid "C"
 msgstr "C"
 
+# CI - Cociente intelectual?
 #: /home/walter/Desktop/sliderule/sliderule.py:53
 msgid "CI"
 msgstr "CI"
@@ -222,20 +223,20 @@ msgstr "T"
 #: /home/walter/Desktop/sliderule/window.py:754
 #: /home/walter/Desktop/sliderule/genslides.py:720
 msgid "Overflow Error"
-msgstr "Վրիպումների գերլցում"
+msgstr "Գերլցման սխալ"
 
 #: /home/walter/Desktop/sliderule/window.py:265
 #: /home/walter/Desktop/sliderule/window.py:719
 #: /home/walter/Desktop/sliderule/window.py:756
 #: /home/walter/Desktop/sliderule/genslides.py:722
 msgid "Name Error"
-msgstr "Անվան վրիպում"
+msgstr "Անվան սխալ"
 
 #: /home/walter/Desktop/sliderule/window.py:268
 #: /home/walter/Desktop/sliderule/window.py:722
 #: /home/walter/Desktop/sliderule/window.py:758
 msgid "Zero-division Error"
-msgstr "Զրոյի-բաժանման վրիպում"
+msgstr "Զրոյի-բաժանման սխալ"
 
 #: /home/walter/Desktop/sliderule/window.py:272
 #: /home/walter/Desktop/sliderule/window.py:275
@@ -245,25 +246,25 @@ msgstr "Զրոյի-բաժանման վրիպում"
 #: /home/walter/Desktop/sliderule/window.py:762
 #: /home/walter/Desktop/sliderule/genslides.py:726
 msgid "Type Error"
-msgstr "Վրիպումի տեսակը"
+msgstr "Սխալի տեսակը"
 
 #: /home/walter/Desktop/sliderule/window.py:278
 #: /home/walter/Desktop/sliderule/window.py:731
 #: /home/walter/Desktop/sliderule/window.py:764
 #: /home/walter/Desktop/sliderule/genslides.py:730
 msgid "Syntax Error"
-msgstr "Շարահյուսության վրիպում"
+msgstr "Շարահյուսության սխալ"
 
 #: /home/walter/Desktop/sliderule/window.py:295
 #: /home/walter/Desktop/sliderule/window.py:308
 #: /home/walter/Desktop/sliderule/window.py:321
 #: /home/walter/Desktop/sliderule/genslides.py:728
 msgid "Value Error"
-msgstr "Արժեքի վրիպում"
+msgstr "Արժեքի սխալ"
 
 #: /home/walter/Desktop/sliderule/genslides.py:724
 msgid "Zero Division Error"
-msgstr "Զրոյի-բաժանման վրիպում"
+msgstr "Զրոյի-բաժանման սխալ"
 
 #~ msgid "Can not divide by zero"
 #~ msgstr "զրոյի չի բաժանվում"
