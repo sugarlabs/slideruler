@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-10-30 00:33-0400\n"
+"POT-Creation-Date: 2011-12-02 00:34-0500\n"
 "PO-Revision-Date: 2011-11-08 22:43+0200\n"
 "Last-Translator: Chris <cjl@laptop.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,212 +17,212 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Pootle 2.0.5\n"
 
-#: activity/activity.info:2 sliderule.py:41
+#: activity/activity.info:2 sliderule.py:40
 msgid "Sliderule"
 msgstr "Sliderule"
 
-#: SlideruleActivity.py:71 sliderule.py:24
+#: SlideruleActivity.py:68 sliderule.py:23
 msgid "square/square root"
 msgstr "square/square root"
 
-#: SlideruleActivity.py:72 sliderule.py:25
+#: SlideruleActivity.py:69 sliderule.py:24
 msgid "multiply/divide"
 msgstr "multiply/divide"
 
-#: SlideruleActivity.py:73 sliderule.py:26
+#: SlideruleActivity.py:70 sliderule.py:25
 msgid "divide/multiply"
 msgstr "divide/multiply"
 
-#: SlideruleActivity.py:74 sliderule.py:27
+#: SlideruleActivity.py:71 sliderule.py:26
 msgid "cube/cube root"
 msgstr "cube/cube root"
 
-#: SlideruleActivity.py:75 sliderule.py:28
+#: SlideruleActivity.py:72 sliderule.py:27
 msgid "sin, asin"
 msgstr "sin, asin"
 
-#: SlideruleActivity.py:76 sliderule.py:29
+#: SlideruleActivity.py:73 sliderule.py:28
 msgid "tan, atan"
 msgstr "tan, atan"
 
-#: SlideruleActivity.py:77 sliderule.py:30
+#: SlideruleActivity.py:74 sliderule.py:29
 msgid "add/subtract"
 msgstr "add/subtract"
 
-#: SlideruleActivity.py:78
+#: SlideruleActivity.py:75
 msgid "natural log"
 msgstr "natural log"
 
-#: SlideruleActivity.py:532 SlideruleActivity.py:550
+#: SlideruleActivity.py:464 SlideruleActivity.py:482
 msgid "Edit"
 msgstr "Edit"
 
-#: SlideruleActivity.py:547
+#: SlideruleActivity.py:479
 msgid "Project"
 msgstr "Project"
 
-#: SlideruleActivity.py:548
+#: SlideruleActivity.py:480
 msgid "Custom slide"
 msgstr "Custom slide"
 
-#: SlideruleActivity.py:549
+#: SlideruleActivity.py:481
 msgid "Custom stator"
 msgstr "Custom stator"
 
-#: SlideruleActivity.py:563
+#: SlideruleActivity.py:496
 msgid "select function"
 msgstr "select function"
 
-#: SlideruleActivity.py:564
+#: SlideruleActivity.py:498
 msgid "active slide"
 msgstr "active slide"
 
-#: SlideruleActivity.py:567
+#: SlideruleActivity.py:501
 msgid "select slide"
 msgstr "select slide"
 
-#: SlideruleActivity.py:568
+#: SlideruleActivity.py:503
 msgid "active stator"
 msgstr "active stator"
 
-#: SlideruleActivity.py:571
+#: SlideruleActivity.py:506
 msgid "select stator"
 msgstr "select stator"
 
-#: SlideruleActivity.py:573 sliderule.py:73
+#: SlideruleActivity.py:510 sliderule.py:72
 msgid "realign slides"
 msgstr "realign slides"
 
-#: SlideruleActivity.py:588
+#: SlideruleActivity.py:523
 msgid "create custom slide"
 msgstr "create custom slide"
 
-#: SlideruleActivity.py:588
+#: SlideruleActivity.py:523
 msgid "create custom stator"
 msgstr "create custom stator"
 
-#: SlideruleActivity.py:593
+#: SlideruleActivity.py:528
 msgid "position function"
 msgstr "position function"
 
-#: SlideruleActivity.py:596
+#: SlideruleActivity.py:531
 msgid "result function"
 msgstr "result function"
 
-#: SlideruleActivity.py:599
+#: SlideruleActivity.py:534
 msgid "label function"
 msgstr "label function"
 
-#: SlideruleActivity.py:601
+#: SlideruleActivity.py:536
 msgid "domain minimum"
 msgstr "domain minimum"
 
-#: SlideruleActivity.py:603
+#: SlideruleActivity.py:538
 msgid "domain maximum"
 msgstr "domain maximum"
 
-#: SlideruleActivity.py:605
+#: SlideruleActivity.py:540
 msgid "step size"
 msgstr "step size"
 
-#: SlideruleActivity.py:609
+#: SlideruleActivity.py:546
 msgid "Copy"
 msgstr "Copy"
 
-#: SlideruleActivity.py:611
+#: SlideruleActivity.py:548
 msgid "Paste"
 msgstr "Paste"
 
-#: constants.py:52
+#: constants.py:51
 msgid "log²"
 msgstr "log²"
 
-#: constants.py:54
+#: constants.py:53
 msgid "log"
 msgstr "log"
 
-#: constants.py:56
+#: constants.py:55
 msgid "1/log"
 msgstr "1/log"
 
-#: constants.py:58
+#: constants.py:57
 msgid "log³"
 msgstr "log³"
 
-#: constants.py:59
+#: constants.py:58
 msgid "sin"
 msgstr "sin"
 
-#: constants.py:60
+#: constants.py:59
 msgid "tan"
 msgstr "tan"
 
-#: constants.py:61
+#: constants.py:60
 msgid "linear"
 msgstr "linear"
 
-#: constants.py:62
+#: constants.py:61
 msgid "log log"
 msgstr "log log"
 
-#: constants.py:63
+#: constants.py:62
 msgid "ln"
 msgstr "ln"
 
-#: constants.py:64
+#: constants.py:63
 msgid "user defined"
 msgstr "user defined"
 
-#: genslides.py:720 window.py:273 window.py:735 window.py:777
+#: genslides.py:719 window.py:286 window.py:748 window.py:790
 msgid "Overflow Error"
 msgstr "Overflow Error"
 
-#: genslides.py:722 window.py:277 window.py:738 window.py:779
+#: genslides.py:721 window.py:290 window.py:751 window.py:792
 msgid "Name Error"
 msgstr "Name Error"
 
-#: genslides.py:724 window.py:280 window.py:741 window.py:781
+#: genslides.py:723 window.py:293 window.py:754 window.py:794
 msgid "Can not divide by zero"
 msgstr "Can not divide by zero"
 
-#: genslides.py:726 window.py:284 window.py:287 window.py:744 window.py:747
-#: window.py:783 window.py:785
+#: genslides.py:725 window.py:297 window.py:300 window.py:757 window.py:760
+#: window.py:796 window.py:798
 msgid "Type Error"
 msgstr "Type Error"
 
-#: genslides.py:728 window.py:307 window.py:320 window.py:333
+#: genslides.py:727 window.py:320 window.py:333 window.py:346
 msgid "Value Error"
 msgstr "Value Error"
 
-#: genslides.py:730 window.py:290 window.py:750 window.py:787
+#: genslides.py:729 window.py:303 window.py:763 window.py:800
 msgid "Syntax Error"
 msgstr "Syntax Error"
 
-#: sliderule.py:45
+#: sliderule.py:44
 msgid "L"
 msgstr "L"
 
-#: sliderule.py:49
+#: sliderule.py:48
 msgid "C"
 msgstr "C"
 
-#: sliderule.py:53
+#: sliderule.py:52
 msgid "CI"
 msgstr "CI"
 
-#: sliderule.py:57
+#: sliderule.py:56
 msgid "A"
 msgstr "A"
 
-#: sliderule.py:61
+#: sliderule.py:60
 msgid "K"
 msgstr "K"
 
-#: sliderule.py:65
+#: sliderule.py:64
 msgid "S"
 msgstr "S"
 
-#: sliderule.py:69
+#: sliderule.py:68
 msgid "T"
 msgstr "T"
 
