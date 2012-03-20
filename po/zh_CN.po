@@ -1,0 +1,236 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-02-15 00:33-0500\n"
+"PO-Revision-Date: 2012-03-15 03:30+0200\n"
+"Last-Translator: lite <litekok@gmail.com>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Pootle 2.0.5\n"
+
+#: activity/activity.info:2 sliderule.py:40
+msgid "Sliderule"
+msgstr "计算尺"
+
+#: SlideruleActivity.py:68 sliderule.py:23
+msgid "square/square root"
+msgstr "平方/平方根"
+
+#: SlideruleActivity.py:69 sliderule.py:24
+msgid "multiply/divide"
+msgstr "乘法/除法"
+
+#: SlideruleActivity.py:70 sliderule.py:25
+msgid "divide/multiply"
+msgstr "除法/乘法"
+
+#: SlideruleActivity.py:71 sliderule.py:26
+msgid "cube/cube root"
+msgstr "立方/立方根"
+
+#: SlideruleActivity.py:72 sliderule.py:27
+msgid "sin, asin"
+msgstr "sin, asin"
+
+#: SlideruleActivity.py:73 sliderule.py:28
+msgid "tan, atan"
+msgstr "tan, atan"
+
+#: SlideruleActivity.py:74 sliderule.py:29
+msgid "add/subtract"
+msgstr "加法/减法"
+
+#: SlideruleActivity.py:75
+msgid "natural log"
+msgstr "自然对数"
+
+#: SlideruleActivity.py:464 SlideruleActivity.py:482
+msgid "Edit"
+msgstr "编辑"
+
+#: SlideruleActivity.py:479
+msgid "Project"
+msgstr "项目"
+
+#: SlideruleActivity.py:480
+msgid "Custom slide"
+msgstr "定制幻灯片"
+
+#: SlideruleActivity.py:481
+msgid "Custom stator"
+msgstr "定制定子"
+
+#: SlideruleActivity.py:496
+msgid "select function"
+msgstr "选择函数"
+
+#: SlideruleActivity.py:498
+msgid "active slide"
+msgstr "活动幻灯片"
+
+#: SlideruleActivity.py:501
+msgid "select slide"
+msgstr "选择幻灯片"
+
+#: SlideruleActivity.py:503
+msgid "active stator"
+msgstr "活动定子"
+
+#: SlideruleActivity.py:506
+msgid "select stator"
+msgstr "选择定子"
+
+#: SlideruleActivity.py:510 sliderule.py:72
+msgid "realign slides"
+msgstr "重新调整幻灯片"
+
+#: SlideruleActivity.py:523
+msgid "create custom slide"
+msgstr "创建定制幻灯片"
+
+#: SlideruleActivity.py:523
+msgid "create custom stator"
+msgstr "创建定制定子"
+
+#: SlideruleActivity.py:528
+msgid "position function"
+msgstr "位置函数"
+
+#: SlideruleActivity.py:531
+msgid "result function"
+msgstr "计算结果函数"
+
+#: SlideruleActivity.py:534
+msgid "label function"
+msgstr "标记函数"
+
+#: SlideruleActivity.py:536
+msgid "domain minimum"
+msgstr "域的最小值"
+
+#: SlideruleActivity.py:538
+msgid "domain maximum"
+msgstr "域的最大值"
+
+#: SlideruleActivity.py:540
+msgid "step size"
+msgstr "步长"
+
+#: SlideruleActivity.py:546
+msgid "Copy"
+msgstr "复制"
+
+#: SlideruleActivity.py:548
+msgid "Paste"
+msgstr "粘贴"
+
+#: constants.py:51
+msgid "log²"
+msgstr "log²"
+
+#: constants.py:53
+msgid "log"
+msgstr "log"
+
+#: constants.py:55
+msgid "1/log"
+msgstr "1/log"
+
+#: constants.py:57
+msgid "log³"
+msgstr "log³"
+
+#: constants.py:58
+msgid "sin"
+msgstr "sin"
+
+#: constants.py:59
+msgid "tan"
+msgstr "tan"
+
+#: constants.py:60
+msgid "linear"
+msgstr "linear"
+
+#: constants.py:61
+msgid "log log"
+msgstr "log log"
+
+#: constants.py:62
+msgid "ln"
+msgstr "ln"
+
+#: constants.py:63
+msgid "user defined"
+msgstr "用户定义"
+
+#: genslides.py:719 window.py:286 window.py:748 window.py:790
+msgid "Overflow Error"
+msgstr "溢出错误"
+
+#: genslides.py:721 window.py:290 window.py:751 window.py:792
+msgid "Name Error"
+msgstr "名称错误"
+
+#: genslides.py:723 window.py:293 window.py:754 window.py:794
+msgid "Can not divide by zero"
+msgstr "不能除零"
+
+#: genslides.py:725 window.py:297 window.py:300 window.py:757 window.py:760
+#: window.py:796 window.py:798
+msgid "Type Error"
+msgstr "类型错误"
+
+#: genslides.py:727 window.py:320 window.py:333 window.py:346
+msgid "Value Error"
+msgstr "值错误"
+
+#: genslides.py:729 window.py:303 window.py:763 window.py:800
+msgid "Syntax Error"
+msgstr "语法错误"
+
+#: sliderule.py:44
+msgid "L"
+msgstr "L"
+
+#: sliderule.py:48
+msgid "C"
+msgstr "C"
+
+#: sliderule.py:52
+msgid "CI"
+msgstr "CI"
+
+#: sliderule.py:56
+msgid "A"
+msgstr "A"
+
+#: sliderule.py:60
+msgid "K"
+msgstr "K"
+
+#: sliderule.py:64
+msgid "S"
+msgstr "S"
+
+#: sliderule.py:68
+msgid "T"
+msgstr "T"
+
+#~ msgid "Slide Rule"
+#~ msgstr "计算尺"
+
+#~ msgid "Zero-division Error"
+#~ msgstr "除零错误"
+
+#~ msgid "Zero Division Error"
+#~ msgstr "除零错误"
