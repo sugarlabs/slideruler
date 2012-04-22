@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-12-02 00:34-0500\n"
-"PO-Revision-Date: 2012-01-16 11:35+0200\n"
+"POT-Creation-Date: 2012-02-15 00:33-0500\n"
+"PO-Revision-Date: 2012-04-03 01:11+0200\n"
 "Last-Translator: Eduardo H. <hoboprimate@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: pt\n"
@@ -51,7 +51,7 @@ msgstr "somar/subtrair"
 
 #: SlideruleActivity.py:75
 msgid "natural log"
-msgstr ""
+msgstr "Logaritmo natural"
 
 #: SlideruleActivity.py:464 SlideruleActivity.py:482
 msgid "Edit"
@@ -59,7 +59,7 @@ msgstr "Editar"
 
 #: SlideruleActivity.py:479
 msgid "Project"
-msgstr "Projecto"
+msgstr "Projeto"
 
 #: SlideruleActivity.py:480
 msgid "Custom slide"
