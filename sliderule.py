@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 #Copyright (c) 2009, 2010 Walter Bender
+#Copyright (c) 2012 Ignacio Rodriguez
 
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -10,10 +11,9 @@
 # You should have received a copy of the GNU General Public License
 # along with this library; if not, write to the Free Software
 # Foundation, 51 Franklin Street, Suite 500 Boston, MA 02110-1335 USA
-
+from gi.repository import Gtk, Gdk, GdkPixbuf
 import pygtk
 pygtk.require('2.0')
-import gtk
 
 from gettext import gettext as _
 import os
@@ -35,57 +35,57 @@ class SlideruleMain:
         self.r = 0
         self.sr = None
 
-        self.win = gtk.Window(gtk.WINDOW_TOPLEVEL)
+        self.win = Gtk.Window(Gtk.WindowType.TOPLEVEL)
         self.win.maximize()
         self.win.set_title(_('Sliderule'))
-        self.win.connect('delete_event', lambda w,e: gtk.main_quit())
+        self.win.connect('delete_event', lambda w,e: Gtk.main_quit())
 
-        menu = gtk.Menu()
-        menu_items = gtk.MenuItem(_("L") + ' ' + _FL)
+        menu = Gtk.Menu()
+        menu_items = Gtk.MenuItem(_("L") + ' ' + _FL)
         menu.append(menu_items)
         menu_items.connect("activate", self._l_cb)
         menu_items.show()
-        menu_items = gtk.MenuItem(_("C") + ' ' + _FC)
+        menu_items = Gtk.MenuItem(_("C") + ' ' + _FC)
         menu.append(menu_items)
         menu_items.connect("activate", self._c_cb)
         menu_items.show()
-        menu_items = gtk.MenuItem(_("CI") + ' ' + _FCI)
+        menu_items = Gtk.MenuItem(_("CI") + ' ' + _FCI)
         menu.append(menu_items)
         menu_items.connect("activate", self._ci_cb)
         menu_items.show()
-        menu_items = gtk.MenuItem(_("A") + ' ' + _FA)
+        menu_items = Gtk.MenuItem(_("A") + ' ' + _FA)
         menu.append(menu_items)
         menu_items.connect("activate", self._a_cb)
         menu_items.show()
-        menu_items = gtk.MenuItem(_("K") + ' ' + _FK)
+        menu_items = Gtk.MenuItem(_("K") + ' ' + _FK)
         menu.append(menu_items)
         menu_items.connect("activate", self._k_cb)
         menu_items.show()
-        menu_items = gtk.MenuItem(_("S") + ' ' + _FS)
+        menu_items = Gtk.MenuItem(_("S") + ' ' + _FS)
         menu.append(menu_items)
         menu_items.connect("activate", self._s_cb)
         menu_items.show()
-        menu_items = gtk.MenuItem(_("T") + ' ' + _FT)
+        menu_items = Gtk.MenuItem(_("T") + ' ' + _FT)
         menu.append(menu_items)
         menu_items.connect("activate", self._t_cb)
         menu_items.show()
-        menu_items = gtk.MenuItem(_("realign slides"))
+        menu_items = Gtk.MenuItem(_("realign slides"))
         menu.append(menu_items)
         menu_items.connect("activate", self._realign_cb)
         menu_items.show()
-        root_menu = gtk.MenuItem("Tools")
+        root_menu = Gtk.MenuItem("Tools")
         root_menu.show()
         root_menu.set_submenu(menu)
 
-        vbox = gtk.VBox(False, 0)
+        vbox = Gtk.VBox(False, 0)
         self.win.add(vbox)
         vbox.show()
 
-        menu_bar = gtk.MenuBar()
+        menu_bar = Gtk.MenuBar()
         vbox.pack_start(menu_bar, False, False, 2)
         menu_bar.show()
 
-        canvas = gtk.DrawingArea()
+        canvas = Gtk.DrawingArea()
         vbox.pack_end(canvas, True, True)
         canvas.show()
 
@@ -174,7 +174,7 @@ class SlideruleMain:
 
 
 def main():
-    gtk.main()
+    Gtk.main()
     return 0
 
 if __name__ == "__main__":

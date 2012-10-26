@@ -1,4 +1,5 @@
 #Copyright (c) 2009, 2010 Walter Bender
+#Copyright (c) 2012, Ignacio Rodriguez
 
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -8,11 +9,9 @@
 # You should have received a copy of the GNU General Public License
 # along with this library; if not, write to the Free Software
 # Foundation, 51 Franklin Street, Suite 500 Boston, MA 02110-1335 USA
-
+from gi.repository import Gtk, Gdk, GObject, GdkPixbuf
 import pygtk
 pygtk.require('2.0')
-import gtk
-import gobject
 import os.path
 
 from constants import SHEIGHT, SWIDTH, LEFT, RIGHT, TOP, BOTTOM, TABWIDTH
@@ -152,13 +151,13 @@ class Tab():
 
 def file_to_pixbuf(path, name, w, h):
     """ Load pixbuf from a file. """
-    return gtk.gdk.pixbuf_new_from_file_at_size(
+    return GdkPixbuf.Pixbuf.new_from_file_at_size(
         os.path.join(path+name+'.svg'), int(w), int(h))
 
 
 def svg_str_to_pixbuf(svg_string):
     """ Load pixbuf from SVG string. """
-    pl = gtk.gdk.PixbufLoader('svg')
+    pl = GdkPixbuf.PixbufLoader.new_with_type('svg')
     pl.write(svg_string)
     pl.close()
     pixbuf = pl.get_pixbuf()

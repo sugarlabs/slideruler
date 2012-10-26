@@ -1,6 +1,10 @@
 24
 
 ENHANCEMENTS:
+* Ignacio Rodriguez port to gtk3
+23
+
+ENHANCEMENTS:
 * Conversion to Cairo graphics
 * New translations
 
@@ -9,7 +13,7 @@ BUG FIXES:
 
 23
 
-BUG FIXES:
+ENHANCEMENT:
 * Harmonize strings: Can not divide by zero
 
 22

@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 #Copyright (c) 2009,2010 Walter Bender
+#Copyright (c) 2012 Ignacio Rodriguez
 
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -26,28 +27,26 @@ graphics associated with your slide and stator.
 
 3. In window.py, you need to import the new class objects from #2.
 """
-
+from gi.repository import Gtk, Gdk, GObject
 import pygtk
 pygtk.require('2.0')
-import gtk
-import gobject
 
 
-import sugar
-from sugar.activity import activity
+import sugar3
+from sugar3.activity import activity
 try:
-    from sugar.graphics.toolbarbox import ToolbarBox
+    from sugar3.graphics.toolbarbox import ToolbarBox
     _have_toolbox = True
 except ImportError:
     _have_toolbox = False
 
 if _have_toolbox:
-    from sugar.bundle.activitybundle import ActivityBundle
-    from sugar.activity.widgets import ActivityToolbarButton, StopButton, \
+    from sugar3.bundle.activitybundle import ActivityBundle
+    from sugar3.activity.widgets import ActivityToolbarButton, StopButton, \
         EditToolbar
-    from sugar.graphics.toolbarbox import ToolbarButton
+    from sugar3.graphics.toolbarbox import ToolbarButton
 
-from sugar.datastore import datastore
+from sugar3.datastore import datastore
 
 from toolbar_utils import combo_factory, button_factory, entry_factory, \
     separator_factory, label_factory
@@ -86,9 +85,9 @@ class SlideruleActivity(activity.Activity):
 
         self._setup_toolbars(_have_toolbox)
 
-        canvas = gtk.DrawingArea()
-        canvas.set_size_request(gtk.gdk.screen_width(),
-                                gtk.gdk.screen_height())
+        canvas = Gtk.DrawingArea()
+        canvas.set_size_request(Gdk.Screen.width(),
+                                Gdk.Screen.height())
         self.set_canvas(canvas)
         canvas.show()
         self.show_all()
@@ -199,14 +198,14 @@ class SlideruleActivity(activity.Activity):
         """ Move the top slider onto top layer """
         self._hide_top()
         self.sr.active_slide.draw()
-        self.top_button.set_icon(self.sr.active_slide.name)
+        self.top_button.set_icon_name(self.sr.active_slide.name)
         self._set_custom_entries(SLIDE, self.sr.active_slide.name)
 
     def set_stator(self):
         """ Move the bottom slider onto top layer """
         self._hide_bottom()
         self.sr.active_stator.draw()
-        self.bottom_button.set_icon(self.sr.active_stator.name)
+        self.bottom_button.set_icon_name(self.sr.active_stator.name)
         self._set_custom_entries(STATOR, self.sr.active_stator.name)
 
     def move_stators(self, x, y):
@@ -407,7 +406,7 @@ class SlideruleActivity(activity.Activity):
 
     def _copy_cb(self, arg=None):
         """ Copy a number to the clipboard from the active slide. """
-        clipBoard = gtk.Clipboard()
+        clipBoard = Gtk.Clipboard()
         if self.sr.last is not None and \
            self.sr.last.labels is not None and \
            self.sr.last.labels[0] is not None:
@@ -416,7 +415,7 @@ class SlideruleActivity(activity.Activity):
 
     def _paste_cb(self, arg=None):
         """ Paste a number from the clipboard to the active slide. """
-        clipBoard = gtk.Clipboard()
+        clipBoard = Gtk.Clipboard()
         text = clipBoard.wait_for_text()
         if text is not None:
             self.sr.enter_value(self.sr.last, text)
@@ -424,10 +423,10 @@ class SlideruleActivity(activity.Activity):
 
     def _setup_toolbars(self, have_toolbox):
         """ Setup the toolbars.. """
-        project_toolbar = gtk.Toolbar()
-        custom_slide_toolbar = gtk.Toolbar()
-        custom_stator_toolbar = gtk.Toolbar()
-        edit_toolbar = gtk.Toolbar()
+        project_toolbar = Gtk.Toolbar()
+        custom_slide_toolbar = Gtk.Toolbar()
+        custom_stator_toolbar = Gtk.Toolbar()
+        edit_toolbar = Gtk.Toolbar()
 
         # no sharing
         self.max_participants = 1

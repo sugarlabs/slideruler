@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 #Copyright (c) 2009-11 Walter Bender
+#Copyright (c) 2012 Ignacio Rodriguez
 
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -31,15 +32,14 @@ graphics associated with your slide and stator.
 
 import pygtk
 pygtk.require('2.0')
-import gtk
-
+from gi.repository import Gtk, Gdk, GdkPixbuf
 import locale
 from gettext import gettext as _
 
 from math import *
 
 try:
-    from sugar.graphics import style
+    from sugar3.graphics import style
     GRID_CELL_SIZE = style.GRID_CELL_SIZE
 except:
     GRID_CELL_SIZE = 0
@@ -94,17 +94,16 @@ class SlideRule():
             self.parent = parent
             parent.show_all()
 
-        self.canvas.set_flags(gtk.CAN_FOCUS)
-        self.canvas.add_events(gtk.gdk.BUTTON_PRESS_MASK)
-        self.canvas.add_events(gtk.gdk.BUTTON_RELEASE_MASK)
-        self.canvas.add_events(gtk.gdk.POINTER_MOTION_MASK)
-        self.canvas.connect("expose-event", self._expose_cb)
+        self.canvas.add_events(Gdk.EventMask.BUTTON_PRESS_MASK)
+        self.canvas.add_events(Gdk.EventMask.BUTTON_RELEASE_MASK)
+        self.canvas.add_events(Gdk.EventMask.POINTER_MOTION_MASK)
+        self.canvas.connect("draw", self.__draw_cb)
         self.canvas.connect("button-press-event", self._button_press_cb)
         self.canvas.connect("button-release-event", self._button_release_cb)
         self.canvas.connect("motion-notify-event", self._mouse_move_cb)
         self.canvas.connect("key_press_event", self._keypress_cb)
-        self.width = gtk.gdk.screen_width()
-        self.height = gtk.gdk.screen_height()-GRID_CELL_SIZE
+        self.width = Gdk.Screen.width()
+        self.height = Gdk.Screen.height()-GRID_CELL_SIZE
         self.sprites = Sprites(self.canvas)
         self.slides = []
         self.stators = []
@@ -145,10 +144,8 @@ class SlideRule():
         self.last = None
         self.dragpos = 0
 
-    def _expose_cb(self, win, event):
-        ''' Callback to handle window expose events '''
-        self.do_expose_event(event)
-        return True
+    def __draw_cb(self, canvas, cr):
+        self.sprites.redraw_sprites(cr=cr)
 
     # Handle the expose-event by drawing
     def do_expose_event(self, event):
@@ -165,11 +162,11 @@ class SlideRule():
         self.sprites.redraw_sprites(cr=cr)
 
     def _destroy_cb(self, win, event):
-        gtk.main_quit()
+        Gtk.main_quit()
 
     def _keypress_cb(self, area, event):
         """ Keypress: moving the slides with the arrow keys """
-        k = gtk.gdk.keyval_name(event.keyval)
+        k = Gdk.keyval_name(event.keyval)
         if self.parent is None:
             return
         if k in ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'period',
