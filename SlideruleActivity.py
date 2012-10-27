@@ -38,6 +38,7 @@ from sugar3.graphics.toolbarbox import ToolbarBox
 from sugar3.bundle.activitybundle import ActivityBundle
 from sugar3.activity.widgets import ActivityToolbarButton, StopButton, \
     EditToolbar
+from sugar3.graphics import style
 from sugar3.graphics.toolbarbox import ToolbarButton
 from sugar3.datastore import datastore
 
@@ -78,18 +79,32 @@ class SlideruleActivity(activity.Activity):
 
         self._setup_toolbars()
 
-        canvas = Gtk.DrawingArea()
-        canvas.set_size_request(Gdk.Screen.width(),
-                                Gdk.Screen.height())
-        self.set_canvas(canvas)
-        canvas.show()
+        self.fixed = Gtk.Fixed()
+        self.fixed.connect('size-allocate', self._fixed_resize_cb)
+        self.fixed.show()
+        self.set_canvas(self.fixed)
+
+        self.vbox = Gtk.VBox(False, 0)
+        self.vbox.set_size_request(
+            Gdk.Screen.width(), Gdk.Screen.height() - style.GRID_CELL_SIZE)
+        self.fixed.put(self.vbox, 0, 0)
+        self.vbox.show()
+
+        self._canvas = Gtk.DrawingArea()
+        self._canvas.set_size_request(int(Gdk.Screen.width()),
+                                      int(Gdk.Screen.height()))
+        self._canvas.show()
+        self.show_all()
+        self.vbox.pack_end(self._canvas, True, True, 0)
+        self.vbox.show()
+
         self.show_all()
 
         self.custom_slides = [False, False]
 
         self.sr = SlideRule(
-            canvas,
-            os.path.join(activity.get_bundle_path(), 'images/'),
+            self.canvas,
+            os.path.join(activity.get_bundle_path(), 'images'),
             self)
 
         # Read the slider positions from the Journal
@@ -163,6 +178,11 @@ class SlideruleActivity(activity.Activity):
                     self._offset_function[i].get_text()
                 self.metadata['calculate' + str(i)] = \
                     self._calculate_function[i].get_text()
+
+    def _fixed_resize_cb(self, widget=None, rect=None):
+        ''' If a toolbar opens or closes, we need to resize the vbox
+        holding out scrolling window. '''
+        self.vbox.set_size_request(rect.width, rect.height)
 
     def _hide_all(self):
         self._hide_top()

@@ -27,6 +27,7 @@ class Stator():
         else:
             self.spr = Sprite(sprites, x, y,
                               svg_str_to_pixbuf(svg_engine().svg))
+        self.spr.type = name
         self.name = name
         self.calculate = calculate
         self.result = result
@@ -68,6 +69,14 @@ class Slide(Stator):
         self.calculate = function
         self.name = name
 
+    def add_textview(self, textview, i=0):
+        self.tabs[i].textview = textview
+        self.tabs[i].textbuffer = textview.get_buffer()
+
+    def set_fixed(self, fixed):
+        for tab in self.tabs:
+            tab.fixed = fixed
+
     def match(self, sprite):
         if sprite == self.spr or sprite == self.tabs[0].spr or \
                 sprite == self.tabs[1].spr:
@@ -77,36 +86,39 @@ class Slide(Stator):
     def draw(self, layer=1000):
         self.spr.set_layer(layer)
         self.spr.draw()
-        self.tabs[0].spr.set_layer(layer)
-        self.tabs[0].spr.draw()
-        self.tabs[1].spr.set_layer(layer)
-        self.tabs[1].spr.draw()
+        for tab in self.tabs:
+            tab.draw()
 
     def move(self, dx, dy):
         self.spr.move((dx, dy))
-        self.tabs[0].spr.move((dx + self.tab_dx[0], dy + self.tab_dy[0]))
-        self.tabs[1].spr.move((dx + self.tab_dx[1], dy + self.tab_dy[1]))
+        for i, tab in enumerate(self.tabs):
+            tab.move(dx + self.tab_dx[i], dy + self.tab_dy[i])
 
     def move_relative(self, dx, dy):
         self.spr.move_relative((dx, dy))
-        self.tabs[0].spr.move_relative((dx, dy))
-        self.tabs[1].spr.move_relative((dx, dy))
+        for i, tab in enumerate(self.tabs):
+            tab.move_relative(dx, dy)
 
     def hide(self):
         self.spr.hide()
-        self.tabs[0].spr.hide()
-        self.tabs[1].spr.hide()
+        for tab in self.tabs:
+            tab.hide()
+
+    def label(self, label, i=0):
+        self.tabs[i].label(label)
 
 
 class Reticule(Slide):
     """ Create a sprite for a reticle """
     def __init__(self, sprites, path, name, x, y, w, h):
         self.spr = Sprite(sprites, x, y, file_to_pixbuf(path, name, w, h))
+        self.spr.type = name
         self.tab_dx = [0, 0]
         self.tab_dy = [-SHEIGHT, 2 * SHEIGHT]
         self.tabs = []
         self.tabs.append(Tab(sprites, path, 'tab', x + self.tab_dx[0],
                              y + self.tab_dy[0], TABWIDTH, SHEIGHT))
+        self.tabs[-1].textview_yoffset = int(h / 4)
         self.tabs.append(Tab(sprites, path, 'tab', x + self.tab_dx[1],
                              y + self.tab_dy[1], TABWIDTH, SHEIGHT))
         self.name = name
@@ -143,16 +155,54 @@ class CustomStator(Stator):
 
 
 class Tab():
-    """ Create tabs for the slide """
+    """ Create tabs for the slide; include a TextView for OSK input """
     def __init__(self, sprites, path, name, x, y, w, h):
         self.spr = Sprite(sprites, x, y, file_to_pixbuf(path, name, w, h))
         self.spr.label = "1.0"
+        self.spr.type = name
         self.name = name
+        self.width = w
+        self.textview = None
+        self.textbuffer = None
+        self.fixed = None
+        self.textview_yoffset = 0
+
+    def label(self, label):
+        if self.textbuffer is not None:
+            self.textbuffer.set_text(label)
+
+    def _move_textview(self, x, y):
+        y += self.textview_yoffset
+        if self.textview is not None:
+            if x > 0 and x < Gdk.Screen.width() - self.width and y > 0:
+                self.fixed.move(self.textview, x, y)
+                self.textview.show()
+            else:
+                self.textview.hide()
+
+    def move(self, x, y):
+        self.spr.move((x, y))
+        self._move_textview(x, y)
+
+    def move_relative(self, dx, dy):
+        self.spr.move_relative((dx, dy))
+        x, y = self.spr.get_xy()
+        self._move_textview(x, y)
+
+    def draw(self, layer=100):
+        self.spr.set_layer(layer)
+        self.spr.draw()
+        x, y = self.spr.get_xy()
+        self._move_textview(x, y)
+
+    def hide(self):
+        self.spr.hide()
+
 
 def file_to_pixbuf(path, name, w, h):
     """ Load pixbuf from a file. """
     return GdkPixbuf.Pixbuf.new_from_file_at_size(
-        os.path.join(path+name+'.svg'), int(w), int(h))
+        os.path.join(path, name + '.svg'), int(w), int(h))
 
 
 def svg_str_to_pixbuf(svg_string):

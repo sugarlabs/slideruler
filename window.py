@@ -33,6 +33,7 @@ graphics associated with your slide and stator.
 import pygtk
 pygtk.require('2.0')
 from gi.repository import Gtk, Gdk, GdkPixbuf
+from gi.repository import Pango, PangoCairo
 import locale
 from gettext import gettext as _
 
@@ -62,6 +63,15 @@ import logging
 _logger = logging.getLogger('sliderule-activity')
 
 
+def _get_screen_dpi():
+    xft_dpi = Gtk.Settings.get_default().get_property('gtk-xft-dpi')
+    dpi = float(xft_dpi / 1024)
+    # HACKITY HACK for XO hardware
+    if dpi == 200:
+        return 133
+    return dpi
+
+
 class SlideRule():
 
     def __init__(self, canvas, path, parent=None):
@@ -82,7 +92,6 @@ class SlideRule():
                         'custom2':[Custom_stator_generator]}
 
         self.path = path
-        self.activity = parent
 
         if parent is None:
             self.sugar = False
@@ -106,7 +115,7 @@ class SlideRule():
         self.canvas.set_can_focus(True)
         self.canvas.grab_focus()
         self.width = Gdk.Screen.width()
-        self.height = Gdk.Screen.height()-GRID_CELL_SIZE
+        self.height = Gdk.Screen.height() - GRID_CELL_SIZE
         self.sprites = Sprites(self.canvas)
         self.slides = []
         self.stators = []
@@ -137,15 +146,62 @@ class SlideRule():
                           150, SCREENOFFSET + SHEIGHT, 100, 2 * SHEIGHT)
         self.reticule.draw(2000)
 
-        self.active_slide = self.name_to_slide('C')
-        self.active_stator = self.name_to_stator('D')
-
-        self.update_slide_labels()
-        self.update_result_label()
-
         self.press = None
         self.last = None
         self.dragpos = 0
+
+        # We need textviews for keyboard input from the on-screen keyboard
+        self._set_screen_dpi()
+        font_desc = Pango.font_description_from_string('12')
+        self.text_entries = []
+        self.text_buffers = []
+
+        w = self.reticule.tabs[0].spr.label_safe_width()
+        h = int(self.reticule.tabs[0].spr.label_safe_height() / 2)
+        for i in range(4):  # Reticule top & bottom; Slider left & right
+            self.text_entries.append(Gtk.TextView())
+            self.text_entries[-1].set_justification(Gtk.Justification.CENTER)
+            self.text_entries[-1].set_pixels_above_lines(4)
+            self.text_entries[-1].override_background_color(
+                Gtk.StateType.NORMAL, Gdk.RGBA(0, 0, 0, 0))
+            self.text_entries[-1].modify_font(font_desc)
+            self.text_buffers.append(self.text_entries[-1].get_buffer())
+            self.text_entries[-1].set_size_request(w, h)
+            self.text_entries[-1].show()
+            if self.parent is not None:
+                self.parent.fixed.put(self.text_entries[-1], 0, 0)
+                self.parent.fixed.show()
+            self.text_entries[-1].connect('focus-out-event',
+                                          self._text_focus_out_cb)
+        self.reticule.add_textview(self.text_entries[0], i=BOTTOM)
+        self.reticule.add_textview(self.text_entries[1], i=TOP)
+        if self.parent is not None:
+            self.reticule.set_fixed(self.parent.fixed)
+        for slide in self.slides:
+            slide.add_textview(self.text_entries[2], i=LEFT)
+            slide.add_textview(self.text_entries[3], i=RIGHT)
+            if self.parent is not None:
+                slide.set_fixed(self.parent.fixed)
+
+        self.active_slide = self.name_to_slide('C')
+        self.active_stator = self.name_to_stator('D')
+        self.update_slide_labels()
+        self.update_result_label()
+
+    def _text_focus_out_cb(self, widget=None, event=None):
+        ''' One of the four textviews was in focus '''
+        i = None
+        if widget in self.text_entries:
+            i = self.text_entries.index(widget)
+            bounds = self.text_buffers[i].get_bounds()
+            text = self.text_buffers[i].get_text(bounds[0], bounds[1], True)
+            text = text.strip()
+            self._process_numeric_input(i, text)
+
+    def _set_screen_dpi(self):
+        dpi = _get_screen_dpi()
+        font_map_default = PangoCairo.font_map_get_default()
+        font_map_default.set_resolution(dpi)
 
     def __draw_cb(self, canvas, cr):
         self.sprites.redraw_sprites(cr=cr)
@@ -155,6 +211,8 @@ class SlideRule():
 
         # Create the cairo context
         cr = self.canvas.window.cairo_create()
+        print 'set cr in do_expose'
+        self.sprites.set_cairo_context(cr)
 
         # Restrict Cairo to the exposed area; avoid extra work
         cr.rectangle(event.area.x, event.area.y,
@@ -172,13 +230,7 @@ class SlideRule():
         k = Gdk.keyval_name(event.keyval)
         if self.parent is None:
             return
-        if k in ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'period',
-                 'minus', 'Return', 'BackSpace', 'comma']:
-            if self.last == self.reticule.tabs[TOP].spr or \
-               self.last == self.reticule.tabs[BOTTOM].spr or \
-               self.last == self.active_slide.tabs[LEFT].spr:
-                self._process_numeric_input(self.last, k)
-        elif k == 'a':
+        if k == 'a':
             self.parent.show_a()
         elif k == 'k':
             self.parent.show_k()
@@ -200,7 +252,7 @@ class SlideRule():
                 self._move_slides(self.last, 1)
         elif k in ['Home', 'Pause', 'Up', '^']:
             self._move_slides(self.name_to_stator('D').spr,
-                              -self.name_to_stator('D').spr.get_xy()[0])
+                              - self.name_to_stator('D').spr.get_xy()[0])
         elif k == 'r':
             self.reticule.move(150, self.reticule.spr.get_xy()[1])
             self.update_slide_labels()
@@ -212,67 +264,19 @@ class SlideRule():
             self.update_result_label()
         return True
 
-    def _process_numeric_input(self, sprite, keyname):
-        ''' Make sure numeric input is valid. '''
-        CURSOR = '█'
-
-        oldnum = sprite.labels[0].replace(CURSOR, '')
-        newnum = oldnum
-        if len(oldnum) == 0:
-            oldnum = '0'
-        if keyname == 'minus':
-            if oldnum == '0':
-                newnum = '-'
-            elif oldnum[0] != '-':
-                newnum = '-' + oldnum
-            else:
-                newnum = oldnum
-        elif keyname == 'comma' and self.decimal_point == ',' and \
-                ',' not in oldnum:
-            newnum = oldnum + ','
-        elif keyname == 'period' and self.decimal_point == '.' and \
-                '.' not in oldnum:
-            newnum = oldnum + '.'
-        elif keyname == 'BackSpace':
-            if len(oldnum) > 0:
-                newnum = oldnum[:len(oldnum)-1]
-            else:
-                newnum = ''
-        elif keyname in ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']:
-            if oldnum == '0':
-                newnum = keyname
-            else:
-                newnum = oldnum + keyname
-        elif keyname == 'Return':
-            self.enter_value(sprite, newnum.replace(self.decimal_point, '.'))
-            return
-        else:
-            newnum = oldnum
-        if newnum == '.':
-            newnum = '0.'
-        if len(newnum) > 0 and newnum != '-':
-            try:
-                float(newnum.replace(self.decimal_point, '.'))
-            except ValueError, e:
-                newnum = oldnum
-        sprite.set_label(newnum + CURSOR)
-
-    def enter_value(self, sprite, value):
-        if sprite is None:
-            return
-        sprite.set_label(value.replace('.', self.decimal_point))
+    def _process_numeric_input(self, i, text):
         try:
-            if sprite == self.reticule.tabs[TOP].spr:
-                self._move_reticule_to_slide_value(
-                    float(value.replace(self.decimal_point, '.')))
-            elif sprite == self.reticule.tabs[BOTTOM].spr:
-                self._move_reticule_to_stator_value(
-                    float(value.replace(self.decimal_point, '.')))
-            else:
-                self._move_slide_to_stator_value(
-                    float(value.replace(self.decimal_point, '.')))
-        except TypeError:
-            sprite.set_label('NaN')
+            n = float(text.replace(self.decimal_point, '.'))
+            if i == 0:
+                self._move_reticule_to_stator_value(n)                    
+            elif i == 1:
+                self._move_reticule_to_slide_value(n)
+            elif i == 2:
+                self._move_slide_to_stator_value(n)
+            elif i == 3:
+                self._move_slide_to_stator_value(self._left_from_right(n))
+        except ValueError:
+            self.result_label.spr.labels[0] = _('NaN') + ' ' + text
         return
 
     def _process_text_field(self, text_field):
@@ -534,14 +538,13 @@ class SlideRule():
         slidex = self.active_slide.spr.get_xy()[0]
         statorx = self.active_stator.spr.get_xy()[0]
         dx = statorx - slidex
+        print 'calling active slide', dx, 0
         self.active_slide.move_relative(dx, 0)
 
     def _move_slides(self, sprite, dx):
         if self.sprite_in_stators(sprite):
-            for slide in self.slides:
-                slide.move_relative(dx, 0)
-            for stator in self.stators:
-                stator.move_relative(dx, 0)
+            self.active_stator.move_relative(dx, 0)
+            self.active_slide.move_relative(dx, 0)
             self.reticule.move_relative(dx, 0)
         elif self.reticule.match(sprite):
             self.reticule.move_relative(dx, 0)
@@ -550,35 +553,52 @@ class SlideRule():
         self.update_slide_labels()
         self.update_result_label()
 
-    def _update_top(self, function):
-        v_left = function()
+    def _left_from_right(self, v_right):
         if self.active_stator.name == 'L2':
-            v_right = 10 + v_left
+            return v_right - 10
         elif self.active_stator.name == 'D':
-            v_right = v_left * 10.
+            return v_right / 10.
         elif self.active_stator.name == 'B':
-            v_right = v_left * 100.
+            return v_right / 100.
         elif self.active_stator.name == 'K2':
-            v_right = v_left * 1000.
+            return v_right / 1000.
         elif self.active_stator.name == 'DI':
-            v_right = v_left / 10.
+            return v_right * 10.
         elif self.active_stator.name == 'LLn2':
-            v_right = round(log(10), 2) + v_left
+            return v_right - round(log(10), 2)
         else:
-            v_right = v_left
-        for slide in self.slides:
-            slide.tabs[LEFT].spr.set_label(str(v_left).replace('.',
-                self.decimal_point))
-            slide.tabs[RIGHT].spr.set_label(str(v_right).replace('.',
-                self.decimal_point))
-
+            return v_right
+        
+    def _right_from_left(self, v_left):
+        if self.active_stator.name == 'L2':
+            return 10 + v_left
+        elif self.active_stator.name == 'D':
+            return v_left * 10.
+        elif self.active_stator.name == 'B':
+            return v_left * 100.
+        elif self.active_stator.name == 'K2':
+            return v_left * 1000.
+        elif self.active_stator.name == 'DI':
+            return v_left / 10.
+        elif self.active_stator.name == 'LLn2':
+            return round(log(10), 2) + v_left
+        else:
+            return v_left
+        
     def update_slide_labels(self):
         """ Based on the current alignment of the rules, calculate labels. """
-        self._update_top(self.active_stator.calculate)
-        self.reticule.tabs[BOTTOM].spr.set_label(
-            str(self.active_stator.result()).replace('.', self.decimal_point))
-        self.reticule.tabs[TOP].spr.set_label(
-            str(self.active_slide.calculate()).replace('.', self.decimal_point))
+        v_left = self.active_stator.calculate()
+        v_right = self._right_from_left(v_left)
+        label_left = str(v_left).replace('.', self.decimal_point)
+        label_right = str(v_right).replace('.', self.decimal_point)
+        self.active_slide.label(label_left, i=LEFT)
+        self.active_slide.label(label_right, i=RIGHT)
+        self.reticule.label(
+            str(self.active_stator.result()).replace('.', self.decimal_point),
+            i=BOTTOM)
+        self.reticule.label(
+            str(self.active_slide.calculate()).replace('.', self.decimal_point),
+            i=TOP)
 
     def _button_release_cb(self, win, event):
         if self.press == None:
