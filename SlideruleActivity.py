@@ -34,18 +34,11 @@ pygtk.require('2.0')
 
 import sugar3
 from sugar3.activity import activity
-try:
-    from sugar3.graphics.toolbarbox import ToolbarBox
-    _have_toolbox = True
-except ImportError:
-    _have_toolbox = False
-
-if _have_toolbox:
-    from sugar3.bundle.activitybundle import ActivityBundle
-    from sugar3.activity.widgets import ActivityToolbarButton, StopButton, \
-        EditToolbar
-    from sugar3.graphics.toolbarbox import ToolbarButton
-
+from sugar3.graphics.toolbarbox import ToolbarBox
+from sugar3.bundle.activitybundle import ActivityBundle
+from sugar3.activity.widgets import ActivityToolbarButton, StopButton, \
+    EditToolbar
+from sugar3.graphics.toolbarbox import ToolbarButton
 from sugar3.datastore import datastore
 
 from toolbar_utils import combo_factory, button_factory, entry_factory, \
@@ -83,7 +76,7 @@ class SlideruleActivity(activity.Activity):
     def __init__(self, handle):
         super(SlideruleActivity,self).__init__(handle)
 
-        self._setup_toolbars(_have_toolbox)
+        self._setup_toolbars()
 
         canvas = Gtk.DrawingArea()
         canvas.set_size_request(Gdk.Screen.width(),
@@ -94,8 +87,10 @@ class SlideruleActivity(activity.Activity):
 
         self.custom_slides = [False, False]
 
-        self.sr = SlideRule(canvas, os.path.join(activity.get_bundle_path(),
-                                                 'images/'), self)
+        self.sr = SlideRule(
+            canvas,
+            os.path.join(activity.get_bundle_path(), 'images/'),
+            self)
 
         # Read the slider positions from the Journal
         for slide in self.sr.slides:
@@ -421,7 +416,7 @@ class SlideruleActivity(activity.Activity):
             self.sr.enter_value(self.sr.last, text)
         return
 
-    def _setup_toolbars(self, have_toolbox):
+    def _setup_toolbars(self):
         """ Setup the toolbars.. """
         project_toolbar = Gtk.Toolbar()
         custom_slide_toolbar = Gtk.Toolbar()
@@ -431,81 +426,81 @@ class SlideruleActivity(activity.Activity):
         # no sharing
         self.max_participants = 1
 
-        if have_toolbox:
-            toolbox = ToolbarBox()
+        toolbox = ToolbarBox()
 
-            # Activity toolbar
-            activity_button = ActivityToolbarButton(self)
+        # Activity toolbar
+        activity_button = ActivityToolbarButton(self)
 
-            toolbox.toolbar.insert(activity_button, 0)
-            activity_button.show()
+        toolbox.toolbar.insert(activity_button, 0)
+        activity_button.show()
 
-            project_toolbar_button = ToolbarButton(page=project_toolbar,
-                                                   icon_name='sliderule')
-            project_toolbar.show()
-            toolbox.toolbar.insert(project_toolbar_button, -1)
-            project_toolbar_button.show()
+        project_toolbar_button = ToolbarButton(page=project_toolbar,
+                                               icon_name='sliderule')
+        project_toolbar.show()
+        toolbox.toolbar.insert(project_toolbar_button, -1)
+        project_toolbar_button.show()
 
-            custom_slide_toolbar_button = ToolbarButton(
-                page=custom_slide_toolbar,
-                icon_name='custom-slide')
-            custom_slide_toolbar.show()
-            toolbox.toolbar.insert(custom_slide_toolbar_button, -1)
-            custom_slide_toolbar_button.show()
+        custom_slide_toolbar_button = ToolbarButton(
+            page=custom_slide_toolbar,
+            icon_name='custom-slide')
+        custom_slide_toolbar.show()
+        toolbox.toolbar.insert(custom_slide_toolbar_button, -1)
+        custom_slide_toolbar_button.show()
 
-            custom_stator_toolbar_button = ToolbarButton(
-                page=custom_stator_toolbar,
-                icon_name='custom-stator')
-            custom_stator_toolbar.show()
-            toolbox.toolbar.insert(custom_stator_toolbar_button, -1)
-            custom_stator_toolbar_button.show()
+        custom_stator_toolbar_button = ToolbarButton(
+            page=custom_stator_toolbar,
+            icon_name='custom-stator')
+        custom_stator_toolbar.show()
+        toolbox.toolbar.insert(custom_stator_toolbar_button, -1)
+        custom_stator_toolbar_button.show()
 
-            edit_toolbar_button = ToolbarButton(label=_('Edit'),
-                                                page=edit_toolbar,
-                                                icon_name='toolbar-edit')
-            edit_toolbar_button.show()
-            toolbox.toolbar.insert(edit_toolbar_button, -1)
-            edit_toolbar_button.show()
+        edit_toolbar_button = ToolbarButton(label=_('Edit'),
+                                            page=edit_toolbar,
+                                            icon_name='toolbar-edit')
+        edit_toolbar_button.show()
+        toolbox.toolbar.insert(edit_toolbar_button, -1)
+        edit_toolbar_button.show()
 
-            self.set_toolbar_box(toolbox)
-            toolbox.show()
-            toolbar = toolbox.toolbar
-
-        else:
-            # Use pre-0.86 toolbar design
-            toolbox = activity.ActivityToolbox(self)
-            self.set_toolbox(toolbox)
-            toolbox.add_toolbar(_('Project'), project_toolbar)
-            toolbox.add_toolbar(_('Custom slide'), custom_slide_toolbar)
-            toolbox.add_toolbar(_('Custom stator'), custom_stator_toolbar)
-            toolbox.add_toolbar(_('Edit'), edit_toolbar)
-            toolbox.show()
-            toolbox.set_current_toolbar(1)
-            toolbar = project_toolbar
-
-            # no sharing
-            if hasattr(toolbox, 'share'):
-               toolbox.share.hide()
-            elif hasattr(toolbox, 'props'):
-               toolbox.props.visible = False
+        self.set_toolbar_box(toolbox)
+        toolbox.show()
+        toolbar = toolbox.toolbar
 
         # Add the buttons to the toolbars
         self._function_combo = combo_factory(
-            FUNCTIONS, project_toolbar, self._function_combo_cb,
-            default=FC_multiply, tooltip=_('select function'))
+            FUNCTIONS,
+            project_toolbar,
+            self._function_combo_cb,
+            default=FC_multiply,
+            tooltip=_('select function'))
         self.top_button = button_factory(
-            'C', project_toolbar, self._dummy_cb, tooltip=_('active slide'))
+            'C',
+            project_toolbar,
+            self._dummy_cb,
+            tooltip=_('active slide'))
         self._slide_combo = combo_factory(
-            SLIDE_TABLE, project_toolbar, self._slide_combo_cb,
-            default=C_slide, tooltip=_('select slide'))
+            SLIDE_TABLE,
+            project_toolbar,
+            self._slide_combo_cb,
+            default=C_slide,
+            tooltip=_('select slide'))
         self.bottom_button = button_factory(
-            'D', project_toolbar, self._dummy_cb, tooltip=_('active stator'))
+            'D',
+            project_toolbar,
+            self._dummy_cb,
+            tooltip=_('active stator'))
         self._stator_combo = combo_factory(
-            STATOR_TABLE, project_toolbar,  self._stator_combo_cb,
-            default=D_slide, tooltip=_('select stator'))
+            STATOR_TABLE,
+            project_toolbar,
+            self._stator_combo_cb,
+            default=D_slide,
+            tooltip=_('select stator'))
+
         separator_factory(project_toolbar)
+
         self.realign_button = button_factory(
-            'realign', project_toolbar, self.realign_cb,
+            'realign',
+            project_toolbar,
+            self.realign_cb,
             tooltip=_('realign slides'))
 
         self._offset_function = []
@@ -524,36 +519,58 @@ class SlideruleActivity(activity.Activity):
         for i in range(2):
             self._offset_function.append(entry_factory(
                     DEFINITIONS[ENTRY[i]][0],
-                    ENTRY_TOOLBAR[i], tooltip=_('position function')))
+                    ENTRY_TOOLBAR[i],
+                    tooltip=_('position function'),
+                    max=10))
             self._calculate_function.append(entry_factory(
                     DEFINITIONS[ENTRY[i]][1],
-                    ENTRY_TOOLBAR[i], tooltip=_('result function')))
+                    ENTRY_TOOLBAR[i],
+                    tooltip=_('result function'),
+                    max=10))
             self._label_function.append(entry_factory(
                     DEFINITIONS[ENTRY[i]][2],
-                    ENTRY_TOOLBAR[i], tooltip=_('label function')))
-            self._domain_min.append(entry_factory(DEFINITIONS[ENTRY[i]][3],
-                ENTRY_TOOLBAR[i], tooltip=_('domain minimum'), max=4))
-            self._domain_max.append(entry_factory(DEFINITIONS[ENTRY[i]][4],
-                ENTRY_TOOLBAR[i], tooltip=_('domain maximum'), max=4))
-            self._step_size.append(entry_factory(DEFINITIONS[ENTRY[i]][5],
-                ENTRY_TOOLBAR[i], tooltip=_('step size'), max=4))
+                    ENTRY_TOOLBAR[i],
+                    tooltip=_('label function'),
+                    max=10))
+            self._domain_min.append(entry_factory(
+                    DEFINITIONS[ENTRY[i]][3],
+                    ENTRY_TOOLBAR[i],
+                    tooltip=_('domain minimum'),
+                    max=4))
+            self._domain_max.append(entry_factory(
+                    DEFINITIONS[ENTRY[i]][4],
+                    ENTRY_TOOLBAR[i],
+                    tooltip=_('domain maximum'),
+                    max=4))
+            self._step_size.append(entry_factory(
+                    DEFINITIONS[ENTRY[i]][5],
+                    ENTRY_TOOLBAR[i],
+                    tooltip=_('step size'),
+                    max=4))
             self.custom.append(button_factory(
-                    ENTRY_BUTTON[i], ENTRY_TOOLBAR[i], ENTRY_CALLBACK[i],
+                    ENTRY_BUTTON[i],
+                    ENTRY_TOOLBAR[i],
+                    ENTRY_CALLBACK[i],
                     tooltip=ENTRY_TOOLTIP[i]))
 
-        copy = button_factory('edit-copy', edit_toolbar, self._copy_cb,
-                              tooltip=_('Copy'), accelerator='<Ctrl>c')
-        paste = button_factory('edit-paste', edit_toolbar, self._paste_cb,
-                                tooltip=_('Paste'), accelerator='<Ctrl>v')
+        copy = button_factory('edit-copy',
+                              edit_toolbar,
+                              self._copy_cb,
+                              tooltip=_('Copy'),
+                              accelerator='<Ctrl>c')
+        paste = button_factory('edit-paste',
+                               edit_toolbar,
+                               self._paste_cb,
+                               tooltip=_('Paste'),
+                               accelerator='<Ctrl>v')
 
-        if have_toolbox:
-            separator_factory(toolbox.toolbar, True, False)
+        separator_factory(toolbox.toolbar, True, False)
 
-            stop_button = StopButton(self)
-            stop_button.props.accelerator = '<Ctrl>q'
-            toolbox.toolbar.insert(stop_button, -1)
-            stop_button.show()
-            # workaround to #2050
-            edit_toolbar_button.set_expanded(True)
-            # start with project toolbar enabled
-            project_toolbar_button.set_expanded(True)
+        stop_button = StopButton(self)
+        stop_button.props.accelerator = '<Ctrl>q'
+        toolbox.toolbar.insert(stop_button, -1)
+        stop_button.show()
+        # workaround to #2050
+        edit_toolbar_button.set_expanded(True)
+        # start with project toolbar enabled
+        project_toolbar_button.set_expanded(True)
