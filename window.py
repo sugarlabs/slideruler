@@ -162,8 +162,10 @@ class SlideRule():
             self.text_entries.append(Gtk.TextView())
             self.text_entries[-1].set_justification(Gtk.Justification.CENTER)
             self.text_entries[-1].set_pixels_above_lines(4)
+            ''' Not necessary (and doesn't work on OS8)
             self.text_entries[-1].override_background_color(
                 Gtk.StateType.NORMAL, Gdk.RGBA(0, 0, 0, 0))
+            '''
             self.text_entries[-1].modify_font(font_desc)
             self.text_buffers.append(self.text_entries[-1].get_buffer())
             self.text_entries[-1].set_size_request(w, h)
