@@ -74,7 +74,7 @@ def _get_screen_dpi():
 
 class SlideRule():
 
-    def __init__(self, canvas, path, parent=None):
+    def __init__(self, canvas, path, parent=None, sugar=True):
         """ Handle launch from both within and without of Sugar environment. """
         self.SLIDES = {'C':[C_slide_generator], 'CI':[CI_slide_generator],
                        'A':[A_slide_generator], 'K':[K_slide_generator],
@@ -93,15 +93,10 @@ class SlideRule():
 
         self.path = path
 
-        if parent is None:
-            self.sugar = False
-            self.canvas = canvas
-            self.parent = None
-        else:
-            self.sugar = True
-            self.canvas = canvas
-            self.parent = parent
-            parent.show_all()
+        self.sugar = sugar
+        self.canvas = canvas
+        self.parent = parent
+        parent.show_all()
 
         self.canvas.add_events(Gdk.EventMask.BUTTON_PRESS_MASK)
         self.canvas.add_events(Gdk.EventMask.BUTTON_RELEASE_MASK)
@@ -170,25 +165,33 @@ class SlideRule():
             self.text_buffers.append(self.text_entries[-1].get_buffer())
             self.text_entries[-1].set_size_request(w, h)
             self.text_entries[-1].show()
-            if self.parent is not None:
-                self.parent.fixed.put(self.text_entries[-1], 0, 0)
-                self.parent.fixed.show()
+            self.parent.fixed.put(self.text_entries[-1], 0, 0)
+            self.parent.fixed.show()
             self.text_entries[-1].connect('focus-out-event',
                                           self._text_focus_out_cb)
         self.reticule.add_textview(self.text_entries[0], i=BOTTOM)
         self.reticule.add_textview(self.text_entries[1], i=TOP)
-        if self.parent is not None:
-            self.reticule.set_fixed(self.parent.fixed)
+        self.reticule.set_fixed(self.parent.fixed)
         for slide in self.slides:
             slide.add_textview(self.text_entries[2], i=LEFT)
             slide.add_textview(self.text_entries[3], i=RIGHT)
-            if self.parent is not None:
-                slide.set_fixed(self.parent.fixed)
+            slide.set_fixed(self.parent.fixed)
+
+        if not self.sugar:
+            self.update_textview_y_offset(self.parent.menu_height)
 
         self.active_slide = self.name_to_slide('C')
         self.active_stator = self.name_to_stator('D')
         self.update_slide_labels()
         self.update_result_label()
+
+    def update_textview_y_offset(self, dy):
+        ''' Need to account for menu height in GNOME '''
+        self.reticule.tabs[0].textview_y_offset += dy
+        self.reticule.tabs[1].textview_y_offset += dy
+        for slide in self.slides:
+            slide.tabs[0].textview_y_offset += dy
+            slide.tabs[1].textview_y_offset += dy
 
     def _text_focus_out_cb(self, widget=None, event=None):
         ''' One of the four textviews was in focus '''
@@ -230,7 +233,7 @@ class SlideRule():
     def _keypress_cb(self, area, event):
         """ Keypress: moving the slides with the arrow keys """
         k = Gdk.keyval_name(event.keyval)
-        if self.parent is None:
+        if not self.sugar:
             return
         if k == 'a':
             self.parent.show_a()
@@ -392,7 +395,8 @@ class SlideRule():
                 self.slides[i] = custom_slide
                 if active:
                     self.active_slide = self.slides[i]
-                self.parent.set_slide()
+                if self.sugar:
+                    self.parent.set_slide()
             else:
                 self.slides.append(custom_slide)
 
@@ -415,13 +419,14 @@ class SlideRule():
                 self.stators[i] = custom_stator
                 if active:
                     self.active_stator = self.stators[i]
-                self.parent.set_stator()
+                if self.sugar:
+                    self.parent.set_stator()
             else:
                 self.stators.append(custom_stator)
 
             self.active_stator = self.name_to_stator(name)
 
-        if name == 'custom' and hasattr(self.parent, 'sr'):
+        if self.sugar and name == 'custom' and hasattr(self.parent, 'sr'):
             self.parent.show_u(slide)
 
         if slide == SLIDE and custom_slide.error_msg is not None:
@@ -624,24 +629,24 @@ class SlideRule():
             if self.active_slide.name == 'A':
                 if self.name_to_slide('A').spr.get_xy()[0] == dx:
                     s = " √ %0.2f = %0.2f\t\t%0.2f² = %0.2f" % (S, R, R, S)
-                elif self.parent is not None:
+                elif self.sugar:
                     self.parent.set_function_unknown()
             elif self.active_slide.name == 'K':
                 if self.name_to_slide('K').spr.get_xy()[0] == dx:
                     s = " ∛ %0.2f = %0.2f\t\t%0.2f³ = %0.2f" % (S, R, R, S)
-                elif self.parent is not None:
+                elif self.sugar:
                     self.parent.set_function_unknown()
             elif self.active_slide.name == 'S':
                 if self.name_to_slide('S').spr.get_xy()[0] == dx:
                     s = " sin(%0.2f) = %0.2f\t\tasin(%0.2f) = %0.2f" % \
                         (S, R/10, R/10, S)
-                elif self.parent is not None:
+                elif self.sugar:
                     self.parent.set_function_unknown()
             elif self.active_slide.name == 'T':
                 if self.name_to_slide('T').spr.get_xy()[0] == dx:
                     s = " tan(%0.2f) = %0.2f\t\tatan(%0.2f) = %0.2f" % \
                         (S, R/10, R/10, S)
-                elif self.parent is not None:
+                elif self.sugar:
                     self.parent.set_function_unknown()
             elif self.active_slide.name == 'C':
                 D = str(self._calc_stator_value('D'))
@@ -684,7 +689,7 @@ class SlideRule():
             R = self._calc_stator_result('LLn2')
             if self.name_to_slide('C').spr.get_xy()[0] == dx:
                 s = " ln(%0.2f) = %0.2f\t\texp(%0.2f) = %0.2f" % (S, R, R, S)
-            elif self.parent is not None:
+            elif self.sugar:
                 self.parent.set_function_unknown()
 
         if self.active_slide.name == 'custom' or \

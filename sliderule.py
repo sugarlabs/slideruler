@@ -33,7 +33,6 @@ class SlideruleMain:
 
     def __init__(self):
         self.r = 0
-        self.sr = None
 
         self.win = Gtk.Window(Gtk.WindowType.TOPLEVEL)
         self.win.maximize()
@@ -73,31 +72,66 @@ class SlideruleMain:
         menu.append(menu_items)
         menu_items.connect("activate", self._realign_cb)
         menu_items.show()
+        menu_items = Gtk.MenuItem(_("Quit"))
+        menu.append(menu_items)
+        menu_items.connect("activate", self._quit_cb)
+        menu_items.show()
         root_menu = Gtk.MenuItem("Tools")
         root_menu.show()
         root_menu.set_submenu(menu)
+
+        menu.show()
+        self.menu_bar = Gtk.MenuBar()
+        self.menu_bar.append(root_menu)
+        self.menu_bar.show()
+        self.menu_height = self.menu_bar.size_request().height
 
         vbox = Gtk.VBox(False, 0)
         self.win.add(vbox)
         vbox.show()
 
-        menu_bar = Gtk.MenuBar()
-        vbox.pack_start(menu_bar, False, False, 2)
-        menu_bar.show()
+        self.fixed = Gtk.Fixed()
+        self.fixed.connect('size-allocate', self._fixed_resize_cb)
+        width = Gdk.Screen.width() - 80
+        height = Gdk.Screen.height() - 60
+        self.fixed.set_size_request(width, height)
+        vbox.pack_start(self.fixed, True, True, 0)
+
+        self.vbox = Gtk.VBox(False, 0)
+        self.vbox.show()
+
+        self.vbox.pack_start(self.menu_bar, False, False, 2)
 
         canvas = Gtk.DrawingArea()
-        vbox.pack_end(canvas, True, True)
+        width = Gdk.Screen.width() - 80
+        height = Gdk.Screen.height() - 60
+        canvas.set_size_request(width, height)
         canvas.show()
-
-        menu_bar.append(root_menu)
+        self.vbox.pack_end(canvas, True, True, 0)
+        self.fixed.put(self.vbox, 0, 0)
+        self.fixed.show()
         self.win.show_all()
 
-        self.sr = SlideRule(canvas, os.path.join(os.path.abspath('.'),
-                                                 'images/'))
+        self.sr = SlideRule(canvas,
+                            os.path.join(os.path.abspath('.'), 'images/'),
+                            parent=self, sugar=False)
         self.sr.win = self.win
         self.sr.activity = self
         self.hide_all()
         self._c_cb(None)
+
+    def show_all(self):
+        self.win.show_all()
+
+    def _fixed_resize_cb(self, widget=None, rect=None):
+        ''' If a toolbar opens or closes, we need to resize the vbox
+        holding out scrolling window. '''
+        self.vbox.set_size_request(rect.width, rect.height)
+        if hasattr(self, 'sr'):
+            self.sr.update_textview_y_offset(-self.menu_height)
+        self.menu_height = self.menu_bar.size_request().height
+        if hasattr(self, 'sr'):
+            self.sr.update_textview_y_offset(self.menu_height)
 
     def set_title(self, title):
         self.win.set_title(title)
@@ -114,7 +148,7 @@ class SlideruleMain:
         cy = self.sr.name_to_slide('C').spr.get_xy()[1]
         for slide in self.sr.slides:
             slide.move(dx, cy)
-        self.move_stators(dx, dy)
+        self.sr.move_stators(dx, dy)
 
     def _show(self):
         self.sr.active_slide.draw()
@@ -171,6 +205,10 @@ class SlideruleMain:
         self.sr.active_stator = self.sr.name_to_stator('L2')
         self._show()
         return True
+
+    def _quit_cb(self, widget):
+        Gtk.main_quit()
+        exit()
 
 
 def main():

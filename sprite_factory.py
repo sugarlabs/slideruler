@@ -118,7 +118,7 @@ class Reticule(Slide):
         self.tabs = []
         self.tabs.append(Tab(sprites, path, 'tab', x + self.tab_dx[0],
                              y + self.tab_dy[0], TABWIDTH, SHEIGHT))
-        self.tabs[-1].textview_yoffset = int(h / 4)
+        self.tabs[-1].textview_y_offset = int(h / 4)
         self.tabs.append(Tab(sprites, path, 'tab', x + self.tab_dx[1],
                              y + self.tab_dy[1], TABWIDTH, SHEIGHT))
         self.name = name
@@ -165,14 +165,14 @@ class Tab():
         self.textview = None
         self.textbuffer = None
         self.fixed = None
-        self.textview_yoffset = 0
+        self.textview_y_offset = 0
 
     def label(self, label):
         if self.textbuffer is not None:
             self.textbuffer.set_text(label)
 
     def _move_textview(self, x, y):
-        y += self.textview_yoffset
+        y += self.textview_y_offset
         if self.textview is not None:
             if x > 0 and x < Gdk.Screen.width() - self.width and y > 0:
                 self.fixed.move(self.textview, x, y)
