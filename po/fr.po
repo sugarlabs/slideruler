@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-10-30 00:32-0400\n"
-"PO-Revision-Date: 2011-11-10 19:48+0200\n"
+"PO-Revision-Date: 2012-11-24 18:30+0200\n"
 "Last-Translator: samy boutayeb <s.boutayeb@free.fr>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: fr\n"
@@ -26,6 +26,8 @@ msgstr "Règle à calcul"
 #. TRANS: "description" option from activity.info file
 msgid "a mechanical calculator for multiplication, division, log, and more"
 msgstr ""
+"calculateur mécanique pour les opérations de multiplication, division, log, "
+"etc."
 
 #: SlideruleActivity.py:61 sliderule.py:23
 msgid "square/square root"
