@@ -1,0 +1,224 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-10-30 00:32-0400\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Translate Toolkit 1.7.0\n"
+
+#. TRANS: "name" option from activity.info file
+#: sliderule.py:40
+msgid "Sliderule"
+msgstr ""
+
+#. TRANS: "summary" option from activity.info file
+#. TRANS: "description" option from activity.info file
+msgid "a mechanical calculator for multiplication, division, log, and more"
+msgstr ""
+
+#: SlideruleActivity.py:61 sliderule.py:23
+msgid "square/square root"
+msgstr ""
+
+#: SlideruleActivity.py:62 sliderule.py:24
+msgid "multiply/divide"
+msgstr ""
+
+#: SlideruleActivity.py:63 sliderule.py:25
+msgid "divide/multiply"
+msgstr ""
+
+#: SlideruleActivity.py:64 sliderule.py:26
+msgid "cube/cube root"
+msgstr ""
+
+#: SlideruleActivity.py:65 sliderule.py:27
+msgid "sin, asin"
+msgstr ""
+
+#: SlideruleActivity.py:66 sliderule.py:28
+msgid "tan, atan"
+msgstr ""
+
+#: SlideruleActivity.py:67 sliderule.py:29
+msgid "add/subtract"
+msgstr ""
+
+#: SlideruleActivity.py:68
+msgid "natural log"
+msgstr ""
+
+#: SlideruleActivity.py:477
+msgid "Edit"
+msgstr ""
+
+#: SlideruleActivity.py:494
+msgid "select function"
+msgstr ""
+
+#: SlideruleActivity.py:499
+msgid "active slide"
+msgstr ""
+
+#: SlideruleActivity.py:505
+msgid "select slide"
+msgstr ""
+
+#: SlideruleActivity.py:510
+msgid "active stator"
+msgstr ""
+
+#: SlideruleActivity.py:516
+msgid "select stator"
+msgstr ""
+
+#: SlideruleActivity.py:524 sliderule.py:72
+msgid "realign slides"
+msgstr ""
+
+#: SlideruleActivity.py:537
+msgid "create custom slide"
+msgstr ""
+
+#: SlideruleActivity.py:537
+msgid "create custom stator"
+msgstr ""
+
+#: SlideruleActivity.py:543
+msgid "position function"
+msgstr ""
+
+#: SlideruleActivity.py:548
+msgid "result function"
+msgstr ""
+
+#: SlideruleActivity.py:553
+msgid "label function"
+msgstr ""
+
+#: SlideruleActivity.py:558
+msgid "domain minimum"
+msgstr ""
+
+#: SlideruleActivity.py:563
+msgid "domain maximum"
+msgstr ""
+
+#: SlideruleActivity.py:568
+msgid "step size"
+msgstr ""
+
+#: SlideruleActivity.py:579
+msgid "Copy"
+msgstr ""
+
+#: SlideruleActivity.py:584
+msgid "Paste"
+msgstr ""
+
+#: constants.py:51
+msgid "log²"
+msgstr ""
+
+#: constants.py:53
+msgid "log"
+msgstr ""
+
+#: constants.py:55
+msgid "1/log"
+msgstr ""
+
+#: constants.py:57
+msgid "log³"
+msgstr ""
+
+#: constants.py:58
+msgid "sin"
+msgstr ""
+
+#: constants.py:59
+msgid "tan"
+msgstr ""
+
+#: constants.py:60
+msgid "linear"
+msgstr ""
+
+#: constants.py:61
+msgid "log log"
+msgstr ""
+
+#: constants.py:62
+msgid "ln"
+msgstr ""
+
+#: constants.py:63
+msgid "user defined"
+msgstr ""
+
+#: genslides.py:719 window.py:292 window.py:770 window.py:812
+msgid "Overflow Error"
+msgstr ""
+
+#: genslides.py:721 window.py:296 window.py:773 window.py:814
+msgid "Name Error"
+msgstr ""
+
+#: genslides.py:723 window.py:299 window.py:776 window.py:816
+msgid "Can not divide by zero"
+msgstr ""
+
+#: genslides.py:725 window.py:303 window.py:306 window.py:779 window.py:782
+#: window.py:818 window.py:820
+msgid "Type Error"
+msgstr ""
+
+#: genslides.py:727 window.py:326 window.py:339 window.py:352
+msgid "Value Error"
+msgstr ""
+
+#: genslides.py:729 window.py:309 window.py:785 window.py:822
+msgid "Syntax Error"
+msgstr ""
+
+#: sliderule.py:44
+msgid "L"
+msgstr ""
+
+#: sliderule.py:48
+msgid "C"
+msgstr ""
+
+#: sliderule.py:52
+msgid "CI"
+msgstr ""
+
+#: sliderule.py:56
+msgid "A"
+msgstr ""
+
+#: sliderule.py:60
+msgid "K"
+msgstr ""
+
+#: sliderule.py:64
+msgid "S"
+msgstr ""
+
+#: sliderule.py:68
+msgid "T"
+msgstr ""
+
+#: window.py:281
+msgid "NaN"
+msgstr ""
