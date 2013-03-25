@@ -7,237 +7,220 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-10-30 00:32-0400\n"
-"PO-Revision-Date: 2012-11-05 22:28+0200\n"
-"Last-Translator: whe <heppew@yahoo.com>\n"
+"PO-Revision-Date: 2013-01-01 00:23+0200\n"
+"Last-Translator: Kamila <kamilafilipowska@yahoo.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: nl\n"
+"Language: pl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
+"|| n%100>=20) ? 1 : 2);\n"
 "X-Generator: Pootle 2.0.5\n"
 
 #. TRANS: "name" option from activity.info file
 #: sliderule.py:40
 msgid "Sliderule"
-msgstr "Schuifliniaal"
+msgstr "Suwak rachunkowy"
 
 #. TRANS: "summary" option from activity.info file
 #. TRANS: "description" option from activity.info file
 msgid "a mechanical calculator for multiplication, division, log, and more"
-msgstr "een mechanische rekenmachine voor vermenigvuldigen, delen, log, en meer"
+msgstr ""
 
 #: SlideruleActivity.py:61 sliderule.py:23
 msgid "square/square root"
-msgstr "kwadraat/vierkantswortel"
+msgstr ""
 
 #: SlideruleActivity.py:62 sliderule.py:24
 msgid "multiply/divide"
-msgstr "vermenigvuldig/deel"
+msgstr ""
 
 #: SlideruleActivity.py:63 sliderule.py:25
 msgid "divide/multiply"
-msgstr "deel/vermenigvuldig"
+msgstr ""
 
 #: SlideruleActivity.py:64 sliderule.py:26
 msgid "cube/cube root"
-msgstr "derde macht/derdemachtswortel"
+msgstr ""
 
 #: SlideruleActivity.py:65 sliderule.py:27
 msgid "sin, asin"
-msgstr "sin, asin"
+msgstr ""
 
 #: SlideruleActivity.py:66 sliderule.py:28
 msgid "tan, atan"
-msgstr "tan, atan"
+msgstr ""
 
 #: SlideruleActivity.py:67 sliderule.py:29
 msgid "add/subtract"
-msgstr "optellen/aftrekken"
+msgstr ""
 
 #: SlideruleActivity.py:68
 msgid "natural log"
-msgstr "natuurlijke log"
+msgstr ""
 
 #: SlideruleActivity.py:477
 msgid "Edit"
-msgstr "Wijzig"
+msgstr ""
 
 #: SlideruleActivity.py:494
 msgid "select function"
-msgstr "selecteer functie"
+msgstr ""
 
 #: SlideruleActivity.py:499
 msgid "active slide"
-msgstr "actieve dia"
+msgstr ""
 
 #: SlideruleActivity.py:505
 msgid "select slide"
-msgstr "selecteer dia"
+msgstr ""
 
 #: SlideruleActivity.py:510
 msgid "active stator"
-msgstr "actieve stator"
+msgstr ""
 
 #: SlideruleActivity.py:516
 msgid "select stator"
-msgstr "selecteer stator"
+msgstr ""
 
 #: SlideruleActivity.py:524 sliderule.py:72
 msgid "realign slides"
-msgstr "dia´s uitlijnen"
+msgstr ""
 
 #: SlideruleActivity.py:537
 msgid "create custom slide"
-msgstr "maak aangepaste dia"
+msgstr ""
 
 #: SlideruleActivity.py:537
 msgid "create custom stator"
-msgstr "maak aangepaste stator"
+msgstr ""
 
 #: SlideruleActivity.py:543
 msgid "position function"
-msgstr "positie functie"
+msgstr ""
 
 #: SlideruleActivity.py:548
 msgid "result function"
-msgstr "resultaat functie"
+msgstr ""
 
 #: SlideruleActivity.py:553
 msgid "label function"
-msgstr "label functie"
+msgstr ""
 
 #: SlideruleActivity.py:558
 msgid "domain minimum"
-msgstr "domein minimum"
+msgstr ""
 
 #: SlideruleActivity.py:563
 msgid "domain maximum"
-msgstr "domein maximum"
+msgstr ""
 
 #: SlideruleActivity.py:568
 msgid "step size"
-msgstr "stapgrootte"
+msgstr ""
 
 #: SlideruleActivity.py:579
 msgid "Copy"
-msgstr "Kopieer"
+msgstr ""
 
 #: SlideruleActivity.py:584
 msgid "Paste"
-msgstr "Plak"
+msgstr ""
 
 #: constants.py:51
 msgid "log²"
-msgstr "log²"
+msgstr ""
 
 #: constants.py:53
 msgid "log"
-msgstr "log"
+msgstr ""
 
 #: constants.py:55
 msgid "1/log"
-msgstr "1/log"
+msgstr ""
 
 #: constants.py:57
 msgid "log³"
-msgstr "log³"
+msgstr ""
 
 #: constants.py:58
 msgid "sin"
-msgstr "sin"
+msgstr ""
 
 #: constants.py:59
 msgid "tan"
-msgstr "tan"
+msgstr ""
 
 #: constants.py:60
 msgid "linear"
-msgstr "lineair"
+msgstr ""
 
 #: constants.py:61
 msgid "log log"
-msgstr "log log"
+msgstr ""
 
 #: constants.py:62
 msgid "ln"
-msgstr "ln"
+msgstr ""
 
 #: constants.py:63
 msgid "user defined"
-msgstr "gebruiker gedefinieerd"
+msgstr ""
 
 #: genslides.py:719 window.py:292 window.py:770 window.py:812
 msgid "Overflow Error"
-msgstr "Overloop Fout"
+msgstr ""
 
 #: genslides.py:721 window.py:296 window.py:773 window.py:814
 msgid "Name Error"
-msgstr "Naam Fout"
+msgstr ""
 
 #: genslides.py:723 window.py:299 window.py:776 window.py:816
 msgid "Can not divide by zero"
-msgstr "Kan niet delen door nul"
+msgstr ""
 
 #: genslides.py:725 window.py:303 window.py:306 window.py:779 window.py:782
 #: window.py:818 window.py:820
 msgid "Type Error"
-msgstr "Type Fout"
+msgstr ""
 
 #: genslides.py:727 window.py:326 window.py:339 window.py:352
 msgid "Value Error"
-msgstr "Waarde Fout"
+msgstr ""
 
 #: genslides.py:729 window.py:309 window.py:785 window.py:822
 msgid "Syntax Error"
-msgstr "Syntax Fout"
+msgstr ""
 
 #: sliderule.py:44
 msgid "L"
-msgstr "L"
+msgstr ""
 
 #: sliderule.py:48
 msgid "C"
-msgstr "C"
+msgstr ""
 
 #: sliderule.py:52
 msgid "CI"
-msgstr "CI"
+msgstr ""
 
 #: sliderule.py:56
 msgid "A"
-msgstr "A"
+msgstr ""
 
 #: sliderule.py:60
 msgid "K"
-msgstr "K"
+msgstr ""
 
 #: sliderule.py:64
 msgid "S"
-msgstr "S"
+msgstr ""
 
 #: sliderule.py:68
 msgid "T"
-msgstr "T"
+msgstr ""
 
 #: window.py:281
 msgid "NaN"
-msgstr "NaN"
-
-#~ msgid "Project"
-#~ msgstr "Project"
-
-#~ msgid "Custom slide"
-#~ msgstr "Aangepaste dia"
-
-#~ msgid "Custom stator"
-#~ msgstr "Aangepaste stator"
-
-#~ msgid "Slide Rule"
-#~ msgstr "Schuifliniaal"
-
-#~ msgid "Zero-division Error"
-#~ msgstr "Nul-deling Fout"
-
-#~ msgid "Zero Division Error"
-#~ msgstr "Nul Deling Fout"
+msgstr ""

@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-10-30 00:32-0400\n"
-"PO-Revision-Date: 2012-11-01 00:12+0200\n"
+"PO-Revision-Date: 2012-11-02 16:42+0200\n"
 "Last-Translator: AlanJAS <alanjas@hotmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: es\n"
@@ -29,197 +29,197 @@ msgstr "una calculadora mecánica para multiplicación, división, registros y m
 
 #: SlideruleActivity.py:61 sliderule.py:23
 msgid "square/square root"
-msgstr ""
+msgstr "cuadrado/raíz cuadrada"
 
 #: SlideruleActivity.py:62 sliderule.py:24
 msgid "multiply/divide"
-msgstr ""
+msgstr "multiplicar/dividir"
 
 #: SlideruleActivity.py:63 sliderule.py:25
 msgid "divide/multiply"
-msgstr ""
+msgstr "dividir/multiplicar"
 
 #: SlideruleActivity.py:64 sliderule.py:26
 msgid "cube/cube root"
-msgstr ""
+msgstr "cubo/raíz cúbica"
 
 #: SlideruleActivity.py:65 sliderule.py:27
 msgid "sin, asin"
-msgstr ""
+msgstr "sin, asin"
 
 #: SlideruleActivity.py:66 sliderule.py:28
 msgid "tan, atan"
-msgstr ""
+msgstr "tan, atan"
 
 #: SlideruleActivity.py:67 sliderule.py:29
 msgid "add/subtract"
-msgstr ""
+msgstr "suma/resta"
 
 #: SlideruleActivity.py:68
 msgid "natural log"
-msgstr ""
+msgstr "logaritmo natural"
 
 #: SlideruleActivity.py:477
 msgid "Edit"
-msgstr ""
+msgstr "Editar"
 
 #: SlideruleActivity.py:494
 msgid "select function"
-msgstr ""
+msgstr "seleccionar función"
 
 #: SlideruleActivity.py:499
 msgid "active slide"
-msgstr ""
+msgstr "diapositiva activa"
 
 #: SlideruleActivity.py:505
 msgid "select slide"
-msgstr ""
+msgstr "seleccionar diapositiva"
 
 #: SlideruleActivity.py:510
 msgid "active stator"
-msgstr ""
+msgstr "estator activo"
 
 #: SlideruleActivity.py:516
 msgid "select stator"
-msgstr ""
+msgstr "seleccionar estator"
 
 #: SlideruleActivity.py:524 sliderule.py:72
 msgid "realign slides"
-msgstr ""
+msgstr "realinear diapositivas"
 
 #: SlideruleActivity.py:537
 msgid "create custom slide"
-msgstr ""
+msgstr "crear diapositiva personalizada"
 
 #: SlideruleActivity.py:537
 msgid "create custom stator"
-msgstr ""
+msgstr "crear estator personalizado"
 
 #: SlideruleActivity.py:543
 msgid "position function"
-msgstr ""
+msgstr "posición de la función"
 
 #: SlideruleActivity.py:548
 msgid "result function"
-msgstr ""
+msgstr "resultado de la función"
 
 #: SlideruleActivity.py:553
 msgid "label function"
-msgstr ""
+msgstr "etiqueta de la función"
 
 #: SlideruleActivity.py:558
 msgid "domain minimum"
-msgstr ""
+msgstr "dominio mínimo"
 
 #: SlideruleActivity.py:563
 msgid "domain maximum"
-msgstr ""
+msgstr "dominio máximo"
 
 #: SlideruleActivity.py:568
 msgid "step size"
-msgstr ""
+msgstr "tamaño de paso"
 
 #: SlideruleActivity.py:579
 msgid "Copy"
-msgstr ""
+msgstr "Copiar"
 
 #: SlideruleActivity.py:584
 msgid "Paste"
-msgstr ""
+msgstr "Pegar"
 
 #: constants.py:51
 msgid "log²"
-msgstr ""
+msgstr "log²"
 
 #: constants.py:53
 msgid "log"
-msgstr ""
+msgstr "log"
 
 #: constants.py:55
 msgid "1/log"
-msgstr ""
+msgstr "1/log"
 
 #: constants.py:57
 msgid "log³"
-msgstr ""
+msgstr "log³"
 
 #: constants.py:58
 msgid "sin"
-msgstr ""
+msgstr "sin"
 
 #: constants.py:59
 msgid "tan"
-msgstr ""
+msgstr "tan"
 
 #: constants.py:60
 msgid "linear"
-msgstr ""
+msgstr "lineal"
 
 #: constants.py:61
 msgid "log log"
-msgstr ""
+msgstr "log log"
 
 #: constants.py:62
 msgid "ln"
-msgstr ""
+msgstr "ln"
 
 #: constants.py:63
 msgid "user defined"
-msgstr ""
+msgstr "definida por el usuario"
 
 #: genslides.py:719 window.py:292 window.py:770 window.py:812
 msgid "Overflow Error"
-msgstr ""
+msgstr "Error de Desbordamiento"
 
 #: genslides.py:721 window.py:296 window.py:773 window.py:814
 msgid "Name Error"
-msgstr ""
+msgstr "Error de Nombre"
 
 #: genslides.py:723 window.py:299 window.py:776 window.py:816
 msgid "Can not divide by zero"
-msgstr ""
+msgstr "No se puede dividir por cero"
 
 #: genslides.py:725 window.py:303 window.py:306 window.py:779 window.py:782
 #: window.py:818 window.py:820
 msgid "Type Error"
-msgstr ""
+msgstr "Error de Tipos"
 
 #: genslides.py:727 window.py:326 window.py:339 window.py:352
 msgid "Value Error"
-msgstr ""
+msgstr "Error de Valor"
 
 #: genslides.py:729 window.py:309 window.py:785 window.py:822
 msgid "Syntax Error"
-msgstr ""
+msgstr "Error de Sintaxis"
 
 #: sliderule.py:44
 msgid "L"
-msgstr ""
+msgstr "L"
 
 #: sliderule.py:48
 msgid "C"
-msgstr ""
+msgstr "C"
 
 #: sliderule.py:52
 msgid "CI"
-msgstr ""
+msgstr "CI"
 
 #: sliderule.py:56
 msgid "A"
-msgstr ""
+msgstr "A"
 
 #: sliderule.py:60
 msgid "K"
-msgstr ""
+msgstr "K"
 
 #: sliderule.py:64
 msgid "S"
-msgstr ""
+msgstr "S"
 
 #: sliderule.py:68
 msgid "T"
-msgstr ""
+msgstr "T"
 
 #: window.py:281
 msgid "NaN"
-msgstr ""
+msgstr "NaN"
