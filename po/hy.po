@@ -1,0 +1,229 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-03-26 00:32-0400\n"
+"PO-Revision-Date: 2013-04-25 17:26+0200\n"
+"Last-Translator: anushnur <anush.mkrtchyan@ca1492.com>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: hy\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Pootle 2.0.5\n"
+
+#. TRANS: "name" option from activity.info file
+#: sliderule.py:39
+msgid "Sliderule"
+msgstr "Լոգարիթմական քանոն"
+
+#. TRANS: "summary" option from activity.info file
+#. TRANS: "description" option from activity.info file
+msgid "a mechanical calculator for multiplication, division, log, and more"
+msgstr "մեխանիկական հաշվիչ բազմապատկման, բաժանման, լոգարիթմի համար և ավելին"
+
+#: SlideruleActivity.py:61 sliderule.py:23
+msgid "square/square root"
+msgstr "քառակուսի/քառակուսի արմատ"
+
+#: SlideruleActivity.py:62 sliderule.py:24
+msgid "multiply/divide"
+msgstr "բազմապատկել/բաժանել"
+
+#: SlideruleActivity.py:63 sliderule.py:25
+msgid "divide/multiply"
+msgstr "բաժանել/բազմապատկել"
+
+#: SlideruleActivity.py:64 sliderule.py:26
+msgid "cube/cube root"
+msgstr "խորանարդ/խորանարդ քառակուսի"
+
+#: SlideruleActivity.py:65 sliderule.py:27
+msgid "sin, asin"
+msgstr ""
+
+#: SlideruleActivity.py:66 sliderule.py:28
+msgid "tan, atan"
+msgstr ""
+
+#: SlideruleActivity.py:67 sliderule.py:29
+msgid "add/subtract"
+msgstr "գումարել/հանել"
+
+#: SlideruleActivity.py:68
+msgid "natural log"
+msgstr "բնական լոգարիթմ"
+
+#: SlideruleActivity.py:477
+msgid "Edit"
+msgstr "Խմբագրել"
+
+#: SlideruleActivity.py:494
+msgid "select function"
+msgstr "ընտրել ֆունկցիան"
+
+#: SlideruleActivity.py:499
+msgid "active slide"
+msgstr "ակտիվ դիապոզիտիվ"
+
+#: SlideruleActivity.py:505
+msgid "select slide"
+msgstr "ընտրել դիապոզիտիվը"
+
+#: SlideruleActivity.py:510
+msgid "active stator"
+msgstr "ակտիվ ստատոր"
+
+#: SlideruleActivity.py:516
+msgid "select stator"
+msgstr "ընտրել ստատոր"
+
+#: SlideruleActivity.py:524 sliderule.py:71
+msgid "realign slides"
+msgstr "հավասարեցնել դիապոզիտիվները"
+
+#: SlideruleActivity.py:537
+msgid "create custom slide"
+msgstr "ստեղծել անձնավորված դիապոզիտիվ"
+
+#: SlideruleActivity.py:537
+msgid "create custom stator"
+msgstr "ստեղծել անձնավորված ստատոր"
+
+#: SlideruleActivity.py:543
+msgid "position function"
+msgstr "ֆունկցիայի դիրք"
+
+#: SlideruleActivity.py:548
+msgid "result function"
+msgstr "ֆունկցիայի արդյունք"
+
+#: SlideruleActivity.py:553
+msgid "label function"
+msgstr "ֆունկցիայի պիտակը"
+
+#: SlideruleActivity.py:558
+msgid "domain minimum"
+msgstr "նվազագույն որոշման տիրույթ"
+
+#: SlideruleActivity.py:563
+msgid "domain maximum"
+msgstr "առավելագույն որոշման տիրույթ"
+
+#: SlideruleActivity.py:568
+msgid "step size"
+msgstr "քայլի չափսը"
+
+#: SlideruleActivity.py:579
+msgid "Copy"
+msgstr "Պատճենել"
+
+#: SlideruleActivity.py:584
+msgid "Paste"
+msgstr "փակցնել"
+
+#: constants.py:51
+msgid "log²"
+msgstr "լոգարիթմ²"
+
+#: constants.py:53
+msgid "log"
+msgstr "լոգարիթմ"
+
+#: constants.py:55
+msgid "1/log"
+msgstr "1/լոգարիթմ"
+
+#: constants.py:57
+msgid "log³"
+msgstr "լոգարիթմ³"
+
+#: constants.py:58
+msgid "sin"
+msgstr "սինուս"
+
+#: constants.py:59
+msgid "tan"
+msgstr "տանգես"
+
+#: constants.py:60
+msgid "linear"
+msgstr "գծային"
+
+#: constants.py:61
+msgid "log log"
+msgstr "լոգարիթմ լոգարիթմ"
+
+#: constants.py:62
+msgid "ln"
+msgstr ""
+
+#: constants.py:63
+msgid "user defined"
+msgstr "օգտագործողը սահմանված է"
+
+#: genslides.py:719 window.py:295 window.py:775 window.py:817
+msgid "Overflow Error"
+msgstr "Գերլցման Սխալմունք"
+
+#: genslides.py:721 window.py:299 window.py:778 window.py:819
+msgid "Name Error"
+msgstr "Անվան Սխալմունք"
+
+#: genslides.py:723 window.py:302 window.py:781 window.py:821
+msgid "Can not divide by zero"
+msgstr "Չի կարող բաժանվել զրոյի վրա"
+
+#: genslides.py:725 window.py:306 window.py:309 window.py:784 window.py:787
+#: window.py:823 window.py:825
+msgid "Type Error"
+msgstr "Տպագրել Վրիպումը"
+
+#: genslides.py:727 window.py:329 window.py:342 window.py:355
+msgid "Value Error"
+msgstr "Արժեքի Վրիպում"
+
+#: genslides.py:729 window.py:312 window.py:790 window.py:827
+msgid "Syntax Error"
+msgstr "Շարահյուսության Վրիպում"
+
+#: sliderule.py:43
+msgid "L"
+msgstr ""
+
+#: sliderule.py:47
+msgid "C"
+msgstr ""
+
+#: sliderule.py:51
+msgid "CI"
+msgstr ""
+
+#: sliderule.py:55
+msgid "A"
+msgstr ""
+
+#: sliderule.py:59
+msgid "K"
+msgstr ""
+
+#: sliderule.py:63
+msgid "S"
+msgstr ""
+
+#: sliderule.py:67
+msgid "T"
+msgstr ""
+
+#: sliderule.py:75
+msgid "Quit"
+msgstr "Հեռանալ"
+
+#: window.py:284
+msgid "NaN"
+msgstr ""
