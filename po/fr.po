@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-10-30 00:32-0400\n"
+"POT-Creation-Date: 2013-03-26 00:32-0400\n"
 "PO-Revision-Date: 2012-11-24 18:31+0200\n"
 "Last-Translator: samy boutayeb <s.boutayeb@free.fr>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,7 +18,7 @@ msgstr ""
 "X-Generator: Pootle 2.0.5\n"
 
 #. TRANS: "name" option from activity.info file
-#: sliderule.py:40
+#: sliderule.py:39
 msgid "Sliderule"
 msgstr "Règle à calcul"
 
@@ -85,7 +85,7 @@ msgstr "base active"
 msgid "select stator"
 msgstr "sélectionner la base"
 
-#: SlideruleActivity.py:524 sliderule.py:72
+#: SlideruleActivity.py:524 sliderule.py:71
 msgid "realign slides"
 msgstr "réaligner les réglettes"
 
@@ -169,60 +169,64 @@ msgstr "ln"
 msgid "user defined"
 msgstr "personnalisé"
 
-#: genslides.py:719 window.py:292 window.py:770 window.py:812
+#: genslides.py:719 window.py:295 window.py:775 window.py:817
 msgid "Overflow Error"
 msgstr "Erreur de dépassement"
 
-#: genslides.py:721 window.py:296 window.py:773 window.py:814
+#: genslides.py:721 window.py:299 window.py:778 window.py:819
 msgid "Name Error"
 msgstr "Erreur de nom"
 
-#: genslides.py:723 window.py:299 window.py:776 window.py:816
+#: genslides.py:723 window.py:302 window.py:781 window.py:821
 msgid "Can not divide by zero"
 msgstr "Division par zéro impossible"
 
-#: genslides.py:725 window.py:303 window.py:306 window.py:779 window.py:782
-#: window.py:818 window.py:820
+#: genslides.py:725 window.py:306 window.py:309 window.py:784 window.py:787
+#: window.py:823 window.py:825
 msgid "Type Error"
 msgstr "Erreur de type"
 
-#: genslides.py:727 window.py:326 window.py:339 window.py:352
+#: genslides.py:727 window.py:329 window.py:342 window.py:355
 msgid "Value Error"
 msgstr "Erreur de valeur"
 
-#: genslides.py:729 window.py:309 window.py:785 window.py:822
+#: genslides.py:729 window.py:312 window.py:790 window.py:827
 msgid "Syntax Error"
 msgstr "Erreur de syntaxe"
 
-#: sliderule.py:44
+#: sliderule.py:43
 msgid "L"
 msgstr "L"
 
-#: sliderule.py:48
+#: sliderule.py:47
 msgid "C"
 msgstr "C"
 
-#: sliderule.py:52
+#: sliderule.py:51
 msgid "CI"
 msgstr "CI"
 
-#: sliderule.py:56
+#: sliderule.py:55
 msgid "A"
 msgstr "A"
 
-#: sliderule.py:60
+#: sliderule.py:59
 msgid "K"
 msgstr "K"
 
-#: sliderule.py:64
+#: sliderule.py:63
 msgid "S"
 msgstr "S"
 
-#: sliderule.py:68
+#: sliderule.py:67
 msgid "T"
 msgstr "T"
 
-#: window.py:281
+#: sliderule.py:75
+msgid "Quit"
+msgstr ""
+
+#: window.py:284
 msgid "NaN"
 msgstr "Pas un nombre"
 
