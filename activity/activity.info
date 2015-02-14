@@ -1,9 +1,10 @@
 [Activity]
 name = Sliderule
-activity_version = 31
+activity_version = 35
 license = GPLv3
 bundle_id = org.sugarlabs.SlideruleActivity
 exec = sugar-activity SlideruleActivity.SlideruleActivity
 icon = activity-sliderule
 show_launcher = yes
 summary = a mechanical calculator for multiplication, division, log, and more
+category = maths
