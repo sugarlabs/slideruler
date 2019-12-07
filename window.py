@@ -216,7 +216,7 @@ class SlideRule():
 
         # Create the cairo context
         cr = self.canvas.window.cairo_create()
-        print 'set cr in do_expose'
+        print ('set cr in do_expose')
         self.sprites.set_cairo_context(cr)
 
         # Restrict Cairo to the exposed area; avoid extra work
@@ -289,26 +289,26 @@ class SlideRule():
         try:
             my_min = "def f(): return " + text_field.replace('import','')
             userdefined = {}
-            exec my_min in globals(), userdefined
-            return userdefined.values()[0]()
-        except OverflowError, e:
+            exec(my_min in globals(), userdefined)
+            return list(userdefined.values())[0]()
+        except OverflowError as e:
             self.result_label.spr.labels[0] = _('Overflow Error') + \
                 ': ' + str(e)
             self.result_label.draw(1000)
-        except NameError, e:
+        except NameError as e:
             self.result_label.spr.labels[0] = _('Name Error') + ': ' + str(e)
             self.result_label.draw(1000)
-        except ZeroDivisionError, e:
+        except ZeroDivisionError as e:
             self.result_label.spr.labels[0] = _('Can not divide by zero') + \
                 ': ' + str(e)
             self.result_label.draw(1000)
-        except TypeError, e:
+        except TypeError as e:
             self.result_label.spr.labels[0] = _('Type Error') + ': ' + str(e)
             self.result_label.draw(1000)
-        except ValueError, e:
+        except ValueError as e:
             self.result_label.spr.labels[0] = _('Type Error') + ': ' + str(e)
             self.result_label.draw(1000)
-        except SyntaxError, e:
+        except SyntaxError as e:
             self.result_label.spr.labels[0] = _('Syntax Error') + ': ' + str(e)
             self.result_label.draw(1000)
         except:
@@ -325,7 +325,7 @@ class SlideRule():
             return
         try:
             min_value = float(result)
-        except ValueError, e:
+        except ValueError as e:
             self.result_label.spr.labels[0] = _('Value Error') + ': ' + str(e)
             self.result_label.draw(1000)
             return
@@ -545,7 +545,7 @@ class SlideRule():
         slidex = self.active_slide.spr.get_xy()[0]
         statorx = self.active_stator.spr.get_xy()[0]
         dx = statorx - slidex
-        print 'calling active slide', dx, 0
+        print ('calling active slide', dx, 0)
         self.active_slide.move_relative(dx, 0)
 
     def _move_slides(self, sprite, dx):
@@ -768,25 +768,25 @@ class SlideRule():
 
         userdefined = {}
         try:
-            exec my_result in globals(), userdefined
-            result = userdefined.values()[0](float(dx) / SCALE) * rescale +\
+            exec(my_result in globals(), userdefined)
+            result = list(userdefined.values())[0](float(dx) / SCALE) * rescale +\
                 offset
-        except OverflowError, e:
+        except OverflowError as e:
             self.error_msg = _('Overflow Error') + ': ' + str(e)
             return '?'
-        except NameError, e:
+        except NameError as e:
             self.error_msg = _('Name Error') + ': ' + str(e)
             return '?'
-        except ZeroDivisionError, e:
+        except ZeroDivisionError as e:
             self.error_msg = _('Can not divide by zero') + ': ' + str(e)
             return '?'
-        except TypeError, e:
+        except TypeError as e:
             self.error_msg = _('Type Error') + ': ' + str(e)
             return '?'
-        except ValueError, e:
+        except ValueError as e:
             self.error_msg = _('Type Error') + ': ' + str(e)
             return '?'
-        except SyntaxError, e:
+        except SyntaxError as e:
             self.error_msg = _('Syntax Error') + ': ' + str(e)
             return '?'
         except:
@@ -807,23 +807,23 @@ class SlideRule():
 
         userdefined = {}
         try:
-            exec my_label in globals(), userdefined
-            label = userdefined.values()[0](result)
+            exec(my_label in globals(), userdefined)
+            label = list(userdefined.values())[0](result)
             if type(label) == float:
                 return round(label, precision)
             else:
                 return label
-        except OverflowError, e:
+        except OverflowError as e:
             self.error_msg = _('Overflow Error') + ': ' + str(e)
-        except NameError, e:
+        except NameError as e:
             self.error_msg = _('Name Error') + ': ' + str(e)
-        except ZeroDivisionError, e:
+        except ZeroDivisionError as e:
             self.error_msg = _('Can not divide by zero') + ': ' + str(e)
-        except TypeError, e:
+        except TypeError as e:
             self.error_msg = _('Type Error') + ': ' + str(e)
-        except ValueError, e:
+        except ValueError as e:
             self.error_msg = _('Type Error') + ': ' + str(e)
-        except SyntaxError, e:
+        except SyntaxError as e:
             self.error_msg = _('Syntax Error') + ': ' + str(e)
         except:
             traceback.print_exc()

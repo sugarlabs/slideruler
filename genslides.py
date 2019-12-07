@@ -58,14 +58,14 @@ class C_slide_generator():
         def offset_function(x):
             my_offset = "def f(x): return " + self.offset_text
             userdefined = {}
-            exec my_offset in globals(), userdefined
-            return userdefined.values()[0](x)
+            exec(my_offset in globals(), userdefined)
+            return list(userdefined.values())[0](x)
 
         def label_function(x):
             my_label = "def f(x): return " + self.label_text
             userdefined = {}
-            exec my_label in globals(), userdefined
-            return userdefined.values()[0](x)
+            exec (my_label in globals(), userdefined)
+            return list(userdefined.values())[0](x)
 
         self.svg = self.make_slide(self.name, offset_function, label_function,
                                    self.min, self.max, self.step)
@@ -715,17 +715,17 @@ class Custom_slide_generator(C_slide_generator):
                 svg += self.mark(offset_function(i), self.slide3,
                                  self.slide2, self.slide1,
                                  label_function(i))
-            except OverflowError, e:
+            except OverflowError as e:
                 self.error_msg = _('Overflow Error') + ': ' + str(e)
-            except NameError, e:
+            except NameError as e:
                 self.error_msg = _('Name Error') + ': ' + str(e)
-            except ZeroDivisionError, e:
+            except ZeroDivisionError as e:
                 self.error_msg = _('Can not divide by zero') + ' ' + str(e)
-            except TypeError, e:
+            except TypeError as e:
                 self.error_msg = _('Type Error') + ': ' + str(e)
-            except ValueError, e:
+            except ValueError as e:
                 self.error_msg = _('Value Error') + ': ' + str(e)
-            except SyntaxError, e:
+            except SyntaxError as e:
                 self.error_msg = _('Syntax Error') + ': ' + str(e)
             except:
                 traceback.print_exc()
@@ -745,7 +745,7 @@ class Custom_stator_generator(Custom_slide_generator):
 def main():
     """ Log scale for slide and stator """
 
-    print C_slide().svg
+    print (C_slide().svg)
     return 0
 
 
