@@ -249,7 +249,7 @@ class Sprite:
     def set_label(self, new_label, i=0):
         ''' Set the label drawn on the sprite '''
         self._extend_labels_array(i)
-        if type(new_label) is str or type(new_label) is unicode:
+        if type(new_label) is str or type(new_label) is str:
             # pango doesn't like nulls
             self.labels[i] = new_label.replace("\0", " ")
         else:
@@ -347,7 +347,7 @@ class Sprite:
                              self.rect[3])
                 cr.fill()
             else:
-                print 'sprite.draw: source not a pixbuf (%s)' % (type(img))
+                print('sprite.draw: source not a pixbuf (%s)' % (type(img)))
         if len(self.labels) > 0:
             self.draw_label(cr)
 
@@ -459,5 +459,5 @@ class Sprite:
             else:
                 return(-1, -1, -1, -1)
         except IndexError:
-            print "Index Error: %d %d" % (len(array), offset)
+            print("Index Error: %d %d" % (len(array), offset))
             return(-1, -1, -1, -1)
