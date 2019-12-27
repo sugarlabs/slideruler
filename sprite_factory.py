@@ -10,7 +10,11 @@
 # along with this library; if not, write to the Free Software
 # Foundation, 51 Franklin Street, Suite 500 Boston, MA 02110-1335 USA
 from gi.repository import Gtk, Gdk, GObject, GdkPixbuf
-# import pygtk
+from sugar3 import logger
+import logging
+_logger = logging.getLogger('slideruler')
+
+logger.start('slideruler')
 # pygtk.require('2.0')
 import os.path
 
@@ -55,10 +59,13 @@ class Slide(Stator):
     def __init__(self, sprites, path, name, x, y, w, h, svg_engine=None,
                  function=None):
         if svg_engine is None:
+            print("it doesnt")
             self.spr = Sprite(sprites, x, y, file_to_pixbuf(path, name, w, h))
         else:
             self.spr = Sprite(sprites, x, y,
                               svg_str_to_pixbuf(svg_engine().svg))
+            print("svg engine exists")
+            print(svg_engine().svg)
         self.tab_dx = [0, SWIDTH - TABWIDTH]
         self.tab_dy = [2 * SHEIGHT, 2 * SHEIGHT]
         self.tabs = []
@@ -208,6 +215,7 @@ def file_to_pixbuf(path, name, w, h):
 def svg_str_to_pixbuf(svg_string):
     """ Load pixbuf from SVG string. """
     pl = GdkPixbuf.PixbufLoader.new_with_type('svg')
+    # print(svg_string)
     pl.write(svg_string.encode())
     pl.close()
     pixbuf = pl.get_pixbuf()

@@ -375,13 +375,13 @@ class Sprite:
             pl.set_text(str(self.labels[i]), -1)
             self._fd.set_size(int(self._scale[i] * Pango.SCALE))
             pl.set_font_description(self._fd)
-            w = pl.get_size()[0] / Pango.SCALE
+            w = pl.get_size()[0] // Pango.SCALE
             if w > my_width:
                 if self._rescale[i]:
                     self._fd.set_size(
                             int(self._scale[i] * Pango.SCALE * my_width / w))
                     pl.set_font_description(self._fd)
-                    w = pl.get_size()[0] / Pango.SCALE
+                    w = pl.get_size()[0] // Pango.SCALE
                 else:
                     j = len(self.labels[i]) - 1
                     while(w > my_width and j > 0):
@@ -389,12 +389,12 @@ class Sprite:
                             "…" + self.labels[i][len(self.labels[i]) - j:], -1)
                         self._fd.set_size(int(self._scale[i] * Pango.SCALE))
                         pl.set_font_description(self._fd)
-                        w = pl.get_size()[0] / Pango.SCALE
+                        w = pl.get_size()[0] // Pango.SCALE
                         j -= 1
             if self._x_pos[i] is not None:
                 x = int(self.rect[0] + self._x_pos[i])
             elif self._horiz_align[i] == "center":
-                x = int(self.rect[0] + self._margins[0] + (my_width - w) / 2)
+                x = int(self.rect[0] + self._margins[0] + (my_width - w) // 2)
             elif self._horiz_align[i] == 'left':
                 x = int(self.rect[0] + self._margins[0])
             else: # right
@@ -403,7 +403,7 @@ class Sprite:
             if self._y_pos[i] is not None:
                 y = int(self.rect[1] + self._y_pos[i])
             elif self._vert_align[i] == "middle":
-                y = int(self.rect[1] + self._margins[1] + (my_height - h) / 2)
+                y = int(self.rect[1] + self._margins[1] + (my_height - h) // 2)
             elif self._vert_align[i] == "top":
                 y = int(self.rect[1] + self._margins[1])
             else: # bottom
@@ -425,7 +425,7 @@ class Sprite:
             pl.set_text(str(self.labels[i]), -1)
             self._fd.set_size(int(self._scale[i] * Pango.SCALE))
             pl.set_font_description(self._fd)
-            w = pl.get_size()[0] / Pango.SCALE
+            w = pl.get_size()[0] // Pango.SCALE
             if w > max:
                 max = w
         return max
