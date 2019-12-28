@@ -58,14 +58,14 @@ class C_slide_generator():
         def offset_function(x):
             my_offset = "def f(x): return " + self.offset_text
             userdefined = {}
-            exec my_offset in globals(), userdefined
-            return userdefined.values()[0](x)
+            exec(my_offset, globals(), userdefined)
+            return list(userdefined.values())[0](x)
 
         def label_function(x):
             my_label = "def f(x): return " + self.label_text
             userdefined = {}
-            exec my_label in globals(), userdefined
-            return userdefined.values()[0](x)
+            exec(my_label, globals(), userdefined)
+            return list(userdefined.values())[0](x)
 
         self.svg = self.make_slide(self.name, offset_function, label_function,
                                    self.min, self.max, self.step)
@@ -169,11 +169,11 @@ class C_slide_generator():
         svg += self.header(label)
 
         for i in range(100, 200):
-            if int((i / 10) * 10) == i:
+            if int((i // 10) * 10) == i:
                 svg += self.mark(offset_function(i / 100.), self.slide3,
                                  self.slide2, self.slide1,
                                  label_function(i / 100.))
-            elif int((i / 5) * 5) == i:
+            elif int((i // 5) * 5) == i:
                 svg += self.mark(offset_function(i / 100.), self.slide3,
                                  self.slide2,
                                  self.slide1 + self.slide_offset1)
@@ -183,7 +183,7 @@ class C_slide_generator():
                                  self.slide1 + self.slide_offset2)
 
         for i in range(200, 400, 2):
-            if int((i / 10) * 10) == i:
+            if int((i // 10) * 10) == i:
                 svg += self.mark(offset_function(i / 100.), self.slide3,
                                  self.slide2, self.slide1,
                                  label_function(i / 100.))
@@ -193,8 +193,8 @@ class C_slide_generator():
                                  self.slide1 + self.slide_offset1)
 
         for i in range(400, 1005, 5):
-            if int((i / 10)* 10) == i:
-                if int((i / 50) * 50) == i:
+            if int((i // 10) * 10) == i:
+                if int((i // 50) * 50) == i:
                     svg += self.mark(offset_function(i / 100.), self.slide3,
                                      self.slide2, self.slide1,
                                      label_function(i / 100.))
@@ -241,11 +241,11 @@ class A_slide_generator(C_slide_generator):
         svg += self.header(label)
 
         for i in range(100, 200):
-            if int((i / 10) * 10) == i:
+            if int((i // 10) * 10) == i:
                 svg += self.mark(offset_function(i / 100.), self.slide3,
                                  self.slide2, self.slide1,
                                  label_function(i / 100.))
-            elif int((i / 5) * 5) == i:
+            elif int((i // 5) * 5) == i:
                 svg += self.mark(offset_function(i / 100.), self.slide3,
                                  self.slide2,
                                  self.slide1 + self.slide_offset1)
@@ -255,7 +255,7 @@ class A_slide_generator(C_slide_generator):
                                  self.slide1 + self.slide_offset2)
 
         for i in range(200, 400, 2):
-            if int((i / 20) * 20) == i:
+            if int((i // 20) * 20) == i:
                 svg += self.mark(offset_function(i / 100.), self.slide3,
                                  self.slide2, self.slide1,
                                  label_function(i / 100.))
@@ -265,8 +265,8 @@ class A_slide_generator(C_slide_generator):
                                  self.slide1 + self.slide_offset1)
 
         for i in range(400, 1000, 5):
-            if int((i / 10)* 10) == i:
-                if int((i / 100) * 100) == i:
+            if int((i // 10)* 10) == i:
+                if int((i // 100) * 100) == i:
                     svg += self.mark(offset_function(i / 100.), self.slide3,
                                      self.slide2, self.slide1,
                                      label_function(i / 100.))
@@ -279,7 +279,7 @@ class A_slide_generator(C_slide_generator):
                                  self.slide1 + self.slide_offset1)
 
         for i in range(1000, 2000, 10):
-            if int((i / 200)* 200) == i:
+            if int((i // 200)* 200) == i:
                 svg += self.mark(offset_function(i / 100.), self.slide3,
                                  self.slide2, self.slide1,
                                  label_function(i / 100.))
@@ -289,8 +289,8 @@ class A_slide_generator(C_slide_generator):
                                  self.slide1 + self.slide_offset1)
 
         for i in range(2000, 10050, 50):
-            if int((i / 1000)* 1000) == i:
-                if int((i / 100)* 100) == i:
+            if int((i // 1000) * 1000) == i:
+                if int((i // 100) * 100) == i:
                     svg += self.mark(offset_function(i / 100.), self.slide3,
                                      self.slide2, self.slide1,
                                      label_function(i / 100.))
@@ -329,11 +329,11 @@ class K_slide_generator(C_slide_generator):
         svg += self.header(label)
 
         for i in range(100, 200, 2):
-            if int((i / 20) * 20) == i:
+            if int((i // 20) * 20) == i:
                 svg += self.mark(offset_function(i / 100.), self.slide3,
                                  self.slide2, self.slide1,
                                  label_function(i / 100.))
-            elif int((i / 5) * 5) == i:
+            elif int((i // 5) * 5) == i:
                 svg += self.mark(offset_function(i / 100.), self.slide3,
                                  self.slide2,
                                  self.slide1 + self.slide_offset1)
@@ -343,7 +343,7 @@ class K_slide_generator(C_slide_generator):
                                  self.slide1 + self.slide_offset2)
 
         for i in range(200, 400, 4):
-            if int((i / 50) * 50) == i:
+            if int((i // 50) * 50) == i:
                 svg += self.mark(offset_function(i / 100.), self.slide3,
                                  self.slide2, self.slide1,
                                  label_function(i / 100.))
@@ -353,8 +353,8 @@ class K_slide_generator(C_slide_generator):
                                  self.slide1 + self.slide_offset1)
 
         for i in range(400, 1000, 10):
-            if int((i / 20)* 20) == i:
-                if int((i / 100)* 100) == i:
+            if int((i // 20) * 20) == i:
+                if int((i // 100) * 100) == i:
                     svg += self.mark(offset_function(i / 100.), self.slide3,
                                      self.slide2, self.slide1,
                                      label_function(i / 100.))
@@ -377,8 +377,8 @@ class K_slide_generator(C_slide_generator):
                                  self.slide1 + self.slide_offset1)
 
         for i in range(2000, 10050, 100):
-            if int((i / 1000)* 1000) == i:
-                if int((i / 100)* 100) == i:
+            if int((i // 1000) * 1000) == i:
+                if int((i // 100) * 100) == i:
                     svg += self.mark(offset_function(i / 100.), self.slide3,
                                      self.slide2, self.slide1,
                                      label_function(i / 100.))
@@ -391,8 +391,8 @@ class K_slide_generator(C_slide_generator):
                                  self.slide1 + self.slide_offset1)
 
         for i in range(11000, 101000, 1000):
-            if int((i / 2000)* 2000) == i:
-                if int((i / 20000)* 20000) == i:
+            if int((i // 2000) * 2000) == i:
+                if int((i // 20000) * 20000) == i:
                     svg += self.mark(offset_function(i / 100.), self.slide3,
                                      self.slide2, self.slide1,
                                      label_function(i / 100.))
@@ -437,11 +437,11 @@ class S_slide_generator(C_slide_generator):
         svg += self.mark(0, self.slide3, self.slide2, self.slide1)
 
         for i in range(24, 64):
-            if int((i / 4) * 4) == i:
+            if int((i // 4) * 4) == i:
                 svg += self.mark(offset_function(i / 4.), self.slide3,
                                  self.slide2, self.slide1,
                                  label_function(i / 4.))
-                if int((i / 8) * 8) == i:
+                if int((i // 8) * 8) == i:
                     svg += self.special_mark(offset_function(i / 4.),
                                              self.slide3 + self.slide_offset3,
                                              self.slide2, self.slide1,
@@ -529,7 +529,7 @@ class T_slide_generator(S_slide_generator):
         svg += self.mark(0, self.slide3, self.slide2, self.slide1)
 
         for i in range(23, 181):
-            if int((i / 4) * 4) == i:
+            if int((i // 4) * 4) == i:
                 svg += self.mark(offset_function(i / 4.), self.slide3,
                                  self.slide2, self.slide1,
                                  label_function(i / 4.))
@@ -558,11 +558,11 @@ class L_slide_generator(C_slide_generator):
         svg += self.header(label)
 
         for i in range(0, 101):
-            if int((i / 10) * 10) == i:
+            if int((i // 10) * 10) == i:
                 svg += self.mark(offset_function(i / 100.), self.slide3,
                                  self.slide2, self.slide1,
                                  label_function(i / 10.))
-            elif int((i / 5) * 5) == i:
+            elif int((i // 5) * 5) == i:
                 svg += self.mark(offset_function(i / 100.), self.slide3,
                                  self.slide2,
                                  self.slide1 + self.slide_offset1)
@@ -604,7 +604,7 @@ class LLn_slide_generator(C_slide_generator):
             return x
 
         def label_function(x):
-            return x * log(10) / 100
+            return x * log(10) // 100
 
         self.svg = self.make_slide(self.name, offset_function, label_function)
 
@@ -616,11 +616,11 @@ class LLn_slide_generator(C_slide_generator):
 
         for i in range(0, int(100 * log(10)) + 1):
             if int((i / 5) * 5) == i:
-                svg += self.mark(offset_function(i / (100. * log(10))),
+                svg += self.mark(offset_function(i // (100. * log(10))),
                                  self.slide3, self.slide2, self.slide1,
-                                 label_function(i / log(10)))
+                                 label_function(i // log(10)))
             else:
-                svg += self.mark(offset_function(i / (100. * log(10))),
+                svg += self.mark(offset_function(i // (100. * log(10))),
                                  self.slide3, self.slide2,
                                  self.slide1 + self.slide_offset2)
 
@@ -647,7 +647,7 @@ class LLn_stator_generator(LLn_slide_generator):
             return x
 
         def label_function(x):
-            return x * log(10) / 100
+            return x * log(10) // 100
 
         self.svg = self.make_slide(self.name, offset_function, label_function)
 
@@ -666,7 +666,7 @@ class Log_slide_generator(C_slide_generator):
         svg += self.header(label)
 
         for i in range(100, 1010, 10):
-            if int((i / 50) * 50) == i:
+            if int((i // 50) * 50) == i:
                 svg += self.mark(offset_function(i / 100.),
                                  self.slide3, self.slide2, self.slide1,
                                  label_function(i / 100.))
@@ -715,17 +715,17 @@ class Custom_slide_generator(C_slide_generator):
                 svg += self.mark(offset_function(i), self.slide3,
                                  self.slide2, self.slide1,
                                  label_function(i))
-            except OverflowError, e:
+            except OverflowError as e:
                 self.error_msg = _('Overflow Error') + ': ' + str(e)
-            except NameError, e:
+            except NameError as e:
                 self.error_msg = _('Name Error') + ': ' + str(e)
-            except ZeroDivisionError, e:
+            except ZeroDivisionError as e:
                 self.error_msg = _('Can not divide by zero') + ' ' + str(e)
-            except TypeError, e:
+            except TypeError as e:
                 self.error_msg = _('Type Error') + ': ' + str(e)
-            except ValueError, e:
+            except ValueError as e:
                 self.error_msg = _('Value Error') + ': ' + str(e)
-            except SyntaxError, e:
+            except SyntaxError as e:
                 self.error_msg = _('Syntax Error') + ': ' + str(e)
             except:
                 traceback.print_exc()
@@ -745,7 +745,7 @@ class Custom_stator_generator(Custom_slide_generator):
 def main():
     """ Log scale for slide and stator """
 
-    print C_slide().svg
+    print(C_slide().svg)
     return 0
 
 
