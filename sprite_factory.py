@@ -9,13 +9,12 @@
 # You should have received a copy of the GNU General Public License
 # along with this library; if not, write to the Free Software
 # Foundation, 51 Franklin Street, Suite 500 Boston, MA 02110-1335 USA
-from gi.repository import Gtk, Gdk, GObject, GdkPixbuf
+from gi.repository import Gdk, GdkPixbuf
 from sugar3 import logger
 import logging
 _logger = logging.getLogger('slideruler')
 
 logger.start('slideruler')
-# pygtk.require('2.0')
 import os.path
 
 from constants import SHEIGHT, SWIDTH, LEFT, RIGHT, TOP, BOTTOM, TABWIDTH
@@ -215,10 +214,7 @@ def file_to_pixbuf(path, name, w, h):
 def svg_str_to_pixbuf(svg_string):
     """ Load pixbuf from SVG string. """
     pl = GdkPixbuf.PixbufLoader.new_with_type('svg')
-    # print(svg_string)
     pl.write(svg_string.encode())
     pl.close()
     pixbuf = pl.get_pixbuf()
     return pixbuf
-
-

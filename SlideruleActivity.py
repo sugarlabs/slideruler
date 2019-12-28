@@ -28,16 +28,10 @@ graphics associated with your slide and stator.
 3. In window.py, you need to import the new class objects from #2.
 """
 import gi
-
 gi.require_version('Gtk', '3.0')
 
-from gi.repository import Gtk, Gdk, GObject
+from gi.repository import Gtk, Gdk
 
-# import pygtk
-# pygtk.require('2.0')
-
-
-import sugar3
 from sugar3.activity import activity
 from sugar3.graphics.toolbarbox import ToolbarBox
 from sugar3.bundle.activitybundle import ActivityBundle
