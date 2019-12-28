@@ -58,13 +58,10 @@ class Slide(Stator):
     def __init__(self, sprites, path, name, x, y, w, h, svg_engine=None,
                  function=None):
         if svg_engine is None:
-            print("it doesnt")
             self.spr = Sprite(sprites, x, y, file_to_pixbuf(path, name, w, h))
         else:
             self.spr = Sprite(sprites, x, y,
                               svg_str_to_pixbuf(svg_engine().svg))
-            print("svg engine exists")
-            print(svg_engine().svg)
         self.tab_dx = [0, SWIDTH - TABWIDTH]
         self.tab_dy = [2 * SHEIGHT, 2 * SHEIGHT]
         self.tabs = []
