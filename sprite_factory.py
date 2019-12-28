@@ -10,11 +10,7 @@
 # along with this library; if not, write to the Free Software
 # Foundation, 51 Franklin Street, Suite 500 Boston, MA 02110-1335 USA
 from gi.repository import Gdk, GdkPixbuf
-from sugar3 import logger
-import logging
-_logger = logging.getLogger('slideruler')
 
-logger.start('slideruler')
 import os.path
 
 from constants import SHEIGHT, SWIDTH, LEFT, RIGHT, TOP, BOTTOM, TABWIDTH
