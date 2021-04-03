@@ -8,121 +8,120 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-03-26 00:32-0400\n"
+"POT-Creation-Date: 2021-04-03 01:09+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#. TRANS: "name" option from activity.info file
-#: sliderule.py:39
+#: activity/activity.info:2 sliderule.py:37
 msgid "Sliderule"
 msgstr ""
 
-#. TRANS: "summary" option from activity.info file
-#. TRANS: "description" option from activity.info file
+#: activity/activity.info:3
 msgid "a mechanical calculator for multiplication, division, log, and more"
 msgstr ""
 
-#: SlideruleActivity.py:61 sliderule.py:23
+#: SlideruleActivity.py:60 sliderule.py:21
 msgid "square/square root"
 msgstr ""
 
-#: SlideruleActivity.py:62 sliderule.py:24
+#: SlideruleActivity.py:61 sliderule.py:22
 msgid "multiply/divide"
 msgstr ""
 
-#: SlideruleActivity.py:63 sliderule.py:25
+#: SlideruleActivity.py:62 sliderule.py:23
 msgid "divide/multiply"
 msgstr ""
 
-#: SlideruleActivity.py:64 sliderule.py:26
+#: SlideruleActivity.py:63 sliderule.py:24
 msgid "cube/cube root"
 msgstr ""
 
-#: SlideruleActivity.py:65 sliderule.py:27
+#: SlideruleActivity.py:64 sliderule.py:25
 msgid "sin, asin"
 msgstr ""
 
-#: SlideruleActivity.py:66 sliderule.py:28
+#: SlideruleActivity.py:65 sliderule.py:26
 msgid "tan, atan"
 msgstr ""
 
-#: SlideruleActivity.py:67 sliderule.py:29
+#: SlideruleActivity.py:66 sliderule.py:27
 msgid "add/subtract"
 msgstr ""
 
-#: SlideruleActivity.py:68
+#: SlideruleActivity.py:67
 msgid "natural log"
 msgstr ""
 
-#: SlideruleActivity.py:477
+#: SlideruleActivity.py:476
 msgid "Edit"
 msgstr ""
 
-#: SlideruleActivity.py:494
+#: SlideruleActivity.py:493
 msgid "select function"
 msgstr ""
 
-#: SlideruleActivity.py:499
+#: SlideruleActivity.py:498
 msgid "active slide"
 msgstr ""
 
-#: SlideruleActivity.py:505
+#: SlideruleActivity.py:504
 msgid "select slide"
 msgstr ""
 
-#: SlideruleActivity.py:510
+#: SlideruleActivity.py:509
 msgid "active stator"
 msgstr ""
 
-#: SlideruleActivity.py:516
+#: SlideruleActivity.py:515
 msgid "select stator"
 msgstr ""
 
-#: SlideruleActivity.py:524 sliderule.py:71
+#: SlideruleActivity.py:523 sliderule.py:69
 msgid "realign slides"
 msgstr ""
 
-#: SlideruleActivity.py:537
+#: SlideruleActivity.py:536
 msgid "create custom slide"
 msgstr ""
 
-#: SlideruleActivity.py:537
+#: SlideruleActivity.py:536
 msgid "create custom stator"
 msgstr ""
 
-#: SlideruleActivity.py:543
+#: SlideruleActivity.py:542
 msgid "position function"
 msgstr ""
 
-#: SlideruleActivity.py:548
+#: SlideruleActivity.py:547
 msgid "result function"
 msgstr ""
 
-#: SlideruleActivity.py:553
+#: SlideruleActivity.py:552
 msgid "label function"
 msgstr ""
 
-#: SlideruleActivity.py:558
+#: SlideruleActivity.py:557
 msgid "domain minimum"
 msgstr ""
 
-#: SlideruleActivity.py:563
+#: SlideruleActivity.py:562
 msgid "domain maximum"
 msgstr ""
 
-#: SlideruleActivity.py:568
+#: SlideruleActivity.py:567
 msgid "step size"
 msgstr ""
 
-#: SlideruleActivity.py:579
+#: SlideruleActivity.py:578
 msgid "Copy"
 msgstr ""
 
-#: SlideruleActivity.py:584
+#: SlideruleActivity.py:583
 msgid "Paste"
 msgstr ""
 
@@ -166,63 +165,63 @@ msgstr ""
 msgid "user defined"
 msgstr ""
 
-#: genslides.py:719 window.py:295 window.py:775 window.py:817
+#: genslides.py:719 window.py:299 window.py:779 window.py:821
 msgid "Overflow Error"
 msgstr ""
 
-#: genslides.py:721 window.py:299 window.py:778 window.py:819
+#: genslides.py:721 window.py:303 window.py:782 window.py:823
 msgid "Name Error"
 msgstr ""
 
-#: genslides.py:723 window.py:302 window.py:781 window.py:821
+#: genslides.py:723 window.py:306 window.py:785 window.py:825
 msgid "Can not divide by zero"
 msgstr ""
 
-#: genslides.py:725 window.py:306 window.py:309 window.py:784 window.py:787
-#: window.py:823 window.py:825
+#: genslides.py:725 window.py:310 window.py:313 window.py:788 window.py:791
+#: window.py:827 window.py:829
 msgid "Type Error"
 msgstr ""
 
-#: genslides.py:727 window.py:329 window.py:342 window.py:355
+#: genslides.py:727 window.py:333 window.py:346 window.py:359
 msgid "Value Error"
 msgstr ""
 
-#: genslides.py:729 window.py:312 window.py:790 window.py:827
+#: genslides.py:729 window.py:316 window.py:794 window.py:831
 msgid "Syntax Error"
 msgstr ""
 
-#: sliderule.py:43
+#: sliderule.py:41
 msgid "L"
 msgstr ""
 
-#: sliderule.py:47
+#: sliderule.py:45
 msgid "C"
 msgstr ""
 
-#: sliderule.py:51
+#: sliderule.py:49
 msgid "CI"
 msgstr ""
 
-#: sliderule.py:55
+#: sliderule.py:53
 msgid "A"
 msgstr ""
 
-#: sliderule.py:59
+#: sliderule.py:57
 msgid "K"
 msgstr ""
 
-#: sliderule.py:63
+#: sliderule.py:61
 msgid "S"
 msgstr ""
 
-#: sliderule.py:67
+#: sliderule.py:65
 msgid "T"
 msgstr ""
 
-#: sliderule.py:75
+#: sliderule.py:73
 msgid "Quit"
 msgstr ""
 
-#: window.py:284
+#: window.py:288
 msgid "NaN"
 msgstr ""
