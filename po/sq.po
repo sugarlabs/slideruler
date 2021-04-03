@@ -7,191 +7,192 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-03-26 00:32-0400\n"
-"PO-Revision-Date: 2017-12-11 01:52+0000\n"
-"Last-Translator: Jasmine <udea_jasmine@yahoo.com>\n"
+"PO-Revision-Date: 2018-02-10 19:14+0000\n"
+"Last-Translator: Besnik_b <besnik@programeshqip.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: hy\n"
+"Language: sq\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n!=1);\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Pootle 2.5.1.1\n"
-"X-POOTLE-MTIME: 1512957163.000000\n"
+"X-POOTLE-MTIME: 1518290083.000000\n"
 
 #. TRANS: "name" option from activity.info file
 #: sliderule.py:39
 msgid "Sliderule"
-msgstr "Լոգարիթմական քանոն"
+msgstr "Sliderule"
 
 #. TRANS: "summary" option from activity.info file
 #. TRANS: "description" option from activity.info file
 msgid "a mechanical calculator for multiplication, division, log, and more"
-msgstr "մեխանիկական հաշվիչ բազմապատկման, բաժանման, լոգարիթմի համար և ավելին"
+msgstr ""
+"Një makinë llogaritëse mekanike për shumëzime, pjesëtime, logaritme, etj"
 
 #: SlideruleActivity.py:61 sliderule.py:23
 msgid "square/square root"
-msgstr "քառակուսի/քառակուսի արմատ"
+msgstr "rrënjë/rrënjë katrore"
 
 #: SlideruleActivity.py:62 sliderule.py:24
 msgid "multiply/divide"
-msgstr "բազմապատկել/բաժանել"
+msgstr "shumëzoni/pjesëtoni"
 
 #: SlideruleActivity.py:63 sliderule.py:25
 msgid "divide/multiply"
-msgstr "բաժանել/բազմապատկել"
+msgstr "shumëzoni/pjesëtoni"
 
 #: SlideruleActivity.py:64 sliderule.py:26
 msgid "cube/cube root"
-msgstr "խորանարդ/խորանարդ քառակուսի"
+msgstr "në kub/rrënjë kubike"
 
 #: SlideruleActivity.py:65 sliderule.py:27
 msgid "sin, asin"
-msgstr "սինուս, ասինուս"
+msgstr "sin, asin"
 
 #: SlideruleActivity.py:66 sliderule.py:28
 msgid "tan, atan"
-msgstr "Տանգես, ատանգես"
+msgstr "tan, atan"
 
 #: SlideruleActivity.py:67 sliderule.py:29
 msgid "add/subtract"
-msgstr "գումարել/հանել"
+msgstr "bëni mbledhje/zbritje"
 
 #: SlideruleActivity.py:68
 msgid "natural log"
-msgstr "բնական լոգարիթմ"
+msgstr "logaritmi natyror"
 
 #: SlideruleActivity.py:477
 msgid "Edit"
-msgstr "Խմբագրել"
+msgstr "Përpunoni"
 
 #: SlideruleActivity.py:494
 msgid "select function"
-msgstr "ընտրել ֆունկցիան"
+msgstr "përzgjidhni funksion"
 
 #: SlideruleActivity.py:499
 msgid "active slide"
-msgstr "ակտիվ դիապոզիտիվ"
+msgstr "rrëshqitësi aktiv"
 
 #: SlideruleActivity.py:505
 msgid "select slide"
-msgstr "ընտրել դիապոզիտիվը"
+msgstr "përzgjidhni rrëshqitës"
 
 #: SlideruleActivity.py:510
 msgid "active stator"
-msgstr "ակտիվ ստատոր"
+msgstr ""
 
 #: SlideruleActivity.py:516
 msgid "select stator"
-msgstr "ընտրել ստատոր"
+msgstr ""
 
 #: SlideruleActivity.py:524 sliderule.py:71
 msgid "realign slides"
-msgstr "հավասարեցնել դիապոզիտիվները"
+msgstr "ridrejtoji rrëshqitësit"
 
 #: SlideruleActivity.py:537
 msgid "create custom slide"
-msgstr "ստեղծել անձնավորված դիապոզիտիվ"
+msgstr "krijoni rrëshqitës vetjak"
 
 #: SlideruleActivity.py:537
 msgid "create custom stator"
-msgstr "ստեղծել անձնավորված ստատոր"
+msgstr ""
 
 #: SlideruleActivity.py:543
 msgid "position function"
-msgstr "ֆունկցիայի դիրք"
+msgstr "funksion pozicioni"
 
 #: SlideruleActivity.py:548
 msgid "result function"
-msgstr "ֆունկցիայի արդյունք"
+msgstr "funksion përfundimi"
 
 #: SlideruleActivity.py:553
 msgid "label function"
-msgstr "ֆունկցիայի պիտակը"
+msgstr "funksion etikete"
 
 #: SlideruleActivity.py:558
 msgid "domain minimum"
-msgstr "նվազագույն որոշման տիրույթ"
+msgstr "minimum fushe"
 
 #: SlideruleActivity.py:563
 msgid "domain maximum"
-msgstr "առավելագույն որոշման տիրույթ"
+msgstr "maksimum fushe"
 
 #: SlideruleActivity.py:568
 msgid "step size"
-msgstr "քայլի չափսը"
+msgstr "madhësi hapi"
 
 #: SlideruleActivity.py:579
 msgid "Copy"
-msgstr "Պատճենել"
+msgstr "Kopjoje"
 
 #: SlideruleActivity.py:584
 msgid "Paste"
-msgstr "փակցնել"
+msgstr "Ngjite"
 
 #: constants.py:51
 msgid "log²"
-msgstr "լոգարիթմ²"
+msgstr "log²"
 
 #: constants.py:53
 msgid "log"
-msgstr "լոգարիթմ"
+msgstr "logaritëm"
 
 #: constants.py:55
 msgid "1/log"
-msgstr "1/լոգարիթմ"
+msgstr "1/log"
 
 #: constants.py:57
 msgid "log³"
-msgstr "լոգարիթմ³"
+msgstr "log³"
 
 #: constants.py:58
 msgid "sin"
-msgstr "սինուս"
+msgstr "sin"
 
 #: constants.py:59
 msgid "tan"
-msgstr "տանգես"
+msgstr "tan"
 
 #: constants.py:60
 msgid "linear"
-msgstr "գծային"
+msgstr "linear"
 
 #: constants.py:61
 msgid "log log"
-msgstr "լոգարիթմ լոգարիթմ"
+msgstr "log log"
 
 #: constants.py:62
 msgid "ln"
-msgstr "Մեջ"
+msgstr "ln"
 
 #: constants.py:63
 msgid "user defined"
-msgstr "օգտագործողը սահմանված է"
+msgstr "përcaktuar nga përdoruesi"
 
 #: genslides.py:719 window.py:295 window.py:775 window.py:817
 msgid "Overflow Error"
-msgstr "Գերլցման Սխալմունք"
+msgstr "Gabim Overflow"
 
 #: genslides.py:721 window.py:299 window.py:778 window.py:819
 msgid "Name Error"
-msgstr "Անվան Սխալմունք"
+msgstr "Gabim Emri"
 
 #: genslides.py:723 window.py:302 window.py:781 window.py:821
 msgid "Can not divide by zero"
-msgstr "Չի կարող բաժանվել զրոյի վրա"
+msgstr "S’mund të pjesëtohet me zero"
 
 #: genslides.py:725 window.py:306 window.py:309 window.py:784 window.py:787
 #: window.py:823 window.py:825
 msgid "Type Error"
-msgstr "Տպագրել Վրիպումը"
+msgstr "Gabim Lloji"
 
 #: genslides.py:727 window.py:329 window.py:342 window.py:355
 msgid "Value Error"
-msgstr "Արժեքի Վրիպում"
+msgstr "Gabim Vlere"
 
 #: genslides.py:729 window.py:312 window.py:790 window.py:827
 msgid "Syntax Error"
-msgstr "Շարահյուսության Վրիպում"
+msgstr "Gabim Sintakse"
 
 #: sliderule.py:43
 msgid "L"
@@ -223,7 +224,7 @@ msgstr ""
 
 #: sliderule.py:75
 msgid "Quit"
-msgstr "Հեռանալ"
+msgstr "Dilni"
 
 #: window.py:284
 msgid "NaN"

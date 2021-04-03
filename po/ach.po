@@ -7,224 +7,224 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-03-26 00:32-0400\n"
-"PO-Revision-Date: 2017-12-11 01:52+0000\n"
-"Last-Translator: Jasmine <udea_jasmine@yahoo.com>\n"
+"PO-Revision-Date: 2017-05-20 18:05+0000\n"
+"Last-Translator: chanchumgpa <chanchumgpa@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: hy\n"
+"Language: ach\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n!=1);\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Pootle 2.5.1.1\n"
-"X-POOTLE-MTIME: 1512957163.000000\n"
+"X-POOTLE-MTIME: 1495303512.000000\n"
 
 #. TRANS: "name" option from activity.info file
 #: sliderule.py:39
 msgid "Sliderule"
-msgstr "Լոգարիթմական քանոն"
+msgstr "Ngolmacer"
 
 #. TRANS: "summary" option from activity.info file
 #. TRANS: "description" option from activity.info file
 msgid "a mechanical calculator for multiplication, division, log, and more"
-msgstr "մեխանիկական հաշվիչ բազմապատկման, բաժանման, լոգարիթմի համար և ավելին"
+msgstr "Nyonyo tiyo cura pi anyaa tye ki peko, lapok, log, ki mukene mapol"
 
 #: SlideruleActivity.py:61 sliderule.py:23
 msgid "square/square root"
-msgstr "քառակուսի/քառակուսի արմատ"
+msgstr "square/square root"
 
 #: SlideruleActivity.py:62 sliderule.py:24
 msgid "multiply/divide"
-msgstr "բազմապատկել/բաժանել"
+msgstr "nyaa/pok"
 
 #: SlideruleActivity.py:63 sliderule.py:25
 msgid "divide/multiply"
-msgstr "բաժանել/բազմապատկել"
+msgstr "pok/nyaa"
 
 #: SlideruleActivity.py:64 sliderule.py:26
 msgid "cube/cube root"
-msgstr "խորանարդ/խորանարդ քառակուսի"
+msgstr "cube/cube root"
 
 #: SlideruleActivity.py:65 sliderule.py:27
 msgid "sin, asin"
-msgstr "սինուս, ասինուս"
+msgstr "sin, asin"
 
 #: SlideruleActivity.py:66 sliderule.py:28
 msgid "tan, atan"
-msgstr "Տանգես, ատանգես"
+msgstr "tan, atan"
 
 #: SlideruleActivity.py:67 sliderule.py:29
 msgid "add/subtract"
-msgstr "գումարել/հանել"
+msgstr "med/kwany"
 
 #: SlideruleActivity.py:68
 msgid "natural log"
-msgstr "բնական լոգարիթմ"
+msgstr "log acwea"
 
 #: SlideruleActivity.py:477
 msgid "Edit"
-msgstr "Խմբագրել"
+msgstr "Yub"
 
 #: SlideruleActivity.py:494
 msgid "select function"
-msgstr "ընտրել ֆունկցիան"
+msgstr "yer tic mudany"
 
 #: SlideruleActivity.py:499
 msgid "active slide"
-msgstr "ակտիվ դիապոզիտիվ"
+msgstr "cer matio"
 
 #: SlideruleActivity.py:505
 msgid "select slide"
-msgstr "ընտրել դիապոզիտիվը"
+msgstr "yer cer"
 
 #: SlideruleActivity.py:510
 msgid "active stator"
-msgstr "ակտիվ ստատոր"
+msgstr "gicako matio"
 
 #: SlideruleActivity.py:516
 msgid "select stator"
-msgstr "ընտրել ստատոր"
+msgstr "yer gicako"
 
 #: SlideruleActivity.py:524 sliderule.py:71
 msgid "realign slides"
-msgstr "հավասարեցնել դիապոզիտիվները"
+msgstr "ryee odoco cere mapol"
 
 #: SlideruleActivity.py:537
 msgid "create custom slide"
-msgstr "ստեղծել անձնավորված դիապոզիտիվ"
+msgstr "yub cer pirkeni"
 
 #: SlideruleActivity.py:537
 msgid "create custom stator"
-msgstr "ստեղծել անձնավորված ստատոր"
+msgstr "yub gicako pirken"
 
 #: SlideruleActivity.py:543
 msgid "position function"
-msgstr "ֆունկցիայի դիրք"
+msgstr "ket tic i kabedo maber"
 
 #: SlideruleActivity.py:548
 msgid "result function"
-msgstr "ֆունկցիայի արդյունք"
+msgstr "adwogo tic maber"
 
 #: SlideruleActivity.py:553
 msgid "label function"
-msgstr "ֆունկցիայի պիտակը"
+msgstr "ket alama tic"
 
 #: SlideruleActivity.py:558
 msgid "domain minimum"
-msgstr "նվազագույն որոշման տիրույթ"
+msgstr "domain mamite"
 
 #: SlideruleActivity.py:563
 msgid "domain maximum"
-msgstr "առավելագույն որոշման տիրույթ"
+msgstr "domain matye"
 
 #: SlideruleActivity.py:568
 msgid "step size"
-msgstr "քայլի չափսը"
+msgstr "nyon cajji"
 
 #: SlideruleActivity.py:579
 msgid "Copy"
-msgstr "Պատճենել"
+msgstr "Lok"
 
 #: SlideruleActivity.py:584
 msgid "Paste"
-msgstr "փակցնել"
+msgstr "Dan"
 
 #: constants.py:51
 msgid "log²"
-msgstr "լոգարիթմ²"
+msgstr "log²"
 
 #: constants.py:53
 msgid "log"
-msgstr "լոգարիթմ"
+msgstr "log"
 
 #: constants.py:55
 msgid "1/log"
-msgstr "1/լոգարիթմ"
+msgstr "1/log"
 
 #: constants.py:57
 msgid "log³"
-msgstr "լոգարիթմ³"
+msgstr "log³"
 
 #: constants.py:58
 msgid "sin"
-msgstr "սինուս"
+msgstr "sin"
 
 #: constants.py:59
 msgid "tan"
-msgstr "տանգես"
+msgstr "tan"
 
 #: constants.py:60
 msgid "linear"
-msgstr "գծային"
+msgstr "linear"
 
 #: constants.py:61
 msgid "log log"
-msgstr "լոգարիթմ լոգարիթմ"
+msgstr "log log"
 
 #: constants.py:62
 msgid "ln"
-msgstr "Մեջ"
+msgstr "Iyi"
 
 #: constants.py:63
 msgid "user defined"
-msgstr "օգտագործողը սահմանված է"
+msgstr "ngat matio kwede makigonyo te"
 
 #: genslides.py:719 window.py:295 window.py:775 window.py:817
 msgid "Overflow Error"
-msgstr "Գերլցման Սխալմունք"
+msgstr "Bal me Wotataa"
 
 #: genslides.py:721 window.py:299 window.py:778 window.py:819
 msgid "Name Error"
-msgstr "Անվան Սխալմունք"
+msgstr "Mii nying Bal"
 
 #: genslides.py:723 window.py:302 window.py:781 window.py:821
 msgid "Can not divide by zero"
-msgstr "Չի կարող բաժանվել զրոյի վրա"
+msgstr "Pe twero poko kine ki Zero"
 
 #: genslides.py:725 window.py:306 window.py:309 window.py:784 window.py:787
 #: window.py:823 window.py:825
 msgid "Type Error"
-msgstr "Տպագրել Վրիպումը"
+msgstr "Goo Bal"
 
 #: genslides.py:727 window.py:329 window.py:342 window.py:355
 msgid "Value Error"
-msgstr "Արժեքի Վրիպում"
+msgstr "Nen rwom me Bal"
 
 #: genslides.py:729 window.py:312 window.py:790 window.py:827
 msgid "Syntax Error"
-msgstr "Շարահյուսության Վրիպում"
+msgstr "Bal pa Syntax"
 
 #: sliderule.py:43
 msgid "L"
-msgstr ""
+msgstr "L"
 
 #: sliderule.py:47
 msgid "C"
-msgstr ""
+msgstr "C"
 
 #: sliderule.py:51
 msgid "CI"
-msgstr ""
+msgstr "CI"
 
 #: sliderule.py:55
 msgid "A"
-msgstr ""
+msgstr "A"
 
 #: sliderule.py:59
 msgid "K"
-msgstr ""
+msgstr "K"
 
 #: sliderule.py:63
 msgid "S"
-msgstr ""
+msgstr "S"
 
 #: sliderule.py:67
 msgid "T"
-msgstr ""
+msgstr "T"
 
 #: sliderule.py:75
 msgid "Quit"
-msgstr "Հեռանալ"
+msgstr "Lwii"
 
 #: window.py:284
 msgid "NaN"
-msgstr ""
+msgstr "NaN"

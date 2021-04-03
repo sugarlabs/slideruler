@@ -2,227 +2,229 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-03-26 00:32-0400\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"PO-Revision-Date: 2017-02-18 16:40+0000\n"
+"Last-Translator: Soori <mbarzegar82@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: fa\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Translate Toolkit 1.7.0\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Pootle 2.5.1.1\n"
+"X-POOTLE-MTIME: 1487436036.000000\n"
 
 #. TRANS: "name" option from activity.info file
 #: sliderule.py:39
 msgid "Sliderule"
-msgstr ""
+msgstr "خط کش مهندسی"
 
 #. TRANS: "summary" option from activity.info file
 #. TRANS: "description" option from activity.info file
 msgid "a mechanical calculator for multiplication, division, log, and more"
-msgstr ""
+msgstr "یک ماشین حساب مکانیکی برای ضرب، تقسیم، لگاریتم، و غیره"
 
 #: SlideruleActivity.py:61 sliderule.py:23
 msgid "square/square root"
-msgstr ""
+msgstr "توان دو (مربع)\\ جذر(ریشه دوم)"
 
 #: SlideruleActivity.py:62 sliderule.py:24
 msgid "multiply/divide"
-msgstr ""
+msgstr "ضرب کردن \\تقسیم کردن"
 
 #: SlideruleActivity.py:63 sliderule.py:25
 msgid "divide/multiply"
-msgstr ""
+msgstr "تقسیم کردن\\ضرب کردن"
 
 #: SlideruleActivity.py:64 sliderule.py:26
 msgid "cube/cube root"
-msgstr ""
+msgstr "مکعب (توان سوم)\\ریشه سوم"
 
 #: SlideruleActivity.py:65 sliderule.py:27
 msgid "sin, asin"
-msgstr ""
+msgstr "سینوس، a سینوس"
 
 #: SlideruleActivity.py:66 sliderule.py:28
 msgid "tan, atan"
-msgstr ""
+msgstr "تانژانت، a تانژانت"
 
 #: SlideruleActivity.py:67 sliderule.py:29
 msgid "add/subtract"
-msgstr ""
+msgstr "اضافه کردن\\تفریق کردن"
 
 #: SlideruleActivity.py:68
 msgid "natural log"
-msgstr ""
+msgstr "لگاریتم طبیعی"
 
 #: SlideruleActivity.py:477
 msgid "Edit"
-msgstr ""
+msgstr "ویرایش کردن"
 
 #: SlideruleActivity.py:494
 msgid "select function"
-msgstr ""
+msgstr "انتخاب تابع"
 
 #: SlideruleActivity.py:499
 msgid "active slide"
-msgstr ""
+msgstr "اسلاید فعال"
 
 #: SlideruleActivity.py:505
 msgid "select slide"
-msgstr ""
+msgstr "انتخاب اسلاید"
 
 #: SlideruleActivity.py:510
 msgid "active stator"
-msgstr ""
+msgstr "فعال کردن استاتور (قسمت ثابت ماشین یا مولد)"
 
 #: SlideruleActivity.py:516
 msgid "select stator"
-msgstr ""
+msgstr "انتخاب کردن استاتور"
 
 #: SlideruleActivity.py:524 sliderule.py:71
 msgid "realign slides"
-msgstr ""
+msgstr "تراز کردن اسلایدها"
 
 #: SlideruleActivity.py:537
 msgid "create custom slide"
-msgstr ""
+msgstr "ایجاد کردن اسلاید معمولی (مرسوم)"
 
 #: SlideruleActivity.py:537
 msgid "create custom stator"
-msgstr ""
+msgstr "ایجادکردن یک استاتور معمولی"
 
 #: SlideruleActivity.py:543
 msgid "position function"
-msgstr ""
+msgstr "موقعیت تابع"
 
 #: SlideruleActivity.py:548
 msgid "result function"
-msgstr ""
+msgstr "نتیجه تابع"
 
 #: SlideruleActivity.py:553
 msgid "label function"
-msgstr ""
+msgstr "علامت تابع"
 
 #: SlideruleActivity.py:558
 msgid "domain minimum"
-msgstr ""
+msgstr "حداقل دامنه"
 
 #: SlideruleActivity.py:563
 msgid "domain maximum"
-msgstr ""
+msgstr "حداکثر دامنه"
 
 #: SlideruleActivity.py:568
 msgid "step size"
-msgstr ""
+msgstr "سایز مرحله (گام)"
 
 #: SlideruleActivity.py:579
 msgid "Copy"
-msgstr ""
+msgstr "کپی کردن"
 
 #: SlideruleActivity.py:584
 msgid "Paste"
-msgstr ""
+msgstr "چسباندن"
 
 #: constants.py:51
 msgid "log²"
-msgstr ""
+msgstr "لگاریتم ۲"
 
 #: constants.py:53
 msgid "log"
-msgstr ""
+msgstr "لگاریتم"
 
 #: constants.py:55
 msgid "1/log"
-msgstr ""
+msgstr "۱/لگاریتم"
 
 #: constants.py:57
 msgid "log³"
-msgstr ""
+msgstr "لگاریتم ۳"
 
 #: constants.py:58
 msgid "sin"
-msgstr ""
+msgstr "سینوس"
 
 #: constants.py:59
 msgid "tan"
-msgstr ""
+msgstr "تانژانت"
 
 #: constants.py:60
 msgid "linear"
-msgstr ""
+msgstr "خطی"
 
 #: constants.py:61
 msgid "log log"
-msgstr ""
+msgstr "لگاریتم لگاریتم"
 
 #: constants.py:62
 msgid "ln"
-msgstr ""
+msgstr "لگاریتم"
 
 #: constants.py:63
 msgid "user defined"
-msgstr ""
+msgstr "کاربر تعریف شده"
 
 #: genslides.py:719 window.py:295 window.py:775 window.py:817
 msgid "Overflow Error"
-msgstr ""
+msgstr "خطای اضافی (بیش از اندازه)"
 
 #: genslides.py:721 window.py:299 window.py:778 window.py:819
 msgid "Name Error"
-msgstr ""
+msgstr "خطای اسمی"
 
 #: genslides.py:723 window.py:302 window.py:781 window.py:821
 msgid "Can not divide by zero"
-msgstr ""
+msgstr "قابل تقسیم بر صفر نمی باشد."
 
 #: genslides.py:725 window.py:306 window.py:309 window.py:784 window.py:787
 #: window.py:823 window.py:825
 msgid "Type Error"
-msgstr ""
+msgstr "خطای نوعی"
 
 #: genslides.py:727 window.py:329 window.py:342 window.py:355
 msgid "Value Error"
-msgstr ""
+msgstr "خطای ارزشی"
 
 #: genslides.py:729 window.py:312 window.py:790 window.py:827
 msgid "Syntax Error"
-msgstr ""
+msgstr "خطای نحوی (ترکیبی)"
 
 #: sliderule.py:43
 msgid "L"
-msgstr ""
+msgstr "ال"
 
 #: sliderule.py:47
 msgid "C"
-msgstr ""
+msgstr "سی"
 
 #: sliderule.py:51
 msgid "CI"
-msgstr ""
+msgstr "کلراید"
 
 #: sliderule.py:55
 msgid "A"
-msgstr ""
+msgstr "ا"
 
 #: sliderule.py:59
 msgid "K"
-msgstr ""
+msgstr "کی"
 
 #: sliderule.py:63
 msgid "S"
-msgstr ""
+msgstr "اس"
 
 #: sliderule.py:67
 msgid "T"
-msgstr ""
+msgstr "تی"
 
 #: sliderule.py:75
 msgid "Quit"
-msgstr ""
+msgstr "خارج شدن"
 
 #: window.py:284
 msgid "NaN"
-msgstr ""
+msgstr "سدیم نیتروژن"
