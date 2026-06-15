@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-04-03 01:09+0100\n"
-"PO-Revision-Date: 2026-03-18 06:28+0000\n"
+"PO-Revision-Date: 2026-06-15 04:31+0000\n"
 "Last-Translator: NF <rkavt@smartprojects.ge>\n"
 "Language-Team: Georgian <http://weblate.sugarlabs.org/projects/"
 "sugar-activities/slideruler/ka/>\n"
@@ -222,7 +222,7 @@ msgstr ""
 
 #: sliderule.py:73
 msgid "Quit"
-msgstr ""
+msgstr "გასვლა"
 
 #: window.py:288
 msgid "NaN"
