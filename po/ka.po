@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-04-03 01:09+0100\n"
-"PO-Revision-Date: 2026-06-15 07:48+0000\n"
+"PO-Revision-Date: 2026-06-15 16:05+0000\n"
 "Last-Translator: NF <rkavt@smartprojects.ge>\n"
 "Language-Team: Georgian <http://weblate.sugarlabs.org/projects/"
 "sugar-activities/slideruler/ka/>\n"
@@ -21,7 +21,7 @@ msgstr ""
 
 #: activity/activity.info:2 sliderule.py:37
 msgid "Sliderule"
-msgstr ""
+msgstr "ლოგარითმული სახაზავი"
 
 #: activity/activity.info:3
 msgid "a mechanical calculator for multiplication, division, log, and more"
@@ -33,11 +33,11 @@ msgstr ""
 
 #: SlideruleActivity.py:61 sliderule.py:22
 msgid "multiply/divide"
-msgstr ""
+msgstr "გამრავლება/გაყოფა"
 
 #: SlideruleActivity.py:62 sliderule.py:23
 msgid "divide/multiply"
-msgstr ""
+msgstr "გაყოფა/გამრავლება"
 
 #: SlideruleActivity.py:63 sliderule.py:24
 msgid "cube/cube root"
@@ -53,7 +53,7 @@ msgstr ""
 
 #: SlideruleActivity.py:66 sliderule.py:27
 msgid "add/subtract"
-msgstr ""
+msgstr "მიმატება/გამოკლება"
 
 #: SlideruleActivity.py:67
 msgid "natural log"
@@ -129,19 +129,19 @@ msgstr "ჩასმა"
 
 #: constants.py:51
 msgid "log²"
-msgstr ""
+msgstr "log²"
 
 #: constants.py:53
 msgid "log"
-msgstr ""
+msgstr "log"
 
 #: constants.py:55
 msgid "1/log"
-msgstr ""
+msgstr "1/log"
 
 #: constants.py:57
 msgid "log³"
-msgstr ""
+msgstr "log³"
 
 #: constants.py:58
 msgid "sin"
@@ -153,7 +153,7 @@ msgstr "tan"
 
 #: constants.py:60
 msgid "linear"
-msgstr ""
+msgstr "წრფივი"
 
 #: constants.py:61
 msgid "log log"
@@ -194,23 +194,23 @@ msgstr ""
 
 #: sliderule.py:41
 msgid "L"
-msgstr ""
+msgstr "L"
 
 #: sliderule.py:45
 msgid "C"
-msgstr ""
+msgstr "C"
 
 #: sliderule.py:49
 msgid "CI"
-msgstr ""
+msgstr "CI"
 
 #: sliderule.py:53
 msgid "A"
-msgstr ""
+msgstr "A"
 
 #: sliderule.py:57
 msgid "K"
-msgstr ""
+msgstr "K"
 
 #: sliderule.py:61
 msgid "S"
@@ -218,7 +218,7 @@ msgstr "სამხ"
 
 #: sliderule.py:65
 msgid "T"
-msgstr ""
+msgstr "T"
 
 #: sliderule.py:73
 msgid "Quit"
@@ -226,4 +226,4 @@ msgstr "გასვლა"
 
 #: window.py:288
 msgid "NaN"
-msgstr ""
+msgstr "NaN"
