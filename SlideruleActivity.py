@@ -419,21 +419,26 @@ class SlideruleActivity(activity.Activity):
         return
 
     def _copy_cb(self, arg=None):
-        """ Copy a number to the clipboard from the active slide. """
-        clipBoard = Gtk.Clipboard()
-        if self.sr.last is not None and \
-           self.sr.last.labels is not None and \
-           self.sr.last.labels[0] is not None:
-            clipBoard.set_text(self.sr.last.labels[0])
-        return
+        """ Copy a number from the focused entry. """
+        clipboard = Gtk.Clipboard.get(Gdk.SELECTION_CLIPBOARD)
+        text = ''
+        for entry in self.sr.text_entries:
+            if entry.is_focus():
+                bounds = entry.get_buffer().get_bounds()
+                text = entry.get_buffer().get_text(bounds[0], bounds[1], True)
+                break
+        clipboard.set_text(text, -1)
 
     def _paste_cb(self, arg=None):
-        """ Paste a number from the clipboard to the active slide. """
-        clipBoard = Gtk.Clipboard()
-        text = clipBoard.wait_for_text()
-        if text is not None:
-            self.sr.enter_value(self.sr.last, text)
-        return
+        """ Paste a number to the focused entry. """
+        clipboard = Gtk.Clipboard.get(Gdk.SELECTION_CLIPBOARD)
+        text = clipboard.wait_for_text()
+        if text is None:
+            return
+        for entry in self.sr.text_entries:
+            if entry.is_focus():
+                entry.get_buffer().set_text(text.strip())
+                break
 
     def _setup_toolbars(self):
         """ Setup the toolbars.. """
